@@ -7,7 +7,7 @@ using Querries.Teams;
 
 namespace WebApi.Teams
 {
-    [Route("Api/Teams")]
+    [Route("api/teams")]
     public class TeamController : Controller
     {
         private readonly TeamCommandHandler _commandHandler;

@@ -26,7 +26,6 @@ namespace BloodBowlLeagueBackend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddTransient<TeamController>();
             services.AddTransient<TeamCommandHandler>();
 
             services.AddMyEventStoreDependencies(typeof(TeamQuery).Assembly, Configuration);
