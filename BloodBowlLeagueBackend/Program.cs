@@ -14,7 +14,11 @@ namespace BloodBowlLeagueBackend
             using (var serviceScope = webHost.Services.CreateScope())
             {
                 var asyncEventDelegator = serviceScope.ServiceProvider.GetService<AsyncEventDelegator>();
-                Task.Run(() => asyncEventDelegator.Update());
+                Task.Run(() =>
+                {
+                    Task.Delay(10000).Wait();
+                    asyncEventDelegator.Update();
+                });
                 webHost.Run();
             }
         }
