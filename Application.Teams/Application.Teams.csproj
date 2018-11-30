@@ -6,12 +6,19 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Domain.Teams\Domain.Teams.csproj" />
+      <ProjectReference Include="..\Querries.Teams\Querries.Teams.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Microwave.Application">
-        <Version>1.0.3</Version>
+        <Version>0.1.5</Version>
       </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="RaceConfigSeed\RaceConfigSeed.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Application.Teams;
+using Application.Teams.RaceConfigSeed;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,7 @@ namespace BloodBowlLeagueBackend
         {
             services.AddMvc();
             services.AddTransient<TeamCommandHandler>();
+            services.AddTransient<RaceConfigSeedHandler>();
 
             services.AddMyEventStoreDependencies(typeof(TeamQuery).Assembly, Configuration);
         }
@@ -39,16 +41,12 @@ namespace BloodBowlLeagueBackend
                 app.UseDeveloperExceptionPage();
             }
 
+            app.EnsureMicrowaveDatabaseCreated();
+
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                var context = serviceScope.ServiceProvider.GetRequiredService<EventStoreReadContext>();
-                context.Database.EnsureCreated();
-                var context2 = serviceScope.ServiceProvider.GetRequiredService<EventStoreWriteContext>();
-                context2.Database.EnsureCreated();
-                var context3 = serviceScope.ServiceProvider.GetRequiredService<QueryStorageContext>();
-                context3.Database.EnsureCreated();
-                var context4 = serviceScope.ServiceProvider.GetRequiredService<SubscriptionContext>();
-                context4.Database.EnsureCreated();
+                var raceConfigSeedHandler = serviceScope.ServiceProvider.GetService<RaceConfigSeedHandler>();
+                raceConfigSeedHandler.EnsureRaceConfigSeed().Wait();
             }
 
             app.UseMvc();
