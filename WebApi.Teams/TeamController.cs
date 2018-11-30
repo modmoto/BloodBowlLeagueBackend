@@ -26,8 +26,8 @@ namespace WebApi.Teams
             return Ok(seasons.Value);
         }
 
-        [HttpPost("Create")]
-        public async Task<ActionResult> GetTeam(CreateTeamComand createTeamComand)
+        [HttpPost("create")]
+        public async Task<ActionResult> GetTeam([FromBody] CreateTeamComand createTeamComand)
         {
             var teamGuid = await _commandHandler.CreateTeam(createTeamComand);
             return Created($"Api/Teams/{teamGuid}", null);

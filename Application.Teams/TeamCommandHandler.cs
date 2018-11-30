@@ -20,8 +20,8 @@ namespace Application.Teams
 
         public async Task<Guid> CreateTeam(CreateTeamComand createTeamComand)
         {
-            var eventStoreResult = await _qeryRepository.Load<RaceConfig>(createTeamComand.RaceId);
-            var race = eventStoreResult.Value;
+            var readModelResult = await _qeryRepository.Load<RaceConfig>(createTeamComand.RaceId);
+            var race = readModelResult.Value;
             var domainResult = Team.Create(race.Id, createTeamComand.TeamName, createTeamComand.TrainerName);
             await _eventStore.AppendAsync(domainResult.DomainEvents, -1);
             return domainResult.DomainEvents.First().EntityId;
@@ -44,15 +44,8 @@ namespace Application.Teams
 
     public class CreateTeamComand
     {
-        public CreateTeamComand(string trainerName, string teamName, Guid raceId)
-        {
-            TrainerName = trainerName;
-            TeamName = teamName;
-            RaceId = raceId;
-        }
-
-        public string TrainerName { get; }
-        public string TeamName { get;  }
-        public Guid RaceId { get; }
+        public string TrainerName { get; set; }
+        public string TeamName { get; set; }
+        public Guid RaceId { get; set; }
     }
 }
