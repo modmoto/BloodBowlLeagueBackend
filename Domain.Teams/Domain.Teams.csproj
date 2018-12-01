@@ -9,8 +9,4 @@
         <Version>0.1.5</Version>
       </PackageReference>
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="RaceConfigSeed" />
-    </ItemGroup>
 </Project>
