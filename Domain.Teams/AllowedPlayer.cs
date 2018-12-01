@@ -7,12 +7,12 @@ namespace Domain.Teams
 {
     public class AllowedPlayer
     {
-    public AllowedPlayer(Guid playerTypeId, int maxmimumPlayers, GoldCoins cost, string playerDecription)
+    public AllowedPlayer(Guid playerTypeId, int maxmimumPlayers, GoldCoins cost, string playerDescription)
         {
             PlayerTypeId = playerTypeId;
             MaxmimumPlayers = maxmimumPlayers;
             Cost = cost;
-            PlayerDecription = playerDecription;
+            PlayerDescription = playerDescription;
         }
 
         public DomainResult CanUsePlayer(int ammount)
@@ -27,6 +27,6 @@ namespace Domain.Teams
         public Guid PlayerTypeId { get; }
         public int MaxmimumPlayers { get; }
         public GoldCoins Cost { get; }
-        public string PlayerDecription { get; }
+        public string PlayerDescription { get; }
     }
 }

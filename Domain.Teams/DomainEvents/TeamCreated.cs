@@ -6,7 +6,6 @@ namespace Domain.Teams.DomainEvents
     public class TeamCreated : IDomainEvent
     {
         public Guid EntityId { get; }
-
         public Guid RaceId { get; }
         public string TeamName { get; }
         public string TrainerName { get; }
