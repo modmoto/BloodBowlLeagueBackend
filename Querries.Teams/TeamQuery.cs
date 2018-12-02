@@ -31,9 +31,9 @@ namespace Querries.Teams
     {
         public Guid PlayerTypeId { get; }
 
-        public PlayerDto(Guid PlayerTypeId)
+        public PlayerDto(Guid playerTypeId)
         {
-            this.PlayerTypeId = PlayerTypeId;
+            PlayerTypeId = playerTypeId;
         }
     }
 }
