@@ -38,7 +38,7 @@ namespace Domain.Teams
                 var playerDto = new PlayerDto(playerTypeId, playerId);
                 Players.Append(playerDto);
                 TeamMoney = TeamMoney.Minus(play.Cost);
-                var playerBought = new PlayerBought(Id, playerTypeId, play.Cost.Value, playerDto.PlayerId);
+                var playerBought = new PlayerBought(Id, playerTypeId, TeamMoney, playerDto.PlayerId);
                 Apply(playerBought);
                 return DomainResult.Ok(playerBought);
             }
@@ -57,7 +57,7 @@ namespace Domain.Teams
 
         public void Apply(PlayerBought playerBought)
         {
-            TeamMoney = new GoldCoins(TeamMoney.Value - playerBought.PlayerCost);
+            TeamMoney = playerBought.NewTeamChestBalance;
             Players = Players.Append(new PlayerDto(playerBought.PlayerTypeId, playerBought.PlayerId));
         }
     }

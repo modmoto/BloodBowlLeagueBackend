@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microwave.Application;
+using Microwave.DependencyInjectionExtensions;
 
 namespace BloodBowlLeagueBackend
 {

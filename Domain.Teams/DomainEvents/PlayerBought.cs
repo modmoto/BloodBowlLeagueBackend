@@ -5,13 +5,13 @@ namespace Domain.Teams.DomainEvents
 {
     public class PlayerBought : IDomainEvent
     {
-        public int PlayerCost { get; }
+        public GoldCoins NewTeamChestBalance { get; }
         public Guid PlayerTypeId { get; }
 
-        public PlayerBought(Guid entityId, Guid playerTypeId, int playerCost, Guid playerId)
+        public PlayerBought(Guid entityId, Guid playerTypeId, GoldCoins newTeamChestBalance, Guid playerId)
         {
             EntityId = entityId;
-            PlayerCost = playerCost;
+            NewTeamChestBalance = newTeamChestBalance;
             PlayerId = playerId;
             PlayerTypeId = playerTypeId;
         }

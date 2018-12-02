@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Domain.Teams.DomainEvents;
-using Microwave.Application;
+using Microwave.Application.Ports;
 using Microwave.Domain;
 
 namespace Application.Teams.RaceConfigSeed

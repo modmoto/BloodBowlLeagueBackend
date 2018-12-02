@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave.DependencyInjectionExtensions;
+using Microwave.EventStores;
 using Querries.Teams;
 
 namespace BloodBowlLeagueBackend
@@ -25,6 +26,9 @@ namespace BloodBowlLeagueBackend
             services.AddMvc();
             services.AddTransient<TeamCommandHandler>();
             services.AddTransient<RaceConfigSeedHandler>();
+
+            services.AddTransient<IEventSourcingStrategy, EventSourcingApplyStrategy>();
+            //services.AddTransient<IEventSourcingStrategy, EventSourcingAtributeStrategy>();
 
             services.AddMyEventStoreDependencies(typeof(TeamQuery).Assembly, Configuration);
         }

@@ -3,7 +3,8 @@ using System.Threading.Tasks;
 using Application.Teams;
 using Domain.Teams;
 using Microsoft.AspNetCore.Mvc;
-using Microwave.Application;
+using Microwave.Application.Ports;
+using Microwave.Queries;
 using Querries.Teams;
 
 namespace WebApi.Teams

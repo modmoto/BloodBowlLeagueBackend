@@ -2,7 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Teams;
-using Microwave.Application;
+using Microwave.Application.Ports;
+using Microwave.Queries;
 using Querries.Teams;
 
 namespace Application.Teams

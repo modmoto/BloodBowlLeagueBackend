@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Domain.Teams;
 using Domain.Teams.DomainEvents;
-using Microwave.Application;
+using Microwave.Queries;
 
 namespace Querries.Teams
 {
