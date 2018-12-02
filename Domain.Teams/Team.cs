@@ -13,28 +13,30 @@ namespace Domain.Teams
         public Guid RaceId { get; private set; }
 
         public GoldCoins TeamMoney { get; private set; } = new GoldCoins(1000000);
-        public IEnumerable<Guid> PlayersTypes { get; } = new List<Guid>();
-        public IEnumerable<AllowedPlayer> AllowedPlayers { get; } = new List<AllowedPlayer>();
+        public IEnumerable<PlayerDto> Players { get; private set; } = new List<PlayerDto>();
+        public IEnumerable<AllowedPlayer> AllowedPlayers { get; private set; } = new List<AllowedPlayer>();
 
-        public static DomainResult Create(Guid raceId, string teamName, string trainerName)
+        public static DomainResult Create(Guid raceId, string teamName, string trainerName, IEnumerable<AllowedPlayer> allowedPlayers)
         {
-            return DomainResult.Ok(new TeamCreated(Guid.NewGuid(), raceId, teamName, trainerName));
+            return DomainResult.Ok(new TeamCreated(Guid.NewGuid(), raceId, teamName, trainerName, allowedPlayers));
         }
 
         public DomainResult BuyPlayer(Guid playerTypeId)
         {
             var play = AllowedPlayers.FirstOrDefault(ap => ap.PlayerTypeId == playerTypeId);
             if (play == null) return DomainResult.Error(new CanNotUsePlayerInThisRaceError(playerTypeId, RaceId));
-            int ammount = PlayersTypes.Count(p => p == playerTypeId);
+            int ammount = Players.Count(p => p.PlayerType == playerTypeId);
 
             var canUsePlayer = play.CanUsePlayer(ammount);
             if (canUsePlayer.Failed) return DomainResult.Error(canUsePlayer.DomainErrors);
 
             if (play.Cost.LessThan(TeamMoney))
             {
-                PlayersTypes.Append(playerTypeId);
+                var playerId = Guid.NewGuid();
+                var playerDto = new PlayerDto(playerTypeId, playerId);
+                Players.Append(playerDto);
                 TeamMoney = TeamMoney.Minus(play.Cost);
-                var playerBought = new PlayerBought(Id, playerTypeId, play.Cost.Value);
+                var playerBought = new PlayerBought(Id, playerTypeId, play.Cost.Value, playerDto.PlayerId);
                 Apply(playerBought);
                 return DomainResult.Ok(playerBought);
             }
@@ -46,12 +48,25 @@ namespace Domain.Teams
         {
             Id = teamCreated.EntityId;
             RaceId = teamCreated.RaceId;
+            AllowedPlayers = teamCreated.AllowerPlayersOnCreation;
         }
 
         public void Apply(PlayerBought playerBought)
         {
             TeamMoney = new GoldCoins(TeamMoney.Value - playerBought.PlayerCost);
-            PlayersTypes.Append(playerBought.PlayerTypeId);
+            Players = Players.Append(new PlayerDto(playerBought.PlayerTypeId, playerBought.PlayerId));
+        }
+    }
+
+    public class PlayerDto
+    {
+        public Guid PlayerType { get; }
+        public Guid PlayerId { get; }
+
+        public PlayerDto(Guid playerType, Guid playerId)
+        {
+            PlayerType = playerType;
+            PlayerId = playerId;
         }
     }
 }

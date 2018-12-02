@@ -7,25 +7,25 @@ namespace Domain.Teams
 {
     public class AllowedPlayer
     {
-    public AllowedPlayer(Guid playerTypeId, int maxmimumPlayers, GoldCoins cost, string playerDescription)
+        public AllowedPlayer(Guid playerTypeId, int maximumPlayers, GoldCoins cost, string playerDescription)
         {
             PlayerTypeId = playerTypeId;
-            MaxmimumPlayers = maxmimumPlayers;
+            MaximumPlayers = maximumPlayers;
             Cost = cost;
             PlayerDescription = playerDescription;
         }
 
         public DomainResult CanUsePlayer(int ammount)
         {
-            var moreThanMax = ammount < MaxmimumPlayers;
+            var moreThanMax = ammount < MaximumPlayers;
 
-            if (!moreThanMax) return DomainResult.Error(new TeamFullError(MaxmimumPlayers));
+            if (!moreThanMax) return DomainResult.Error(new TeamFullError(MaximumPlayers));
 
             return DomainResult.Ok(new List<IDomainEvent>());
         }
 
         public Guid PlayerTypeId { get; }
-        public int MaxmimumPlayers { get; }
+        public int MaximumPlayers { get; }
         public GoldCoins Cost { get; }
         public string PlayerDescription { get; }
     }

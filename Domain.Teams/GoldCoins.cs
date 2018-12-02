@@ -9,14 +9,14 @@
             Value = value;
         }
 
-        public bool LessThan(GoldCoins teamChest)
+        public bool LessThan(GoldCoins otherValue)
         {
-            return Value > teamChest.Value;
+            return Value < otherValue.Value;
         }
 
-        public GoldCoins Minus(GoldCoins playerCost)
+        public GoldCoins Minus(GoldCoins otherCost)
         {
-            return new GoldCoins(Value - playerCost.Value);
+            return new GoldCoins(Value - otherCost.Value);
         }
     }
 }

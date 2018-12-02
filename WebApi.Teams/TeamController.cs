@@ -37,10 +37,18 @@ namespace WebApi.Teams
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult> GetTeam([FromBody] CreateTeamComand createTeamComand)
+        public async Task<ActionResult> CreateTeam([FromBody] CreateTeamCommand createTeamCommand)
         {
-            var teamGuid = await _commandHandler.CreateTeam(createTeamComand);
+            var teamGuid = await _commandHandler.CreateTeam(createTeamCommand);
             return Created($"Api/Teams/{teamGuid}", null);
+        }
+
+        [HttpPost("{teamId}/buyPlayer")]
+        public async Task<ActionResult> buyPlayer(Guid teamId, [FromBody] BuyPlayerCommand createTeamCommand)
+        {
+            createTeamCommand.TeamId = teamId;
+            await _commandHandler.BuyPlayer(createTeamCommand);
+            return Ok();
         }
     }
 }

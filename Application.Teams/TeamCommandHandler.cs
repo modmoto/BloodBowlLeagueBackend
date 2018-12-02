@@ -18,32 +18,32 @@ namespace Application.Teams
             _qeryRepository = qeryRepository;
         }
 
-        public async Task<Guid> CreateTeam(CreateTeamComand createTeamComand)
+        public async Task<Guid> CreateTeam(CreateTeamCommand createTeamCommand)
         {
-            var readModelResult = await _qeryRepository.Load<RaceConfig>(createTeamComand.RaceId);
+            var readModelResult = await _qeryRepository.Load<RaceConfig>(createTeamCommand.RaceId);
             var race = readModelResult.Value;
-            var domainResult = Team.Create(race.Id, createTeamComand.TeamName, createTeamComand.TrainerName);
-            await _eventStore.AppendAsync(domainResult.DomainEvents, -1);
+            var domainResult = Team.Create(race.Id, createTeamCommand.TeamName, createTeamCommand.TrainerName, race.AllowedPlayers);
+            await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             return domainResult.DomainEvents.First().EntityId;
         }
 
-        public async Task BuyPlayer(BuyPlayerComand buyPlayerComand)
+        public async Task BuyPlayer(BuyPlayerCommand buyPlayerCommand)
         {
-            var teamResult = await _eventStore.LoadAsync<Team>(buyPlayerComand.TeamId);
+            var teamResult = await _eventStore.LoadAsync<Team>(buyPlayerCommand.TeamId);
             var team = teamResult.Entity;
-            var buyPlayer = team.BuyPlayer(buyPlayerComand.PlayerTypeId);
-            await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerComand.TeamVersion);
+            var buyPlayer = team.BuyPlayer(buyPlayerCommand.PlayerTypeId);
+            await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion);
         }
     }
 
-    public class BuyPlayerComand
+    public class BuyPlayerCommand
     {
         public Guid TeamId { get; set; }
         public Guid PlayerTypeId { get; set; }
         public long TeamVersion { get; set; }
     }
 
-    public class CreateTeamComand
+    public class CreateTeamCommand
     {
         public string TrainerName { get; set; }
         public string TeamName { get; set; }

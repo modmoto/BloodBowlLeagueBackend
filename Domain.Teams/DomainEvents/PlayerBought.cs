@@ -8,13 +8,15 @@ namespace Domain.Teams.DomainEvents
         public int PlayerCost { get; }
         public Guid PlayerTypeId { get; }
 
-        public PlayerBought(Guid entityId, Guid playerTypeId, int playerCost)
+        public PlayerBought(Guid entityId, Guid playerTypeId, int playerCost, Guid playerId)
         {
             EntityId = entityId;
             PlayerCost = playerCost;
+            PlayerId = playerId;
             PlayerTypeId = playerTypeId;
         }
 
         public Guid EntityId { get; }
+        public Guid PlayerId { get; }
     }
 }
