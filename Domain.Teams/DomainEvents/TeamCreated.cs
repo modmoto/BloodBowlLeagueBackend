@@ -10,15 +10,15 @@ namespace Domain.Teams.DomainEvents
         public Guid RaceId { get; }
         public string TeamName { get; }
         public string TrainerName { get; }
-        public IEnumerable<AllowedPlayer> AllowerPlayersOnCreation { get; }
+        public IEnumerable<AllowedPlayer> AllowedPlayersOnCreation { get; }
 
-        public TeamCreated(Guid teamId, Guid raceId, string teamName, string trainerName, IEnumerable<AllowedPlayer> allowerPlayersOnCreation)
+        public TeamCreated(Guid teamId, Guid raceId, string teamName, string trainerName, IEnumerable<AllowedPlayer> allowedPlayersOnCreation)
         {
             EntityId = teamId;
             RaceId = raceId;
             TeamName = teamName;
             TrainerName = trainerName;
-            AllowerPlayersOnCreation = allowerPlayersOnCreation;
+            AllowedPlayersOnCreation = allowedPlayersOnCreation;
         }
     }
 }

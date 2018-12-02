@@ -48,7 +48,7 @@ namespace Domain.Teams
         {
             Id = teamCreated.EntityId;
             RaceId = teamCreated.RaceId;
-            AllowedPlayers = teamCreated.AllowerPlayersOnCreation;
+            AllowedPlayers = teamCreated.AllowedPlayersOnCreation;
         }
 
         public void Apply(PlayerBought playerBought)
