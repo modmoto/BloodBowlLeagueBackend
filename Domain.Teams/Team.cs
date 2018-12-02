@@ -7,7 +7,7 @@ using Microwave.Domain;
 
 namespace Domain.Teams
 {
-    public class Team
+    public class Team : IApply<TeamCreated>, IApply<PlayerBought>
     {
         public Guid Id { get; private set; }
         public Guid RaceId { get; private set; }
