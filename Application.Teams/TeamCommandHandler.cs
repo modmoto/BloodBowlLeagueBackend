@@ -30,9 +30,9 @@ namespace Application.Teams
         public async Task BuyPlayer(BuyPlayerComand buyPlayerComand)
         {
             var teamResult = await _eventStore.LoadAsync<Team>(buyPlayerComand.TeamId);
-            var team = teamResult.Value;
+            var team = teamResult.Entity;
             var buyPlayer = team.BuyPlayer(buyPlayerComand.PlayerTypeId);
-            await _eventStore.AppendAsync(buyPlayer.DomainEvents, teamResult.Version);
+            await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerComand.TeamVersion);
         }
     }
 
@@ -40,6 +40,7 @@ namespace Application.Teams
     {
         public Guid TeamId { get; set; }
         public Guid PlayerTypeId { get; set; }
+        public long TeamVersion { get; set; }
     }
 
     public class CreateTeamComand
