@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Application.Teams;
+using Domain.Teams;
 using Microsoft.AspNetCore.Mvc;
 using Microwave.Application;
 using Querries.Teams;
@@ -12,18 +13,27 @@ namespace WebApi.Teams
     {
         private readonly TeamCommandHandler _commandHandler;
         private readonly IQeryRepository _queryRepository;
+        private readonly IEventStore _eventStore;
 
-        public TeamController(TeamCommandHandler commandHandler, IQeryRepository queryRepository)
+        public TeamController(TeamCommandHandler commandHandler, IQeryRepository queryRepository, IEventStore eventStore)
         {
             _commandHandler = commandHandler;
             _queryRepository = queryRepository;
+            _eventStore = eventStore;
         }
 
         [HttpGet("{teamId}")]
         public async Task<ActionResult> GetTeam(Guid teamId)
         {
-            var seasons = await _queryRepository.Load<TeamQuery>(teamId);
-            return Ok(seasons.Value);
+            var eventstoreResult = await _eventStore.LoadAsync<Team>(teamId);
+            return Ok(eventstoreResult);
+        }
+
+        [HttpGet("/querries/team/{teamId}")]
+        public async Task<ActionResult> GetTeamQuerry(Guid teamId)
+        {
+            var teamQuerry = await _queryRepository.Load<TeamQuery>(teamId);
+            return Ok(teamQuerry.Value);
         }
 
         [HttpPost("create")]
