@@ -23,17 +23,19 @@ namespace Querries.Teams
 
         public void Handle(PlayerBought domainEvent)
         {
-            PlayerList.Append(new PlayerDto(domainEvent.PlayerTypeId));
+            PlayerList.Append(new PlayerDto(domainEvent.PlayerTypeId, domainEvent.PlayerId));
         }
     }
 
     public class PlayerDto
     {
         public Guid PlayerTypeId { get; }
+        public Guid DomainEventPlayerId { get; }
 
-        public PlayerDto(Guid playerTypeId)
+        public PlayerDto(Guid playerTypeId, Guid domainEventPlayerId)
         {
             PlayerTypeId = playerTypeId;
+            DomainEventPlayerId = domainEventPlayerId;
         }
     }
 }
