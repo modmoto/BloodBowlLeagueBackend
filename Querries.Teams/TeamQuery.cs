@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Teams.DomainEvents;
-using Microwave.Application.Ports;
 using Microwave.Queries;
 
 namespace Querries.Teams
