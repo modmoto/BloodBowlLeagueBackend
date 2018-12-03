@@ -11,10 +11,10 @@ namespace Application.Teams.RaceConfigSeed
 {
     public class RaceConfigSeedHandler
     {
-        private readonly IEntityStreamRepository _eventTypes;
+        private readonly IEventRepository _eventTypes;
         private readonly IObjectConverter _objectConverter;
 
-        public RaceConfigSeedHandler(IEntityStreamRepository eventTypes, IObjectConverter objectConverter)
+        public RaceConfigSeedHandler(IEventRepository eventTypes, IObjectConverter objectConverter)
         {
             _eventTypes = eventTypes;
             _objectConverter = objectConverter;

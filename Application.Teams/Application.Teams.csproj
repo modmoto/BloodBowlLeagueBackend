@@ -11,7 +11,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microwave.Application">
-        <Version>0.4.5</Version>
+        <Version>0.4.7</Version>
       </PackageReference>
     </ItemGroup>
 
