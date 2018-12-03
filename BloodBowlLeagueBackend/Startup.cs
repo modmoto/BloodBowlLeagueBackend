@@ -27,9 +27,6 @@ namespace BloodBowlLeagueBackend
             services.AddTransient<TeamCommandHandler>();
             services.AddTransient<RaceConfigSeedHandler>();
 
-            services.AddTransient<IEventSourcingStrategy, EventSourcingApplyStrategy>();
-            //services.AddTransient<IEventSourcingStrategy, EventSourcingAtributeStrategy>();
-
             services.AddMyEventStoreDependencies(typeof(TeamQuery).Assembly, Configuration);
         }
 
