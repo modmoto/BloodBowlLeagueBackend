@@ -11,10 +11,10 @@ namespace Application.Teams.RaceConfigSeed
 {
     public class RaceConfigSeedHandler
     {
-        private readonly ITypeProjectionRepository _eventTypes;
+        private readonly IEntityStreamRepository _eventTypes;
         private readonly IObjectConverter _objectConverter;
 
-        public RaceConfigSeedHandler(ITypeProjectionRepository eventTypes, IObjectConverter objectConverter)
+        public RaceConfigSeedHandler(IEntityStreamRepository eventTypes, IObjectConverter objectConverter)
         {
             _eventTypes = eventTypes;
             _objectConverter = objectConverter;
@@ -24,12 +24,9 @@ namespace Application.Teams.RaceConfigSeed
         {
             var eventsInSeedRaw = File.ReadAllText($"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}/RaceConfigSeed/RaceConfigSeed.json");
             var domainEventsInSeed = _objectConverter.Deserialize<IEnumerable<IDomainEvent>>(eventsInSeedRaw);
-            var eventsAllreadyAdded = (await _eventTypes.LoadEventsByTypeAsync(nameof(RaceCreated))).Value.Count();
+            var eventsAllreadyAdded = (await _eventTypes.LoadEventsByTypeAsync(nameof(RaceCreated), 0)).Value.Count();
             var remainingEvents = domainEventsInSeed.Skip(eventsAllreadyAdded);
-            foreach (var remainingEvent in remainingEvents)
-            {
-                await _eventTypes.AppendToTypeStream(remainingEvent);
-            }
+            await _eventTypes.AppendAsync(remainingEvents, eventsAllreadyAdded);
         }
     }
 }
