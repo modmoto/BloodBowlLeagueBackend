@@ -10,7 +10,6 @@ namespace Domain.Teams
     public class Team : Entity
     {
         public Guid Id { get; private set; }
-        public Guid RaceId { get; private set; }
 
         public GoldCoins TeamMoney { get; private set; } = new GoldCoins(1000000);
         public IEnumerable<Guid> PlayerTypes { get; private set; } = new List<Guid>();
@@ -24,7 +23,7 @@ namespace Domain.Teams
         public DomainResult BuyPlayer(Guid playerTypeId)
         {
             var play = AllowedPlayers.FirstOrDefault(ap => ap.PlayerTypeId == playerTypeId);
-            if (play == null) return DomainResult.Error(new CanNotUsePlayerInThisRaceError(playerTypeId, RaceId));
+            if (play == null) return DomainResult.Error(new CanNotUsePlayerInThisRaceError(playerTypeId));
             int ammount = PlayerTypes.Count(p => p == playerTypeId);
 
             var canUsePlayer = play.CanUsePlayer(ammount);
