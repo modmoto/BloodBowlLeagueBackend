@@ -6,12 +6,13 @@ using Microwave.Queries;
 
 namespace Querries.Teams
 {
-    public class TeamQuery : IdentifiableQuery, IHandle<TeamCreated>, IHandle<PlayerBought>
+    public class TeamQuery : ReadModel, IHandle<TeamCreated>, IHandle<PlayerBought>
     {
         public IEnumerable<PlayerDto> PlayerList { get; } = new List<PlayerDto>();
         public Guid RaceId { get; private set; }
         public string TrainerName { get; private set; }
         public string TeamName { get; private set; }
+        public Guid Id { get; private set; }
 
         public void Handle(TeamCreated domainEvent)
         {
