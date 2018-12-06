@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Domain.Teams.DomainEvents;
-using Microwave.Application.Ports;
+using Microwave.Queries;
 
 namespace Querries.Teams
 {

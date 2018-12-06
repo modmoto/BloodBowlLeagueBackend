@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Teams;
-using Microwave.Application.Ports;
+using Microwave.EventStores;
 using Microwave.Queries;
 using Querries.Teams;
 
