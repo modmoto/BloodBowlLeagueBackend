@@ -13,8 +13,6 @@ namespace Domain.Teams
         public Guid RaceId { get; private set; }
 
         public GoldCoins TeamMoney { get; private set; } = new GoldCoins(1000000);
-        public string TeamName { get; private set; }
-        public string TrainerName { get; private set; }
         public IEnumerable<Guid> PlayerTypes { get; private set; } = new List<Guid>();
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; private set; } = new List<AllowedPlayer>();
 
@@ -47,9 +45,6 @@ namespace Domain.Teams
         private void Apply(TeamCreated teamCreated)
         {
             Id = teamCreated.EntityId;
-            RaceId = teamCreated.RaceId;
-            TeamName = teamCreated.TeamName;
-            TrainerName = teamCreated.TrainerName;
             AllowedPlayers = teamCreated.AllowedPlayers;
         }
 
