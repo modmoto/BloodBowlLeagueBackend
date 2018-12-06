@@ -15,7 +15,7 @@ namespace Domain.Teams
         public GoldCoins TeamMoney { get; private set; } = new GoldCoins(1000000);
         public string TeamName { get; private set; }
         public string TrainerName { get; private set; }
-        public IEnumerable<PlayerDto> Players { get; private set; } = new List<PlayerDto>();
+        public IEnumerable<Guid> PlayerTypes { get; private set; } = new List<Guid>();
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; private set; } = new List<AllowedPlayer>();
 
         public static DomainResult Create(Guid raceId, string teamName, string trainerName, IEnumerable<AllowedPlayer> allowedPlayers)
@@ -27,18 +27,16 @@ namespace Domain.Teams
         {
             var play = AllowedPlayers.FirstOrDefault(ap => ap.PlayerTypeId == playerTypeId);
             if (play == null) return DomainResult.Error(new CanNotUsePlayerInThisRaceError(playerTypeId, RaceId));
-            int ammount = Players.Count(p => p.PlayerType == playerTypeId);
+            int ammount = PlayerTypes.Count(p => p == playerTypeId);
 
             var canUsePlayer = play.CanUsePlayer(ammount);
             if (canUsePlayer.Failed) return DomainResult.Error(canUsePlayer.DomainErrors);
 
             if (play.Cost.LessThan(TeamMoney))
             {
-                var playerId = Guid.NewGuid();
-                var playerDto = new PlayerDto(playerTypeId, playerId);
-                Players.Append(playerDto);
+                PlayerTypes.Append(playerTypeId);
                 TeamMoney = TeamMoney.Minus(play.Cost);
-                var playerBought = new PlayerBought(Id, playerTypeId, TeamMoney, playerDto.PlayerId);
+                var playerBought = new PlayerBought(Id, playerTypeId, TeamMoney);
                 Apply(playerBought);
                 return DomainResult.Ok(playerBought);
             }
@@ -58,19 +56,7 @@ namespace Domain.Teams
         private void Apply(PlayerBought playerBought)
         {
             TeamMoney = playerBought.NewTeamChestBalance;
-            Players = Players.Append(new PlayerDto(playerBought.PlayerTypeId, playerBought.PlayerId));
-        }
-    }
-
-    public class PlayerDto
-    {
-        public Guid PlayerType { get; }
-        public Guid PlayerId { get; }
-
-        public PlayerDto(Guid playerType, Guid playerId)
-        {
-            PlayerType = playerType;
-            PlayerId = playerId;
+            PlayerTypes = PlayerTypes.Append(playerBought.PlayerTypeId);
         }
     }
 }

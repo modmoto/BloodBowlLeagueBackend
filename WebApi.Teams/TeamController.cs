@@ -14,26 +14,17 @@ namespace WebApi.Teams
     {
         private readonly TeamCommandHandler _commandHandler;
         private readonly IQeryRepository _queryRepository;
-        private readonly IEventStore _eventStore;
 
-        public TeamController(TeamCommandHandler commandHandler, IQeryRepository queryRepository, IEventStore eventStore)
+        public TeamController(TeamCommandHandler commandHandler, IQeryRepository queryRepository)
         {
             _commandHandler = commandHandler;
             _queryRepository = queryRepository;
-            _eventStore = eventStore;
         }
 
         [HttpGet("{teamId}")]
         public async Task<ActionResult> GetTeam(Guid teamId)
         {
-            var eventstoreResult = await _eventStore.LoadAsync<Team>(teamId);
-            return Ok(eventstoreResult);
-        }
-
-        [HttpGet("/querries/team/{teamId}")]
-        public async Task<ActionResult> GetTeamQuerry(Guid teamId)
-        {
-            var teamQuerry = await _queryRepository.Load<TeamQuery>(teamId);
+            var teamQuerry = await _queryRepository.Load<TeamReadModel>(teamId);
             return Ok(teamQuerry.Value);
         }
 
@@ -45,7 +36,7 @@ namespace WebApi.Teams
         }
 
         [HttpPost("{teamId}/buyPlayer")]
-        public async Task<ActionResult> buyPlayer(Guid teamId, [FromBody] BuyPlayerCommand createTeamCommand)
+        public async Task<ActionResult> BuyPlayer(Guid teamId, [FromBody] BuyPlayerCommand createTeamCommand)
         {
             createTeamCommand.TeamId = teamId;
             await _commandHandler.BuyPlayer(createTeamCommand);
