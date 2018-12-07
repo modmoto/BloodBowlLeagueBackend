@@ -10,14 +10,14 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
         <PackageReference Include="Microwave.DependencyInjectionExtensions">
           <Version>1.4.9.78</Version>
         </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Application.Teams\Application.Teams.csproj" />
-      <ProjectReference Include="..\WebApi.Teams\WebApi.Teams.csproj" />
+      <ProjectReference Include="..\Querries.Teams\Querries.Teams.csproj" />
     </ItemGroup>
 
 </Project>

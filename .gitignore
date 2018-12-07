@@ -335,3 +335,4 @@ ASALocalRun/
 /BloodBowlLeagueBackend/EventStoreReadContext.db
 /BloodBowlLeagueBackend/QueryStorageContext.db
 /BloodBowlLeagueBackend/EventStoreContext.db
+/QuerryHost.Teams/QueryStorageContext.db

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Application.Teams;
-using Domain.Teams;
 using Microsoft.AspNetCore.Mvc;
-using Microwave.Application.Ports;
-using Microwave.Queries;
-using Querries.Teams;
 
 namespace WebApi.Teams
 {
@@ -13,19 +9,10 @@ namespace WebApi.Teams
     public class TeamController : Controller
     {
         private readonly TeamCommandHandler _commandHandler;
-        private readonly IQeryRepository _queryRepository;
 
-        public TeamController(TeamCommandHandler commandHandler, IQeryRepository queryRepository)
+        public TeamController(TeamCommandHandler commandHandler)
         {
             _commandHandler = commandHandler;
-            _queryRepository = queryRepository;
-        }
-
-        [HttpGet("{teamId}")]
-        public async Task<ActionResult> GetTeam(Guid teamId)
-        {
-            var teamQuerry = await _queryRepository.Load<TeamReadModel>(teamId);
-            return Ok(teamQuerry.Value);
         }
 
         [HttpPost("create")]

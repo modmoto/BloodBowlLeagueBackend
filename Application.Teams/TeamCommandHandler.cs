@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Teams;
 using Microwave.EventStores;
-using Microwave.Queries;
 using Querries.Teams;
 
 namespace Application.Teams
@@ -11,19 +10,17 @@ namespace Application.Teams
     public class TeamCommandHandler
     {
         private readonly IEventStore _eventStore;
-        private readonly IQeryRepository _qeryRepository;
 
-        public TeamCommandHandler(IEventStore eventStore, IQeryRepository qeryRepository)
+        public TeamCommandHandler(IEventStore eventStore)
         {
             _eventStore = eventStore;
-            _qeryRepository = qeryRepository;
         }
 
         public async Task<Guid> CreateTeam(CreateTeamCommand createTeamCommand)
         {
-            var readModelResult = await _qeryRepository.Load<RaceConfig>(createTeamCommand.RaceId);
-            var race = readModelResult.Value;
-            var domainResult = Team.Create(race.Id, createTeamCommand.TeamName, createTeamCommand.TrainerName, race.ReadModel.AllowedPlayers);
+            var readModelResult = await _eventStore.LoadAsync<RaceConfig>(createTeamCommand.RaceId);
+            var race = readModelResult.Entity;
+            var domainResult = Team.Create(race.Id, createTeamCommand.TeamName, createTeamCommand.TrainerName, race.AllowedPlayers);
             await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             return domainResult.DomainEvents.First().EntityId;
         }
