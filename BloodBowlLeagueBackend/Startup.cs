@@ -4,11 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microwave.Application.Ports;
 using Microwave.DependencyInjectionExtensions;
-using Microwave.EventStores;
-using Microwave.ObjectPersistences;
-using Querries.Teams;
 
 namespace BloodBowlLeagueBackend
 {
