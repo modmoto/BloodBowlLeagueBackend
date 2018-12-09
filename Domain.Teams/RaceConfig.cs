@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Domain.Teams;
 using Domain.Teams.DomainEvents;
 using Microwave.Domain;
-using Microwave.Queries;
 
-namespace Querries.Teams
+namespace Domain.Teams
 {
     public class RaceConfig : Entity
     {

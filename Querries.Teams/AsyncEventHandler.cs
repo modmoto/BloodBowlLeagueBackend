@@ -5,12 +5,12 @@ using Microwave.Queries;
 
 namespace Querries.Teams
 {
-    public class AsyncEventHandler : IHandleAsync<TeamCreated>
-    {
-        public Task HandleAsync(TeamCreated domainEvent)
-        {
-            Console.WriteLine("dasda");
-            return Task.CompletedTask;
-        }
-    }
+//    public class AsyncEventHandler : IHandleAsync<TeamCreated>
+//    {
+//        public Task HandleAsync(TeamCreated domainEvent)
+//        {
+//            Console.WriteLine("dasda");
+//            return Task.CompletedTask;
+//        }
+//    }
 }
