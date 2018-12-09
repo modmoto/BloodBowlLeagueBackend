@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Teams;
 using Microwave.EventStores;
-using Querries.Teams;
 
 namespace Application.Teams
 {

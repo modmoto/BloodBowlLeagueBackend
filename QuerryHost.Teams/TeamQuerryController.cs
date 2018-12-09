@@ -1,8 +1,5 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microwave.Queries;
-using Querries.Teams;
 
 namespace QuerryHost.Teams
 {
@@ -16,11 +13,18 @@ namespace QuerryHost.Teams
             _queryRepository = queryRepository;
         }
 
-        [HttpGet("{teamId}")]
-        public async Task<ActionResult> GetTeam(Guid teamId)
-        {
-            var teamQuerry = await _queryRepository.Load<TeamReadModel>(teamId);
-            return Ok(teamQuerry.Value);
-        }
+//        [HttpGet("{teamId}")]
+//        public async Task<ActionResult> GetTeam(Guid teamId)
+//        {
+//            var teamQuerry = await _queryRepository.Load<TeamReadModel>(teamId);
+//            return Ok(teamQuerry.Value);
+//        }
+
+//        [HttpGet("Count")]
+//        public async Task<ActionResult> GetTeam(Guid teamId)
+//        {
+//            var teamQuerry = await _queryRepository.Load<CounterQuery>(teamId);
+//            return Ok(teamQuerry.Value);
+//        }
     }
 }

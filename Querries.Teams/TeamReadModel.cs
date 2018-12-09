@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Domain.Teams.DomainEvents;
 using Microwave.Queries;
+using Querries.Teams.DomainEvents;
 
 namespace Querries.Teams
 {
-    public class TeamReadModel : ReadModel, IHandle<TeamCreated>, IHandle<PlayerBought>
+    public class TeamReadModel : ReadModel
     {
         public IEnumerable<PlayerDto> PlayerList { get; set; }
         public Guid RaceId { get; set; }
