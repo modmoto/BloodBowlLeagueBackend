@@ -25,7 +25,7 @@ namespace BloodBowlLeagueBackend
             services.AddTransient<TeamCommandHandler>();
             services.AddTransient<RaceConfigSeedHandler>();
 
-            services.AddMicrowave();
+            services.AddMicrowave(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
