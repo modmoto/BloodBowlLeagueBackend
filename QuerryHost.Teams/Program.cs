@@ -3,6 +3,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave.DependencyInjectionExtensions;
+using Microwave.Queries;
 
 namespace QuerryHost.Teams
 {
