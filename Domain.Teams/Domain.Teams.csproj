@@ -6,7 +6,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microwave.Domain">
-        <Version>1.5.1.120</Version>
+        <Version>1.5.2.121</Version>
       </PackageReference>
     </ItemGroup>
 </Project>
