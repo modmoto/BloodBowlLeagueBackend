@@ -5,6 +5,7 @@ using Querries.Teams.DomainEvents;
 
 namespace Querries.Teams
 {
+    [CreateReadmodelOn(typeof(RaceCreated))]
     public class RaceReadModel : ReadModel, IHandle<RaceCreated>
     {
         public Guid RaceId { get; set; }

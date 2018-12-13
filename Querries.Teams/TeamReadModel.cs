@@ -5,6 +5,7 @@ using Querries.Teams.DomainEvents;
 
 namespace Querries.Teams
 {
+    [CreateReadmodelOn(typeof(TeamCreated))]
     public class TeamReadModel : ReadModel, IHandle<TeamCreated>, IHandle<PlayerBought>
     {
         public IEnumerable<PlayerDto> PlayerList { get; set; }
