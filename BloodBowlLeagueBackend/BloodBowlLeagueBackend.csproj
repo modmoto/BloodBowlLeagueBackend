@@ -11,7 +11,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microwave.DependencyInjectionExtensions">
-          <Version>1.5.4.144</Version>
+          <Version>1.5.4.146</Version>
         </PackageReference>
     </ItemGroup>
 

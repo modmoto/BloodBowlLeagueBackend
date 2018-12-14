@@ -9,7 +9,7 @@ namespace Querries.Teams
     [CreateReadmodelOn(typeof(TeamCreated))]
     public class TeamReadModel : ReadModel, IHandle<TeamCreated>, IHandle<PlayerBought>
     {
-        public IEnumerable<Guid> PlayerList { get; set; }
+        public IEnumerable<Guid> PlayerList { get; set; } = new List<Guid>();
         public Guid RaceId { get; set; }
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
@@ -25,7 +25,9 @@ namespace Querries.Teams
 
         public void Handle(PlayerBought domainEvent)
         {
-            PlayerList = PlayerList.Append(domainEvent.PlayerTypeId);
+            var newPlayers = new List<Guid>();
+            newPlayers.Add(domainEvent.PlayerTypeId);
+            PlayerList = newPlayers;
         }
     }
 }
