@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microwave.Queries;
 using Querries.Teams.DomainEvents;
 
@@ -8,7 +9,7 @@ namespace Querries.Teams
     [CreateReadmodelOn(typeof(TeamCreated))]
     public class TeamReadModel : ReadModel, IHandle<TeamCreated>, IHandle<PlayerBought>
     {
-        public IEnumerable<PlayerDto> PlayerList { get; set; }
+        public IEnumerable<Guid> PlayerList { get; set; }
         public Guid RaceId { get; set; }
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
@@ -24,15 +25,7 @@ namespace Querries.Teams
 
         public void Handle(PlayerBought domainEvent)
         {
-            var playerDtos = new List<PlayerDto>();
-            playerDtos.Add(new PlayerDto { PlayerTypeId = domainEvent.PlayerTypeId });
-            playerDtos.AddRange(PlayerList ?? new List<PlayerDto>());
-            PlayerList = playerDtos;
+            PlayerList = PlayerList.Append(domainEvent.PlayerTypeId);
         }
-    }
-
-    public class PlayerDto
-    {
-        public Guid PlayerTypeId { get; set; }
     }
 }
