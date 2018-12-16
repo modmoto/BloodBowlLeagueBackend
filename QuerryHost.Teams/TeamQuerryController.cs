@@ -9,9 +9,9 @@ namespace QuerryHost.Teams
     [Route("api/teams")]
     public class TeamQuerryController : Controller
     {
-        private readonly IQeryRepository _queryRepository;
+        private readonly IReadModelRepository _queryRepository;
 
-        public TeamQuerryController(IQeryRepository queryRepository)
+        public TeamQuerryController(IReadModelRepository queryRepository)
         {
             _queryRepository = queryRepository;
         }

@@ -21,7 +21,7 @@ namespace QuerryHost.Teams
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddMicrowaveQuerries(Assembly.GetAssembly(typeof(TeamReadModel)), Configuration);
+            services.AddMicrowaveReadModels(Assembly.GetAssembly(typeof(TeamReadModel)), Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

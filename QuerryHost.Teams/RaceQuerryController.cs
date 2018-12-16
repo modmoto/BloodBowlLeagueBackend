@@ -9,9 +9,9 @@ namespace QuerryHost.Teams
     [Route("api/races")]
     public class RaceQuerryController : Controller
     {
-        private readonly IQeryRepository _queryRepository;
+        private readonly IReadModelRepository _queryRepository;
 
-        public RaceQuerryController(IQeryRepository queryRepository)
+        public RaceQuerryController(IReadModelRepository queryRepository)
         {
             _queryRepository = queryRepository;
         }
