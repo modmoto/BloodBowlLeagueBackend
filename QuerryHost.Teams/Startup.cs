@@ -36,7 +36,6 @@ namespace QuerryHost.Teams
                 app.UseHsts();
             }
 
-            app.EnsureMicrowaveDatabaseCreated();
             app.RunMicrowaveQueries();
 
             app.UseHttpsRedirection();

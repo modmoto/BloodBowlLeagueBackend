@@ -36,8 +36,6 @@ namespace BloodBowlLeagueBackend
                 app.UseDeveloperExceptionPage();
             }
 
-            app.EnsureMicrowaveDatabaseCreated();
-
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var raceConfigSeedHandler = serviceScope.ServiceProvider.GetService<RaceConfigSeedHandler>();
