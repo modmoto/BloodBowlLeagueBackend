@@ -6,7 +6,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Domain.Teams\Domain.Teams.csproj" />
-      <ProjectReference Include="..\Querries.Teams\Querries.Teams.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -17,7 +16,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microwave.EventStores">
-        <Version>1.6.2.184</Version>
+        <Version>1.6.2.208</Version>
       </PackageReference>
     </ItemGroup>
 

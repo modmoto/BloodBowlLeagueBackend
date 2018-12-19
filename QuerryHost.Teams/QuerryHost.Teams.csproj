@@ -12,7 +12,7 @@
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
         <PackageReference Include="Microwave.DependencyInjectionExtensions">
-          <Version>1.6.2.184</Version>
+          <Version>1.6.2.208</Version>
         </PackageReference>
     </ItemGroup>
 

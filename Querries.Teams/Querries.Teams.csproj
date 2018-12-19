@@ -6,7 +6,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microwave.Queries">
-        <Version>1.6.2.184</Version>
+        <Version>1.6.2.208</Version>
       </PackageReference>
     </ItemGroup>
 
