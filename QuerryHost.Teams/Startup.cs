@@ -28,10 +28,6 @@ namespace QuerryHost.Teams
             BsonClassMap.RegisterClassMap<TeamCreated>();
             BsonClassMap.RegisterClassMap<RaceCreated>();
             BsonClassMap.RegisterClassMap<PlayerBought>();
-
-            BsonClassMap.RegisterClassMap<TeamReadModel>();
-            BsonClassMap.RegisterClassMap<CounterQuery>();
-            BsonClassMap.RegisterClassMap<RaceReadModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

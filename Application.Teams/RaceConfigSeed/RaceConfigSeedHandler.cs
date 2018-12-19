@@ -4,28 +4,31 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Domain.Teams.DomainEvents;
-using Microwave.Application;
 using Microwave.Domain;
 using Microwave.Queries;
+using Newtonsoft.Json;
 
 namespace Application.Teams.RaceConfigSeed
 {
     public class RaceConfigSeedHandler
     {
         private readonly IEventRepository _eventTypes;
-        private readonly IObjectConverter _objectConverter;
 
-        public RaceConfigSeedHandler(IEventRepository eventTypes, IObjectConverter objectConverter)
+        public RaceConfigSeedHandler(IEventRepository eventTypes)
         {
             _eventTypes = eventTypes;
-            _objectConverter = objectConverter;
         }
 
         public async Task EnsureRaceConfigSeed()
         {
             var eventsInSeedRaw = File.ReadAllText($"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}/RaceConfigSeed/RaceConfigSeed.json");
-            var domainEventsInSeed = _objectConverter.Deserialize<IEnumerable<IDomainEvent>>(eventsInSeedRaw);
-            var eventsAllreadyAdded = (await _eventTypes.LoadEventsByTypeAsync(nameof(RaceCreated), 0)).Value.Count();
+            var domainEventsInSeed = JsonConvert.DeserializeObject<IEnumerable<IDomainEvent>>(eventsInSeedRaw,
+                new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                });
+            var result = await _eventTypes.LoadEventsByTypeAsync(nameof(RaceCreated), 0);
+            var eventsAllreadyAdded = result.Value.Count();
             var remainingEvents = domainEventsInSeed.Skip(eventsAllreadyAdded);
             await _eventTypes.AppendAsync(remainingEvents, eventsAllreadyAdded);
         }
