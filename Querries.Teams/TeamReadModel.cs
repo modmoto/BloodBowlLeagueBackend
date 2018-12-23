@@ -15,6 +15,8 @@ namespace Querries.Teams
         public string TeamName { get; set; }
         public Guid TeamId { get; set; }
 
+        public GoldCoins TeamChest { get; set; }
+
         public void Handle(TeamCreated domainEvent)
         {
             TeamId = domainEvent.EntityId;
@@ -26,6 +28,7 @@ namespace Querries.Teams
 
         public void Handle(PlayerBought domainEvent)
         {
+            TeamChest = domainEvent.NewTeamChestBalance;
             PlayerList = PlayerList.Append(domainEvent.PlayerTypeId);
         }
     }

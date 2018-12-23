@@ -1,8 +1,10 @@
 ﻿using Application.Teams;
 using Application.Teams.RaceConfigSeed;
+using Domain.Teams;
 using Domain.Teams.DomainEvents;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
@@ -27,11 +29,7 @@ namespace BloodBowlLeagueBackend
             services.AddTransient<TeamCommandHandler>();
             services.AddTransient<RaceConfigSeedHandler>();
 
-            services.AddMicrowave(Configuration);
-
-            BsonClassMap.RegisterClassMap<TeamCreated>();
-            BsonClassMap.RegisterClassMap<RaceCreated>();
-            BsonClassMap.RegisterClassMap<PlayerBought>();
+            services.AddMicrowave(typeof(TeamCreated).Assembly, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
