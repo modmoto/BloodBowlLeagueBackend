@@ -13,11 +13,11 @@ namespace Querries.Teams
         public Guid RaceId { get; set; }
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
-        public Guid Id { get; set; }
+        public Guid TeamId { get; set; }
 
         public void Handle(TeamCreated domainEvent)
         {
-            Id = domainEvent.EntityId;
+            TeamId = domainEvent.EntityId;
             RaceId = domainEvent.RaceId;
             TeamName = domainEvent.TeamName;
             TrainerName = domainEvent.TrainerName;
