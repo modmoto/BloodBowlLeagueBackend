@@ -1,6 +1,6 @@
-using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microwave.Domain;
 using Microwave.Queries;
 using Querries.Teams;
 
@@ -17,9 +17,9 @@ namespace QuerryHost.Teams
         }
 
         [HttpGet("{raceId}")]
-        public async Task<ActionResult> GetTeam(Guid raceId)
+        public async Task<ActionResult> GetTeam(string raceId)
         {
-            var teamQuerry = await _queryRepository.Load<RaceReadModel>(raceId);
+            var teamQuerry = await _queryRepository.Load<RaceReadModel>(StringIdentity.Create(raceId));
             return Ok(teamQuerry.Value);
         }
     }

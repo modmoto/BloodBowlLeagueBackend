@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microwave.Domain;
 using Microwave.Queries;
 using Querries.Teams;
 
@@ -19,7 +20,7 @@ namespace QuerryHost.Teams
         [HttpGet("{teamId}")]
         public async Task<ActionResult> GetTeam(Guid teamId)
         {
-            var teamQuerry = await _queryRepository.Load<TeamReadModel>(teamId);
+            var teamQuerry = await _queryRepository.Load<TeamReadModel>(GuidIdentity.Create(teamId));
             return Ok(teamQuerry.Value);
         }
 

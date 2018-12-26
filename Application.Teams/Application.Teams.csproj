@@ -9,14 +9,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="RaceConfigSeed\RaceConfigSeed.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="Microwave.EventStores">
-        <Version>0.6.3.237</Version>
+        <Version>0.7.0.240</Version>
       </PackageReference>
     </ItemGroup>
 

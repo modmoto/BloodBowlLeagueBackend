@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
+using Domain.Teams;
 using Domain.Teams.DomainEvents;
 using Microwave.Domain;
 using Microwave.Queries;
-using Newtonsoft.Json;
 
 namespace Application.Teams.RaceConfigSeed
 {
@@ -21,16 +19,31 @@ namespace Application.Teams.RaceConfigSeed
 
         public async Task EnsureRaceConfigSeed()
         {
-            var eventsInSeedRaw = File.ReadAllText($"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}/RaceConfigSeed/RaceConfigSeed.json");
-            var domainEventsInSeed = JsonConvert.DeserializeObject<IEnumerable<IDomainEvent>>(eventsInSeedRaw,
-                new JsonSerializerSettings
-                {
-                    TypeNameHandling = TypeNameHandling.All
-                });
             var result = await _eventTypes.LoadEventsByTypeAsync(nameof(RaceCreated), 0);
             var eventsAllreadyAdded = result.Value.Count();
-            var remainingEvents = domainEventsInSeed.Skip(eventsAllreadyAdded);
+            var remainingEvents = DomainEventsInSeed.Skip(eventsAllreadyAdded);
             await _eventTypes.AppendAsync(remainingEvents, eventsAllreadyAdded);
         }
+
+        private static IEnumerable<IDomainEvent> DomainEventsInSeed => new List<IDomainEvent>
+        {
+            new RaceCreated(StringIdentity.Create("DarkElves"), new List<AllowedPlayer>
+            {
+                new AllowedPlayer(StringIdentity.Create("DE_LineMan"), 16, new GoldCoins(70000), "Lineman"),
+                new AllowedPlayer(StringIdentity.Create("DE_Assassine"), 2, new GoldCoins(90000), "Assasine"),
+                new AllowedPlayer(StringIdentity.Create("DE_Blitzer"), 4, new GoldCoins(100000), "Blitzer"),
+                new AllowedPlayer(StringIdentity.Create("DE_WitchElve"), 2, new GoldCoins(110000), "Witch Elve")
+            }, "Dark Elves"),
+
+            new RaceCreated(StringIdentity.Create("Humans"), new List<AllowedPlayer>
+            {
+                new AllowedPlayer(StringIdentity.Create("HU_LineMan"), 16, new GoldCoins(50000), "Lineman"),
+                new AllowedPlayer(StringIdentity.Create("HU_Blitzer"), 4, new GoldCoins(90000), "Blitzer"),
+                new AllowedPlayer(StringIdentity.Create("HU_Catcher"), 4, new GoldCoins(70000), "Catcher"),
+                new AllowedPlayer(StringIdentity.Create("HU_Thrower"), 2, new GoldCoins(70000), "Thrower"),
+                new AllowedPlayer(StringIdentity.Create("HU_Ogre"), 1, new GoldCoins(70000), "Ogre")
+            }, "Humans")
+
+        };
     }
 }

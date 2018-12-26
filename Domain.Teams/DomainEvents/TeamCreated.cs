@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microwave.Domain;
 
 namespace Domain.Teams.DomainEvents
 {
     public class TeamCreated : IDomainEvent
     {
-        public TeamCreated(Guid entityId, Guid raceId, string teamName, string trainerName, IEnumerable<AllowedPlayer> allowedPlayers)
+        public TeamCreated(Identity entityId, StringIdentity raceId, string teamName, string trainerName, IEnumerable<AllowedPlayer> allowedPlayers)
         {
             EntityId = entityId;
             RaceId = raceId;
@@ -15,8 +14,8 @@ namespace Domain.Teams.DomainEvents
             AllowedPlayers = allowedPlayers;
         }
 
-        public Guid EntityId { get; }
-        public Guid RaceId { get; }
+        public Identity EntityId { get; }
+        public StringIdentity RaceId { get; }
         public string TeamName { get; }
         public string TrainerName { get; }
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; }

@@ -10,18 +10,19 @@ namespace Domain.Teams
     [SnapShotAfter(3)]
     public class Team : Entity
     {
-        public Guid Id { get; private set; }
+        public Identity Id { get; private set; }
 
         public GoldCoins TeamMoney { get; private set; } = new GoldCoins(1000000);
-        public IEnumerable<Guid> PlayerTypes { get; private set; } = new List<Guid>();
+        public IEnumerable<Identity> PlayerTypes { get; private set; } = new List<Identity>();
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; private set; } = new List<AllowedPlayer>();
 
-        public static DomainResult Create(Guid raceId, string teamName, string trainerName, IEnumerable<AllowedPlayer> allowedPlayers)
+        public static DomainResult Create(StringIdentity raceId, string teamName, string trainerName, IEnumerable<AllowedPlayer>
+        allowedPlayers)
         {
-            return DomainResult.Ok(new TeamCreated(Guid.NewGuid(), raceId, teamName, trainerName, allowedPlayers));
+            return DomainResult.Ok(new TeamCreated(GuidIdentity.Create(Guid.NewGuid()), raceId, teamName, trainerName, allowedPlayers));
         }
 
-        public DomainResult BuyPlayer(Guid playerTypeId)
+        public DomainResult BuyPlayer(StringIdentity playerTypeId)
         {
             var play = AllowedPlayers.FirstOrDefault(ap => ap.PlayerTypeId == playerTypeId);
             if (play == null) return DomainResult.Error(new CanNotUsePlayerInThisRaceError(playerTypeId));

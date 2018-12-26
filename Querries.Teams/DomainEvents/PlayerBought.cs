@@ -1,15 +1,14 @@
-﻿using System;
-using Microwave.Domain;
+﻿using Microwave.Domain;
 
 namespace Querries.Teams.DomainEvents
 {
     public class PlayerBought : IDomainEvent
     {
-        public Guid EntityId{ get; set; }
+        public Identity EntityId{ get; set; }
         public GoldCoins NewTeamChestBalance{ get; set; }
-        public Guid PlayerTypeId{ get; set; }
+        public Identity PlayerTypeId{ get; set; }
 
-        public PlayerBought(Guid entityId, Guid playerTypeId, GoldCoins newTeamChestBalance)
+        public PlayerBought(Identity entityId, Identity playerTypeId, GoldCoins newTeamChestBalance)
         {
             EntityId = entityId;
             NewTeamChestBalance = newTeamChestBalance;

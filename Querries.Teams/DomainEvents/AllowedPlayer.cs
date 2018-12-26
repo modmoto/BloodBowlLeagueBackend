@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microwave.Domain;
 
 namespace Querries.Teams.DomainEvents
 {
     public class AllowedPlayer
     {
-        public AllowedPlayer(Guid playerTypeId, int maximumPlayers, GoldCoins cost, string playerDescription)
+        public AllowedPlayer(Identity playerTypeId, int maximumPlayers, GoldCoins cost, string playerDescription)
         {
             PlayerTypeId = playerTypeId;
             MaximumPlayers = maximumPlayers;
@@ -12,7 +12,7 @@ namespace Querries.Teams.DomainEvents
             PlayerDescription = playerDescription;
         }
 
-        public Guid PlayerTypeId{ get; set; }
+        public Identity PlayerTypeId{ get; set; }
         public int MaximumPlayers{ get; set; }
         public GoldCoins Cost{ get; set; }
         public string PlayerDescription{ get; set; }

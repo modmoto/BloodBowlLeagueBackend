@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Application.Teams;
 using Microsoft.AspNetCore.Mvc;
+using Microwave.Domain;
 
 namespace WebApi.Teams
 {
@@ -25,7 +26,7 @@ namespace WebApi.Teams
         [HttpPost("{teamId}/buyPlayer")]
         public async Task<ActionResult> BuyPlayer(Guid teamId, [FromBody] BuyPlayerCommand createTeamCommand)
         {
-            createTeamCommand.TeamId = teamId;
+            createTeamCommand.TeamId = GuidIdentity.Create(teamId);
             await _commandHandler.BuyPlayer(createTeamCommand);
             return Ok();
         }
