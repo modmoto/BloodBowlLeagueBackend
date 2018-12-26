@@ -20,7 +20,7 @@ namespace WebApi.Teams
         public async Task<ActionResult> CreateTeam([FromBody] CreateTeamCommand createTeamCommand)
         {
             var teamGuid = await _commandHandler.CreateTeam(createTeamCommand);
-            return Created($"Api/Teams/{teamGuid}", null);
+            return Created($"Api/Teams/{teamGuid.Id}", null);
         }
 
         [HttpPost("{teamId}/buyPlayer")]

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Domain.Teams;
 using Domain.Teams.DomainEvents;
 using Microwave.Domain;
-using Microwave.Queries;
+using Microwave.EventStores;
 
 namespace Application.Teams.RaceConfigSeed
 {

@@ -24,18 +24,18 @@ namespace Domain.Teams
 
         public DomainResult BuyPlayer(StringIdentity playerTypeId)
         {
-            var play = AllowedPlayers.FirstOrDefault(ap => ap.PlayerTypeId == playerTypeId);
-            if (play == null) return DomainResult.Error(new CanNotUsePlayerInThisRaceError(playerTypeId));
-            int ammount = PlayerTypes.Count(p => p == playerTypeId);
+            var player = AllowedPlayers.FirstOrDefault(ap => ap.PlayerTypeId.Equals(playerTypeId));
+            if (player == null) return DomainResult.Error(new CanNotUsePlayerInThisRaceError(playerTypeId));
+            int ammount = PlayerTypes.Count(p => p.Equals(playerTypeId));
 
-            var canUsePlayer = play.CanUsePlayer(ammount);
+            var canUsePlayer = player.CanUsePlayer(ammount);
             if (canUsePlayer.Failed) return DomainResult.Error(canUsePlayer.DomainErrors);
 
-            if (!play.Cost.LessThan(TeamMoney))
-                return DomainResult.Error(new FewMoneyInTeamChestError(play.Cost.Value, TeamMoney.Value));
+            if (!player.Cost.LessThan(TeamMoney))
+                return DomainResult.Error(new FewMoneyInTeamChestError(player.Cost.Value, TeamMoney.Value));
 
             PlayerTypes.Append(playerTypeId);
-            TeamMoney = TeamMoney.Minus(play.Cost);
+            TeamMoney = TeamMoney.Minus(player.Cost);
             var playerBought = new PlayerBought(Id, playerTypeId, TeamMoney);
             Apply(playerBought);
             return DomainResult.Ok(playerBought);
