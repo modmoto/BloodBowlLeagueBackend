@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Domain.Teams;
 using Microwave.Domain;
-using Microwave.EventStores;
+using Microwave.EventStores.Ports;
 
 namespace Application.Teams
 {
@@ -18,7 +17,7 @@ namespace Application.Teams
 
         public async Task<Identity> CreateTeam(CreateTeamCommand createTeamCommand)
         {
-            var readModelResult = await _eventStore.LoadAsync<RaceConfig>(StringIdentity.Create(createTeamCommand.RaceId));
+            var readModelResult = await _eventStore.LoadAsync<RaceConfig>(createTeamCommand.RaceId);
             var race = readModelResult.Entity;
             var domainResult = Team.Create(race.Id, createTeamCommand.TeamName, createTeamCommand.TrainerName, race.AllowedPlayers);
             await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
@@ -29,7 +28,7 @@ namespace Application.Teams
         {
             var teamResult = await _eventStore.LoadAsync<Team>(buyPlayerCommand.TeamId);
             var team = teamResult.Entity;
-            var buyPlayer = team.BuyPlayer(StringIdentity.Create(buyPlayerCommand.PlayerTypeId));
+            var buyPlayer = team.BuyPlayer(buyPlayerCommand.PlayerTypeId);
             await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion);
         }
     }
@@ -37,7 +36,7 @@ namespace Application.Teams
     public class BuyPlayerCommand
     {
         public GuidIdentity TeamId { get; set; }
-        public string PlayerTypeId { get; set; }
+        public StringIdentity PlayerTypeId { get; set; }
         public long TeamVersion { get; set; }
     }
 
@@ -45,6 +44,6 @@ namespace Application.Teams
     {
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
-        public string RaceId { get; set; }
+        public StringIdentity RaceId { get; set; }
     }
 }

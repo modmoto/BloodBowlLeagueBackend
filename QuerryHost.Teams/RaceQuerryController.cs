@@ -17,9 +17,9 @@ namespace QuerryHost.Teams
         }
 
         [HttpGet("{raceId}")]
-        public async Task<ActionResult> GetTeam(string raceId)
+        public async Task<ActionResult> GetTeam(StringIdentity raceId)
         {
-            var teamQuerry = await _queryRepository.Load<RaceReadModel>(StringIdentity.Create(raceId));
+            var teamQuerry = await _queryRepository.Load<RaceReadModel>(raceId);
             return Ok(teamQuerry.Value);
         }
     }
