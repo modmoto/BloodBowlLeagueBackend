@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microwave.Domain;
 using Microwave.Queries;
@@ -6,7 +7,6 @@ using Querries.Teams.DomainEvents;
 
 namespace Querries.Teams
 {
-    [CreateReadmodelOn(typeof(TeamCreated))]
     public class TeamReadModel : ReadModel, IHandle<TeamCreated>, IHandle<PlayerBought>
     {
         public IEnumerable<Identity> PlayerList { get; set; }
@@ -31,5 +31,7 @@ namespace Querries.Teams
             TeamChest = domainEvent.NewTeamChestBalance;
             PlayerList = PlayerList.Append(domainEvent.PlayerTypeId);
         }
+
+        public override Type GetsCreatedOn => typeof(TeamCreated);
     }
 }

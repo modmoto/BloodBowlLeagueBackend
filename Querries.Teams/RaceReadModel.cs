@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microwave.Domain;
 using Microwave.Queries;
 using Querries.Teams.DomainEvents;
 
 namespace Querries.Teams
 {
-    [CreateReadmodelOn(typeof(RaceCreated))]
     public class RaceReadModel : ReadModel, IHandle<RaceCreated>
     {
         public Identity RaceId { get; set; }
@@ -18,5 +18,7 @@ namespace Querries.Teams
             AllowedPlayers = domainEvent.AllowedPlayers;
             RaceDescription = domainEvent.RaceDescription;
         }
+
+        public override Type GetsCreatedOn => typeof(RaceCreated);
     }
 }
