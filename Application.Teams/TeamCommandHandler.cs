@@ -18,7 +18,7 @@ namespace Application.Teams
         public async Task<Identity> CreateTeam(CreateTeamCommand createTeamCommand)
         {
             var readModelResult = await _eventStore.LoadAsync<RaceConfig>(createTeamCommand.RaceId);
-            var race = readModelResult.Value;
+            var race = readModelResult.Value.Entity;
             var domainResult = Team.Create(race.Id, createTeamCommand.TeamName, createTeamCommand.TrainerName, race.AllowedPlayers);
             await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             return domainResult.DomainEvents.First().EntityId;
@@ -27,7 +27,7 @@ namespace Application.Teams
         public async Task BuyPlayer(BuyPlayerCommand buyPlayerCommand)
         {
             var teamResult = await _eventStore.LoadAsync<Team>(buyPlayerCommand.TeamId);
-            var team = teamResult.Value;
+            var team = teamResult.Value.Entity;
             var buyPlayer = team.BuyPlayer(buyPlayerCommand.PlayerTypeId);
             await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion);
         }
