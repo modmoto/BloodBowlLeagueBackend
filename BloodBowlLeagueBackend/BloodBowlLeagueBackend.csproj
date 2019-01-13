@@ -11,7 +11,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microwave">
-          <Version>0.8.1.351-beta</Version>
+          <Version>0.9.0.352-beta</Version>
         </PackageReference>
     </ItemGroup>
 
