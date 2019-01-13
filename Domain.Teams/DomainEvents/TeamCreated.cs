@@ -5,7 +5,8 @@ namespace Domain.Teams.DomainEvents
 {
     public class TeamCreated : IDomainEvent
     {
-        public TeamCreated(Identity entityId, Identity raceId, string teamName, string trainerName, IEnumerable<AllowedPlayer> allowedPlayers)
+        public TeamCreated(GuidIdentity entityId, StringIdentity raceId, string teamName, string trainerName,
+        IEnumerable<AllowedPlayer> allowedPlayers)
         {
             EntityId = entityId;
             RaceId = raceId;

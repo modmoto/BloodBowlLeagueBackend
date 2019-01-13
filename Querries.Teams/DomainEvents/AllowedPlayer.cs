@@ -4,7 +4,7 @@ namespace Querries.Teams.DomainEvents
 {
     public class AllowedPlayer
     {
-        public AllowedPlayer(Identity playerTypeId, int maximumPlayers, GoldCoins cost, string playerDescription)
+        public AllowedPlayer(StringIdentity playerTypeId, int maximumPlayers, GoldCoins cost, string playerDescription)
         {
             PlayerTypeId = playerTypeId;
             MaximumPlayers = maximumPlayers;

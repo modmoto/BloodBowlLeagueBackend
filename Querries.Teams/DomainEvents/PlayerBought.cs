@@ -8,7 +8,7 @@ namespace Querries.Teams.DomainEvents
         public GoldCoins NewTeamChestBalance{ get; set; }
         public Identity PlayerTypeId{ get; set; }
 
-        public PlayerBought(Identity entityId, Identity playerTypeId, GoldCoins newTeamChestBalance)
+        public PlayerBought(GuidIdentity entityId, StringIdentity playerTypeId, GoldCoins newTeamChestBalance)
         {
             EntityId = entityId;
             NewTeamChestBalance = newTeamChestBalance;

@@ -10,10 +10,10 @@ namespace Domain.Teams
     [SnapShotAfter(3)]
     public class Team : Entity
     {
-        public Identity Id { get; private set; }
+        public GuidIdentity Id { get; private set; }
 
         public GoldCoins TeamMoney { get; private set; } = new GoldCoins(1000000);
-        public IEnumerable<Identity> PlayerTypes { get; private set; } = new List<Identity>();
+        public IEnumerable<StringIdentity> PlayerTypes { get; private set; } = new List<StringIdentity>();
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; private set; } = new List<AllowedPlayer>();
 
         public static DomainResult Create(StringIdentity raceId, string teamName, string trainerName, IEnumerable<AllowedPlayer>
@@ -44,7 +44,7 @@ namespace Domain.Teams
 
         private void Apply(TeamCreated teamCreated)
         {
-            Id = teamCreated.EntityId;
+            Id = GuidIdentity.Create(new Guid(teamCreated.EntityId.Id));
             AllowedPlayers = teamCreated.AllowedPlayers;
         }
 
