@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microwave.Domain;
 
-namespace Application.Players.Events
+namespace Domain.Players.Events
 {
     public class PlayerConfigCreated : IDomainEvent
     {

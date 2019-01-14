@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Players.Events;
+using Domain.Players;
+using Domain.Players.Events;
 using Microwave.Application.Results;
 using Microwave.Domain;
 using Microwave.EventStores.Ports;

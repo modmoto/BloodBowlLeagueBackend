@@ -16,7 +16,7 @@ namespace Domain.Players
             TeamId = teamId;
         }
 
-        public static DomainResult Create(GuidIdentity teamId, StringIdentity playerTypeId)
+        public static DomainResult Create(GuidIdentity teamId, StringIdentity playerTypeId, PlayerConfig playerConfig)
         {
             var playerCreated = new PlayerCreated(GuidIdentity.Create(Guid.NewGuid()), playerTypeId, teamId);
             return DomainResult.Ok(playerCreated);

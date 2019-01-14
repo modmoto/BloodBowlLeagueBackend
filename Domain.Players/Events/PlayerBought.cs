@@ -1,6 +1,6 @@
 ﻿using Microwave.Domain;
 
-namespace Application.Players.Events
+namespace Domain.Players.Events
 {
     public class PlayerBought : IDomainEvent
     {
