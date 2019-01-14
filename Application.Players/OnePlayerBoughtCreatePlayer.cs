@@ -7,14 +7,15 @@ using Microwave.Queries;
 
 namespace Application.Players
 {
-    public class OnPlayerBoughtCreatePlayer : IHandleAsync<PlayerBought>
+    public class OnePlayerBoughtCreatePlayer : IHandleAsync<PlayerBought>
     {
         private readonly IEventStore _eventStore;
 
-        public OnPlayerBoughtCreatePlayer(IEventStore eventStore)
+        public OnePlayerBoughtCreatePlayer(IEventStore eventStore)
         {
             _eventStore = eventStore;
         }
+
         public async Task HandleAsync(PlayerBought domainEvent)
         {
             var result = Player.Create((GuidIdentity) domainEvent.EntityId, domainEvent.PlayerTypeId);
