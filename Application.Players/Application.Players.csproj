@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microwave.EventStores">
+        <Version>0.9.0.357-beta</Version>
+      </PackageReference>
+      <PackageReference Include="Microwave.Queries">
+        <Version>0.9.0.357-beta</Version>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain.Players\Domain.Players.csproj" />
+    </ItemGroup>
+
+</Project>
