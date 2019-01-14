@@ -39,12 +39,11 @@ namespace Domain.Teams
             var playerBought = new PlayerBought(Id, playerTypeId, TeamMoney);
             Apply(playerBought);
             return DomainResult.Ok(playerBought);
-
         }
 
         private void Apply(TeamCreated teamCreated)
         {
-            Id = GuidIdentity.Create(new Guid(teamCreated.EntityId.Id));
+            Id = (GuidIdentity) teamCreated.EntityId;
             AllowedPlayers = teamCreated.AllowedPlayers;
         }
 
