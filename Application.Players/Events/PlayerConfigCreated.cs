@@ -1,17 +1,20 @@
 using System.Collections.Generic;
-using Application.Players.Skills;
 using Microwave.Domain;
 
 namespace Application.Players.Events
 {
-    internal class PlayerConfigCreated : IDomainEvent
+    public class PlayerConfigCreated : IDomainEvent
     {
         public Identity EntityId { get; }
-        public List<Skill> StartingSkills { get; }
-        public List<SkillType> SkillsOnDefault { get; }
-        public List<SkillType> SkillsOnDouble { get; }
+        public IEnumerable<StringIdentity> StartingSkills { get; }
+        public IEnumerable<SkillType> SkillsOnDefault { get; }
+        public IEnumerable<SkillType> SkillsOnDouble { get; }
 
-        public PlayerConfigCreated(StringIdentity entityId, List<Skill> startingSkills, List<SkillType> skillsOnDefault, List<SkillType> skillsOnDouble)
+        public PlayerConfigCreated(
+            StringIdentity entityId,
+            IEnumerable<StringIdentity> startingSkills,
+            IEnumerable<SkillType> skillsOnDefault,
+            IEnumerable<SkillType> skillsOnDouble)
         {
             EntityId = entityId;
             StartingSkills = startingSkills;

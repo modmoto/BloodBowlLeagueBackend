@@ -1,4 +1,4 @@
-namespace Application.Players.Skills
+namespace Application.Players
 {
     public enum SkillType
     {

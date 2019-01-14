@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Players.Events;
-using Application.Players.Skills;
 using Microwave.Application.Results;
 using Microwave.Domain;
 using Microwave.EventStores.Ports;
@@ -33,7 +32,35 @@ namespace Application.Players
         private static IEnumerable<IDomainEvent> DomainEventsInSeed => new List<IDomainEvent>
         {
             new PlayerConfigCreated(StringIdentity.Create("DE_LineMan"),
-                new List<Skill>(),
+                new List<StringIdentity>(),
+                new List<SkillType>
+                {
+                    SkillType.General
+                },
+                new List<SkillType>
+                {
+                    SkillType.General
+                }
+            ),
+            new PlayerConfigCreated(StringIdentity.Create("DE_Blitzer"),
+                new List<StringIdentity>
+                {
+                    Skills.Block
+                },
+                new List<SkillType>
+                {
+                    SkillType.General
+                },
+                new List<SkillType>
+                {
+                    SkillType.General
+                }
+            ),
+            new PlayerConfigCreated(StringIdentity.Create("DE_WitchElve"),
+                new List<StringIdentity>
+                {
+                    Skills.Dodge
+                },
                 new List<SkillType>
                 {
                     SkillType.General
@@ -44,5 +71,11 @@ namespace Application.Players
                 }
             )
         };
+    }
+
+    internal class Skills
+    {
+        public static StringIdentity Block => StringIdentity.Create("Block");
+        public static StringIdentity Dodge => StringIdentity.Create("Dodge");
     }
 }
