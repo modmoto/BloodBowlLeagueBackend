@@ -1,13 +1,12 @@
-﻿using Application.Teams;
-using Application.Teams.RaceConfigSeed;
-using Domain.Teams.DomainEvents;
+﻿using Application.Players;
+using Domain.Players.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 
-namespace BloodBowlLeagueBackend
+namespace Players.WriteHost
 {
     public class Startup
     {
@@ -18,28 +17,20 @@ namespace BloodBowlLeagueBackend
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddTransient<TeamCommandHandler>();
-            services.AddTransient<RaceConfigSeedHandler>();
 
-            services.AddMicrowave(Configuration, typeof(TeamCreated).Assembly);
+            services.AddMicrowave(Configuration, typeof(PlayerConfigCreated).Assembly);
+            services.AddMicrowaveReadModels(Configuration, typeof(OnePlayerBoughtCreatePlayer).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                var raceConfigSeedHandler = serviceScope.ServiceProvider.GetService<RaceConfigSeedHandler>();
+                var raceConfigSeedHandler = serviceScope.ServiceProvider.GetService<PlayerConfigSeedHandler>();
                 raceConfigSeedHandler.EnsureRaceConfigSeed().Wait();
             }
 
