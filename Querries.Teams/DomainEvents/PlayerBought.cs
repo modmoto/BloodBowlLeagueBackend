@@ -4,15 +4,17 @@ namespace Querries.Teams.DomainEvents
 {
     public class PlayerBought : IDomainEvent
     {
-        public Identity EntityId{ get; set; }
-        public GoldCoins NewTeamChestBalance{ get; set; }
-        public Identity PlayerTypeId{ get; set; }
-
-        public PlayerBought(GuidIdentity entityId, StringIdentity playerTypeId, GoldCoins newTeamChestBalance)
+        public PlayerBought(GuidIdentity entityId, StringIdentity playerTypeId, GuidIdentity playerId, GoldCoins newTeamChestBalance)
         {
             EntityId = entityId;
             NewTeamChestBalance = newTeamChestBalance;
             PlayerTypeId = playerTypeId;
+            PlayerId = playerId;
         }
+
+        public Identity EntityId { get; }
+        public GoldCoins NewTeamChestBalance { get; }
+        public StringIdentity PlayerTypeId { get; }
+        public GuidIdentity PlayerId { get; }
     }
 }

@@ -4,13 +4,15 @@ namespace Domain.Players.Events
 {
     public class PlayerBought : IDomainEvent
     {
-        public Identity EntityId{ get; set; }
-        public StringIdentity PlayerTypeId{ get; set; }
+        public Identity EntityId { get; }
+        public GuidIdentity PlayerId { get; }
+        public StringIdentity PlayerTypeId { get; }
 
-        public PlayerBought(GuidIdentity entityId, StringIdentity playerTypeId)
+        public PlayerBought(GuidIdentity entityId, StringIdentity playerTypeId, GuidIdentity playerId)
         {
             EntityId = entityId;
             PlayerTypeId = playerTypeId;
+            PlayerId = playerId;
         }
     }
 }

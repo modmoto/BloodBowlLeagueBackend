@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain.Players.Events;
 using Microwave.Domain;
 
 namespace Domain.Players
@@ -16,24 +17,14 @@ namespace Domain.Players
             TeamId = teamId;
         }
 
-        public static DomainResult Create(GuidIdentity teamId, StringIdentity playerTypeId, PlayerConfig playerConfig)
+        public static DomainResult Create(
+            GuidIdentity teamId,
+            GuidIdentity playerId,
+            StringIdentity playerTypeId,
+            PlayerConfig playerConfig)
         {
-            var playerCreated = new PlayerCreated(GuidIdentity.Create(Guid.NewGuid()), playerTypeId, teamId);
+            var playerCreated = new PlayerCreated(playerId, playerTypeId, teamId, playerConfig);
             return DomainResult.Ok(playerCreated);
         }
-    }
-
-    public class PlayerCreated : IDomainEvent
-    {
-        public PlayerCreated(GuidIdentity entityId, StringIdentity playerTypeId, GuidIdentity teamId)
-        {
-            EntityId = entityId;
-            PlayerTypeId = playerTypeId;
-            TeamId = teamId;
-        }
-
-        public Identity EntityId { get; }
-        public StringIdentity PlayerTypeId { get; }
-        public GuidIdentity TeamId { get; }
     }
 }

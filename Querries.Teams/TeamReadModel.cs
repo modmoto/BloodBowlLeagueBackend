@@ -9,7 +9,7 @@ namespace Querries.Teams
 {
     public class TeamReadModel : ReadModel, IHandle<TeamCreated>, IHandle<PlayerBought>
     {
-        public IEnumerable<Identity> PlayerList { get; set; }
+        public IEnumerable<PlayerDto> PlayerList { get; set; }
         public Identity RaceId { get; set; }
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
@@ -23,15 +23,28 @@ namespace Querries.Teams
             RaceId = domainEvent.RaceId;
             TeamName = domainEvent.TeamName;
             TrainerName = domainEvent.TrainerName;
-            PlayerList = new List<Identity>();
+            PlayerList = new List<PlayerDto>();
         }
 
         public void Handle(PlayerBought domainEvent)
         {
             TeamChest = domainEvent.NewTeamChestBalance;
-            PlayerList = PlayerList.Append(domainEvent.PlayerTypeId);
+            var playerDto = new PlayerDto(domainEvent.PlayerId, domainEvent.PlayerTypeId);
+            PlayerList = PlayerList.Append(playerDto);
         }
 
         public override Type GetsCreatedOn => typeof(TeamCreated);
+    }
+
+    public class PlayerDto
+    {
+        public PlayerDto(GuidIdentity playerId, StringIdentity playerTypeId)
+        {
+            PlayerId = playerId;
+            PlayerTypeId = playerTypeId;
+        }
+
+        public GuidIdentity PlayerId { get; }
+        public StringIdentity PlayerTypeId{ get; }
     }
 }
