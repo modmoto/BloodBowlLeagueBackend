@@ -34,8 +34,8 @@ namespace Domain.Players
             if (!FreeSkillPoints.Any()) return DomainResult.Error(new NoLevelUpsAvailable());
             foreach (var freeSkillType in FreeSkillPoints)
             {
-                var isPOssible = newSkill.IsBiggerOrEqual(freeSkillType);
-                if (isPOssible)
+                var isPossible = newSkill.IsBiggerOrEqual(freeSkillType);
+                if (isPossible)
                 {
                     var skillTypes = FreeSkillPoints.ToList();
                     skillTypes.Remove(freeSkillType);
