@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Querries.Teams;
+using Teams.ReadHost.Teams;
 
-namespace QuerryHost.Teams
+namespace Teams.ReadHost
 {
     public class Startup
     {

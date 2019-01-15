@@ -1,7 +1,6 @@
 using Microwave.Queries;
-using Querries.Teams.DomainEvents;
 
-namespace Querries.Teams
+namespace Teams.ReadHost.Teams
 {
     public class CounterQuery : Query, IHandle<TeamCreated>
     {

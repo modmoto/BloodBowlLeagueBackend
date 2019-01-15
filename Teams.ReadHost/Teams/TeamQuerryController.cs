@@ -2,9 +2,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microwave.Domain;
 using Microwave.Queries;
-using Querries.Teams;
 
-namespace QuerryHost.Teams
+namespace Teams.ReadHost.Teams
 {
     [Route("api/teams")]
     public class TeamQuerryController : Controller

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microwave.Domain;
+using Teams.ReadHost.Teams;
 
-namespace Querries.Teams.DomainEvents
+namespace Teams.ReadHost.Races
 {
     public class RaceCreated : IDomainEvent
     {

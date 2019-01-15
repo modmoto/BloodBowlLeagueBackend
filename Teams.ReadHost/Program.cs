@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace QuerryHost.Teams
+namespace Teams.ReadHost
 {
     public class Program
     {

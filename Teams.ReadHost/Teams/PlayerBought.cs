@@ -1,6 +1,6 @@
 ﻿using Microwave.Domain;
 
-namespace Querries.Teams.DomainEvents
+namespace Teams.ReadHost.Teams
 {
     public class PlayerBought : IDomainEvent
     {

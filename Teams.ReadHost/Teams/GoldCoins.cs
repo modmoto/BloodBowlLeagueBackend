@@ -1,4 +1,4 @@
-﻿namespace Querries.Teams.DomainEvents
+﻿namespace Teams.ReadHost.Teams
 {
     public class GoldCoins
     {

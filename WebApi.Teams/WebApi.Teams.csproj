@@ -17,7 +17,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Application.Teams\Application.Teams.csproj" />
-      <ProjectReference Include="..\Querries.Teams\Querries.Teams.csproj" />
     </ItemGroup>
 
     <ItemGroup>

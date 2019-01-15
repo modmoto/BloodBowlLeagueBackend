@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microwave.Domain;
 using Microwave.Queries;
-using Querries.Teams.DomainEvents;
+using Teams.ReadHost.Teams;
 
-namespace Querries.Teams
+namespace Teams.ReadHost.Races
 {
     public class RaceReadModel : ReadModel, IHandle<RaceCreated>
     {
