@@ -14,14 +14,23 @@ namespace Application.Players
             _eventStore = eventStore;
         }
 
-        public async Task LevelUp(GuidIdentity playerId, LevelUpPlayerComand createTeamCommand)
+        public async Task LevelUp(GuidIdentity playerId, LevelUpPlayerComand levelUpCommand)
         {
-            var result = await _eventStore.LoadAsync<Player>(playerId);
-            var valueEntity = result.Value.Entity;
+            var skill = (await _eventStore.LoadAsync<Skill>(levelUpCommand.SkillId)).Value.Entity;
+            var player = (await _eventStore.LoadAsync<Player>(playerId)).Value.Entity;
+            var result = player.LevelUp(skill);
+
+            (await _eventStore.AppendAsync(result.DomainEvents, (await _eventStore.LoadAsync<Player>(playerId)).Value.Version)).Check();
         }
     }
 
     public class LevelUpPlayerComand
     {
+        public LevelUpPlayerComand(StringIdentity skillId)
+        {
+            SkillId = skillId;
+        }
+
+        public StringIdentity SkillId { get; }
     }
 }

@@ -1,4 +1,7 @@
-﻿using Domain.Players.Events;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Domain.Players.DomainErrors;
+using Domain.Players.Events;
 using Microwave.Domain;
 
 namespace Domain.Players
@@ -8,6 +11,7 @@ namespace Domain.Players
         public GuidIdentity EntityId { get; private set; }
         public StringIdentity PlayerTypeId { get; private set; }
         public PlayerConfig PlayerConfig { get; private set; }
+        public IEnumerable<SkillType> FreeSkillPoints { get; set; }
 
         public static DomainResult Create(
             GuidIdentity playerId,
@@ -23,6 +27,23 @@ namespace Domain.Players
             EntityId = (GuidIdentity) playerCreated.EntityId;
             PlayerTypeId = playerCreated.PlayerTypeId;
             PlayerConfig = playerCreated.PlayerConfig;
+        }
+
+        public DomainResult LevelUp(Skill newSkill)
+        {
+            if (!FreeSkillPoints.Any()) return DomainResult.Error(new NoLevelUpsAvailable());
+            foreach (var freeSkillType in FreeSkillPoints)
+            {
+                var isPOssible = newSkill.IsBiggerOrEqual(freeSkillType);
+                if (isPOssible)
+                {
+                    var skillTypes = FreeSkillPoints.ToList();
+                    skillTypes.Remove(freeSkillType);
+                    return DomainResult.Ok(new SkillPicked(EntityId, newSkill.SkillId, skillTypes));
+                }
+            }
+
+            return DomainResult.Error(new SkillNotPickable(FreeSkillPoints));
         }
     }
 }
