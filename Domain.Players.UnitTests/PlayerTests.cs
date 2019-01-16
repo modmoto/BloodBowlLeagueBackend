@@ -13,9 +13,9 @@ namespace Domain.Players.UnitTests
         public void LevelUp_NoSkillAvailable()
         {
             var player = new Player();
-
             var skillLevelUp = new Skill();
-            skillLevelUp.Apply(new SkillCreated(StringIdentity.Create("egal"), SkillType.Strength));
+            skillLevelUp.Apply(SkillCreated(SkillType.Agility));
+
             var domainResult = player.LevelUp(skillLevelUp);
 
             Assert.IsFalse(domainResult.IsOk);
@@ -25,19 +25,10 @@ namespace Domain.Players.UnitTests
         public void LevelUp_StrengtSkillAvailable()
         {
             var player = new Player();
-            var playerConfig = new PlayerConfig();
-            var playerTypeId = StringIdentity.Create("whatever");
-            playerConfig.Apply(new PlayerConfigCreated(
-                playerTypeId,
-                new List<StringIdentity>(),
-                new []{ SkillType.General },
-                new []{ SkillType.Passing }));
-
-            player.Apply(new PlayerCreated(GuidIdentity.Create(), playerTypeId, playerConfig));
-            player.Apply(new PlayerLeveledUp(GuidIdentity.Create(), new []{ LevelUpType.PlusOneStrength }));
-
+            player.Apply(PlayerLeveledUp(new [] { FreeSkillPoint.PlusOneStrength }));
             var skillLevelUp = new Skill();
-            skillLevelUp.Apply(new SkillCreated(StringIdentity.Create("egal"), SkillType.PlusOneStrength));
+            skillLevelUp.Apply(SkillCreated(SkillType.PlusOneStrength));
+
             var domainResult = player.LevelUp(skillLevelUp);
 
             Assert.IsTrue(domainResult.IsOk);
@@ -48,19 +39,10 @@ namespace Domain.Players.UnitTests
         public void LevelUp_StrengtSkillAvailable_SkillOfLowerPower()
         {
             var player = new Player();
-            var playerConfig = new PlayerConfig();
-            var playerTypeId = StringIdentity.Create("whatever");
-            playerConfig.Apply(new PlayerConfigCreated(
-                playerTypeId,
-                new List<StringIdentity>(),
-                new []{ SkillType.General },
-                new []{ SkillType.Passing }));
-
-            player.Apply(new PlayerCreated(GuidIdentity.Create(), playerTypeId, playerConfig));
-            player.Apply(new PlayerLeveledUp(GuidIdentity.Create(), new []{ LevelUpType.PlusOneStrength }));
-
+            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.PlusOneStrength }));
             var skillLevelUp = new Skill();
-            skillLevelUp.Apply(new SkillCreated(StringIdentity.Create("egal"), SkillType.PlusOneArmorOrMovement));
+            skillLevelUp.Apply(SkillCreated(SkillType.Passing));
+
             var domainResult = player.LevelUp(skillLevelUp);
 
             Assert.IsTrue(domainResult.IsOk);
@@ -71,19 +53,11 @@ namespace Domain.Players.UnitTests
         public void LevelUp_StrengthWanted_ButOnlyArmorPossible()
         {
             var player = new Player();
-            var playerConfig = new PlayerConfig();
-            var playerTypeId = StringIdentity.Create("whatever");
-            playerConfig.Apply(new PlayerConfigCreated(
-                playerTypeId,
-                new List<StringIdentity>(),
-                new []{ SkillType.General },
-                new []{ SkillType.Passing }));
-
-            player.Apply(new PlayerCreated(GuidIdentity.Create(), playerTypeId, playerConfig));
-            player.Apply(new PlayerLeveledUp(GuidIdentity.Create(), new []{ LevelUpType.PlusOneArmorOrMovement }));
-
+            player.Apply(PlayerCreated());
+            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.PlusOneArmorOrMovement }));
             var skillLevelUp = new Skill();
-            skillLevelUp.Apply(new SkillCreated(StringIdentity.Create("egal"), SkillType.PlusOneStrength));
+            skillLevelUp.Apply(SkillCreated(SkillType.PlusOneStrength));
+
             var domainResult = player.LevelUp(skillLevelUp);
 
             Assert.IsFalse(domainResult.IsOk);
@@ -93,19 +67,11 @@ namespace Domain.Players.UnitTests
         public void LevelUp_DoubleReplacedWithGeneral()
         {
             var player = new Player();
-            var playerConfig = new PlayerConfig();
-            var playerTypeId = StringIdentity.Create("whatever");
-            playerConfig.Apply(new PlayerConfigCreated(
-                playerTypeId,
-                new List<StringIdentity>(),
-                new []{ SkillType.General },
-                new []{ SkillType.Passing }));
-
-            player.Apply(new PlayerCreated(GuidIdentity.Create(), playerTypeId, playerConfig));
-            player.Apply(new PlayerLeveledUp(GuidIdentity.Create(), new []{ LevelUpType.Double }));
-
+            player.Apply(PlayerCreated());
+            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Double }));
             var skillLevelUp = new Skill();
-            skillLevelUp.Apply(new SkillCreated(StringIdentity.Create("egal"), SkillType.General));
+            skillLevelUp.Apply(SkillCreated(SkillType.General));
+
             var domainResult = player.LevelUp(skillLevelUp);
 
             Assert.IsTrue(domainResult.IsOk);
@@ -115,19 +81,11 @@ namespace Domain.Players.UnitTests
         public void LevelUp_DoubleUSedForDouble()
         {
             var player = new Player();
-            var playerConfig = new PlayerConfig();
-            var playerTypeId = StringIdentity.Create("whatever");
-            playerConfig.Apply(new PlayerConfigCreated(
-                playerTypeId,
-                new List<StringIdentity>(),
-                new []{ SkillType.General },
-                new []{ SkillType.Passing }));
-
-            player.Apply(new PlayerCreated(GuidIdentity.Create(), playerTypeId, playerConfig));
-            player.Apply(new PlayerLeveledUp(GuidIdentity.Create(), new []{ LevelUpType.Double }));
-
+            player.Apply(PlayerCreated());
+            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Double }));
             var skillLevelUp = new Skill();
-            skillLevelUp.Apply(new SkillCreated(StringIdentity.Create("egal"), SkillType.Passing));
+            skillLevelUp.Apply(SkillCreated(SkillType.Passing));
+
             var domainResult = player.LevelUp(skillLevelUp);
 
             Assert.IsTrue(domainResult.IsOk);
@@ -137,22 +95,47 @@ namespace Domain.Players.UnitTests
         public void LevelUp_DoubleTooHigh()
         {
             var player = new Player();
+            player.Apply(PlayerCreated());
+            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Normal }));
+            var skillLevelUp = new Skill();
+            skillLevelUp.Apply(SkillCreated(SkillType.Passing));
+
+            var domainResult = player.LevelUp(skillLevelUp);
+
+            Assert.IsFalse(domainResult.IsOk);
+        }
+
+
+        private static SkillCreated SkillCreated(SkillType skillType)
+        {
+            return new SkillCreated(StringIdentity.Create("egal"), skillType);
+        }
+
+        private static PlayerLeveledUp PlayerLeveledUp(IEnumerable<FreeSkillPoint> freeSkillPoints = null)
+        {
+            return new PlayerLeveledUp(GuidIdentity.Create(), freeSkillPoints ?? new []{ FreeSkillPoint.PlusOneStrength });
+        }
+
+        private static PlayerConfig PlayerConfig(
+            IEnumerable<SkillType> defaultSkills = null,
+            IEnumerable<SkillType> doubleSkills = null)
+        {
             var playerConfig = new PlayerConfig();
             var playerTypeId = StringIdentity.Create("whatever");
             playerConfig.Apply(new PlayerConfigCreated(
                 playerTypeId,
                 new List<StringIdentity>(),
-                new []{ SkillType.General },
-                new []{ SkillType.Passing }));
+                defaultSkills ?? new[] {SkillType.General},
+                doubleSkills ?? new[] {SkillType.Passing}));
+            return playerConfig;
+        }
 
-            player.Apply(new PlayerCreated(GuidIdentity.Create(), playerTypeId, playerConfig));
-            player.Apply(new PlayerLeveledUp(GuidIdentity.Create(), new []{ LevelUpType.Normal }));
-
-            var skillLevelUp = new Skill();
-            skillLevelUp.Apply(new SkillCreated(StringIdentity.Create("egal"), SkillType.Passing));
-            var domainResult = player.LevelUp(skillLevelUp);
-
-            Assert.IsFalse(domainResult.IsOk);
+        private static PlayerCreated PlayerCreated(
+            IEnumerable<SkillType> defaultSkills = null,
+            IEnumerable<SkillType> doubleSkills = null)
+        {
+            var playerConfig = PlayerConfig(defaultSkills, doubleSkills);
+            return new PlayerCreated(GuidIdentity.Create(), StringIdentity.Create("whatever"), playerConfig);
         }
     }
 }

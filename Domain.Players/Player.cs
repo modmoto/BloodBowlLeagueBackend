@@ -11,7 +11,7 @@ namespace Domain.Players
         public GuidIdentity EntityId { get; private set; }
         public StringIdentity PlayerTypeId { get; private set; }
         public PlayerConfig PlayerConfig { get; private set; }
-        public IEnumerable<LevelUpType> FreeSkillPoints { get; private set; } = new List<LevelUpType>();
+        public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
         public IEnumerable<StringIdentity> CurrentSkills { get; private set; } = new List<StringIdentity>();
 
         public static DomainResult Create(
@@ -45,25 +45,25 @@ namespace Domain.Players
                 var isPossible = false;
                 switch (freeSkillType)
                 {
-                    case LevelUpType.Normal:
+                    case FreeSkillPoint.Normal:
                     {
                         if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) isPossible = true;
                         break;
                     }
-                    case LevelUpType.Double:
+                    case FreeSkillPoint.Double:
                     {
                         if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) isPossible = true;
                         if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) isPossible = true;
                         break;
                     }
-                    case LevelUpType.PlusOneArmorOrMovement:
+                    case FreeSkillPoint.PlusOneArmorOrMovement:
                     {
                         if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) isPossible = true;
                         if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) isPossible = true;
                         if (newSkill.SkillType == SkillType.PlusOneArmorOrMovement) isPossible = true;
                         break;
                     }
-                    case LevelUpType.PlusOneAgility:
+                    case FreeSkillPoint.PlusOneAgility:
                     {
                         if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) isPossible = true;
                         if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) isPossible = true;
@@ -71,7 +71,7 @@ namespace Domain.Players
                         if (newSkill.SkillType == SkillType.PlusOneAgility) isPossible = true;
                         break;
                     }
-                    case LevelUpType.PlusOneStrength:
+                    case FreeSkillPoint.PlusOneStrength:
                         isPossible = true;
                         break;
                 }
@@ -89,7 +89,7 @@ namespace Domain.Players
         }
     }
 
-    public enum LevelUpType
+    public enum FreeSkillPoint
     {
         Normal, Double, PlusOneArmorOrMovement, PlusOneAgility, PlusOneStrength
     }

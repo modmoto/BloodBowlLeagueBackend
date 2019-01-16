@@ -7,9 +7,9 @@ namespace Domain.Players.Events
     {
         public Identity EntityId { get; }
         public StringIdentity NewSkill { get; }
-        public IEnumerable<LevelUpType> RemainingLevelUps { get; }
+        public IEnumerable<FreeSkillPoint> RemainingLevelUps { get; }
 
-        public SkillPicked(GuidIdentity entityId, StringIdentity newSkill, IEnumerable<LevelUpType> remainingLevelUps)
+        public SkillPicked(GuidIdentity entityId, StringIdentity newSkill, IEnumerable<FreeSkillPoint> remainingLevelUps)
         {
             EntityId = entityId;
             NewSkill = newSkill;
