@@ -13,5 +13,23 @@ namespace Domain.Players
             if (SkillType == SkillType.Agility) return true;
             return false;
         }
+
+        public void Apply(SkillCreated skillCreated)
+        {
+            SkillId = (StringIdentity) skillCreated.EntityId;
+            SkillType = skillCreated.SkillType;
+        }
+    }
+
+    public class SkillCreated : IDomainEvent
+    {
+        public SkillCreated(Identity entityId, SkillType skillType)
+        {
+            EntityId = entityId;
+            SkillType = skillType;
+        }
+
+        public Identity EntityId { get; }
+        public SkillType SkillType { get; }
     }
 }

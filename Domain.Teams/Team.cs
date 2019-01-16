@@ -36,7 +36,7 @@ namespace Domain.Teams
 
             PlayerTypes.Append(playerTypeId);
             TeamMoney = TeamMoney.Minus(player.Cost);
-            var playerBought = new PlayerBought(Id, playerTypeId, GuidIdentity.Create(Guid.NewGuid()),  TeamMoney);
+            var playerBought = new PlayerBought(Id, playerTypeId, GuidIdentity.Create(),  TeamMoney);
             Apply(playerBought);
             return DomainResult.Ok(playerBought);
         }

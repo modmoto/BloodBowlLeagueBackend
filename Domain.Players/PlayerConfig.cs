@@ -8,13 +8,13 @@ namespace Domain.Players
     {
         public void Apply(PlayerConfigCreated configCreated)
         {
-            CurrentSkills = configCreated.StartingSkills;
+            StartingSkills = configCreated.StartingSkills;
             SkillsOnDefault = configCreated.SkillsOnDefault;
             SkillsOnDouble = configCreated.SkillsOnDouble;
 
         }
 
-        public IEnumerable<StringIdentity> CurrentSkills { get; set; }
+        public IEnumerable<StringIdentity> StartingSkills { get; set; }
 
         public IEnumerable<SkillType> SkillsOnDefault { get; set; }
 

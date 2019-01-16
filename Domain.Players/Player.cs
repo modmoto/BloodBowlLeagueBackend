@@ -11,7 +11,8 @@ namespace Domain.Players
         public GuidIdentity EntityId { get; private set; }
         public StringIdentity PlayerTypeId { get; private set; }
         public PlayerConfig PlayerConfig { get; private set; }
-        public IEnumerable<SkillType> FreeSkillPoints { get; set; }
+        public IEnumerable<SkillType> FreeSkillPoints { get; private set; } = new List<SkillType>();
+        public IEnumerable<StringIdentity> CurrentSkills { get; private set; } = new List<StringIdentity>();
 
         public static DomainResult Create(
             GuidIdentity playerId,
@@ -26,6 +27,7 @@ namespace Domain.Players
         {
             EntityId = (GuidIdentity) playerCreated.EntityId;
             PlayerTypeId = playerCreated.PlayerTypeId;
+            CurrentSkills = playerCreated.PlayerConfig.StartingSkills;
             PlayerConfig = playerCreated.PlayerConfig;
         }
 
