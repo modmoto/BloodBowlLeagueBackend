@@ -5,15 +5,10 @@ branches:
 services:
 - mongodb
 
-nuget:
-  account_feed: true
-
 init:
 - git config --global core.autocrlf false
 
 before_build:
-- ps: >-
-      nuget sources add -name MicrowaveDevelopement -source https://ci.appveyor.com/nuget/microwave-4xgi95botamc
 - appveyor-retry dotnet restore -v Minimal
 - choco install opencover.portable
 
