@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microwave.Domain;
 
-namespace Domain.Players.Events
+namespace Domain.Players.Events.Players
 {
     public class SkillPicked : IDomainEvent
     {

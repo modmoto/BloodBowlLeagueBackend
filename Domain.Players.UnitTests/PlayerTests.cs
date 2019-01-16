@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Players.Events;
+using Domain.Players.Events.PlayerConfigs;
+using Domain.Players.Events.Players;
+using Domain.Players.Events.Skills;
 using Microwave.Domain;
 using NUnit.Framework;
 

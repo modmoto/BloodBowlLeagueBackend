@@ -2,6 +2,7 @@
 using System.Linq;
 using Domain.Players.DomainErrors;
 using Domain.Players.Events;
+using Domain.Players.Events.Players;
 using Microwave.Domain;
 
 namespace Domain.Players

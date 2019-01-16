@@ -1,3 +1,4 @@
+using Domain.Players.Events.Skills;
 using Microwave.Domain;
 
 namespace Domain.Players
@@ -12,17 +13,5 @@ namespace Domain.Players
             SkillId = (StringIdentity) skillCreated.EntityId;
             SkillType = skillCreated.SkillType;
         }
-    }
-
-    public class SkillCreated : IDomainEvent
-    {
-        public SkillCreated(Identity entityId, SkillType skillType)
-        {
-            EntityId = entityId;
-            SkillType = skillType;
-        }
-
-        public Identity EntityId { get; }
-        public SkillType SkillType { get; }
     }
 }
