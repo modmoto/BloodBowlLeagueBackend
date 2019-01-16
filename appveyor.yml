@@ -5,6 +5,9 @@ branches:
 services:
 - mongodb
 
+nuget:
+  account_feed: true
+
 init:
 - git config --global core.autocrlf false
 
