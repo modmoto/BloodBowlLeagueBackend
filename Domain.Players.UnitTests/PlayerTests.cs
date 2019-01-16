@@ -13,15 +13,6 @@ namespace Domain.Players.UnitTests
         public void LevelUp_NoSkillAvailable()
         {
             var player = new Player();
-            var playerConfig = new PlayerConfig();
-            var playerTypeId = StringIdentity.Create("whatever");
-            playerConfig.Apply(new PlayerConfigCreated(
-                playerTypeId,
-                new List<StringIdentity>(),
-                new []{ SkillType.General },
-                new []{ SkillType.Passing }));
-
-            player.Apply(new PlayerCreated(GuidIdentity.Create(), playerTypeId, playerConfig));
 
             var skillLevelUp = new Skill();
             skillLevelUp.Apply(new SkillCreated(StringIdentity.Create("egal"), SkillType.Strength));
