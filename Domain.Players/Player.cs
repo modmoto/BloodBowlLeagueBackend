@@ -11,7 +11,7 @@ namespace Domain.Players
         public GuidIdentity EntityId { get; private set; }
         public StringIdentity PlayerTypeId { get; private set; }
         public PlayerConfig PlayerConfig { get; private set; }
-        public IEnumerable<SkillType> FreeSkillPoints { get; private set; } = new List<SkillType>();
+        public IEnumerable<LevelUpType> FreeSkillPoints { get; private set; } = new List<LevelUpType>();
         public IEnumerable<StringIdentity> CurrentSkills { get; private set; } = new List<StringIdentity>();
 
         public static DomainResult Create(
@@ -31,12 +31,52 @@ namespace Domain.Players
             PlayerConfig = playerCreated.PlayerConfig;
         }
 
+        public void Apply(PlayerLeveledUp leveledUp)
+        {
+            FreeSkillPoints = leveledUp.FreeSkillPoints;
+        }
+
         public DomainResult LevelUp(Skill newSkill)
         {
             if (!FreeSkillPoints.Any()) return DomainResult.Error(new NoLevelUpsAvailable());
+
             foreach (var freeSkillType in FreeSkillPoints)
             {
-                var isPossible = newSkill.IsBiggerOrEqual(freeSkillType);
+                var isPossible = false;
+                switch (freeSkillType)
+                {
+                    case LevelUpType.Normal:
+                    {
+                        if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) isPossible = true;
+                        break;
+                    }
+                    case LevelUpType.Double:
+                    {
+                        if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) isPossible = true;
+                        if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) isPossible = true;
+                        break;
+                    }
+                    case LevelUpType.PlusOneArmorOrMovement:
+                    {
+                        if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) isPossible = true;
+                        if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) isPossible = true;
+                        if (newSkill.SkillType == SkillType.PlusOneArmorOrMovement) isPossible = true;
+                        break;
+                    }
+                    case LevelUpType.PlusOneAgility:
+                    {
+                        if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) isPossible = true;
+                        if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) isPossible = true;
+                        if (newSkill.SkillType == SkillType.PlusOneArmorOrMovement) isPossible = true;
+                        if (newSkill.SkillType == SkillType.PlusOneAgility) isPossible = true;
+                        break;
+                    }
+                    case LevelUpType.PlusOneStrength:
+                        isPossible = true;
+                        break;
+                }
+
+
                 if (isPossible)
                 {
                     var skillTypes = FreeSkillPoints.ToList();
@@ -47,5 +87,10 @@ namespace Domain.Players
 
             return DomainResult.Error(new SkillNotPickable(FreeSkillPoints));
         }
+    }
+
+    public enum LevelUpType
+    {
+        Normal, Double, PlusOneArmorOrMovement, PlusOneAgility, PlusOneStrength
     }
 }

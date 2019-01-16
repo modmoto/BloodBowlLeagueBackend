@@ -14,15 +14,18 @@ namespace Domain.Players
 
         }
 
-        public IEnumerable<StringIdentity> StartingSkills { get; set; }
+        public IEnumerable<StringIdentity> StartingSkills { get; private set; }
 
-        public IEnumerable<SkillType> SkillsOnDefault { get; set; }
+        public IEnumerable<SkillType> SkillsOnDefault { get; private set; }
 
-        public IEnumerable<SkillType> SkillsOnDouble { get; set; }
+        public IEnumerable<SkillType> SkillsOnDouble { get; private set; }
     }
 
     public enum SkillType
     {
-        General, Agility, Strength, Passing, Mutation, Extraordinary, PlusOneAgility, PlusOneArmor, PlusOneStrength, PlusOneMovement
+        General, Agility, Strength, Passing, Mutation, Extraordinary,
+        PlusOneAgility,
+        PlusOneArmorOrMovement,
+        PlusOneStrength
     }
 }

@@ -5,7 +5,7 @@ namespace Domain.Players.DomainErrors
 {
     public class SkillNotPickable : DomainError
     {
-        public SkillNotPickable(IEnumerable<SkillType> pickableSkills) : base($"Skill is not pickable, can only choose from: {string.Join(",", pickableSkills)}")
+        public SkillNotPickable(IEnumerable<LevelUpType> pickableSkills) : base($"Skill is not pickable, can only choose from: {string.Join(",", pickableSkills)}")
         {
         }
     }
