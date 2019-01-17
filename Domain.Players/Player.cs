@@ -7,7 +7,7 @@ using Microwave.Domain;
 
 namespace Domain.Players
 {
-    public class Player : Entity
+    public class Player : Entity, IApply<PlayerCreated>, IApply<PlayerLeveledUp>
     {
         public GuidIdentity EntityId { get; private set; }
         public StringIdentity PlayerTypeId { get; private set; }

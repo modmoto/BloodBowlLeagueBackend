@@ -8,7 +8,7 @@ using Microwave.Domain;
 namespace Domain.Teams
 {
     [SnapShotAfter(3)]
-    public class Team : Entity
+    public class Team : Entity, IApply<TeamCreated>, IApply<PlayerBought>
     {
         public GuidIdentity Id { get; private set; }
 
@@ -34,20 +34,20 @@ namespace Domain.Teams
             if (!player.Cost.LessThan(TeamMoney))
                 return DomainResult.Error(new FewMoneyInTeamChestError(player.Cost.Value, TeamMoney.Value));
 
-            PlayerTypes.Append(playerTypeId);
+            PlayerTypes = PlayerTypes.Append(playerTypeId);
             TeamMoney = TeamMoney.Minus(player.Cost);
             var playerBought = new PlayerBought(Id, playerTypeId, GuidIdentity.Create(),  TeamMoney);
             Apply(playerBought);
             return DomainResult.Ok(playerBought);
         }
 
-        private void Apply(TeamCreated teamCreated)
+        public void Apply(TeamCreated teamCreated)
         {
             Id = (GuidIdentity) teamCreated.EntityId;
             AllowedPlayers = teamCreated.AllowedPlayers;
         }
 
-        private void Apply(PlayerBought playerBought)
+        public void Apply(PlayerBought playerBought)
         {
             TeamMoney = playerBought.NewTeamChestBalance;
             PlayerTypes = PlayerTypes.Append(playerBought.PlayerTypeId);

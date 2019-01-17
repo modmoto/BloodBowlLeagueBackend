@@ -5,7 +5,7 @@ using Microwave.Domain;
 
 namespace Domain.Players
 {
-    public class PlayerConfig : Entity
+    public class PlayerConfig : Entity, IApply<PlayerConfigCreated>
     {
         public void Apply(PlayerConfigCreated configCreated)
         {
