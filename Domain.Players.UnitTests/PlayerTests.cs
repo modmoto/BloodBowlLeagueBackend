@@ -1,18 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Players.Events;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domain.Players.Events.PlayerConfigs;
 using Domain.Players.Events.Players;
 using Domain.Players.Events.Skills;
 using Microwave.Domain;
-using NUnit.Framework;
 
 namespace Domain.Players.UnitTests
 {
-    [TestFixture]
+    [TestClass]
     public class PlayerTests
     {
-        [Test]
+        [TestMethod]
         public void LevelUp_NoSkillAvailable()
         {
             var player = new Player();
@@ -24,7 +23,7 @@ namespace Domain.Players.UnitTests
             Assert.IsFalse(domainResult.IsOk);
         }
 
-        [Test]
+        [TestMethod]
         public void LevelUp_StrengtSkillAvailable()
         {
             var player = new Player();
@@ -38,7 +37,7 @@ namespace Domain.Players.UnitTests
             Assert.AreEqual(1, domainResult.DomainEvents.Count());
         }
 
-        [Test]
+        [TestMethod]
         public void LevelUp_StrengtSkillAvailable_SkillOfLowerPower()
         {
             var player = new Player();
@@ -52,7 +51,7 @@ namespace Domain.Players.UnitTests
             Assert.AreEqual(1, domainResult.DomainEvents.Count());
         }
 
-        [Test]
+        [TestMethod]
         public void LevelUp_StrengthWanted_ButOnlyArmorPossible()
         {
             var player = new Player();
@@ -66,7 +65,7 @@ namespace Domain.Players.UnitTests
             Assert.IsFalse(domainResult.IsOk);
         }
 
-        [Test]
+        [TestMethod]
         public void LevelUp_DoubleReplacedWithGeneral()
         {
             var player = new Player();
@@ -80,7 +79,7 @@ namespace Domain.Players.UnitTests
             Assert.IsTrue(domainResult.IsOk);
         }
 
-        [Test]
+        [TestMethod]
         public void LevelUp_DoubleUSedForDouble()
         {
             var player = new Player();
@@ -94,7 +93,7 @@ namespace Domain.Players.UnitTests
             Assert.IsTrue(domainResult.IsOk);
         }
 
-        [Test]
+        [TestMethod]
         public void LevelUp_DoubleTooHigh()
         {
             var player = new Player();
