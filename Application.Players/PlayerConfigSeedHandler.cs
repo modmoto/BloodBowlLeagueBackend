@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Players;
-using Domain.Players.Events;
 using Domain.Players.Events.PlayerConfigs;
 using Microwave.Application.Results;
 using Microwave.Domain;

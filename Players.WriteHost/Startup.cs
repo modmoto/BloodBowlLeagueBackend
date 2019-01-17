@@ -1,5 +1,4 @@
 ﻿using Application.Players;
-using Domain.Players.Events;
 using Domain.Players.Events.PlayerConfigs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

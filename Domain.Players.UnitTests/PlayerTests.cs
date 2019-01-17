@@ -107,15 +107,38 @@ namespace Domain.Players.UnitTests
             Assert.IsFalse(domainResult.IsOk);
         }
 
-
-        private static SkillCreated SkillCreated(SkillType skillType)
+        [TestMethod]
+        public void LevelUp_PickSkillTwice()
         {
-            return new SkillCreated(StringIdentity.Create("egal"), skillType);
+            var player = new Player();
+            player.Apply(PlayerCreated());
+            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Normal }));
+            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Normal }));
+            player.Apply(SkillPicked(StringIdentity.Create("SameSkill")));
+
+            var skillLevelUp = new Skill();
+            skillLevelUp.Apply(SkillCreated(SkillType.General, StringIdentity.Create("SameSkill")));
+
+            var domainResult2 = player.LevelUp(skillLevelUp);
+
+            Assert.IsFalse(domainResult2.IsOk);
+        }
+
+
+        private static SkillCreated SkillCreated(SkillType skillType, StringIdentity skillId = null)
+        {
+            return new SkillCreated(skillId ?? StringIdentity.Create("egal"), skillType);
         }
 
         private static PlayerLeveledUp PlayerLeveledUp(IEnumerable<FreeSkillPoint> freeSkillPoints = null)
         {
             return new PlayerLeveledUp(GuidIdentity.Create(), freeSkillPoints ?? new []{ FreeSkillPoint.PlusOneStrength });
+        }
+
+        private static SkillPicked SkillPicked(StringIdentity skillId = null)
+        {
+            return new SkillPicked(GuidIdentity.Create(), skillId ?? StringIdentity.Create("Whatever"),
+                new List<FreeSkillPoint>());
         }
 
         private static PlayerConfig PlayerConfig(
