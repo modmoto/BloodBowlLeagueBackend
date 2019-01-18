@@ -6,13 +6,14 @@ using Microwave.Domain;
 
 namespace Domain.Players
 {
-    public class Player : Entity, IApply<PlayerCreated>, IApply<PlayerLeveledUp>, IApply<SkillPicked>
+    public class Player : Entity, IApply<PlayerCreated>, IApply<PlayerLeveledUp>, IApply<SkillChosen>
     {
         public GuidIdentity EntityId { get; private set; }
         public StringIdentity PlayerTypeId { get; private set; }
         public PlayerConfig PlayerConfig { get; private set; }
         public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
         public IEnumerable<StringIdentity> CurrentSkills { get; private set; } = new List<StringIdentity>();
+        public long StarPlayerPoints { get; private set; }
 
         public static DomainResult Create(
             GuidIdentity playerId,
@@ -23,7 +24,7 @@ namespace Domain.Players
             return DomainResult.Ok(playerCreated);
         }
 
-        public DomainResult LevelUp(Skill newSkill)
+        public DomainResult ChooseSkill(Skill newSkill)
         {
             if (!FreeSkillPoints.Any()) return DomainResult.Error(new NoLevelUpsAvailable());
             if (CurrentSkills.Any(s => s == newSkill.SkillId)) return DomainResult.Error(new CanNotPickSkillTwice(CurrentSkills));
@@ -69,19 +70,40 @@ namespace Domain.Players
                 {
                     var skillTypes = FreeSkillPoints.ToList();
                     skillTypes.Remove(freeSkillType);
-                    return DomainResult.Ok(new SkillPicked(EntityId, newSkill.SkillId, skillTypes));
+                    return DomainResult.Ok(new SkillChosen(EntityId, newSkill.SkillId, skillTypes));
                 }
             }
 
             return DomainResult.Error(new SkillNotPickable(FreeSkillPoints));
         }
 
-        public void Apply(SkillPicked domainEvent)
+        public void Apply(PlayerPassed domainEvent)
+        {
+            StarPlayerPoints = domainEvent.NewStarPlayerPoints;
+        }
+
+        public void Apply(PlayerMadeCasualty domainEvent)
+        {
+            StarPlayerPoints += domainEvent.NewStarPlayerPoints;
+        }
+
+        public void Apply(PlayerMadeTouchdown domainEvent)
+        {
+            StarPlayerPoints += domainEvent.NewStarPlayerPoints;
+        }
+
+        public void Apply(PlayerWasNominatedMostValuablePlayer domainEvent)
+        {
+            StarPlayerPoints += domainEvent.NewStarPlayerPoints;
+        }
+
+
+        public void Apply(SkillChosen domainEvent)
         {
             CurrentSkills = CurrentSkills.Append(domainEvent.NewSkill);
             FreeSkillPoints = domainEvent.RemainingLevelUps;
         }
-        
+
         public void Apply(PlayerCreated playerCreated)
         {
             EntityId = (GuidIdentity) playerCreated.EntityId;

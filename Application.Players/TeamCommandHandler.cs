@@ -18,7 +18,7 @@ namespace Application.Players
         {
             var skill = (await _eventStore.LoadAsync<Skill>(levelUpCommand.SkillId)).Value.Entity;
             var player = (await _eventStore.LoadAsync<Player>(playerId)).Value.Entity;
-            var result = player.LevelUp(skill);
+            var result = player.ChooseSkill(skill);
 
             (await _eventStore.AppendAsync(result.DomainEvents, (await _eventStore.LoadAsync<Player>(playerId)).Value.Version)).Check();
         }
