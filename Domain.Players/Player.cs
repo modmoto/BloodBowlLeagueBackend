@@ -6,7 +6,13 @@ using Microwave.Domain;
 
 namespace Domain.Players
 {
-    public class Player : Entity, IApply<PlayerCreated>, IApply<PlayerLeveledUp>, IApply<SkillChosen>
+    public class Player : Entity, IApply<PlayerCreated>,
+        IApply<PlayerLeveledUp>,
+        IApply<SkillChosen>,
+        IApply<PlayerPassed>,
+        IApply<PlayerWasNominatedMostValuablePlayer>,
+        IApply<PlayerMadeTouchdown>,
+        IApply<PlayerMadeCasualty>
     {
         public GuidIdentity EntityId { get; private set; }
         public StringIdentity PlayerTypeId { get; private set; }
@@ -96,7 +102,6 @@ namespace Domain.Players
         {
             StarPlayerPoints += domainEvent.NewStarPlayerPoints;
         }
-
 
         public void Apply(SkillChosen domainEvent)
         {

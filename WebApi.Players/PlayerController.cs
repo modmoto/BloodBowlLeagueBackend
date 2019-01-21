@@ -16,7 +16,8 @@ namespace WebApi.Players
         }
 
         [HttpPost("{playerId}/level-up")]
-        public async Task<ActionResult> CreateTeam(GuidIdentity playerId, [FromBody] LevelUpPlayerComand createTeamCommand)
+        public async Task<ActionResult> LevelUpPlayer(GuidIdentity playerId, [FromBody] LevelUpPlayerComand
+        createTeamCommand)
         {
             await _commandHandler.LevelUp(playerId, createTeamCommand);
             return Ok();
