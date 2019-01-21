@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Players", "WebApi.Pl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Players.UnitTests", "Domain.Players.UnitTests\Domain.Players.UnitTests.csproj", "{02A75C12-ECC5-4583-8978-230ADF1B7A57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Players.UnitTests", "Application.Players.UnitTests\Application.Players.UnitTests.csproj", "{8F31816C-BC83-4506-9AE4-E3722FF34EE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,10 @@ Global
 		{02A75C12-ECC5-4583-8978-230ADF1B7A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02A75C12-ECC5-4583-8978-230ADF1B7A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02A75C12-ECC5-4583-8978-230ADF1B7A57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F31816C-BC83-4506-9AE4-E3722FF34EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F31816C-BC83-4506-9AE4-E3722FF34EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F31816C-BC83-4506-9AE4-E3722FF34EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F31816C-BC83-4506-9AE4-E3722FF34EE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{51A383C6-126C-4AF4-B356-CCF9FD32A482} = {04090BE6-D0C2-43A6-8940-40E23AAFA2EF}
@@ -86,5 +92,6 @@ Global
 		{4E8381A1-487A-4FD1-9554-69B3E56EFAE1} = {64F06669-5C6B-4CCB-A5ED-D1E0FE9A8F83}
 		{B06FD563-4256-422D-A06D-6DB256681B18} = {6CD21BF4-3E2A-42D8-8E1A-35BA8BA555CE}
 		{02A75C12-ECC5-4583-8978-230ADF1B7A57} = {6CD21BF4-3E2A-42D8-8E1A-35BA8BA555CE}
+		{8F31816C-BC83-4506-9AE4-E3722FF34EE0} = {6CD21BF4-3E2A-42D8-8E1A-35BA8BA555CE}
 	EndGlobalSection
 EndGlobal

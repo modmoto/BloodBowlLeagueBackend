@@ -14,7 +14,7 @@ namespace Domain.Players
         IApply<PlayerMadeTouchdown>,
         IApply<PlayerMadeCasualty>
     {
-        public GuidIdentity EntityId { get; private set; }
+        public GuidIdentity PlayerId { get; private set; }
         public StringIdentity PlayerTypeId { get; private set; }
         public PlayerConfig PlayerConfig { get; private set; }
         public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
@@ -76,11 +76,31 @@ namespace Domain.Players
                 {
                     var skillTypes = FreeSkillPoints.ToList();
                     skillTypes.Remove(freeSkillType);
-                    return DomainResult.Ok(new SkillChosen(EntityId, newSkill.SkillId, skillTypes));
+                    return DomainResult.Ok(new SkillChosen(PlayerId, newSkill.SkillId, skillTypes));
                 }
             }
 
             return DomainResult.Error(new SkillNotPickable(FreeSkillPoints));
+        }
+
+        public DomainResult Pass()
+        {
+            return DomainResult.Ok(new PlayerPassed(PlayerId, StarPlayerPoints + 1));
+        }
+
+        public DomainResult Block()
+        {
+            return DomainResult.Ok(new PlayerMadeCasualty(PlayerId, StarPlayerPoints + 2));
+        }
+
+        public DomainResult Move()
+        {
+            return DomainResult.Ok(new PlayerMadeTouchdown(PlayerId, StarPlayerPoints + 3));
+        }
+
+        public DomainResult NominateForMostValuablePlayer()
+        {
+            return DomainResult.Ok(new PlayerWasNominatedMostValuablePlayer(PlayerId, StarPlayerPoints + 5));
         }
 
         public void Apply(PlayerPassed domainEvent)
@@ -111,7 +131,7 @@ namespace Domain.Players
 
         public void Apply(PlayerCreated playerCreated)
         {
-            EntityId = (GuidIdentity) playerCreated.EntityId;
+            PlayerId = (GuidIdentity) playerCreated.EntityId;
             PlayerTypeId = playerCreated.PlayerTypeId;
             CurrentSkills = playerCreated.PlayerConfig.StartingSkills;
             PlayerConfig = playerCreated.PlayerConfig;

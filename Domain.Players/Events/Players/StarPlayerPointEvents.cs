@@ -4,7 +4,7 @@ namespace Domain.Players.Events.Players
 {
     public class PlayerPassed : IDomainEvent
     {
-        public PlayerPassed(long newStarPlayerPoints, Identity entityId)
+        public PlayerPassed(Identity entityId, long newStarPlayerPoints)
         {
             NewStarPlayerPoints = newStarPlayerPoints;
             EntityId = entityId;
@@ -16,7 +16,7 @@ namespace Domain.Players.Events.Players
 
     public class PlayerWasNominatedMostValuablePlayer : IDomainEvent
     {
-        public PlayerWasNominatedMostValuablePlayer(long newStarPlayerPoints, Identity entityId)
+        public PlayerWasNominatedMostValuablePlayer(Identity entityId, long newStarPlayerPoints)
         {
             NewStarPlayerPoints = newStarPlayerPoints;
             EntityId = entityId;
@@ -28,7 +28,7 @@ namespace Domain.Players.Events.Players
 
     public class PlayerMadeTouchdown : IDomainEvent
     {
-        public PlayerMadeTouchdown(long newStarPlayerPoints, Identity entityId)
+        public PlayerMadeTouchdown(Identity entityId, long newStarPlayerPoints)
         {
             NewStarPlayerPoints = newStarPlayerPoints;
             EntityId = entityId;
@@ -40,7 +40,7 @@ namespace Domain.Players.Events.Players
 
     public class PlayerMadeCasualty : IDomainEvent
     {
-        public PlayerMadeCasualty(long newStarPlayerPoints, Identity entityId)
+        public PlayerMadeCasualty(Identity entityId, long newStarPlayerPoints)
         {
             NewStarPlayerPoints = newStarPlayerPoints;
             EntityId = entityId;
