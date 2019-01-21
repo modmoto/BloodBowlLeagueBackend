@@ -74,7 +74,7 @@ namespace Application.Players
         };
     }
 
-    internal class Skills
+    internal static class Skills
     {
         public static StringIdentity Block => StringIdentity.Create("Block");
         public static StringIdentity Dodge => StringIdentity.Create("Dodge");
