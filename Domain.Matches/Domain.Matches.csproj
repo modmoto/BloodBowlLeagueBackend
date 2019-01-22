@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microwave.Domain">
+        <Version>0.9.0.363-beta</Version>
+      </PackageReference>
+    </ItemGroup>
+
+</Project>

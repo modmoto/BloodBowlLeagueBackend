@@ -24,7 +24,7 @@ namespace Application.Players.UnitTests
             mock.Setup(es => es.LoadAsync<Player>(identity))
                 .ReturnsAsync(Result<EventStoreResult<Player>>.Ok(new EventStoreResult<Player>(new Player(), 0)));
 
-            var onMatchUploadedUpdatePlayerProgress = new OnMatchUploadedUpdatePlayerProgress(mock.Object);
+            var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(mock.Object);
             var matchResultUploaded = MatchResultUploaded(identity);
 
             await onMatchUploadedUpdatePlayerProgress.HandleAsync(matchResultUploaded);
@@ -38,7 +38,7 @@ namespace Application.Players.UnitTests
             mock.Setup(es => es.LoadAsync<Player>(It.IsAny<GuidIdentity>()))
                 .ReturnsAsync(Result<EventStoreResult<Player>>.NotFound(GuidIdentity.Create()));
 
-            var onMatchUploadedUpdatePlayerProgress = new OnMatchUploadedUpdatePlayerProgress(mock.Object);
+            var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(mock.Object);
             var matchResultUploaded = MatchResultUploaded(GuidIdentity.Create(Guid.NewGuid()));
 
             await Assert.ThrowsExceptionAsync<NotFoundException>(
@@ -55,7 +55,7 @@ namespace Application.Players.UnitTests
                 .ReturnsAsync(Result<EventStoreResult<Player>>.Ok(new EventStoreResult<Player>(new Player(), 0)));
             mock.Setup(es => es.LoadAsync<Player>(idNotFound))
                 .ReturnsAsync(Result<EventStoreResult<Player>>.NotFound(GuidIdentity.Create()));
-            var onMatchUploadedUpdatePlayerProgress = new OnMatchUploadedUpdatePlayerProgress(mock.Object);
+            var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(mock.Object);
 
             var matchResultUploaded = MatchResultUploaded(idFound, idNotFound);
 
@@ -63,11 +63,11 @@ namespace Application.Players.UnitTests
                 async () => await onMatchUploadedUpdatePlayerProgress.HandleAsync(matchResultUploaded));
         }
 
-        private static MatchResultUploaded MatchResultUploaded(params GuidIdentity[] identity)
+        private static MatchFinished MatchResultUploaded(params GuidIdentity[] identity)
         {
             var progressionEvents = new []{ ProgressionEvent.PlayerPassed, ProgressionEvent.PlayerMadeCasualty };
             var progressions = identity.Select(guidIdentity => new PlayerProgression(guidIdentity, progressionEvents));
-            return new MatchResultUploaded(GuidIdentity.Create(Guid.NewGuid()), progressions);
+            return new MatchFinished(GuidIdentity.Create(Guid.NewGuid()), progressions);
         }
     }
 }

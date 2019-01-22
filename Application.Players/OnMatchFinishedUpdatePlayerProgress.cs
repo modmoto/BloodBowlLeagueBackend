@@ -10,16 +10,16 @@ using Microwave.Queries;
 
 namespace Application.Players
 {
-    public class OnMatchUploadedUpdatePlayerProgress : IHandleAsync<MatchResultUploaded>
+    public class OnMatchFinishedUpdatePlayerProgress : IHandleAsync<MatchFinished>
     {
         private readonly IEventStore _eventStore;
 
-        public OnMatchUploadedUpdatePlayerProgress(IEventStore eventStore)
+        public OnMatchFinishedUpdatePlayerProgress(IEventStore eventStore)
         {
             _eventStore = eventStore;
         }
 
-        public async Task HandleAsync(MatchResultUploaded domainEvent)
+        public async Task HandleAsync(MatchFinished domainEvent)
         {
             var resultList = new List<Tuple<EventStoreResult<Player>, IEnumerable<IDomainEvent>>>();
             foreach (var playerProgression in domainEvent.PlayerProgressions)

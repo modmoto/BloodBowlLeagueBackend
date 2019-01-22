@@ -1,18 +1,23 @@
 ﻿using System.Collections.Generic;
 using Microwave.Domain;
 
-namespace Domain.Players.Events.ForeignEvents
+namespace Domain.Matches.Events
 {
-    public class MatchResultUploaded : IDomainEvent
+    public class MatchFinished : IDomainEvent
     {
-        public MatchResultUploaded(Identity entityId, IEnumerable<PlayerProgression> playerProgressions)
+        public MatchFinished(
+            Identity entityId,
+            IEnumerable<PlayerProgression> playerProgressions,
+            GameResult gameResult)
         {
             EntityId = entityId;
             PlayerProgressions = playerProgressions;
+            GameResult = gameResult;
         }
 
         public Identity EntityId { get; }
         public IEnumerable<PlayerProgression> PlayerProgressions { get; }
+        public GameResult GameResult { get; }
     }
 
     public class PlayerProgression
