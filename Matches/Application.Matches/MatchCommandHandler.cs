@@ -20,7 +20,7 @@ namespace Application.Matches
         {
             var result = (await _eventStore.LoadAsync<Match>(command.MatchId)).Value;
             var match = result.Entity;
-            var domainResult = match.Finish(new List<PlayerProgression>());
+            var domainResult = match.Finish(command.PlayerProgressions);
             domainResult.EnsureSucces();
             var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, result.Version);
             storeResult.Check();
@@ -42,6 +42,13 @@ namespace Application.Matches
 
     public class FinishMatchCommand
     {
+        public FinishMatchCommand(GuidIdentity matchId, IEnumerable<PlayerProgression> playerProgressions)
+        {
+            MatchId = matchId;
+            PlayerProgressions = playerProgressions;
+        }
+
         public GuidIdentity MatchId { get; }
+        public IEnumerable<PlayerProgression> PlayerProgressions { get; }
     }
 }
