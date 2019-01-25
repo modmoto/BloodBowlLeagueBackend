@@ -2,23 +2,19 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
-        <DebugType>full</DebugType>
+        <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="wwwroot\" />
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
         <PackageReference Include="Microwave">
           <Version>0.9.7.389-beta</Version>
         </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Application.Teams\Application.Teams.csproj" />
-      <ProjectReference Include="..\WebApi.Teams\WebApi.Teams.csproj" />
+      <ProjectReference Include="..\Domain.Matches\Domain.Matches.csproj" />
     </ItemGroup>
 
 </Project>

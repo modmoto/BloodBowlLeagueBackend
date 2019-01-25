@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Players.WriteHost
+namespace Host.Players
 {
     public class Program
     {

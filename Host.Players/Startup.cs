@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 
-namespace Players.WriteHost
+namespace Host.Players
 {
     public class Startup
     {
@@ -25,7 +25,6 @@ namespace Players.WriteHost
             services.AddMicrowaveReadModels(Configuration, typeof(OnePlayerBoughtCreatePlayer).Assembly);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
