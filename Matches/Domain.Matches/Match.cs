@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Domain.Matches.Errors;
 using Domain.Matches.Events;
 using Microwave.Domain;
 
@@ -13,10 +14,20 @@ namespace Domain.Matches
 
         public GuidIdentity TrainerAtHome { get; private set; }
         public IEnumerable<PlayerProgression> PlayerProgressions { get; private set; }
+        public bool IsFinished { get; private set; }
+
+
+        public static DomainResult Create(GuidIdentity trainerAtHome, GuidIdentity trainerAsGuest)
+        {
+            var domainEvents = new MatchCreated(GuidIdentity.Create(), trainerAtHome, trainerAsGuest);
+            return DomainResult.Ok(domainEvents);
+        }
+
 
         public DomainResult Finish(IEnumerable<PlayerProgression> playerProgressions)
         {
-            var trainerResults = PlayerProgressions.GroupBy(p => p.PlayerId).ToList();
+            var progressions = playerProgressions.ToList();
+            var trainerResults = progressions.GroupBy(p => p.PlayerId).ToList();
             if (TrainersInResultAreNotTheTrainersOfThisMatch(trainerResults)) return DomainResult.Error(new TrainersCanOnlyBeFromThisMatch());
 
             var homeTouchDowns = CountTouchDowns(trainerResults.Single(k => k.Key == TrainerAtHome));
@@ -35,7 +46,8 @@ namespace Domain.Matches
                     : GameResult.WinResult(guestResult, homeResult);
             }
 
-            var matchResultUploaded = new MatchFinished(MatchId, playerProgressions, gameResult);
+            var matchResultUploaded = new MatchFinished(MatchId, progressions, gameResult);
+            IsFinished = true;
             return DomainResult.Ok(matchResultUploaded);
         }
 
@@ -51,12 +63,6 @@ namespace Domain.Matches
                    && (trainers[1].Key== TrainerAtHome || trainers[1].Key == TrainerAsGuest));
         }
 
-        public static DomainResult Create(GuidIdentity trainerAtHome, GuidIdentity trainerAsGuest)
-        {
-            var domainEvents = new MatchCreated(GuidIdentity.Create(), trainerAtHome, trainerAsGuest);
-            return DomainResult.Ok(domainEvents);
-        }
-
         public void Apply(MatchFinished domainEvent)
         {
             PlayerProgressions = domainEvent.PlayerProgressions;
@@ -68,64 +74,5 @@ namespace Domain.Matches
             TrainerAtHome = domainEvent.TrainerAtHome;
             TrainerAsGuest = domainEvent.TrainerAsGuest;
         }
-    }
-
-    public class TrainersCanOnlyBeFromThisMatch : DomainError
-    {
-        public TrainersCanOnlyBeFromThisMatch() : base("The trainers did not create this match, can not finish with this results.")
-        {
-        }
-    }
-
-    public class GameResult
-    {
-        public bool IsDraw { get; }
-        public object WinnerId { get; }
-        public object LooserId { get; }
-
-        private GameResult(bool isDraw, object winnerId, object looserId)
-        {
-            IsDraw = isDraw;
-            WinnerId = winnerId;
-            LooserId = looserId;
-        }
-
-        public static GameResult Draw()
-        {
-            return new GameResult(true, null, null);
-        }
-
-        public static GameResult WinResult(TrainerGameResult winner, TrainerGameResult looser)
-        {
-            return new GameResult(false, winner, looser);
-        }
-    }
-
-    public class TrainerGameResult
-    {
-        public Identity TrainerId { get; }
-        public long TouchDowns { get; }
-
-        public TrainerGameResult(Identity trainerId, long touchDowns)
-        {
-            TrainerId = trainerId;
-            TouchDowns = touchDowns;
-        }
-    }
-
-    public class MatchCreated : IDomainEvent
-    {
-        public GuidIdentity TrainerAtHome { get; }
-        public GuidIdentity TrainerAsGuest { get; }
-
-        public Identity EntityId { get; }
-
-        public MatchCreated(GuidIdentity entityId, GuidIdentity trainerAtHome, GuidIdentity trainerAsGuest)
-        {
-            EntityId = entityId;
-            TrainerAtHome = trainerAtHome;
-            TrainerAsGuest = trainerAsGuest;
-        }
-
     }
 }
