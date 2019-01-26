@@ -1,4 +1,5 @@
 using System.Linq;
+using Domain.Matches.Errors;
 using Domain.Matches.Events;
 using Domain.Matches.ForeignEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -34,6 +35,28 @@ namespace Domain.Matches.UnitTests
             var domainEvent = domainResult.DomainEvents.First() as MatchFinished;
             Assert.AreEqual(teamReadModel.TeamId, domainEvent.GameResult.Winner.TrainerId);
             Assert.AreEqual(teamReadModel2.TeamId, domainEvent.GameResult.Looser.TrainerId);
+        }
+
+        [TestMethod]
+        public void FinishMatch_PlayersNotInTeam()
+        {
+            var match = new Match();
+
+            var player1Id = GuidIdentity.Create();
+            var player2Id = GuidIdentity.Create();
+            var player3Id = GuidIdentity.Create();
+            var teamReadModel = TeamReadModel(player1Id);
+            var teamReadModel2 = TeamReadModel(player3Id);
+
+            match.Apply(new MatchCreated(GuidIdentity.Create(), teamReadModel, teamReadModel2));
+
+            var playerProgression1 = PlayerProgressionTouchdown(player2Id);
+            var playerProgressions = new []{ playerProgression1 };
+
+            var domainResult = match.Finish(playerProgressions);
+
+            Assert.IsFalse(match.IsFinished);
+            Assert.IsTrue(domainResult.DomainErrors.Single().GetType() == typeof(PlayerWasNotPartOfTheTeamOnMatchCreation));
         }
 
         private static PlayerProgression PlayerProgressionTouchdown(GuidIdentity playerId)
