@@ -4,16 +4,16 @@ namespace Domain.Matches.Events
 {
     public class MatchCreated : IDomainEvent
     {
-        public GuidIdentity TrainerAtHome { get; }
-        public GuidIdentity TrainerAsGuest { get; }
+        public TeamReadModel HomeTeam { get; }
+        public TeamReadModel GuestTeam { get; }
 
         public Identity EntityId { get; }
 
-        public MatchCreated(GuidIdentity entityId, GuidIdentity trainerAtHome, GuidIdentity trainerAsGuest)
+        public MatchCreated(GuidIdentity entityId, TeamReadModel homeTeam, TeamReadModel guestTeam)
         {
             EntityId = entityId;
-            TrainerAtHome = trainerAtHome;
-            TrainerAsGuest = trainerAsGuest;
+            HomeTeam = homeTeam;
+            GuestTeam = guestTeam;
         }
 
     }

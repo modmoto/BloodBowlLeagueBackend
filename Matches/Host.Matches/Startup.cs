@@ -1,4 +1,5 @@
-﻿using Domain.Matches.Events;
+﻿using Domain.Matches;
+using Domain.Matches.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,11 +22,13 @@ namespace Host.Matches
             services.AddMvc();
 
             services.AddMicrowave(Configuration, typeof(MatchFinished).Assembly);
+            services.AddMicrowaveReadModels(Configuration, typeof(TeamReadModel).Assembly);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseMvc();
+            app.RunMicrowaveQueries();
         }
     }
 }

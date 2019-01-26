@@ -4,16 +4,19 @@ using Domain.Matches;
 using Domain.Matches.Events;
 using Microwave.Domain;
 using Microwave.EventStores.Ports;
+using Microwave.Queries;
 
 namespace Application.Matches
 {
     public class MatchCommandHandler
     {
         private readonly IEventStore _eventStore;
+        private readonly IReadModelRepository _readModelRepository;
 
-        public MatchCommandHandler(IEventStore eventStore)
+        public MatchCommandHandler(IEventStore eventStore, IReadModelRepository readModelRepository)
         {
             _eventStore = eventStore;
+            _readModelRepository = readModelRepository;
         }
 
         public async Task FinishMatch(FinishMatchCommand command)
@@ -28,7 +31,9 @@ namespace Application.Matches
 
         public async Task CreateMatch(CreateMatchCommand command)
         {
-            var domainResult = Match.Create(command.TrainerAtHome, command.TrainerAsGuest);
+            var homeTeam = (await _readModelRepository.Load<TeamReadModel>(command.HomeTeam)).Value.ReadModel;
+            var guestTeam = (await _readModelRepository.Load<TeamReadModel>(command.GuestTeam)).Value.ReadModel;
+            var domainResult = Match.Create(homeTeam, guestTeam);
             var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             storeResult.Check();
         }
@@ -36,8 +41,8 @@ namespace Application.Matches
 
     public class CreateMatchCommand
     {
-        public GuidIdentity TrainerAtHome { get; set; }
-        public GuidIdentity TrainerAsGuest { get; set; }
+        public GuidIdentity HomeTeam { get; set; }
+        public GuidIdentity GuestTeam { get; set; }
     }
 
     public class FinishMatchCommand

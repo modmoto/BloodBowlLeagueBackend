@@ -5,14 +5,14 @@ namespace Domain.Matches
     public class GameResult
     {
         public bool IsDraw { get; }
-        public TrainerGameResult WinnerId { get; }
-        public TrainerGameResult LooserId { get; }
+        public TrainerGameResult Winner { get; }
+        public TrainerGameResult Looser { get; }
 
-        private GameResult(bool isDraw, TrainerGameResult winnerId, TrainerGameResult looserId)
+        private GameResult(bool isDraw, TrainerGameResult winner, TrainerGameResult looser)
         {
             IsDraw = isDraw;
-            WinnerId = winnerId;
-            LooserId = looserId;
+            Winner = winner;
+            Looser = looser;
         }
 
         public static GameResult Draw()

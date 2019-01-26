@@ -9,15 +9,13 @@ namespace Domain.Matches
     public class Match : Entity, IApply<MatchFinished>, IApply<MatchCreated>
     {
         public GuidIdentity MatchId { get; private set; }
-
-        public GuidIdentity TrainerAsGuest { get; private set; }
-
-        public GuidIdentity TrainerAtHome { get; private set; }
+        public TeamReadModel GuestTeam { get; private set; }
+        public TeamReadModel HomeTeam { get; private set; }
         public IEnumerable<PlayerProgression> PlayerProgressions { get; private set; }
         public bool IsFinished { get; private set; }
 
 
-        public static DomainResult Create(GuidIdentity trainerAtHome, GuidIdentity trainerAsGuest)
+        public static DomainResult Create(TeamReadModel trainerAtHome, TeamReadModel trainerAsGuest)
         {
             var domainEvents = new MatchCreated(GuidIdentity.Create(), trainerAtHome, trainerAsGuest);
             return DomainResult.Ok(domainEvents);
@@ -28,19 +26,35 @@ namespace Domain.Matches
         {
             if (IsFinished) return DomainResult.Error(new MatchAllreadyFinished());
             var progressions = playerProgressions.ToList();
-            var trainerResults = progressions.GroupBy(p => p.PlayerId).ToList();
-            if (TrainersInResultAreNotTheTrainersOfThisMatch(trainerResults)) return DomainResult.Error(new TrainersCanOnlyBeFromThisMatch());
 
-            var homeTouchDowns = CountTouchDowns(trainerResults.Single(k => k.Key == TrainerAtHome));
-            var guestTouchDowns = CountTouchDowns(trainerResults.Single(k => k.Key == TrainerAsGuest));
+            var homeTeamProgression = new List<PlayerProgression>();
+            var guestTeamProgression = new List<PlayerProgression>();
+            foreach (var progression in progressions)
+            {
+                if (HomeTeam.Players.Contains(progression.PlayerId))
+                {
+                    homeTeamProgression.Add(progression);
+                    continue;
+                }
 
+                if (GuestTeam.Players.Contains(progression.PlayerId))
+                {
+                    guestTeamProgression.Add(progression);
+                    continue;
+                }
+
+                return DomainResult.Error(new PlayerWasNotPartOfTheTeamOnMatchCreation(progression.PlayerId));
+            }
+
+            var homeTouchDowns = CountTouchDowns(homeTeamProgression);
+            var guestTouchDowns = CountTouchDowns(guestTeamProgression);
 
             GameResult gameResult;
             if (homeTouchDowns == guestTouchDowns) gameResult = GameResult.Draw();
             else
             {
-                var homeResult = new TrainerGameResult(TrainerAtHome, homeTouchDowns);
-                var guestResult = new TrainerGameResult(TrainerAsGuest, guestTouchDowns);
+                var homeResult = new TrainerGameResult(HomeTeam.TeamId, homeTouchDowns);
+                var guestResult = new TrainerGameResult(GuestTeam.TeamId, guestTouchDowns);
 
                 gameResult = homeTouchDowns > guestTouchDowns
                     ? GameResult.WinResult(homeResult, guestResult)
@@ -52,16 +66,9 @@ namespace Domain.Matches
             return DomainResult.Ok(matchResultUploaded);
         }
 
-        private static int CountTouchDowns(IGrouping<GuidIdentity, PlayerProgression> trainerResults)
+        private static int CountTouchDowns(IEnumerable<PlayerProgression> trainerResults)
         {
             return trainerResults.Sum(playerProgression => playerProgression.ProgressionEvents.Count(ev => ev == ProgressionEvent.PlayerMadeTouchdown));
-        }
-
-        private bool TrainersInResultAreNotTheTrainersOfThisMatch(IList<IGrouping<GuidIdentity, PlayerProgression>> trainers)
-        {
-            return !(trainers.Count == 2
-                   && (trainers[0].Key== TrainerAtHome || trainers[0].Key == TrainerAsGuest)
-                   && (trainers[1].Key== TrainerAtHome || trainers[1].Key == TrainerAsGuest));
         }
 
         public void Apply(MatchFinished domainEvent)
@@ -73,8 +80,8 @@ namespace Domain.Matches
         public void Apply(MatchCreated domainEvent)
         {
             MatchId = (GuidIdentity) domainEvent.EntityId;
-            TrainerAtHome = domainEvent.TrainerAtHome;
-            TrainerAsGuest = domainEvent.TrainerAsGuest;
+            HomeTeam = domainEvent.HomeTeam;
+            GuestTeam = domainEvent.GuestTeam;
         }
     }
 }
