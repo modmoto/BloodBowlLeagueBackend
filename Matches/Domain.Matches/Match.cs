@@ -29,8 +29,8 @@ namespace Domain.Matches
 
             var homeTeamProgression = progressions.Where(p => HomeTeam.Players.Contains(p.PlayerId));
             var guestTeamProgression = progressions.Where(p => GuestTeam.Players.Contains(p.PlayerId));
-            var unrelatedPlayers = progressions.Where(p => !HomeTeam.Players.Contains(p.PlayerId) && !GuestTeam.Players.Contains(p
-                                                         .PlayerId)).Select(p => p.PlayerId).ToList();
+            var unrelatedPlayers = progressions.Where(p =>
+                !HomeTeam.Players.Contains(p.PlayerId) && !GuestTeam.Players.Contains(p.PlayerId)).Select(p => p.PlayerId).ToList();
             if (unrelatedPlayers.Any()) return DomainResult.Error(new PlayerWasNotPartOfTheTeamOnMatchCreation(unrelatedPlayers));
 
             var homeTouchDowns = CountTouchDowns(homeTeamProgression);
