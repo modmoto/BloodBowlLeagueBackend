@@ -27,28 +27,24 @@ namespace Domain.Matches
             if (IsFinished) return DomainResult.Error(new MatchAllreadyFinished());
             var progressions = playerProgressions.ToList();
 
-            var homeTeamProgression = new List<PlayerProgression>();
-            var guestTeamProgression = new List<PlayerProgression>();
-            foreach (var progression in progressions)
-            {
-                if (HomeTeam.Players.Contains(progression.PlayerId))
-                {
-                    homeTeamProgression.Add(progression);
-                    continue;
-                }
-
-                if (GuestTeam.Players.Contains(progression.PlayerId))
-                {
-                    guestTeamProgression.Add(progression);
-                    continue;
-                }
-
-                return DomainResult.Error(new PlayerWasNotPartOfTheTeamOnMatchCreation(progression.PlayerId));
-            }
+            var homeTeamProgression = progressions.Where(p => HomeTeam.Players.Contains(p.PlayerId));
+            var guestTeamProgression = progressions.Where(p => GuestTeam.Players.Contains(p.PlayerId));
+            var unrelatedPlayers = progressions.Where(p => !HomeTeam.Players.Contains(p.PlayerId) && !GuestTeam.Players.Contains(p
+                                                         .PlayerId)).Select(p => p.PlayerId).ToList();
+            if (unrelatedPlayers.Any()) return DomainResult.Error(new PlayerWasNotPartOfTheTeamOnMatchCreation(unrelatedPlayers));
 
             var homeTouchDowns = CountTouchDowns(homeTeamProgression);
             var guestTouchDowns = CountTouchDowns(guestTeamProgression);
 
+            var gameResult = CreatGameResult(homeTouchDowns, guestTouchDowns);
+
+            var matchResultUploaded = new MatchFinished(MatchId, progressions, gameResult);
+            IsFinished = true;
+            return DomainResult.Ok(matchResultUploaded);
+        }
+
+        private GameResult CreatGameResult(int homeTouchDowns, int guestTouchDowns)
+        {
             GameResult gameResult;
             if (homeTouchDowns == guestTouchDowns) gameResult = GameResult.Draw();
             else
@@ -61,9 +57,7 @@ namespace Domain.Matches
                     : GameResult.WinResult(guestResult, homeResult);
             }
 
-            var matchResultUploaded = new MatchFinished(MatchId, progressions, gameResult);
-            IsFinished = true;
-            return DomainResult.Ok(matchResultUploaded);
+            return gameResult;
         }
 
         private static int CountTouchDowns(IEnumerable<PlayerProgression> trainerResults)

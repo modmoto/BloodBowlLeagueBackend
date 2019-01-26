@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using Microwave.Domain;
 
 namespace Domain.Matches.Errors
 {
     public class PlayerWasNotPartOfTheTeamOnMatchCreation : DomainError
     {
-        public PlayerWasNotPartOfTheTeamOnMatchCreation(GuidIdentity playerIdentity) : base($"The progression for player {playerIdentity} is not possible, as he was not part of one team on the creation of this match.")
+        public PlayerWasNotPartOfTheTeamOnMatchCreation(IEnumerable<GuidIdentity> playerIdentity) : base($"The progression for players {string.Join(", ", playerIdentity)} are not possible, as they where not part of one team on the creation of this match.")
         {
         }
     }
