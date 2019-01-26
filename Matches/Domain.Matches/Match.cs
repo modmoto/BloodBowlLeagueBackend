@@ -26,6 +26,7 @@ namespace Domain.Matches
 
         public DomainResult Finish(IEnumerable<PlayerProgression> playerProgressions)
         {
+            if (IsFinished) return DomainResult.Error(new MatchAllreadyFinished());
             var progressions = playerProgressions.ToList();
             var trainerResults = progressions.GroupBy(p => p.PlayerId).ToList();
             if (TrainersInResultAreNotTheTrainersOfThisMatch(trainerResults)) return DomainResult.Error(new TrainersCanOnlyBeFromThisMatch());
@@ -65,6 +66,7 @@ namespace Domain.Matches
 
         public void Apply(MatchFinished domainEvent)
         {
+            IsFinished = true;
             PlayerProgressions = domainEvent.PlayerProgressions;
         }
 
