@@ -22,7 +22,7 @@ namespace Application.Players.UnitTests
             var mock = new Mock<IEventStore>();
             var identity = GuidIdentity.Create(Guid.NewGuid());
             mock.Setup(es => es.LoadAsync<Player>(identity))
-                .ReturnsAsync(Result<EventStoreResult<Player>>.Ok(new EventStoreResult<Player>(new Player(), 0)));
+                .ReturnsAsync(EventStoreResult<Player>.Ok(new Player(), 0));
 
             var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(mock.Object);
             var matchResultUploaded = MatchResultUploaded(identity);
@@ -36,7 +36,7 @@ namespace Application.Players.UnitTests
         {
             var mock = new Mock<IEventStore>();
             mock.Setup(es => es.LoadAsync<Player>(It.IsAny<GuidIdentity>()))
-                .ReturnsAsync(Result<EventStoreResult<Player>>.NotFound(GuidIdentity.Create()));
+                .ReturnsAsync(EventStoreResult<Player>.NotFound(GuidIdentity.Create()));
 
             var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(mock.Object);
             var matchResultUploaded = MatchResultUploaded(GuidIdentity.Create(Guid.NewGuid()));
@@ -52,9 +52,9 @@ namespace Application.Players.UnitTests
             var idNotFound = GuidIdentity.Create();
             var idFound = GuidIdentity.Create();
             mock.Setup(es => es.LoadAsync<Player>(idFound))
-                .ReturnsAsync(Result<EventStoreResult<Player>>.Ok(new EventStoreResult<Player>(new Player(), 0)));
+                .ReturnsAsync(EventStoreResult<Player>.Ok(new Player(), 0));
             mock.Setup(es => es.LoadAsync<Player>(idNotFound))
-                .ReturnsAsync(Result<EventStoreResult<Player>>.NotFound(GuidIdentity.Create()));
+                .ReturnsAsync(EventStoreResult<Player>.NotFound(GuidIdentity.Create()));
             var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(mock.Object);
 
             var matchResultUploaded = MatchResultUploaded(idFound, idNotFound);

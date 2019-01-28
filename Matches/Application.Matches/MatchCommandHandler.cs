@@ -21,7 +21,7 @@ namespace Application.Matches
 
         public async Task FinishMatch(FinishMatchCommand command)
         {
-            var result = (await _eventStore.LoadAsync<Match>(command.MatchId)).Value;
+            var result = (await _eventStore.LoadAsync<Match>(command.MatchId));
             var match = result.Entity;
             var domainResult = match.Finish(command.PlayerProgressions);
             domainResult.EnsureSucces();
@@ -31,8 +31,8 @@ namespace Application.Matches
 
         public async Task CreateMatch(CreateMatchCommand command)
         {
-            var homeTeam = (await _readModelRepository.Load<TeamReadModel>(command.HomeTeam)).Value.ReadModel;
-            var guestTeam = (await _readModelRepository.Load<TeamReadModel>(command.GuestTeam)).Value.ReadModel;
+            var homeTeam = (await _readModelRepository.Load<TeamReadModel>(command.HomeTeam)).ReadModel;
+            var guestTeam = (await _readModelRepository.Load<TeamReadModel>(command.GuestTeam)).ReadModel;
             var domainResult = Match.Create(homeTeam, guestTeam);
             var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             storeResult.Check();

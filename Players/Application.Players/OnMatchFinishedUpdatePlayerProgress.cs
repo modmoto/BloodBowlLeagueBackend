@@ -26,9 +26,8 @@ namespace Application.Players
             {
                 var domainResults = new List<DomainResult>();
                 var result = await _eventStore.LoadAsync<Player>(playerProgression.PlayerId);
-                var eventStoreResult = result.Value;
 
-                var player = eventStoreResult.Entity;
+                var player = result.Entity;
                 foreach (var progressionEvent in playerProgression.ProgressionEvents)
                 {
                     switch (progressionEvent)
@@ -50,7 +49,7 @@ namespace Application.Players
 
                 var domainEvents = domainResults.SelectMany(res => res.DomainEvents);
 
-                resultList.Add(new Tuple<EventStoreResult<Player>, IEnumerable<IDomainEvent>>(eventStoreResult, domainEvents));
+                resultList.Add(new Tuple<EventStoreResult<Player>, IEnumerable<IDomainEvent>>(result, domainEvents));
             }
 
             foreach (var tuple in resultList)
