@@ -21,7 +21,7 @@ namespace Application.Matches
 
         public async Task FinishMatch(FinishMatchCommand command)
         {
-            var result = (await _eventStore.LoadAsync<Match>(command.MatchId));
+            var result = await _eventStore.LoadAsync<Match>(command.MatchId);
             var match = result.Entity;
             var domainResult = match.Finish(command.PlayerProgressions);
             domainResult.EnsureSucces();
