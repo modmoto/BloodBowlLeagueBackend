@@ -18,7 +18,7 @@ namespace Application.Players
         public async Task HandleAsync(PlayerBought domainEvent)
         {
             var eventResult = await _eventStore.LoadAsync<PlayerConfig>(domainEvent.PlayerTypeId);
-            var playerConfig = eventResult.Entity;
+            var playerConfig = eventResult.Value;
             var result = Player.Create(domainEvent.PlayerId, domainEvent.PlayerTypeId, playerConfig);
             var storeResult = await _eventStore.AppendAsync(result.DomainEvents, 0);
             storeResult.Check();

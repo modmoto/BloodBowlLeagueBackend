@@ -27,7 +27,7 @@ namespace Application.Players
                 var domainResults = new List<DomainResult>();
                 var result = await _eventStore.LoadAsync<Player>(playerProgression.PlayerId);
 
-                var player = result.Entity;
+                var player = result.Value;
                 foreach (var progressionEvent in playerProgression.ProgressionEvents)
                 {
                     switch (progressionEvent)
