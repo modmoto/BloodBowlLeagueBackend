@@ -21,11 +21,24 @@ namespace Application.Matches
 
         public async Task FinishMatch(FinishMatchCommand command)
         {
-            var result = await _eventStore.LoadAsync<Match>(command.MatchId);
-            var match = result.Value;
+            var eventStoreResult = await _eventStore.LoadAsync<Match>(command.MatchId);
+            var match = eventStoreResult.Value;
             var domainResult = match.Finish(command.PlayerProgressions);
             domainResult.EnsureSucces();
-            var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, result.Version);
+            var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, eventStoreResult.Version);
+            storeResult.Check();
+        }
+
+        public async Task StartMatch(StartMatchCommand command)
+        {
+            var eventStoreResult = await _eventStore.LoadAsync<Match>(command.MatchId);
+            var match = eventStoreResult.Value;
+            var homeTeam = (await _readModelRepository.Load<TeamReadModel>(match.TrainerAtHome)).Value;
+            var guestTeam = (await _readModelRepository.Load<TeamReadModel>(match.TrainerAsGuest)).Value;
+
+            var domainResult = match.Start(homeTeam, guestTeam);
+            domainResult.EnsureSucces();
+            var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, eventStoreResult.Version);
             storeResult.Check();
         }
 
@@ -33,16 +46,32 @@ namespace Application.Matches
         {
             var homeTeam = (await _readModelRepository.Load<TeamReadModel>(command.HomeTeam)).Value;
             var guestTeam = (await _readModelRepository.Load<TeamReadModel>(command.GuestTeam)).Value;
-            var domainResult = Match.Create(homeTeam, guestTeam);
+            var domainResult = Match.Create(homeTeam.TeamId, guestTeam.TeamId);
             var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             storeResult.Check();
         }
     }
 
+    public class StartMatchCommand
+    {
+        public StartMatchCommand(GuidIdentity matchId)
+        {
+            MatchId = matchId;
+        }
+
+        public GuidIdentity MatchId { get; }
+    }
+
     public class CreateMatchCommand
     {
-        public GuidIdentity HomeTeam { get; set; }
-        public GuidIdentity GuestTeam { get; set; }
+        public CreateMatchCommand(GuidIdentity homeTeam, GuidIdentity guestTeam)
+        {
+            HomeTeam = homeTeam;
+            GuestTeam = guestTeam;
+        }
+
+        public GuidIdentity HomeTeam { get; }
+        public GuidIdentity GuestTeam { get; }
     }
 
     public class FinishMatchCommand

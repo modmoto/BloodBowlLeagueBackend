@@ -6,21 +6,30 @@ using Microwave.Domain;
 
 namespace Domain.Matches
 {
-    public class Match : Entity, IApply<MatchFinished>, IApply<MatchCreated>
+    public class Match : Entity, IApply<MatchFinished>, IApply<MatchStarted>, IApply<MatchCreated>
     {
         public GuidIdentity MatchId { get; private set; }
         public TeamReadModel GuestTeam { get; private set; }
         public TeamReadModel HomeTeam { get; private set; }
+        public GuidIdentity TrainerAtHome { get; private set; }
+        public GuidIdentity TrainerAsGuest { get; private set; }
         public IEnumerable<PlayerProgression> PlayerProgressions { get; private set; }
         public bool IsFinished { get; private set; }
 
-
-        public static DomainResult Create(TeamReadModel trainerAtHome, TeamReadModel trainerAsGuest)
+        public static DomainResult Create(GuidIdentity trainerAtHome, GuidIdentity trainerAsGuest)
         {
             var domainEvents = new MatchCreated(GuidIdentity.Create(), trainerAtHome, trainerAsGuest);
             return DomainResult.Ok(domainEvents);
         }
 
+        public DomainResult Start(TeamReadModel teamAtHome, TeamReadModel teamAsGuest)
+        {
+            if (TrainerAtHome != teamAtHome.TeamId || TrainerAsGuest != teamAsGuest.TeamId) return DomainResult.Error
+            (new TrainerHaveToBeTheSameAsOnGameCreation(TrainerAtHome, TrainerAsGuest));
+            HomeTeam = teamAtHome;
+            GuestTeam = teamAsGuest;
+            return DomainResult.Ok(new MatchStarted(MatchId, HomeTeam, GuestTeam));
+        }
 
         public DomainResult Finish(IEnumerable<PlayerProgression> playerProgressions)
         {
@@ -71,11 +80,18 @@ namespace Domain.Matches
             PlayerProgressions = domainEvent.PlayerProgressions;
         }
 
-        public void Apply(MatchCreated domainEvent)
+        public void Apply(MatchStarted domainEvent)
         {
             MatchId = (GuidIdentity) domainEvent.EntityId;
             HomeTeam = domainEvent.HomeTeam;
             GuestTeam = domainEvent.GuestTeam;
+        }
+
+        public void Apply(MatchCreated domainEvent)
+        {
+            MatchId = (GuidIdentity) domainEvent.EntityId;
+            TrainerAtHome = domainEvent.TrainerAtHome;
+            TrainerAsGuest = domainEvent.TrainerAsGuest;
         }
     }
 }

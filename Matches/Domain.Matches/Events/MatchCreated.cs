@@ -1,20 +1,18 @@
 using Microwave.Domain;
 
-namespace Domain.Matches.Events
+namespace Domain.Matches
 {
     public class MatchCreated : IDomainEvent
     {
-        public TeamReadModel HomeTeam { get; }
-        public TeamReadModel GuestTeam { get; }
-
         public Identity EntityId { get; }
+        public GuidIdentity TrainerAtHome { get; }
+        public GuidIdentity TrainerAsGuest { get; }
 
-        public MatchCreated(GuidIdentity entityId, TeamReadModel homeTeam, TeamReadModel guestTeam)
+        public MatchCreated(GuidIdentity entityId, GuidIdentity trainerAtHome, GuidIdentity trainerAsGuest)
         {
             EntityId = entityId;
-            HomeTeam = homeTeam;
-            GuestTeam = guestTeam;
+            TrainerAtHome = trainerAtHome;
+            TrainerAsGuest = trainerAsGuest;
         }
-
     }
 }
