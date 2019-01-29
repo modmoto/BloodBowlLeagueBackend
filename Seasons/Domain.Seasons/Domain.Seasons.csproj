@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Microwave.Domain">
+      <HintPath>..\..\..\..\..\.nuget\packages\microwave.domain\0.10.0.396-beta\lib\netstandard2.0\Microwave.Domain.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

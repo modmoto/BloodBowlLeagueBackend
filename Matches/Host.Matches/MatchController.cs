@@ -20,7 +20,7 @@ namespace Host.Matches
         [HttpPost("create")]
         public async Task<ActionResult> CreateMatch([FromBody] CreateMatchCommand command)
         {
-            await _commandHandler.CreateMatch(command);
+            await _commandHandler.CreateMatches(command);
             return Ok();
         }
 

@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Players", "Players", "{6CD21BF4-3E2A-42D8-8E1A-35BA8BA555CE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Teams", "Teams", "{04090BE6-D0C2-43A6-8940-40E23AAFA2EF}"
@@ -8,31 +11,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadHosts", "ReadHosts", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Matches", "Matches", "{1D8B2F6D-0089-4F45-879C-06CABB28A56E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Teams", "Teams\Application.Teams\Application.Teams.csproj", "{71E3E22B-006A-4F28-AEF6-FC2E41713E9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Teams", "Teams\Application.Teams\Application.Teams.csproj", "{71E3E22B-006A-4F28-AEF6-FC2E41713E9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Teams", "Teams\Domain.Teams\Domain.Teams.csproj", "{98D0B1C8-E3D8-4C06-A23A-5773C258EA87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Teams", "Teams\Domain.Teams\Domain.Teams.csproj", "{98D0B1C8-E3D8-4C06-A23A-5773C258EA87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host.Teams", "Teams\Host.Teams\Host.Teams.csproj", "{9FB2B47A-F3F9-43D6-9F43-0C649BD22D8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Host.Teams", "Teams\Host.Teams\Host.Teams.csproj", "{9FB2B47A-F3F9-43D6-9F43-0C649BD22D8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Players", "Players\Application.Players\Application.Players.csproj", "{522A66BC-5C50-4181-89D0-A7CBEF0149E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Players", "Players\Application.Players\Application.Players.csproj", "{522A66BC-5C50-4181-89D0-A7CBEF0149E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Players.UnitTests", "Players\Application.Players.UnitTests\Application.Players.UnitTests.csproj", "{1912E860-9A7B-4C3D-889C-274CC8D53434}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Players.UnitTests", "Players\Application.Players.UnitTests\Application.Players.UnitTests.csproj", "{1912E860-9A7B-4C3D-889C-274CC8D53434}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Players", "Players\Domain.Players\Domain.Players.csproj", "{56740D85-20B6-4234-8953-045E25F4A174}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Players", "Players\Domain.Players\Domain.Players.csproj", "{56740D85-20B6-4234-8953-045E25F4A174}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Players.UnitTests", "Players\Domain.Players.UnitTests\Domain.Players.UnitTests.csproj", "{0A0B516B-F078-4500-BB70-4CAB88765C34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Players.UnitTests", "Players\Domain.Players.UnitTests\Domain.Players.UnitTests.csproj", "{0A0B516B-F078-4500-BB70-4CAB88765C34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host.Players", "Players\Host.Players\Host.Players.csproj", "{8CA59263-EB1C-4E81-9340-AD9B1AEA3DB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Host.Players", "Players\Host.Players\Host.Players.csproj", "{8CA59263-EB1C-4E81-9340-AD9B1AEA3DB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Matches", "Matches\Application.Matches\Application.Matches.csproj", "{A3EBC433-10C3-4DB9-9579-A2150A3EA95E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Matches", "Matches\Application.Matches\Application.Matches.csproj", "{A3EBC433-10C3-4DB9-9579-A2150A3EA95E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Matches", "Matches\Domain.Matches\Domain.Matches.csproj", "{93A89523-A337-4CA2-8836-3F4BC78754FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Matches", "Matches\Domain.Matches\Domain.Matches.csproj", "{93A89523-A337-4CA2-8836-3F4BC78754FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host.Matches", "Matches\Host.Matches\Host.Matches.csproj", "{5FB0345E-1859-4E9B-8B5C-6AA551193893}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Host.Matches", "Matches\Host.Matches\Host.Matches.csproj", "{5FB0345E-1859-4E9B-8B5C-6AA551193893}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teams.ReadHost", "ReadHosts\Teams.ReadHost\Teams.ReadHost.csproj", "{FF263365-5604-40C3-AAE3-9C4C635C49BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teams.ReadHost", "ReadHosts\Teams.ReadHost\Teams.ReadHost.csproj", "{FF263365-5604-40C3-AAE3-9C4C635C49BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Matches.UnitTests", "Matches\Domain.Matches.UnitTests\Domain.Matches.UnitTests.csproj", "{69C46D15-F190-4F8D-B86A-8669E3AC2143}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Matches.UnitTests", "Matches\Domain.Matches.UnitTests\Domain.Matches.UnitTests.csproj", "{69C46D15-F190-4F8D-B86A-8669E3AC2143}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Seasons", "Seasons", "{6E0DF90A-FBB6-44BE-B569-AF56FE362A5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Seasons", "Seasons\Domain.Seasons\Domain.Seasons.csproj", "{E96707DC-430C-4DF5-8069-247CEF986882}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Seasons.UnitTests", "Seasons\Domain.Seasons.UnitTests\Domain.Seasons.UnitTests.csproj", "{4A413B29-E3D4-4023-B65E-7713CE93FF2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -92,6 +101,17 @@ Global
 		{69C46D15-F190-4F8D-B86A-8669E3AC2143}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69C46D15-F190-4F8D-B86A-8669E3AC2143}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69C46D15-F190-4F8D-B86A-8669E3AC2143}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E96707DC-430C-4DF5-8069-247CEF986882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E96707DC-430C-4DF5-8069-247CEF986882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E96707DC-430C-4DF5-8069-247CEF986882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E96707DC-430C-4DF5-8069-247CEF986882}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A413B29-E3D4-4023-B65E-7713CE93FF2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A413B29-E3D4-4023-B65E-7713CE93FF2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A413B29-E3D4-4023-B65E-7713CE93FF2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A413B29-E3D4-4023-B65E-7713CE93FF2F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{71E3E22B-006A-4F28-AEF6-FC2E41713E9D} = {04090BE6-D0C2-43A6-8940-40E23AAFA2EF}
@@ -107,5 +127,10 @@ Global
 		{5FB0345E-1859-4E9B-8B5C-6AA551193893} = {1D8B2F6D-0089-4F45-879C-06CABB28A56E}
 		{FF263365-5604-40C3-AAE3-9C4C635C49BA} = {64F06669-5C6B-4CCB-A5ED-D1E0FE9A8F83}
 		{69C46D15-F190-4F8D-B86A-8669E3AC2143} = {1D8B2F6D-0089-4F45-879C-06CABB28A56E}
+		{E96707DC-430C-4DF5-8069-247CEF986882} = {6E0DF90A-FBB6-44BE-B569-AF56FE362A5E}
+		{4A413B29-E3D4-4023-B65E-7713CE93FF2F} = {6E0DF90A-FBB6-44BE-B569-AF56FE362A5E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7507A1C3-FC11-47B2-9D71-89E16F2E3D65}
 	EndGlobalSection
 EndGlobal

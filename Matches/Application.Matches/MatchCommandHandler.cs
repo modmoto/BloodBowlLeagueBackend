@@ -42,7 +42,7 @@ namespace Application.Matches
             storeResult.Check();
         }
 
-        public async Task CreateMatch(CreateMatchCommand command)
+        public async Task CreateMatches(CreateMatchCommand command)
         {
             var homeTeam = (await _readModelRepository.Load<TeamReadModel>(command.HomeTeam)).Value;
             var guestTeam = (await _readModelRepository.Load<TeamReadModel>(command.GuestTeam)).Value;
