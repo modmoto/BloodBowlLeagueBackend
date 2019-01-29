@@ -10,7 +10,7 @@ namespace Domain.Seasons
             for (var i = 0; i < count; i++)
             {
                 var matchupStates = new List<MatchupState>();
-                for (var j = 0; j < count; i++)
+                for (var j = 0; j < count; j++)
                 {
                     matchupStates.Add(i == j ? MatchupState.IsDone : MatchupState.IsFree);
                 }
@@ -20,28 +20,43 @@ namespace Domain.Seasons
             AddRange(thisList);
         }
 
-        public void MarkAsDone(int x, int y)
+        public void MarkAsDone(int column, int row)
         {
-            this[x][y] = MatchupState.IsDone;
+            this[column][row] = MatchupState.IsDone;
+            this[row][column] = MatchupState.IsDone;
+            MarkColumnAsDoneForToday(column);
+            MarkColumnAsDoneForToday(row);
+            MarkRowAsDoneForToday(row);
+            MarkRowAsDoneForToday(column);
         }
 
-        public void MarkRowAsDoneForToday(int x)
+        private void MarkColumnAsDoneForToday(int x)
         {
-            var y = 0;
-            foreach (var cell in this[x])
+            for (int i = 0; i < Count; i++)
             {
-                y++;
-                if (cell == MatchupState.IsDone) continue;
-                this[x][y - 1] = MatchupState.IsMatchUpForThisDay;
+                if (this[x][i] == MatchupState.IsDone) continue;
+                this[x][i] = MatchupState.IsMatchUpForThisDay;
             }
         }
 
-        public void MarkColumAsDoneForToday(int y)
+        private void MarkRowAsDoneForToday(int y)
         {
             for (int i = 0; i < Count; i++)
             {
                 if (this[i][y] == MatchupState.IsDone) continue;
                 this[i][y] = MatchupState.IsMatchUpForThisDay;
+            }
+        }
+
+        public void ResetTodayBlock()
+        {
+            for (var i = 0; i < Count; i++)
+            {
+                var rows = this[i];
+                for (var index = 0; index < rows.Count; index++)
+                {
+                    if (rows[index] == MatchupState.IsMatchUpForThisDay) rows[index] = MatchupState.IsFree;
+                }
             }
         }
     }

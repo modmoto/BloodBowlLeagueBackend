@@ -45,7 +45,7 @@ namespace Domain.Seasons.UnitTests
         }
 
         [TestMethod]
-        public void MakePairings_PairingsOk_forPlayers()
+        public void MakePairings_PairingsOk_fourPlayers()
         {
             var team1 = GuidIdentity.Create();
             var team2 = GuidIdentity.Create();
@@ -66,16 +66,16 @@ namespace Domain.Seasons.UnitTests
             Assert.AreEqual(team4, matchesOnDay1[1].GuestTeam);
 
             var matchesOnDay2 = domainEventGameDays[1].Matchups.ToList();
-            Assert.AreEqual(team1, matchesOnDay2[0].HomeTeam);
-            Assert.AreEqual(team3, matchesOnDay2[0].GuestTeam);
+            Assert.AreEqual(team4, matchesOnDay2[0].HomeTeam);
+            Assert.AreEqual(team1, matchesOnDay2[0].GuestTeam);
             Assert.AreEqual(team2, matchesOnDay2[1].HomeTeam);
-            Assert.AreEqual(team4, matchesOnDay2[1].GuestTeam);
+            Assert.AreEqual(team3, matchesOnDay2[1].GuestTeam);
 
             var matchesOnDay3 = domainEventGameDays[2].Matchups.ToList();
-            Assert.AreEqual(team1, matchesOnDay3[0].HomeTeam);
+            Assert.AreEqual(team2, matchesOnDay3[0].HomeTeam);
             Assert.AreEqual(team4, matchesOnDay3[0].GuestTeam);
-            Assert.AreEqual(team2, matchesOnDay3[1].HomeTeam);
-            Assert.AreEqual(team3, matchesOnDay3[1].GuestTeam);
+            Assert.AreEqual(team3, matchesOnDay3[1].HomeTeam);
+            Assert.AreEqual(team1, matchesOnDay3[1].GuestTeam);
         }
 
         [TestMethod]

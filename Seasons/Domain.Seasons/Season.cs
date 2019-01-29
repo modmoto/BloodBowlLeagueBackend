@@ -27,53 +27,35 @@ namespace Domain.Seasons
         {
             if (TeamCountIsUneven()) return DomainResult.Error(new CanNotStartSeasonWithUnevenTeamCount(Teams.Count()));
 
-            var matchupMatrix = new MatchupMatrix(Teams.Count());
-            foreach (var outerMatchup in matchupMatrix)
-            {
-                foreach (var matchUp in outerMatchup)
-                {
-                    
-                }
-            }
-
-
-            var matchups = Teams.SelectMany((fst, i) => Teams.Skip(i + 1).Select(snd => new Matchup(fst, snd))).ToList();
-
+            var teams = Teams.ToList();
+            var gamesCount = teams.Count - 1;
+            var gamesPerDay = teams.Count / 2;
+            var matchupMatrix = new MatchupMatrix(teams.Count);
             var gameDays = new List<GameDay>();
-            var gameDaysAmmount = Teams.Count() - 1;
-            var matchesPerDayAmmount = Teams.Count() - 1;
-            for (var i = 0; i < gameDaysAmmount; i++)
-            {
-                var matchupsOnThisDay = new List<Matchup>();
-                var matchupCount = 0;
-                var matchupsRemoved = new List<Matchup>();
-                foreach (var matchup in matchups)
-                {
-                    if (PlayerIsAllreadyPlayingOnThisDay(matchup, matchupsOnThisDay)) continue;
-                    matchupCount++;
-                    matchupsOnThisDay.Add(matchup);
-                    matchupsRemoved.Add(matchup);
-                    if (matchupCount == matchesPerDayAmmount) break;
-                }
 
-                foreach (var matchup in matchupsRemoved)
+            var matchupsOnADay = new List<Matchup>();
+            while (gameDays.Count != gamesCount) { 
+                for (var index = 0; index < matchupMatrix.Count; index++)
                 {
-                    matchups.Remove(matchup);
-                }
+                    for (var i = 0; i < matchupMatrix[index].Count; i++)
+                    {
+                        if (matchupMatrix[index][i] == MatchupState.IsFree)
+                        {
+                            matchupMatrix.MarkAsDone(index, i);
+                            matchupsOnADay.Add(new Matchup(teams[index], teams[i]));
 
-                var gameDay = new GameDay(matchupsOnThisDay);
-                gameDays.Add(gameDay);
+                            if (matchupsOnADay.Count == gamesPerDay)
+                            {
+                                gameDays.Add(new GameDay(matchupsOnADay));
+                                matchupsOnADay = new List<Matchup>();
+                                matchupMatrix.ResetTodayBlock();
+                            }
+                        }
+                    }
+                }
             }
-            
-            return DomainResult.Ok(new SeasonStarted(SeasonId, gameDays));
-        }
 
-        private bool PlayerIsAllreadyPlayingOnThisDay(Matchup matchup, IEnumerable<Matchup> matchupsOnDay)
-        {
-            return matchupsOnDay.Any(m =>    m.HomeTeam == matchup.HomeTeam
-                                          || m.HomeTeam == matchup.GuestTeam
-                                          || m.GuestTeam == matchup.HomeTeam
-                                          || m.GuestTeam == matchup.GuestTeam);
+            return DomainResult.Ok(new SeasonStarted(SeasonId, gameDays));
         }
 
         private bool TeamCountIsUneven()
