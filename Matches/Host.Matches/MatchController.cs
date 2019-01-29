@@ -31,5 +31,13 @@ namespace Host.Matches
             await _commandHandler.FinishMatch(finishMatchCommand);
             return Ok();
         }
+
+        [HttpPost("{matchId}/start")]
+        public async Task<ActionResult> StartMatch(GuidIdentity guidIdentity)
+        {
+            var startMatchCommand = new StartMatchCommand(guidIdentity);
+            await _commandHandler.StartMatch(startMatchCommand);
+            return Ok();
+        }
     }
 }
