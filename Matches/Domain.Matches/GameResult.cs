@@ -5,35 +5,49 @@ namespace Domain.Matches
     public class GameResult
     {
         public bool IsDraw { get; }
-        public TrainerGameResult Winner { get; }
-        public TrainerGameResult Looser { get; }
+        public PointsOfTeam Team { get; }
+        public PointsOfTeam Looser { get; }
 
-        private GameResult(bool isDraw, TrainerGameResult winner, TrainerGameResult looser)
+        private GameResult(bool isDraw, PointsOfTeam team, PointsOfTeam looser)
         {
             IsDraw = isDraw;
-            Winner = winner;
+            Team = team;
             Looser = looser;
         }
 
-        public static GameResult Draw()
+        private static GameResult Draw()
         {
             return new GameResult(true, null, null);
         }
 
-        public static GameResult WinResult(TrainerGameResult winner, TrainerGameResult looser)
+        private static GameResult WinResult(PointsOfTeam team, PointsOfTeam looser)
         {
-            return new GameResult(false, winner, looser);
+            return new GameResult(false, team, looser);
+        }
+
+        public static GameResult CreatGameResult(PointsOfTeam homeTouchDowns, PointsOfTeam guestTouchDowns)
+        {
+            GameResult gameResult;
+            if (homeTouchDowns == guestTouchDowns) gameResult = Draw();
+            else
+            {
+                gameResult = homeTouchDowns.TouchDowns > guestTouchDowns.TouchDowns
+                    ? WinResult(homeTouchDowns, guestTouchDowns)
+                    : WinResult(guestTouchDowns, homeTouchDowns);
+            }
+
+            return gameResult;
         }
     }
 
-    public class TrainerGameResult
+    public class PointsOfTeam
     {
-        public Identity TrainerId { get; }
+        public Identity TeamId { get; }
         public long TouchDowns { get; }
 
-        public TrainerGameResult(Identity trainerId, long touchDowns)
+        public PointsOfTeam(Identity teamId, long touchDowns)
         {
-            TrainerId = trainerId;
+            TeamId = teamId;
             TouchDowns = touchDowns;
         }
     }

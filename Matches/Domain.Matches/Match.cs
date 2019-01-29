@@ -45,28 +45,14 @@ namespace Domain.Matches
             var homeTouchDowns = CountTouchDowns(homeTeamProgression);
             var guestTouchDowns = CountTouchDowns(guestTeamProgression);
 
-            var gameResult = CreatGameResult(homeTouchDowns, guestTouchDowns);
+            var homeResult = new PointsOfTeam(TeamAtHome, homeTouchDowns);
+            var guestResult = new PointsOfTeam(TeamAsGuest, guestTouchDowns);
+
+            var gameResult = GameResult.CreatGameResult(homeResult, guestResult);
 
             var matchResultUploaded = new MatchFinished(MatchId, progressions, gameResult);
             IsFinished = true;
             return DomainResult.Ok(matchResultUploaded);
-        }
-
-        private GameResult CreatGameResult(int homeTouchDowns, int guestTouchDowns)
-        {
-            GameResult gameResult;
-            if (homeTouchDowns == guestTouchDowns) gameResult = GameResult.Draw();
-            else
-            {
-                var homeResult = new TrainerGameResult(TeamAtHome, homeTouchDowns);
-                var guestResult = new TrainerGameResult(TeamAsGuest, guestTouchDowns);
-
-                gameResult = homeTouchDowns > guestTouchDowns
-                    ? GameResult.WinResult(homeResult, guestResult)
-                    : GameResult.WinResult(guestResult, homeResult);
-            }
-
-            return gameResult;
         }
 
         private static int CountTouchDowns(IEnumerable<PlayerProgression> trainerResults)
