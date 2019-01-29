@@ -9,10 +9,10 @@ namespace Domain.Matches
     public class Match : Entity, IApply<MatchFinished>, IApply<MatchStarted>, IApply<MatchCreated>
     {
         public GuidIdentity MatchId { get; private set; }
-        public TeamReadModel GuestTeam { get; private set; }
-        public TeamReadModel HomeTeam { get; private set; }
-        public GuidIdentity TrainerAtHome { get; private set; }
-        public GuidIdentity TrainerAsGuest { get; private set; }
+        public IEnumerable<GuidIdentity> GuestTeam { get; private set; }
+        public IEnumerable<GuidIdentity> HomeTeam { get; private set; }
+        public GuidIdentity TeamAtHome { get; private set; }
+        public GuidIdentity TeamAsGuest { get; private set; }
         public IEnumerable<PlayerProgression> PlayerProgressions { get; private set; }
         public bool IsFinished { get; private set; }
 
@@ -24,10 +24,10 @@ namespace Domain.Matches
 
         public DomainResult Start(TeamReadModel teamAtHome, TeamReadModel teamAsGuest)
         {
-            if (TrainerAtHome != teamAtHome.TeamId || TrainerAsGuest != teamAsGuest.TeamId) return DomainResult.Error
-            (new TrainerHaveToBeTheSameAsOnGameCreation(TrainerAtHome, TrainerAsGuest));
-            HomeTeam = teamAtHome;
-            GuestTeam = teamAsGuest;
+            if (TeamAtHome != teamAtHome.TeamId || TeamAsGuest != teamAsGuest.TeamId) return DomainResult.Error
+            (new TrainerHaveToBeTheSameAsOnGameCreation(TeamAtHome, TeamAsGuest));
+            HomeTeam = teamAtHome.Players;
+            GuestTeam = teamAsGuest.Players;
             return DomainResult.Ok(new MatchStarted(MatchId, HomeTeam, GuestTeam));
         }
 
@@ -36,10 +36,10 @@ namespace Domain.Matches
             if (IsFinished) return DomainResult.Error(new MatchAllreadyFinished());
             var progressions = playerProgressions.ToList();
 
-            var homeTeamProgression = progressions.Where(p => HomeTeam.Players.Contains(p.PlayerId));
-            var guestTeamProgression = progressions.Where(p => GuestTeam.Players.Contains(p.PlayerId));
+            var homeTeamProgression = progressions.Where(p => HomeTeam.Contains(p.PlayerId));
+            var guestTeamProgression = progressions.Where(p => GuestTeam.Contains(p.PlayerId));
             var unrelatedPlayers = progressions.Where(p =>
-                !HomeTeam.Players.Contains(p.PlayerId) && !GuestTeam.Players.Contains(p.PlayerId)).Select(p => p.PlayerId).ToList();
+                !HomeTeam.Contains(p.PlayerId) && !GuestTeam.Contains(p.PlayerId)).Select(p => p.PlayerId).ToList();
             if (unrelatedPlayers.Any()) return DomainResult.Error(new PlayerWasNotPartOfTheTeamOnMatchCreation(unrelatedPlayers));
 
             var homeTouchDowns = CountTouchDowns(homeTeamProgression);
@@ -58,8 +58,8 @@ namespace Domain.Matches
             if (homeTouchDowns == guestTouchDowns) gameResult = GameResult.Draw();
             else
             {
-                var homeResult = new TrainerGameResult(HomeTeam.TeamId, homeTouchDowns);
-                var guestResult = new TrainerGameResult(GuestTeam.TeamId, guestTouchDowns);
+                var homeResult = new TrainerGameResult(TeamAtHome, homeTouchDowns);
+                var guestResult = new TrainerGameResult(TeamAsGuest, guestTouchDowns);
 
                 gameResult = homeTouchDowns > guestTouchDowns
                     ? GameResult.WinResult(homeResult, guestResult)
@@ -90,8 +90,8 @@ namespace Domain.Matches
         public void Apply(MatchCreated domainEvent)
         {
             MatchId = (GuidIdentity) domainEvent.EntityId;
-            TrainerAtHome = domainEvent.TrainerAtHome;
-            TrainerAsGuest = domainEvent.TrainerAsGuest;
+            TeamAtHome = domainEvent.TrainerAtHome;
+            TeamAsGuest = domainEvent.TrainerAsGuest;
         }
     }
 }

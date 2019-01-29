@@ -23,7 +23,9 @@ namespace Domain.Matches.UnitTests
             var teamReadModel = TeamReadModel(player1Id, player2Id);
             var teamReadModel2 = TeamReadModel(player3Id, player4Id, player5Id);
 
-            match.Apply(new MatchStarted(GuidIdentity.Create(), teamReadModel, teamReadModel2));
+            var matchId = GuidIdentity.Create();
+            match.Apply(new MatchCreated(matchId, teamReadModel.TeamId, teamReadModel2.TeamId));
+            match.Apply(new MatchStarted(matchId, teamReadModel.Players, teamReadModel2.Players));
 
             var playerProgression1 = PlayerProgressionTouchdown(player2Id);
             var playerProgression2 = PlayerProgressionNormal(player4Id);
@@ -48,7 +50,7 @@ namespace Domain.Matches.UnitTests
             var teamReadModel = TeamReadModel(player1Id);
             var teamReadModel2 = TeamReadModel(player3Id);
 
-            match.Apply(new MatchStarted(GuidIdentity.Create(), teamReadModel, teamReadModel2));
+            match.Apply(new MatchStarted(GuidIdentity.Create(), teamReadModel.Players, teamReadModel2.Players));
 
             var playerProgression1 = PlayerProgressionTouchdown(player2Id);
             var playerProgressions = new []{ playerProgression1 };

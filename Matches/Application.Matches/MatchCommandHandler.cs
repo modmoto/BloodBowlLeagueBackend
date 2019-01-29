@@ -33,8 +33,8 @@ namespace Application.Matches
         {
             var eventStoreResult = await _eventStore.LoadAsync<Match>(command.MatchId);
             var match = eventStoreResult.Value;
-            var homeTeam = (await _readModelRepository.Load<TeamReadModel>(match.TrainerAtHome)).Value;
-            var guestTeam = (await _readModelRepository.Load<TeamReadModel>(match.TrainerAsGuest)).Value;
+            var homeTeam = (await _readModelRepository.Load<TeamReadModel>(match.TeamAtHome)).Value;
+            var guestTeam = (await _readModelRepository.Load<TeamReadModel>(match.TeamAsGuest)).Value;
 
             var domainResult = match.Start(homeTeam, guestTeam);
             domainResult.EnsureSucces();
