@@ -16,10 +16,4 @@
     <ProjectReference Include="..\Domain.Seasons\Domain.Seasons.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Microwave.Domain">
-      <HintPath>..\..\..\..\..\.nuget\packages\microwave.domain\0.10.0.396-beta\lib\netstandard2.0\Microwave.Domain.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

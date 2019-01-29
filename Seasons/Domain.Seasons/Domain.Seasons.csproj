@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Microwave.Domain">
-      <HintPath>..\..\..\..\..\.nuget\packages\microwave.domain\0.10.0.396-beta\lib\netstandard2.0\Microwave.Domain.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Microwave.Domain">
+      <Version>0.10.0.397-beta</Version>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
