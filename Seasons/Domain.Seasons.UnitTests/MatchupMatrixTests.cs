@@ -1,7 +1,5 @@
 using System.Linq;
-using Domain.Seasons.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microwave.Domain;
 
 namespace Domain.Seasons.UnitTests
 {
