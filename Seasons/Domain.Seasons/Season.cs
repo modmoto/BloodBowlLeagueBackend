@@ -27,8 +27,8 @@ namespace Domain.Seasons
         {
             if (TeamCountIsUneven()) return DomainResult.Error(new CanNotStartSeasonWithUnevenTeamCount(Teams.Count()));
 
-            var matchupMatrix = new MatchupMatrix(Teams.Count());
-            var gameDays = matchupMatrix.CreateGameDays(Teams);
+            var matchPairingService = new MatchPairingService();
+            var gameDays = matchPairingService.ComputeFixtures(Teams);
             return DomainResult.Ok(new SeasonStarted(SeasonId, gameDays));
         }
 
