@@ -27,34 +27,8 @@ namespace Domain.Seasons
         {
             if (TeamCountIsUneven()) return DomainResult.Error(new CanNotStartSeasonWithUnevenTeamCount(Teams.Count()));
 
-            var teams = Teams.ToList();
-            var gamesCount = teams.Count - 1;
-            var gamesPerDay = teams.Count / 2;
-            var matchupMatrix = new MatchupMatrix(teams.Count);
-            var gameDays = new List<GameDay>();
-
-            var matchupsOnADay = new List<Matchup>();
-            while (gameDays.Count != gamesCount) { 
-                for (var index = 0; index < matchupMatrix.Count; index++)
-                {
-                    for (var i = 0; i < matchupMatrix[index].Count; i++)
-                    {
-                        if (matchupMatrix[index][i] == MatchupState.IsFree)
-                        {
-                            matchupMatrix.MarkAsDone(index, i);
-                            matchupsOnADay.Add(new Matchup(teams[index], teams[i]));
-
-                            if (matchupsOnADay.Count == gamesPerDay)
-                            {
-                                gameDays.Add(new GameDay(matchupsOnADay));
-                                matchupsOnADay = new List<Matchup>();
-                                matchupMatrix.ResetTodayBlock();
-                            }
-                        }
-                    }
-                }
-            }
-
+            var matchupMatrix = new MatchupMatrix(Teams.Count());
+            var gameDays = matchupMatrix.CreateGameDays(Teams);
             return DomainResult.Ok(new SeasonStarted(SeasonId, gameDays));
         }
 
@@ -79,35 +53,33 @@ namespace Domain.Seasons
         }
     }
 
-
-    public enum MatchupState
-    {
-        IsDone, IsFree, IsMatchUpForThisDay
-    }
-
     public class Matchup
     {
-        public Matchup(GuidIdentity homeTeam, GuidIdentity guestTeam)
+        public Matchup(GuidIdentity matchId, GuidIdentity homeTeam, GuidIdentity guestTeam)
         {
+            MatchId = matchId;
             HomeTeam = homeTeam;
             GuestTeam = guestTeam;
         }
 
+        public GuidIdentity MatchId { get; }
         public GuidIdentity HomeTeam { get; }
         public GuidIdentity GuestTeam { get; }
 
         public override string ToString()
         {
-            return $"{HomeTeam.Id} vs {GuestTeam.Id}";
+            return $"{HomeTeam} vs {GuestTeam}";
         }
     }
 
     public class GameDay
     {
+        public GuidIdentity Id { get; }
         public IEnumerable<Matchup> Matchups { get; }
 
-        public GameDay(IEnumerable<Matchup> matchups)
+        public GameDay(GuidIdentity id, IEnumerable<Matchup> matchups)
         {
+            Id = id;
             Matchups = matchups;
         }
     }
