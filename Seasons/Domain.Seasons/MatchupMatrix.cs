@@ -53,7 +53,6 @@ namespace Domain.Seasons
                 thisList.Add(matchupStates);
             }
 
-            _matrix = thisList;
             return null;
         }
     }
