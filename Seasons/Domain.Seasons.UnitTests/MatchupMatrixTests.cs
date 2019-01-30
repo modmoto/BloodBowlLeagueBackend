@@ -38,6 +38,28 @@ namespace Domain.Seasons.UnitTests
         }
 
         [TestMethod]
+        public void SetIsWorking_NotToPower2()
+        {
+            var matchupMatrix = new MatchupMatrix(6);
+            matchupMatrix.MarkAsDone(1, 2);
+
+            Assert.IsTrue(matchupMatrix[1][0] == MatchupState.IsMatchUpForThisDay);
+            Assert.IsTrue(matchupMatrix[1][1] == MatchupState.IsDone);
+            Assert.IsTrue(matchupMatrix[1][2] == MatchupState.IsDone);
+            Assert.IsTrue(matchupMatrix[1][3] == MatchupState.IsMatchUpForThisDay);
+            Assert.IsTrue(matchupMatrix[1][4] == MatchupState.IsMatchUpForThisDay);
+            Assert.IsTrue(matchupMatrix[1][5] == MatchupState.IsMatchUpForThisDay);
+
+            Assert.IsTrue(matchupMatrix[0][2] == MatchupState.IsMatchUpForThisDay);
+            Assert.IsTrue(matchupMatrix[1][2] == MatchupState.IsDone);
+            Assert.IsTrue(matchupMatrix[2][1] == MatchupState.IsDone);
+            Assert.IsTrue(matchupMatrix[2][2] == MatchupState.IsDone);
+            Assert.IsTrue(matchupMatrix[3][2] == MatchupState.IsMatchUpForThisDay);
+            Assert.IsTrue(matchupMatrix[4][2] == MatchupState.IsMatchUpForThisDay);
+            Assert.IsTrue(matchupMatrix[5][2] == MatchupState.IsMatchUpForThisDay);
+        }
+
+        [TestMethod]
         public void ResetIsWorking()
         {
             var matchupMatrix = new MatchupMatrix(4);
