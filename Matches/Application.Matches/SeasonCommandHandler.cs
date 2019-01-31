@@ -27,14 +27,14 @@ namespace Application.Matches
             var domainResult = season.StartSeason();
             var domainEvents = domainResult.DomainEvents.ToList();
             var matchCreatedEvents = domainEvents.Where(ev => ev.GetType() == typeof(MatchCreated));
+            var seasonEvents = domainEvents.Where(ev => ev.GetType() != typeof(MatchCreated));
 
             foreach (var domainEvent in matchCreatedEvents)
             {
                 (await _eventStore.AppendAsync(domainEvent, 0)).Check();
             }
 
-            var seasonCreatedEvent = domainEvents.Last();
-            var storeResult = await _eventStore.AppendAsync(seasonCreatedEvent, eventStoreResult.Version);
+            var storeResult = await _eventStore.AppendAsync(seasonEvents, eventStoreResult.Version);
             storeResult.Check();
         }
 
