@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 
-namespace Host.Players
+namespace Host.Players.Startup
 {
     public class Startup
     {
