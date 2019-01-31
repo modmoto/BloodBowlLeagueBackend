@@ -35,10 +35,10 @@ namespace Domain.Seasons
                 matchup.Apply((MatchCreated) domainResult.DomainEvents.Single());
                 matchups.Add(matchup);
 
-                for (var idx = 1; idx < numberOfMatchesInARound; idx++)
+                for (var index = 1; index < numberOfMatchesInARound; index++)
                 {
-                    var firstTeamIndex = (roundNumber + idx) % numberOfTeams;
-                    var secondTeamIndex = (roundNumber + numberOfTeams - idx) % numberOfTeams;
+                    var firstTeamIndex = (roundNumber + index) % numberOfTeams;
+                    var secondTeamIndex = (roundNumber + numberOfTeams - index) % numberOfTeams;
 
                     var domainResultInner = Matchup.Create(teamsTemp[firstTeamIndex], teamsTemp[secondTeamIndex]);
                     domainEvents.AddRange(domainResultInner.DomainEvents);
