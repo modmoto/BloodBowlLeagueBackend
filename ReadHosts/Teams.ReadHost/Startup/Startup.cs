@@ -1,13 +1,12 @@
-﻿using Application.Teams;
-using Application.Teams.RaceConfigSeed;
-using Domain.Teams.DomainEvents;
+﻿using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
+using Teams.ReadHost.Teams;
 
-namespace Teams.WriteHost
+namespace Teams.ReadHost.Startup
 {
     public class Startup
     {
@@ -18,23 +17,28 @@ namespace Teams.WriteHost
 
         public IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddTransient<TeamCommandHandler>();
-            services.AddTransient<RaceConfigSeedHandler>();
-
-            services.AddMicrowave(Configuration, typeof(TeamCreated).Assembly);
+            services.AddMicrowaveReadModels(Configuration, Assembly.GetAssembly(typeof(TeamReadModel)));
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            if (env.IsDevelopment())
             {
-                var raceConfigSeedHandler = serviceScope.ServiceProvider.GetService<RaceConfigSeedHandler>();
-                raceConfigSeedHandler.EnsureRaceConfigSeed().Wait();
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseHsts();
             }
 
+            app.RunMicrowaveQueries();
+
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
