@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Domain.Matches.Matches;
-using Domain.Matches.Matches.Events;
-using Domain.Matches.Seasons.Events;
+using Domain.Matches;
+using Domain.Matches.Events;
 using Microwave.Domain;
 
-namespace Domain.Matches.Seasons
+namespace Domain.Seasons
 {
     public class MatchPairingService
     {

@@ -1,6 +1,6 @@
 using Microwave.Domain;
 
-namespace Domain.Matches.Matches.Errors
+namespace Domain.Matches.Errors
 {
     public class TrainerHaveToBeTheSameAsOnGameCreation : DomainError
     {

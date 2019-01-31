@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Domain.Matches.Matches;
-using Domain.Matches.Seasons.Errors;
-using Domain.Matches.Seasons.Events;
+using Domain.Seasons.Errors;
+using Domain.Seasons.Events;
 using Microwave.Domain;
 
-namespace Domain.Matches.Seasons
+namespace Domain.Seasons
 {
     public class Season : Entity, IApply<TeamAddedToSeason>, IApply<SeasonCreated>, IApply<SeasonStarted>
     {

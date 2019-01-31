@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Domain.Matches.Matches;
+using Domain.Matches;
 using Microwave.Domain;
 
-namespace Domain.Matches.Seasons
+namespace Domain.Seasons
 {
     public class GameDay
     {

@@ -1,6 +1,5 @@
 ﻿using Domain.Matches;
-using Domain.Matches.Matches;
-using Domain.Matches.Matches.Events;
+using Domain.Matches.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

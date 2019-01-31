@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <DebugType>full</DebugType>
     </PropertyGroup>
 
@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Domain.Matches\Domain.Matches.csproj" />
+      <ProjectReference Include="..\Domain.Seasons\Domain.Seasons.csproj" />
     </ItemGroup>
 
 </Project>

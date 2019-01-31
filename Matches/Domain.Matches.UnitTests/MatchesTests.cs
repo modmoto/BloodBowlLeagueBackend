@@ -1,9 +1,7 @@
 using System.Linq;
-using Domain.Matches.Matches;
-using Domain.Matches.Matches.Errors;
-using Domain.Matches.Matches.Events;
-using Domain.Matches.Matches.ForeignEvents;
-using Domain.Matches.Seasons.Events;
+using Domain.Matches.Errors;
+using Domain.Matches.Events;
+using Domain.Matches.ForeignEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microwave.Domain;
 

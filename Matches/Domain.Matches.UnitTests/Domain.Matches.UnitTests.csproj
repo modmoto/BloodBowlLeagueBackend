@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
-
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
@@ -14,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Domain.Matches\Domain.Matches.csproj" />
+      <ProjectReference Include="..\Domain.Seasons\Domain.Seasons.csproj" />
     </ItemGroup>
 
 </Project>

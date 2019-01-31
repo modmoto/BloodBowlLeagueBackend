@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Domain.Matches.Matches.Errors;
-using Domain.Matches.Matches.Events;
-using Domain.Matches.Seasons.Events;
+using Domain.Matches.Errors;
+using Domain.Matches.Events;
 using Microwave.Domain;
 
-namespace Domain.Matches.Matches
+namespace Domain.Matches
 {
     public class Matchup : Entity, IApply<MatchFinished>, IApply<MatchStarted>, IApply<MatchCreated>
     {

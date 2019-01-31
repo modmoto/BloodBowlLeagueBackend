@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Matches;
-using Domain.Matches.Matches.Events;
+using Domain.Matches.Events;
 using Microsoft.AspNetCore.Mvc;
 using Microwave.Domain;
 

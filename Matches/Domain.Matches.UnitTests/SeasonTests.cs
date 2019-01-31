@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Matches.Matches;
-using Domain.Matches.Matches.Events;
-using Domain.Matches.Seasons;
-using Domain.Matches.Seasons.Events;
+using Domain.Matches.Events;
+using Domain.Seasons;
+using Domain.Seasons.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microwave.Domain;
 
