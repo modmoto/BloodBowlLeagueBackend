@@ -4,7 +4,7 @@ using Microwave.Domain;
 
 namespace Domain.Matches.Seasons
 {
-    public class GameDay : Entity, IApply<GameDayCreated>
+    public class GameDay
     {
         public GuidIdentity Id { get; private set; }
         public IEnumerable<Matchup> Matchups { get; private set; }
