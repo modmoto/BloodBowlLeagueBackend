@@ -7,7 +7,7 @@ using Microwave.Domain;
 
 namespace Domain.Matches.Seasons
 {
-    public class Season : IApply<TeamAddedToSeason>, IApply<SeasonCreated>, IApply<SeasonStarted>
+    public class Season : Entity, IApply<TeamAddedToSeason>, IApply<SeasonCreated>, IApply<SeasonStarted>
     {
         public GuidIdentity SeasonId { get; private set; }
         public IEnumerable<GuidIdentity> Teams { get; private set; } = new List<GuidIdentity>();
