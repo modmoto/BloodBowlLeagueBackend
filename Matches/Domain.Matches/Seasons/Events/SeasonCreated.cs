@@ -1,6 +1,6 @@
 ﻿using Microwave.Domain;
 
-namespace Domain.Seasons.Events
+namespace Domain.Matches.Seasons.Events
 {
     public class SeasonCreated : IDomainEvent
     {

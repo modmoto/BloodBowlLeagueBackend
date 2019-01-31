@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microwave.Domain;
 
-namespace Domain.Matches.Errors
+namespace Domain.Matches.Matches.Errors
 {
     public class PlayerWasNotPartOfTheTeamOnMatchCreation : DomainError
     {

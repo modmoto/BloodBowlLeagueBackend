@@ -1,15 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Domain.Seasons.Events;
+using Domain.Matches.Matches;
+using Domain.Matches.Seasons.Errors;
+using Domain.Matches.Seasons.Events;
 using Microwave.Domain;
 
-namespace Domain.Seasons
+namespace Domain.Matches.Seasons
 {
     public class Season : IApply<TeamAddedToSeason>, IApply<SeasonCreated>, IApply<SeasonStarted>
     {
         public GuidIdentity SeasonId { get; private set; }
         public IEnumerable<GuidIdentity> Teams { get; private set; } = new List<GuidIdentity>();
-        public IEnumerable<Matchup> Matchups { get; private set; }
+        public IEnumerable<GameDay> GameDays { get; private set; } = new List<GameDay>();
         public bool SeasonIsStarted { get; private set; }
 
         public static DomainResult Create()
@@ -28,8 +30,20 @@ namespace Domain.Seasons
             if (TeamCountIsUneven()) return DomainResult.Error(new CanNotStartSeasonWithUnevenTeamCount(Teams.Count()));
 
             var matchPairingService = new MatchPairingService();
-            var gameDays = matchPairingService.ComputePairings(Teams);
-            return DomainResult.Ok(new SeasonStarted(SeasonId, gameDays));
+            var domainEvents = matchPairingService.ComputePairings(SeasonId, Teams).ToList();
+            var gameDayCreatedEvents = domainEvents.Where(d => d.GetType() == typeof(GameDayCreated)).Select(d => (GameDayCreated) d);
+
+            var gameDays = new List<GameDay>();
+            foreach (var gameDayCreated in gameDayCreatedEvents)
+            {
+                var gameDay = new GameDay();
+                gameDay.Apply(gameDayCreated);
+                gameDays.Add(gameDay);
+            }
+
+            var seasonStarted = new SeasonStarted(SeasonId, gameDays);
+            var allEvents = domainEvents.Append(seasonStarted);
+            return DomainResult.Ok(allEvents);
         }
 
         private bool TeamCountIsUneven()
@@ -50,6 +64,7 @@ namespace Domain.Seasons
         public void Apply(SeasonStarted domainEvent)
         {
             SeasonIsStarted = true;
+            GameDays = domainEvent.GameDays;
         }
     }
 }

@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Seasons.Events;
+using Domain.Matches.Matches;
+using Domain.Matches.Matches.Events;
+using Domain.Matches.Seasons;
+using Domain.Matches.Seasons.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microwave.Domain;
 
-namespace Domain.Seasons.UnitTests
+namespace Domain.Matches.UnitTests
 {
     [TestClass]
     public class SeasonTests
@@ -12,14 +15,11 @@ namespace Domain.Seasons.UnitTests
         [TestMethod]
         public void AssertMethodTest_HappyPath()
         {
-            var match = new Matchup(GuidIdentity.Create(), GuidIdentity.Create(), GuidIdentity.Create());
-            var match2 = new Matchup(GuidIdentity.Create(), GuidIdentity.Create(), GuidIdentity.Create());
+            var match = CreateDefaultMatchup();
+            var match2 = CreateDefaultMatchup();
             var gameDays = new List<GameDay>
             {
-                new GameDay(GuidIdentity.Create(), new List<Matchup>
-                {
-                    match, match2
-                })
+                CreateGameDay(match, match2)
             };
 
             AssertMatchIsNeverPlayedTwice(gameDays);
@@ -29,13 +29,10 @@ namespace Domain.Seasons.UnitTests
         [TestMethod]
         public void AssertMethodTest_DoubleGame()
         {
-            var match = new Matchup(GuidIdentity.Create(), GuidIdentity.Create(), GuidIdentity.Create());
+            var match = CreateDefaultMatchup();
             var gameDays = new List<GameDay>
             {
-                new GameDay(GuidIdentity.Create(), new List<Matchup>
-                {
-                    match, match
-                })
+                CreateGameDay(match, match)
             };
 
             AssertMatchIsNeverPlayedTwice(gameDays);
@@ -47,17 +44,28 @@ namespace Domain.Seasons.UnitTests
         {
             var team1 = GuidIdentity.Create();
             var team2 = GuidIdentity.Create();
-            var match = new Matchup(GuidIdentity.Create(), team1, team2);
-            var matchSwitched = new Matchup(GuidIdentity.Create(), team2, team1);
+            var match = CreateDefaultMatchup(team1, team2);
+            var matchSwitched = CreateDefaultMatchup(team1, team2);
+
+
             var gameDays = new List<GameDay>
             {
-                new GameDay(GuidIdentity.Create(), new List<Matchup>
-                {
-                    match, matchSwitched
-                })
+                CreateGameDay(match, matchSwitched)
             };
 
             Assert.IsFalse(AssertMatchIsNeverPlayedTwice(gameDays));
+        }
+
+        private static GameDay CreateGameDay(Matchup match, Matchup matchSwitched)
+        {
+            var matchups = new List<Matchup>
+            {
+                match, matchSwitched
+            };
+
+            var gameDay = new GameDay();
+            gameDay.Apply(new GameDayCreated(GuidIdentity.Create(), GuidIdentity.Create(), matchups));
+            return gameDay;
         }
 
         [TestMethod]
@@ -67,7 +75,7 @@ namespace Domain.Seasons.UnitTests
 
             var domainResult = season.StartSeason();
 
-            var domainEvent = domainResult.DomainEvents.First() as SeasonStarted;
+            var domainEvent = domainResult.DomainEvents.Last() as SeasonStarted;
             Assert.AreEqual(3, domainEvent.GameDays.Count());
         }
 
@@ -80,7 +88,7 @@ namespace Domain.Seasons.UnitTests
 
             var domainResult = season.StartSeason();
 
-            var domainEvent = domainResult.DomainEvents.First() as SeasonStarted;
+            var domainEvent = domainResult.DomainEvents.Last() as SeasonStarted;
             Assert.AreEqual(1, domainEvent.GameDays.Count());
             Assert.IsTrue(AssertMatchIsNeverPlayedTwice(domainEvent.GameDays));
         }
@@ -106,23 +114,10 @@ namespace Domain.Seasons.UnitTests
 
             var domainResult = season.StartSeason();
 
-            var domainEvent = domainResult.DomainEvents.First() as SeasonStarted;
+            var domainEvent = domainResult.DomainEvents.Last() as SeasonStarted;
             var domainEventGameDays = domainEvent.GameDays.ToList();
             Assert.AreEqual(3, domainEventGameDays.Count);
             Assert.IsTrue(AssertMatchIsNeverPlayedTwice(domainEventGameDays));
-        }
-
-        private bool AssertMatchIsNeverPlayedTwice(IEnumerable<GameDay> domainEventGameDays)
-        {
-            var allMatches = domainEventGameDays.SelectMany(g => g.Matchups).ToList();
-            foreach (var match in allMatches)
-            {
-                var matchWith = allMatches.Where(m => m.HomeTeam == match.HomeTeam && m.GuestTeam == match.GuestTeam
-                                                               || m.HomeTeam == match.GuestTeam && m.GuestTeam == match.HomeTeam);
-                if (matchWith.Count() != 1) return false;
-            }
-
-            return true;
         }
 
         [TestMethod]
@@ -138,7 +133,7 @@ namespace Domain.Seasons.UnitTests
 
             var domainResult = season.StartSeason();
 
-            var domainEvent = domainResult.DomainEvents.First() as SeasonStarted;
+            var domainEvent = domainResult.DomainEvents.Last() as SeasonStarted;
             var domainEventGameDays = domainEvent.GameDays.ToList();
             Assert.AreEqual(5, domainEventGameDays.Count);
             Assert.IsTrue(AssertMatchIsNeverPlayedTwice(domainEventGameDays));
@@ -159,10 +154,31 @@ namespace Domain.Seasons.UnitTests
 
             var domainResult = season.StartSeason();
 
-            var domainEvent = domainResult.DomainEvents.First() as SeasonStarted;
+            var domainEvent = domainResult.DomainEvents.Last() as SeasonStarted;
             var domainEventGameDays = domainEvent.GameDays.ToList();
             Assert.AreEqual(7, domainEventGameDays.Count);
             Assert.IsTrue(AssertMatchIsNeverPlayedTwice(domainEventGameDays));
+        }
+
+
+        private static Matchup CreateDefaultMatchup(GuidIdentity team1 = null, GuidIdentity team2 = null)
+        {
+            var matchup = new Matchup();
+            matchup.Apply(new MatchCreated(GuidIdentity.Create(), team1 ?? GuidIdentity.Create(), team2 ?? GuidIdentity.Create()));
+            return matchup;
+        }
+
+        private bool AssertMatchIsNeverPlayedTwice(IEnumerable<GameDay> domainEventGameDays)
+        {
+            var allMatches = domainEventGameDays.SelectMany(g => g.Matchups).ToList();
+            foreach (var match in allMatches)
+            {
+                var matchWith = allMatches.Where(m => m.TeamAtHome == match.TeamAtHome && m.TeamAsGuest == match.TeamAsGuest
+                                                      || m.TeamAtHome == match.TeamAsGuest && m.TeamAsGuest == match.TeamAtHome);
+                if (matchWith.Count() != 1) return false;
+            }
+
+            return true;
         }
 
         private static Season CreateSeasonWithTeams(params GuidIdentity[] identities)

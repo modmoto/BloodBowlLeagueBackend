@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Matches.ForeignEvents;
+using Domain.Matches.Matches.ForeignEvents;
 using Microwave.Domain;
 using Microwave.Queries;
 
-namespace Domain.Matches
+namespace Domain.Matches.Matches
 {
     public class TeamReadModel : ReadModel, IApply<PlayerBought>, IApply<TeamCreated>
     {

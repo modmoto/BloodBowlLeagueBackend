@@ -1,6 +1,6 @@
 using Microwave.Domain;
 
-namespace Domain.Matches
+namespace Domain.Matches.Matches
 {
     public class GameResult
     {

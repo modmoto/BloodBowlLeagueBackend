@@ -1,6 +1,6 @@
 ﻿using Microwave.Domain;
 
-namespace Domain.Seasons
+namespace Domain.Matches.Seasons.Errors
 {
     public class SeasonAllreadyStarted : DomainError
     {

@@ -1,7 +1,9 @@
 using System.Linq;
-using Domain.Matches.Errors;
-using Domain.Matches.Events;
-using Domain.Matches.ForeignEvents;
+using Domain.Matches.Matches;
+using Domain.Matches.Matches.Errors;
+using Domain.Matches.Matches.Events;
+using Domain.Matches.Matches.ForeignEvents;
+using Domain.Matches.Seasons.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microwave.Domain;
 
@@ -13,7 +15,7 @@ namespace Domain.Matches.UnitTests
         [TestMethod]
         public void FinishMatchHappyPath()
         {
-            var match = new Match();
+            var match = new Matchup();
 
             var player1Id = GuidIdentity.Create();
             var player2Id = GuidIdentity.Create();
@@ -42,7 +44,7 @@ namespace Domain.Matches.UnitTests
         [TestMethod]
         public void FinishMatch_PlayersNotInTeam()
         {
-            var match = new Match();
+            var match = new Matchup();
 
             var player1Id = GuidIdentity.Create();
             var player2Id = GuidIdentity.Create();

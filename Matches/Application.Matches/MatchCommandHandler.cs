@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Matches;
-using Domain.Matches.Events;
+using Domain.Matches.Matches;
+using Domain.Matches.Matches.Events;
 using Microwave.Domain;
 using Microwave.EventStores.Ports;
 using Microwave.Queries;
@@ -21,7 +22,7 @@ namespace Application.Matches
 
         public async Task FinishMatch(FinishMatchCommand command)
         {
-            var eventStoreResult = await _eventStore.LoadAsync<Match>(command.MatchId);
+            var eventStoreResult = await _eventStore.LoadAsync<Matchup>(command.MatchId);
             var match = eventStoreResult.Value;
             var domainResult = match.Finish(command.PlayerProgressions);
             domainResult.EnsureSucces();
@@ -31,7 +32,7 @@ namespace Application.Matches
 
         public async Task StartMatch(StartMatchCommand command)
         {
-            var eventStoreResult = await _eventStore.LoadAsync<Match>(command.MatchId);
+            var eventStoreResult = await _eventStore.LoadAsync<Matchup>(command.MatchId);
             var match = eventStoreResult.Value;
             var homeTeam = (await _readModelRepository.Load<TeamReadModel>(match.TeamAtHome)).Value;
             var guestTeam = (await _readModelRepository.Load<TeamReadModel>(match.TeamAsGuest)).Value;
@@ -46,7 +47,7 @@ namespace Application.Matches
         {
             var homeTeam = (await _readModelRepository.Load<TeamReadModel>(command.HomeTeam)).Value;
             var guestTeam = (await _readModelRepository.Load<TeamReadModel>(command.GuestTeam)).Value;
-            var domainResult = Match.Create(homeTeam.TeamId, guestTeam.TeamId);
+            var domainResult = Matchup.Create(homeTeam.TeamId, guestTeam.TeamId);
             var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             storeResult.Check();
         }

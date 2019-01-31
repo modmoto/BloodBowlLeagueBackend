@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microwave.Domain;
 
-namespace Domain.Seasons
+namespace Domain.Matches.Seasons.Events
 {
     public class SeasonStarted : IDomainEvent
     {

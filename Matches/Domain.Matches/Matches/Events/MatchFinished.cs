@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microwave.Domain;
 
-namespace Domain.Matches.Events
+namespace Domain.Matches.Matches.Events
 {
     public class MatchFinished : IDomainEvent
     {
