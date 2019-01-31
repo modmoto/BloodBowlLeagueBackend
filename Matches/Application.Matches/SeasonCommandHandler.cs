@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Domain.Matches.Matches;
+using Domain.Matches.Matches.Events;
 using Domain.Matches.Seasons;
 using Microwave.Domain;
 using Microwave.EventStores.Ports;
@@ -23,8 +25,16 @@ namespace Application.Matches
             var eventStoreResult = await _eventStore.LoadAsync<Season>(command.SeasonId);
             var season = eventStoreResult.Value;
             var domainResult = season.StartSeason();
-            domainResult.EnsureSucces();
-            var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, eventStoreResult.Version);
+            var domainEvents = domainResult.DomainEvents.ToList();
+            var matchCreatedEvents = domainEvents.Where(ev => ev.GetType() == typeof(MatchCreated));
+
+            foreach (var domainEvent in matchCreatedEvents)
+            {
+                (await _eventStore.AppendAsync(domainEvent, 0)).Check();
+            }
+
+            var seasonCreatedEvent = domainEvents.Last();
+            var storeResult = await _eventStore.AppendAsync(seasonCreatedEvent, eventStoreResult.Version);
             storeResult.Check();
         }
 

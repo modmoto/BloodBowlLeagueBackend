@@ -26,9 +26,9 @@ namespace Domain.Matches.Seasons
 
             for (var roundNumber = 0; roundNumber < numberOfRounds; roundNumber++)
             {
-                var teamIdx = roundNumber % numberOfTeams;
-
                 var matchups = new List<Matchup>();
+
+                var teamIdx = roundNumber % numberOfTeams;
 
                 var domainResult = Matchup.Create(teamsTemp[teamIdx], teams[0]);
                 domainEvents.AddRange(domainResult.DomainEvents);
@@ -40,7 +40,6 @@ namespace Domain.Matches.Seasons
                 {
                     var firstTeamIndex = (roundNumber + idx) % numberOfTeams;
                     var secondTeamIndex = (roundNumber + numberOfTeams - idx) % numberOfTeams;
-
 
                     var domainResultInner = Matchup.Create(teamsTemp[firstTeamIndex], teamsTemp[secondTeamIndex]);
                     domainEvents.AddRange(domainResultInner.DomainEvents);
