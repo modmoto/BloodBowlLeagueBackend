@@ -46,6 +46,12 @@ namespace Application.Matches
             var domainResult = season.AddTeam(team.TeamId);
             (await _eventStore.AppendAsync(domainResult.DomainEvents, seasonResult.Version)).Check();
         }
+
+        public async Task CreateSeason()
+        {
+            var domainResult = Season.Create();
+            (await _eventStore.AppendAsync(domainResult.DomainEvents, 0)).Check();
+        }
     }
 
     public class AddTeamToSeasonCommand
