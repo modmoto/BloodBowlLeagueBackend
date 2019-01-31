@@ -6,7 +6,7 @@ namespace Domain.Seasons
 {
     public class MatchPairingService
     {
-        public IEnumerable<GameDay> ComputeFixtures(IEnumerable<GuidIdentity> listTeam)
+        public IEnumerable<GameDay> ComputePairings(IEnumerable<GuidIdentity> listTeam)
         {
             var result = new List<GameDay>();
 
