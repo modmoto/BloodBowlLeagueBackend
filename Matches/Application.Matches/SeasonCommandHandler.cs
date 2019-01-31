@@ -62,6 +62,11 @@ namespace Application.Matches
 
     public class StartSeasonCommand
     {
-        public GuidIdentity SeasonId { get; set; }
+        public StartSeasonCommand(GuidIdentity seasonId)
+        {
+            SeasonId = seasonId;
+        }
+
+        public GuidIdentity SeasonId { get; }
     }
 }
