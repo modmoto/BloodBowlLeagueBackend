@@ -1,6 +1,6 @@
 using Microwave.Domain;
 
-namespace Domain.Matches.Events
+namespace Domain.Matches.ForeignEvents
 {
     public class MatchCreated : IDomainEvent
     {

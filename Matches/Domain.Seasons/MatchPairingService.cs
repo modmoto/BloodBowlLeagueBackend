@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Domain.Matches;
-using Domain.Matches.Events;
+using Domain.Seasons.Events;
 using Microwave.Domain;
 
 namespace Domain.Seasons
@@ -25,14 +24,14 @@ namespace Domain.Seasons
 
             for (var roundNumber = 0; roundNumber < numberOfRounds; roundNumber++)
             {
-                var matchups = new List<Matchup>();
+                var matchups = new List<MatchupReadModel>();
 
                 var teamIdx = roundNumber % numberOfTeams;
 
-                var domainResult = Matchup.Create(teamsTemp[teamIdx], teams[0]);
-                domainEvents.AddRange(domainResult.DomainEvents);
-                var matchup = new Matchup();
-                matchup.Apply((MatchCreated) domainResult.DomainEvents.Single());
+                var matchCreated = new MatchCreated(GuidIdentity.Create(), teamsTemp[teamIdx], teams[0]);
+                domainEvents.Add(matchCreated);
+                var matchup = new MatchupReadModel();
+                matchup.Handle(matchCreated);
                 matchups.Add(matchup);
 
                 for (var index = 1; index < numberOfMatchesInARound; index++)
@@ -40,10 +39,10 @@ namespace Domain.Seasons
                     var firstTeamIndex = (roundNumber + index) % numberOfTeams;
                     var secondTeamIndex = (roundNumber + numberOfTeams - index) % numberOfTeams;
 
-                    var domainResultInner = Matchup.Create(teamsTemp[firstTeamIndex], teamsTemp[secondTeamIndex]);
-                    domainEvents.AddRange(domainResultInner.DomainEvents);
-                    var matchupInner = new Matchup();
-                    matchupInner.Apply((MatchCreated) domainResultInner.DomainEvents.Single());
+                    var matchCreatedInner = new MatchCreated(GuidIdentity.Create(), teamsTemp[firstTeamIndex], teamsTemp[secondTeamIndex]);
+                    domainEvents.Add(matchCreatedInner);
+                    var matchupInner = new MatchupReadModel();
+                    matchupInner.Handle(matchCreatedInner);
                     matchups.Add(matchupInner);
                 }
 

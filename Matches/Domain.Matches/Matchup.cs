@@ -2,6 +2,7 @@
 using System.Linq;
 using Domain.Matches.Errors;
 using Domain.Matches.Events;
+using Domain.Matches.ForeignEvents;
 using Microwave.Domain;
 
 namespace Domain.Matches
