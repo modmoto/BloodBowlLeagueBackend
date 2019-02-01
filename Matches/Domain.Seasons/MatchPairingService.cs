@@ -31,7 +31,7 @@ namespace Domain.Seasons
                 var matchCreated = new MatchCreated(GuidIdentity.Create(), teamsTemp[teamIdx], teams[0]);
                 domainEvents.Add(matchCreated);
                 var matchup = new MatchupReadModel();
-                matchup.Handle(matchCreated);
+                matchup.Apply(matchCreated);
                 matchups.Add(matchup);
 
                 for (var index = 1; index < numberOfMatchesInARound; index++)
@@ -42,7 +42,7 @@ namespace Domain.Seasons
                     var matchCreatedInner = new MatchCreated(GuidIdentity.Create(), teamsTemp[firstTeamIndex], teamsTemp[secondTeamIndex]);
                     domainEvents.Add(matchCreatedInner);
                     var matchupInner = new MatchupReadModel();
-                    matchupInner.Handle(matchCreatedInner);
+                    matchupInner.Apply(matchCreatedInner);
                     matchups.Add(matchupInner);
                 }
 
