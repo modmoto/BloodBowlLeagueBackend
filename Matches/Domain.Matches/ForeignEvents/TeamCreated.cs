@@ -9,6 +9,6 @@ namespace Domain.Matches.ForeignEvents
             EntityId = entityId;
         }
 
-        public Identity EntityId{ get; set; }
+        public Identity EntityId{ get; }
     }
 }

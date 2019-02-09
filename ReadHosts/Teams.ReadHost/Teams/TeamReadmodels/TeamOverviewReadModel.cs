@@ -1,8 +1,9 @@
 ﻿using System;
 using Microwave.Domain;
 using Microwave.Queries;
+using Teams.ReadHost.Teams.TeamReadmodels.Events;
 
-namespace Teams.ReadHost.Teams
+namespace Teams.ReadHost.Teams.TeamReadmodels
 {
     public class TeamOverviewReadModel : ReadModel, IHandle<TeamCreated>
     {

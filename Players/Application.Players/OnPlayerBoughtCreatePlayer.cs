@@ -6,11 +6,11 @@ using Microwave.Queries;
 
 namespace Application.Players
 {
-    public class OnePlayerBoughtCreatePlayer : IHandleAsync<PlayerBought>
+    public class OnPlayerBoughtCreatePlayer : IHandleAsync<PlayerBought>
     {
         private readonly IEventStore _eventStore;
 
-        public OnePlayerBoughtCreatePlayer(IEventStore eventStore)
+        public OnPlayerBoughtCreatePlayer(IEventStore eventStore)
         {
             _eventStore = eventStore;
         }

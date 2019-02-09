@@ -18,7 +18,7 @@ namespace Application.Players
             _eventTypes = eventTypes;
         }
 
-        public async Task EnsureRaceConfigSeed()
+        public async Task EnsurePlayerConfigSeed()
         {
             var result = await _eventTypes.LoadEventsByTypeAsync(nameof(PlayerConfigCreated));
             var eventsAllreadyAdded = 0;

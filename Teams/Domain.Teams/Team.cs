@@ -12,14 +12,15 @@ namespace Domain.Teams
     {
         public GuidIdentity Id { get; private set; }
 
-        public GoldCoins TeamMoney { get; private set; } = new GoldCoins(1000000);
+        public GoldCoins TeamMoney { get; private set; }
         public IEnumerable<StringIdentity> PlayerTypes { get; private set; } = new List<StringIdentity>();
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; private set; } = new List<AllowedPlayer>();
 
         public static DomainResult Create(StringIdentity raceId, string teamName, string trainerName, IEnumerable<AllowedPlayer>
         allowedPlayers)
         {
-            return DomainResult.Ok(new TeamCreated(GuidIdentity.Create(Guid.NewGuid()), raceId, teamName, trainerName, allowedPlayers));
+            return DomainResult.Ok(new TeamCreated(GuidIdentity.Create(Guid.NewGuid()), raceId, teamName,
+            trainerName, allowedPlayers, new GoldCoins(1000000)));
         }
 
         public DomainResult BuyPlayer(StringIdentity playerTypeId)
@@ -44,6 +45,7 @@ namespace Domain.Teams
         {
             Id = (GuidIdentity) teamCreated.EntityId;
             AllowedPlayers = teamCreated.AllowedPlayers;
+            TeamMoney = teamCreated.StartingMoney;
         }
 
         public void Apply(PlayerBought playerBought)

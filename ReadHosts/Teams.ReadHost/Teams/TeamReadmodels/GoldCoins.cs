@@ -1,4 +1,4 @@
-﻿namespace Teams.ReadHost.Teams
+﻿namespace Teams.ReadHost.Teams.TeamReadmodels
 {
     public class GoldCoins
     {

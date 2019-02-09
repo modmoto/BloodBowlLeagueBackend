@@ -22,7 +22,9 @@ namespace Host.Players.Startup
             services.AddMvc();
 
             services.AddMicrowave(Configuration, typeof(PlayerConfigCreated).Assembly);
-            services.AddMicrowaveReadModels(Configuration, typeof(OnePlayerBoughtCreatePlayer).Assembly);
+            services.AddMicrowaveReadModels(Configuration, typeof(OnPlayerBoughtCreatePlayer).Assembly);
+
+            services.AddTransient<PlayerConfigSeedHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -30,7 +32,7 @@ namespace Host.Players.Startup
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var raceConfigSeedHandler = serviceScope.ServiceProvider.GetService<PlayerConfigSeedHandler>();
-                raceConfigSeedHandler.EnsureRaceConfigSeed().Wait();
+                raceConfigSeedHandler.EnsurePlayerConfigSeed().Wait();
             }
 
             app.UseMvc();

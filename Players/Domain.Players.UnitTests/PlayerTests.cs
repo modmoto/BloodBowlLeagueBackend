@@ -132,7 +132,7 @@ namespace Domain.Players.UnitTests
 
         private static PlayerLeveledUp PlayerLeveledUp(IEnumerable<FreeSkillPoint> freeSkillPoints = null)
         {
-            return new PlayerLeveledUp(GuidIdentity.Create(), freeSkillPoints ?? new []{ FreeSkillPoint.PlusOneStrength });
+            return new PlayerLeveledUp(GuidIdentity.Create(), freeSkillPoints ?? new []{ FreeSkillPoint.PlusOneStrength }, 2);
         }
 
         private static SkillChosen SkillPicked(StringIdentity skillId = null)
