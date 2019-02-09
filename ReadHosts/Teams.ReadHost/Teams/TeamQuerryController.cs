@@ -22,10 +22,10 @@ namespace Teams.ReadHost.Teams
             return Ok(teamQuerry);
         }
 
-        [HttpGet("Count")]
-        public async Task<ActionResult> GetCounter()
+        [HttpGet]
+        public async Task<ActionResult> GetTeams()
         {
-            var teamQuerry = await _queryRepository.Load<CounterQuery>();
+            var teamQuerry = await _queryRepository.LoadAll<TeamOverviewReadModel>();
             return Ok(teamQuerry.Value);
         }
     }
