@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microwave.Domain;
@@ -29,9 +30,23 @@ namespace Teams.ReadHost.FullTeams
                 team.PlayerList.Count(p => p.PlayerId == domainEvent.EntityId) == 1);
             var teamId = teamWithPlayer.TeamId;
             var teamsFull = (await _readModelRepository.Load<TeamReadModelFull>(teamId)).Value;
-            teamsFull.PlayerList = teamsFull.PlayerList.Append(player);
+            teamsFull.PlayerList = AddOrUpdatePlayer(teamsFull, player);
 
             (await _readModelRepository.Save(new ReadModelResult<TeamReadModelFull>(teamsFull, teamId, 0))).Check();
+        }
+
+        private static IEnumerable<PlayerReadModel> AddOrUpdatePlayer(TeamReadModelFull teamsFull, PlayerReadModel player)
+        {
+            var playerReadModels = teamsFull.PlayerList.ToList();
+            var playerInList = playerReadModels.Single(p => p.PlayerId == player.PlayerId);
+            var indexOf = playerReadModels.IndexOf(playerInList);
+            if (indexOf == -1)
+            {
+                return teamsFull.PlayerList.Append(player);
+            }
+
+            playerReadModels[indexOf] = player;
+            return playerReadModels;
         }
 
         public async Task HandleAsync(PlayerCreated domainEvent)
