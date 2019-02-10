@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microwave.Queries;
-using Teams.ReadHost.Teams.PlayerReadModels;
-using Teams.ReadHost.Teams.TeamReadmodels.Events;
+using Teams.ReadHost.Players;
+using Teams.ReadHost.Teams;
+using Teams.ReadHost.Teams.Events;
 
-namespace Teams.ReadHost.Teams.TeamReadmodels
+namespace Teams.ReadHost.FullTeams
 {
     public class TeamReadModelFull : ReadModel
     {

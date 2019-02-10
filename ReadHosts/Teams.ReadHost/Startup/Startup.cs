@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Teams.ReadHost.Teams;
-using Teams.ReadHost.Teams.TeamReadmodels;
 
 namespace Teams.ReadHost.Startup
 {

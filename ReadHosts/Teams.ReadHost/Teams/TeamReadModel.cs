@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microwave.Domain;
 using Microwave.Queries;
-using Teams.ReadHost.Teams.PlayerReadModels;
-using Teams.ReadHost.Teams.TeamReadmodels.Events;
+using Teams.ReadHost.Teams.Events;
 
-namespace Teams.ReadHost.Teams.TeamReadmodels
+namespace Teams.ReadHost.Teams
 {
     public class TeamReadModel : ReadModel, IHandle<TeamCreated>, IHandle<PlayerBought>
     {

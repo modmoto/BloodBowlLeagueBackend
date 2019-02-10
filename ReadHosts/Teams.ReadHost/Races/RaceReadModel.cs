@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Microwave.Domain;
 using Microwave.Queries;
 using Teams.ReadHost.Teams;
-using Teams.ReadHost.Teams.TeamReadmodels;
 
 namespace Teams.ReadHost.Races
 {

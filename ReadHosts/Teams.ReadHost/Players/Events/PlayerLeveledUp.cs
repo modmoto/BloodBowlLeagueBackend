@@ -1,6 +1,6 @@
 using Microwave.Domain;
 
-namespace Teams.ReadHost.Teams.PlayerReadModels.Events
+namespace Teams.ReadHost.Players.Events
 {
     public class PlayerLeveledUp : IDomainEvent
     {

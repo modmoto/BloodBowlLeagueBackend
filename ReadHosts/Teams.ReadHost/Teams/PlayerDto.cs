@@ -1,6 +1,6 @@
 using Microwave.Domain;
 
-namespace Teams.ReadHost.Teams.TeamReadmodels
+namespace Teams.ReadHost.Teams
 {
     public class PlayerDto
     {
