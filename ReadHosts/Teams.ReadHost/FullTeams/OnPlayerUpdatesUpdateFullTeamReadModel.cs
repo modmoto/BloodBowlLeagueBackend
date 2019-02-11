@@ -6,11 +6,12 @@ using Microwave.Queries;
 using Teams.ReadHost.Players;
 using Teams.ReadHost.Players.Events;
 using Teams.ReadHost.Teams;
+using Teams.ReadHost.Teams.Events;
 
 namespace Teams.ReadHost.FullTeams
 {
     public class OnPlayerUpdatesUpdateFullTeamReadModel :
-        IHandleAsync<PlayerCreated>,
+        IHandleAsync<PlayerBought>,
         IHandleAsync<SkillChosen>,
         IHandleAsync<PlayerLeveledUp>
     {
@@ -49,7 +50,7 @@ namespace Teams.ReadHost.FullTeams
             return playerReadModels;
         }
 
-        public async Task HandleAsync(PlayerCreated domainEvent)
+        public async Task HandleAsync(PlayerBought domainEvent)
         {
             await UpdateTeamReadModelFull(domainEvent);
         }
