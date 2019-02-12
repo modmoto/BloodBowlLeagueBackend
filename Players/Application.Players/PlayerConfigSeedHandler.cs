@@ -11,22 +11,22 @@ namespace Application.Players
 {
     public class PlayerConfigSeedHandler
     {
-        private readonly IEventRepository _eventTypes;
+        private readonly IEventRepository _eventRepository;
 
-        public PlayerConfigSeedHandler(IEventRepository eventTypes)
+        public PlayerConfigSeedHandler(IEventRepository eventRepository)
         {
-            _eventTypes = eventTypes;
+            _eventRepository = eventRepository;
         }
 
         public async Task EnsurePlayerConfigSeed()
         {
-            var result = await _eventTypes.LoadEventsByTypeAsync(nameof(PlayerConfigCreated));
+            var result = await _eventRepository.LoadEventsByTypeAsync(nameof(PlayerConfigCreated));
             var eventsAllreadyAdded = 0;
             if (result.Is<Ok>()) eventsAllreadyAdded = result.Value.Count();
             var remainingEvents = DomainEventsInSeed.Skip(eventsAllreadyAdded);
             foreach (var domainEvent in remainingEvents)
             {
-                await _eventTypes.AppendAsync(new []{ domainEvent }, eventsAllreadyAdded);
+                await _eventRepository.AppendAsync(new []{ domainEvent }, eventsAllreadyAdded);
             }
         }
 
