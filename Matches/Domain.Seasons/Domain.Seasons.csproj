@@ -7,10 +7,10 @@
 
     <ItemGroup>
       <PackageReference Include="Microwave.Domain">
-        <Version>0.10.0.401-beta</Version>
+        <Version>0.10.1.403-beta</Version>
       </PackageReference>
       <PackageReference Include="Microwave.Queries">
-        <Version>0.10.0.401-beta</Version>
+        <Version>0.10.1.403-beta</Version>
       </PackageReference>
     </ItemGroup>
 </Project>
