@@ -10,10 +10,7 @@ using Teams.ReadHost.Teams.Events;
 
 namespace Teams.ReadHost.FullTeams
 {
-    public class OnPlayerUpdatesUpdateFullTeamReadModel :
-        IHandleAsync<PlayerBought>,
-        IHandleAsync<SkillChosen>,
-        IHandleAsync<PlayerLeveledUp>
+    public class OnPlayerUpdatesUpdateFullTeamReadModel
     {
         private readonly IReadModelRepository _readModelRepository;
 

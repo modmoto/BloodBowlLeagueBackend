@@ -4,7 +4,11 @@ namespace Domain.Teams.DomainEvents
 {
     public class PlayerBought : IDomainEvent
     {
-        public PlayerBought(GuidIdentity entityId, StringIdentity playerTypeId, GuidIdentity playerId, GoldCoins newTeamChestBalance)
+        public PlayerBought(
+            GuidIdentity entityId,
+            StringIdentity playerTypeId,
+            GuidIdentity playerId,
+            GoldCoins newTeamChestBalance)
         {
             EntityId = entityId;
             NewTeamChestBalance = newTeamChestBalance;

@@ -23,10 +23,11 @@ namespace Domain.Players
 
         public static DomainResult Create(
             GuidIdentity playerId,
+            GuidIdentity teamId,
             StringIdentity playerTypeId,
             PlayerConfig playerConfig)
         {
-            var playerCreated = new PlayerCreated(playerId, playerTypeId, playerConfig);
+            var playerCreated = new PlayerCreated(playerId, teamId, playerTypeId, playerConfig);
             return DomainResult.Ok(playerCreated);
         }
 

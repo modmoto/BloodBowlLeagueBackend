@@ -160,7 +160,7 @@ namespace Domain.Players.UnitTests
             IEnumerable<SkillType> doubleSkills = null)
         {
             var playerConfig = PlayerConfig(defaultSkills, doubleSkills);
-            return new PlayerCreated(GuidIdentity.Create(), StringIdentity.Create("whatever"), playerConfig);
+            return new PlayerCreated(GuidIdentity.Create(), GuidIdentity.Create(), StringIdentity.Create("whatever"), playerConfig);
         }
     }
 }

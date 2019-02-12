@@ -1,10 +1,12 @@
 ﻿using Application.Players;
+using Domain.Players.Events.ForeignEvents;
 using Domain.Players.Events.PlayerConfigs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
+using Microwave.Queries;
 
 namespace Host.Players.Startup
 {
@@ -22,7 +24,10 @@ namespace Host.Players.Startup
             services.AddMvc();
 
             services.AddMicrowave(Configuration, typeof(PlayerConfigCreated).Assembly);
-            services.AddMicrowaveReadModels(Configuration, typeof(OnPlayerBoughtCreatePlayer).Assembly);
+            services.AddMicrowaveReadModels(
+                Configuration,
+                typeof(OnPlayerBoughtCreatePlayer).Assembly,
+                typeof(PlayerBought).Assembly);
 
             services.AddTransient<PlayerConfigSeedHandler>();
         }
@@ -35,6 +40,7 @@ namespace Host.Players.Startup
                 raceConfigSeedHandler.EnsurePlayerConfigSeed().Wait();
             }
 
+            app.RunMicrowaveQueries();
             app.UseMvc();
         }
     }
