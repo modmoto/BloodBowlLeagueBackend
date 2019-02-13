@@ -1,27 +1,30 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
+using Microwave.Queries;
+using Teams.ReadHost.Players;
 using Teams.ReadHost.Teams;
 
 namespace Teams.ReadHost.Startup
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration(new Uri("http://localhost:5000/"))
         {
-            Configuration = configuration;
-        }
+            Database = new ReadDatabaseConfig { DatabaseName = "TeamReadhostReadModelDb"},
+            ReadModelConfig = new ReadModelConfig()
+            {
+                { typeof(PlayerReadModel), new Uri("http://localhost:5002/")}
+            }
+        };
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddMicrowaveReadModels(Configuration, Assembly.GetAssembly(typeof(TeamReadModel)));
+            services.AddMicrowaveReadModels(_readModelConfig, Assembly.GetAssembly(typeof(TeamReadModel)));
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

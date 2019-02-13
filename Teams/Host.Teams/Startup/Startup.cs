@@ -3,28 +3,25 @@ using Application.Teams.RaceConfigSeed;
 using Domain.Teams.DomainEvents;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
+using Microwave.EventStores;
 
 namespace Teams.WriteHost.Startup
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        readonly WriteModelConfiguration _writeModelConfig = new WriteModelConfiguration()
         {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-
+            Database = new WriteDatabaseConfig { DatabaseName = "TeamWriteModelDb"},
+        };
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
             services.AddTransient<TeamCommandHandler>();
             services.AddTransient<RaceConfigSeedHandler>();
 
-            services.AddMicrowave(Configuration, typeof(TeamCreated).Assembly);
+            services.AddMicrowave(_writeModelConfig, typeof(TeamCreated).Assembly);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
