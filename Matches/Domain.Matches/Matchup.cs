@@ -6,7 +6,10 @@ using Microwave.Domain;
 
 namespace Domain.Matches
 {
-    public class Matchup : Entity, IApply<MatchFinished>, IApply<MatchStarted>, IApply<MatchCreated>
+    public class Matchup : Entity,
+        IApply<MatchFinished>,
+        IApply<MatchStarted>,
+        IApply<MatchCreated>
     {
         public GuidIdentity MatchId { get; private set; }
         public IEnumerable<GuidIdentity> GuestTeamPlayers { get; private set; }
