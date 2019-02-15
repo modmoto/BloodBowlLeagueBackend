@@ -1,16 +1,14 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microwave.Domain;
 using Microwave.Queries;
 using Teams.ReadHost.Players;
-using Teams.ReadHost.Players.Events;
 using Teams.ReadHost.Teams;
-using Teams.ReadHost.Teams.Events;
 
 namespace Teams.ReadHost.FullTeams
 {
-    public class OnPlayerUpdatesUpdateFullTeamReadModel
+    public class OnPlayerUpdatesUpdateFullTeamReadModel :
+        ReadModelMerge<PlayerReadModel>,
+        ReadModelMerge<TeamReadModel>
     {
         private readonly IReadModelRepository _readModelRepository;
 
@@ -19,47 +17,47 @@ namespace Teams.ReadHost.FullTeams
             _readModelRepository = readModelRepository;
         }
 
-        private async Task UpdateTeamReadModelFull(IDomainEvent domainEvent)
+        public async Task Merge(PlayerReadModel mergeUnit)
         {
-            var player = (await _readModelRepository.Load<PlayerReadModel>(domainEvent.EntityId)).Value;
-            var teams = await _readModelRepository.LoadAll<TeamReadModel>();
-
-            var teamWithPlayer = teams.Value.Single(team =>
-                team.PlayerList.Count(p => p.PlayerId == domainEvent.EntityId) == 1);
-            var teamId = teamWithPlayer.TeamId;
-            var teamsFull = (await _readModelRepository.Load<TeamReadModelFull>(teamId)).Value;
-            teamsFull.PlayerList = AddOrUpdatePlayer(teamsFull, player);
-
-            (await _readModelRepository.Save(new ReadModelResult<TeamReadModelFull>(teamsFull, teamId, 0))).Check();
-        }
-
-        private static IEnumerable<PlayerReadModel> AddOrUpdatePlayer(TeamReadModelFull teamsFull, PlayerReadModel player)
-        {
-            var playerReadModels = teamsFull.PlayerList.ToList();
-            var playerInList = playerReadModels.Single(p => p.PlayerId == player.PlayerId);
-            var indexOf = playerReadModels.IndexOf(playerInList);
-            if (indexOf == -1)
+            var allModels = (await _readModelRepository.LoadAll<TeamReadModel>()).Value;
+            var teamReadModel = allModels.Single(m => m.PlayerList.Any(s => s.PlayerId == mergeUnit.PlayerId));
+            var teamReadModelResult = await _readModelRepository.Load<TeamReadModelFull>(teamReadModel.TeamId);
+            var teamReadModelFull = teamReadModelResult.Value;
+            var playerReadModels = teamReadModelFull.PlayerList.ToList();
+            var playerReadModel = playerReadModels.FirstOrDefault(p => p.PlayerId == mergeUnit.PlayerId);
+            if (playerReadModel == null)
             {
-                return teamsFull.PlayerList.Append(player);
+                playerReadModels.Add(mergeUnit);
+            }
+            else
+            {
+                playerReadModels.Remove(playerReadModel);
+                playerReadModels.Add(mergeUnit);
             }
 
-            playerReadModels[indexOf] = player;
-            return playerReadModels;
+            teamReadModelFull.PlayerList = playerReadModels;
+            var result = new ReadModelResult<TeamReadModelFull>(
+                teamReadModelFull,
+                teamReadModelFull.Team.TeamId,
+                teamReadModelResult.Version + 1);
+
+            (await _readModelRepository.Save(result)).Check();
         }
 
-        public async Task HandleAsync(PlayerBought domainEvent)
+        public async Task Merge(TeamReadModel mergeUnit)
         {
-            await UpdateTeamReadModelFull(domainEvent);
+            var teamReadModelFull = await _readModelRepository.Load<TeamReadModelFull>(mergeUnit.TeamId);
+            teamReadModelFull.Value.Team = mergeUnit;
+            var readModelResult = new ReadModelResult<TeamReadModelFull>(
+                teamReadModelFull.Value,
+                mergeUnit.TeamId,
+                teamReadModelFull.Version + 1);
+            (await _readModelRepository.Save(readModelResult)).Check();
         }
+    }
 
-        public async Task HandleAsync(SkillChosen domainEvent)
-        {
-            await UpdateTeamReadModelFull(domainEvent);
-        }
-
-        public async Task HandleAsync(PlayerLeveledUp domainEvent)
-        {
-            await UpdateTeamReadModelFull(domainEvent);
-        }
+    public interface ReadModelMerge<T> where T : ReadModel
+    {
+        Task Merge(T mergeUnit);
     }
 }
