@@ -13,7 +13,7 @@ namespace Teams.WriteHost.Startup
     {
         readonly WriteModelConfiguration _writeModelConfig = new WriteModelConfiguration
         {
-            Database = new WriteDatabaseConfig { DatabaseName = "TeamWriteModelDb"},
+            Database = new WriteDatabaseConfig { DatabaseName = "TeamWriteModelDb"}
         };
         public void ConfigureServices(IServiceCollection services)
         {

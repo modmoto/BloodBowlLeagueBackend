@@ -14,7 +14,7 @@ namespace Teams.ReadHost.Startup
     {
         readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration(new Uri("http://localhost:5000/"))
         {
-            Database = new ReadDatabaseConfig { DatabaseName = "TeamReadhostReadModelDb"},
+            Database = new ReadDatabaseConfig { DatabaseName = "TeamReadModelDb"},
             ReadModelConfig = new ReadModelConfig
             {
                 { typeof(PlayerReadModel), new Uri("http://localhost:5002/")}

@@ -25,7 +25,7 @@ namespace Host.Players.Startup
 
         readonly WriteModelConfiguration _writeModelConfig = new WriteModelConfiguration
         {
-            Database = new WriteDatabaseConfig { DatabaseName = "PlayerWriteModelDb"},
+            Database = new WriteDatabaseConfig { DatabaseName = "PlayerWriteModelDb"}
         };
 
         public void ConfigureServices(IServiceCollection services)
