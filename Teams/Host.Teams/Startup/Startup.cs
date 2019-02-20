@@ -11,7 +11,7 @@ namespace Teams.WriteHost.Startup
 {
     public class Startup
     {
-        readonly WriteModelConfiguration _writeModelConfig = new WriteModelConfiguration()
+        readonly WriteModelConfiguration _writeModelConfig = new WriteModelConfiguration
         {
             Database = new WriteDatabaseConfig { DatabaseName = "TeamWriteModelDb"},
         };
