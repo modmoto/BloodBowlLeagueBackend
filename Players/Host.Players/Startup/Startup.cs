@@ -42,11 +42,11 @@ namespace Host.Players.Startup
                 typeof(PlayerBought).Assembly);
 
             services.AddTransient<PlayerConfigSeedHandler>();
+            services.AddTransient<PlayerCommandHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            var domainEventFactory = app.ApplicationServices.GetService<IDomainEventFactory>();
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var raceConfigSeedHandler = serviceScope.ServiceProvider.GetService<PlayerConfigSeedHandler>();

@@ -19,7 +19,7 @@ namespace Teams.ReadHost.Teams
         public async Task<ActionResult> GetTeam(GuidIdentity teamId)
         {
             var teamQuerry = await _queryRepository.Load<TeamReadModel>(teamId);
-            return Ok(teamQuerry);
+            return Ok(teamQuerry.Value);
         }
 
         [HttpGet]

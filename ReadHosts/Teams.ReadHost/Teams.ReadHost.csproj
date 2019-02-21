@@ -11,9 +11,8 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.App" />
-        <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
         <PackageReference Include="Microwave">
-          <Version>0.10.1.418-beta</Version>
+          <Version>0.10.2.426-beta</Version>
         </PackageReference>
     </ItemGroup>
 </Project>

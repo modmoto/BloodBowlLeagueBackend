@@ -35,6 +35,7 @@ namespace Host.Matches.Startup
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
             app.UseMvc();
             app.RunMicrowaveQueries();
         }

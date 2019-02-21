@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
+using Microwave.EventStores;
 using Microwave.Queries;
+using Microwave.WebApi.Filters;
 using Teams.ReadHost.Players;
 using Teams.ReadHost.Teams;
 
@@ -24,6 +28,7 @@ namespace Teams.ReadHost.Startup
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddMicrowave(new WriteModelConfiguration(), Assembly.GetAssembly(typeof(TeamReadModel)));
             services.AddMicrowaveReadModels(_readModelConfig, Assembly.GetAssembly(typeof(TeamReadModel)));
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
@@ -37,20 +42,8 @@ namespace Teams.ReadHost.Startup
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
-
             app.RunMicrowaveQueries();
-
-            app.UseHttpsRedirection();
             app.UseCors("MyPolicy");
-
             app.UseMvc();
         }
     }
