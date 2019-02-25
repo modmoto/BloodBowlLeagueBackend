@@ -13,6 +13,7 @@ namespace Teams.ReadHost.Players
         IHandle<PlayerLeveledUp>
     {
         public GuidIdentity PlayerId { get; private set; }
+        public GuidIdentity TeamId { get; private set; }
         public StringIdentity PlayerTypeId{ get; private set; }
         public IEnumerable<StringIdentity> Skills { get; private set; } = new List<StringIdentity>();
         public int Level { get; set; }
@@ -21,6 +22,7 @@ namespace Teams.ReadHost.Players
         public void Handle(PlayerCreated domainEvent)
         {
             PlayerId = (GuidIdentity) domainEvent.EntityId;
+            TeamId = domainEvent.TeamId;
             PlayerTypeId = domainEvent.PlayerTypeId;
         }
 

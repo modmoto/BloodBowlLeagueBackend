@@ -19,9 +19,7 @@ namespace Teams.ReadHost.FullTeams
 
         public async Task Merge(PlayerReadModel mergeUnit)
         {
-            var allModels = (await _readModelRepository.LoadAll<TeamReadModel>()).Value;
-            var teamReadModel = allModels.Single(m => m.PlayerList.Any(s => s.PlayerId == mergeUnit.PlayerId));
-            var teamReadModelResult = await _readModelRepository.Load<TeamReadModelFull>(teamReadModel.TeamId);
+            var teamReadModelResult = await _readModelRepository.Load<TeamReadModelFull>(mergeUnit.TeamId);
             var teamReadModelFull = teamReadModelResult.Value;
             var playerReadModels = teamReadModelFull.PlayerList.ToList();
             var playerReadModel = playerReadModels.FirstOrDefault(p => p.PlayerId == mergeUnit.PlayerId);
@@ -39,7 +37,7 @@ namespace Teams.ReadHost.FullTeams
             var result = new ReadModelResult<TeamReadModelFull>(
                 teamReadModelFull,
                 teamReadModelFull.Team.TeamId,
-                teamReadModelResult.Version + 1);
+                teamReadModelResult.Version);
 
             (await _readModelRepository.Save(result)).Check();
         }
