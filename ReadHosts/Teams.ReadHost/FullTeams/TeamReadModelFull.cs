@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microwave.Domain;
 using Microwave.Queries;
 using Teams.ReadHost.Players;
 using Teams.ReadHost.Teams;
@@ -13,5 +14,6 @@ namespace Teams.ReadHost.FullTeams
         public TeamReadModel Team { get; set; }
 
         public override Type GetsCreatedOn => typeof(TeamCreated);
+        public override Identity EntityId { get; }
     }
 }

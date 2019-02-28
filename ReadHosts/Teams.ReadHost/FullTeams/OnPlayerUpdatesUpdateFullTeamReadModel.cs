@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microwave.Application.Results;
 using Microwave.Queries;
 using Teams.ReadHost.Players;
 using Teams.ReadHost.Teams;
@@ -34,23 +35,13 @@ namespace Teams.ReadHost.FullTeams
             }
 
             teamReadModelFull.PlayerList = playerReadModels;
-            var result = new ReadModelResult<TeamReadModelFull>(
-                teamReadModelFull,
-                teamReadModelFull.Team.TeamId,
-                teamReadModelResult.Version);
-
-            (await _readModelRepository.Save(result)).Check();
         }
 
         public async Task Merge(TeamReadModel mergeUnit)
         {
             var teamReadModelFull = await _readModelRepository.Load<TeamReadModelFull>(mergeUnit.TeamId);
+
             teamReadModelFull.Value.Team = mergeUnit;
-            var readModelResult = new ReadModelResult<TeamReadModelFull>(
-                teamReadModelFull.Value,
-                mergeUnit.TeamId,
-                teamReadModelFull.Version + 1);
-            (await _readModelRepository.Save(readModelResult)).Check();
         }
     }
 

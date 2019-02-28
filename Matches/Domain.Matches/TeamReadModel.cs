@@ -13,6 +13,7 @@ namespace Domain.Matches
         public IEnumerable<GuidIdentity> Players { get; private set; } = new List<GuidIdentity>();
 
         public override Type GetsCreatedOn => typeof(TeamCreated);
+        public override Identity EntityId => TeamId;
 
         public void Apply(PlayerBought domainEvent)
         {
