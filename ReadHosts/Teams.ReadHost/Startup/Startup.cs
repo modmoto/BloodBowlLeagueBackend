@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.EventStores;
 using Microwave.Queries;
-using Microwave.WebApi.Filters;
 using Teams.ReadHost.Players;
 using Teams.ReadHost.Teams;
 
@@ -18,7 +15,7 @@ namespace Teams.ReadHost.Startup
     {
         readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration(new Uri("http://localhost:5000/"))
         {
-            Database = new ReadDatabaseConfig { DatabaseName = "TeamReadModelDb"},
+            Database = new ReadDatabaseConfig { ConnectionString = "mongodb://localhost:32768/", DatabaseName = "TeamReadModelDb"},
             ReadModelConfig = new ReadModelConfig
             {
                 { typeof(PlayerReadModel), new Uri("http://localhost:5002/")}

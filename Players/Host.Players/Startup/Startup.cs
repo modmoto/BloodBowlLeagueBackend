@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.EventStores;
 using Microwave.Queries;
-using Microwave.WebApi;
 
 namespace Host.Players.Startup
 {
