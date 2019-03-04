@@ -18,7 +18,6 @@ namespace Teams.ReadHost.Players
         public IEnumerable<StringIdentity> Skills { get; private set; } = new List<StringIdentity>();
         public int Level { get; set; }
         public override Type GetsCreatedOn => typeof(PlayerCreated);
-        public override Identity EntityId => PlayerId;
 
         public void Handle(PlayerCreated domainEvent)
         {

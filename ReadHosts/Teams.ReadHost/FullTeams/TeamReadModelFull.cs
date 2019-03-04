@@ -14,6 +14,5 @@ namespace Teams.ReadHost.FullTeams
         public TeamReadModel Team { get; set; }
 
         public override Type GetsCreatedOn => typeof(TeamCreated);
-        public override Identity EntityId { get; }
     }
 }

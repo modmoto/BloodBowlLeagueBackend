@@ -21,6 +21,5 @@ namespace Teams.ReadHost.Teams
         }
 
         public override Type GetsCreatedOn => typeof(TeamCreated);
-        public override Identity EntityId => TeamId;
     }
 }

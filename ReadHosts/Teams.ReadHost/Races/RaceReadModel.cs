@@ -20,6 +20,5 @@ namespace Teams.ReadHost.Races
         }
 
         public override Type GetsCreatedOn => typeof(RaceCreated);
-        public override Identity EntityId => RaceId;
     }
 }
