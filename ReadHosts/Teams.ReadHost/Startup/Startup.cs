@@ -13,9 +13,9 @@ namespace Teams.ReadHost.Startup
 {
     public class Startup
     {
-        readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration(new Uri("http://localhost:5000/"))
+        readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration(new Uri("http://teams.readhost/"))
         {
-            Database = new ReadDatabaseConfig { ConnectionString = "mongodb://localhost:32768/", DatabaseName = "TeamReadModelDb"},
+            Database = new ReadDatabaseConfig { ConnectionString = "mongodb://mongo/", DatabaseName = "TeamReadModelDb"},
             ReadModelConfig = new ReadModelConfig
             {
                 { typeof(PlayerReadModel), new Uri("http://localhost:5002/")}

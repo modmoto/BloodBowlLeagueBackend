@@ -15,4 +15,10 @@
           <Version>0.10.3.201903046-beta</Version>
         </PackageReference>
     </ItemGroup>
+
+    <ItemGroup>
+      <None Update="entrypoint.sh">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
 </Project>

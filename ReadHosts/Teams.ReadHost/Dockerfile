@@ -9,4 +9,6 @@ RUN dotnet publish --output /output --configuration Release
 FROM microsoft/dotnet:2.2-sdk
 WORKDIR /app
 COPY --from=build /output /app
+
+EXPOSE 80/tcp
 ENTRYPOINT ["dotnet", "Teams.ReadHost.dll"]
