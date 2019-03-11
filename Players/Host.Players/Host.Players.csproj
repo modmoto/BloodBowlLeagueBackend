@@ -9,7 +9,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microwave">
-            <Version>0.10.4.2019031133-beta</Version>
+            <Version>0.10.4.2019031135-beta</Version>
         </PackageReference>
     </ItemGroup>
 
