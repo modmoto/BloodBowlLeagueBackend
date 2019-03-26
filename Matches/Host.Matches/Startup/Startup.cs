@@ -1,5 +1,4 @@
-﻿using System;
-using Domain.Matches;
+﻿using Domain.Matches;
 using Domain.Matches.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +11,7 @@ namespace Host.Matches.Startup
 {
     public class Startup
     {
-        readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration(new Uri("http://localhost:5004/"))
+        readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration
         {
             Database = new ReadDatabaseConfig { DatabaseName = "MatchReadModelDb"},
         };

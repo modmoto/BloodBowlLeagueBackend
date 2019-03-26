@@ -1,5 +1,4 @@
-﻿using System;
-using Application.Players;
+﻿using Application.Players;
 using Domain.Players.Events.ForeignEvents;
 using Domain.Players.Events.PlayerConfigs;
 using Microsoft.AspNetCore.Builder;
@@ -13,7 +12,7 @@ namespace Host.Players.Startup
 {
     public class Startup
     {
-        readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration(new Uri("http://localhost:5002/"))
+        readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration
         {
             Database = new ReadDatabaseConfig { DatabaseName = "PlayerReadModelDb"}
         };
