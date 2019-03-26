@@ -7,7 +7,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microwave.Domain">
-        <Version>0.10.6.201903262-beta</Version>
+        <Version>0.10.6.201903263-beta</Version>
       </PackageReference>
     </ItemGroup>
 
