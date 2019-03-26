@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.EventStores;
 using Microwave.Queries;
+using ServiceConfig;
 
 namespace Host.Matches.Startup
 {
@@ -14,6 +15,7 @@ namespace Host.Matches.Startup
         readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration
         {
             Database = new ReadDatabaseConfig { DatabaseName = "MatchReadModelDb"},
+            ServiceLocations = ServiceConfiguration.ServiceAdresses
         };
 
         readonly WriteModelConfiguration _writeModelConfig = new WriteModelConfiguration

@@ -21,4 +21,8 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\ServiceConfig\ServiceConfig.csproj" />
+    </ItemGroup>
 </Project>

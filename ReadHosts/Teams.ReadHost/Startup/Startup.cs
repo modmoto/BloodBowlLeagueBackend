@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.EventStores;
 using Microwave.Queries;
+using ServiceConfig;
 using Teams.ReadHost.Teams;
 
 namespace Teams.ReadHost.Startup
@@ -14,6 +15,7 @@ namespace Teams.ReadHost.Startup
         readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration
         {
             Database = new ReadDatabaseConfig { ConnectionString = "mongodb://mongo/", DatabaseName = "TeamReadModelDb"},
+            ServiceLocations = ServiceConfiguration.ServiceAdresses
         };
 
         public void ConfigureServices(IServiceCollection services)

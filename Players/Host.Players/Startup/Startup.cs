@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.EventStores;
 using Microwave.Queries;
+using ServiceConfig;
 
 namespace Host.Players.Startup
 {
@@ -14,7 +15,8 @@ namespace Host.Players.Startup
     {
         readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration
         {
-            Database = new ReadDatabaseConfig { DatabaseName = "PlayerReadModelDb"}
+            Database = new ReadDatabaseConfig { DatabaseName = "PlayerReadModelDb"},
+            ServiceLocations = ServiceConfiguration.ServiceAdresses
         };
 
         readonly WriteModelConfiguration _writeModelConfig = new WriteModelConfiguration
