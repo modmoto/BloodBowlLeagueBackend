@@ -15,10 +15,6 @@ namespace Host.Matches.Startup
         readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration(new Uri("http://localhost:5004/"))
         {
             Database = new ReadDatabaseConfig { DatabaseName = "MatchReadModelDb"},
-            DomainEventConfig = new DomainEventConfig
-            {
-                { typeof(TeamReadModel), new Uri("http://localhost:5000/")}
-            }
         };
 
         readonly WriteModelConfiguration _writeModelConfig = new WriteModelConfiguration

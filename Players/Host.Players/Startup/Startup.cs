@@ -15,11 +15,7 @@ namespace Host.Players.Startup
     {
         readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration(new Uri("http://localhost:5002/"))
         {
-            Database = new ReadDatabaseConfig { DatabaseName = "PlayerReadModelDb"},
-            DomainEventConfig = new DomainEventConfig
-            {
-                { typeof(PlayerBought), new Uri("http://localhost:5000/")}
-            }
+            Database = new ReadDatabaseConfig { DatabaseName = "PlayerReadModelDb"}
         };
 
         readonly WriteModelConfiguration _writeModelConfig = new WriteModelConfiguration
