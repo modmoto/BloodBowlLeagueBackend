@@ -14,7 +14,7 @@ namespace Teams.ReadHost.Startup
     {
         readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration
         {
-            Database = new ReadDatabaseConfig { ConnectionString = "mongodb://mongo/", DatabaseName = "TeamReadModelDb"},
+            Database = new ReadDatabaseConfig { DatabaseName = "TeamReadModelDb"},
             ServiceLocations = ServiceConfiguration.ServiceAdresses
         };
 
