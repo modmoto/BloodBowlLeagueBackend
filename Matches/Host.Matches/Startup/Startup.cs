@@ -1,33 +1,27 @@
-﻿using Domain.Matches;
-using Domain.Matches.Events;
+﻿using Domain.Matches.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Microwave.EventStores;
-using Microwave.Queries;
+using Microwave.Application;
 using ServiceConfig;
 
 namespace Host.Matches.Startup
 {
     public class Startup
     {
-        readonly ReadModelConfiguration _readModelConfig = new ReadModelConfiguration
+        readonly MicrowaveConfiguration _config = new MicrowaveConfiguration
         {
-            Database = new ReadDatabaseConfig { DatabaseName = "MatchReadModelDb"},
-            ServiceLocations = ServiceConfiguration.ServiceAdresses
+            ReadDatabase = new ReadDatabaseConfig { DatabaseName = "MatchReadModelDb"},
+            ServiceLocations = ServiceConfiguration.ServiceAdresses,
+            WriteDatabase = new WriteDatabaseConfig { DatabaseName = "MatchWriteModelDb" }
         };
 
-        readonly WriteModelConfiguration _writeModelConfig = new WriteModelConfiguration
-        {
-            Database = new WriteDatabaseConfig { DatabaseName = "MatchWriteModelDb"}
-        };
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
 
-            services.AddMicrowave(_writeModelConfig, typeof(MatchFinished).Assembly);
-            services.AddMicrowaveReadModels(_readModelConfig, typeof(TeamReadModel).Assembly);
+            services.AddMicrowave(_config, typeof(MatchFinished).Assembly);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

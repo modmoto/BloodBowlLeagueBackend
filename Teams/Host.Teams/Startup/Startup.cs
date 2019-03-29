@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Microwave.EventStores;
+using Microwave.Application;
 
 namespace Teams.WriteHost.Startup
 {
     public class Startup
     {
-        readonly WriteModelConfiguration _writeModelConfig = new WriteModelConfiguration
+        readonly MicrowaveConfiguration _writeModelConfig = new MicrowaveConfiguration
         {
-            Database = new WriteDatabaseConfig { DatabaseName = "TeamWriteModelDb"}
+            WriteDatabase = new WriteDatabaseConfig { DatabaseName = "TeamWriteModelDb"}
         };
         public void ConfigureServices(IServiceCollection services)
         {

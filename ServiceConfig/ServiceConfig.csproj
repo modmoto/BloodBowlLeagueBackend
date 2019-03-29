@@ -5,6 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microwave.Application" Version="0.10.7.152-beta" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Reference Include="Microwave.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
         <HintPath>..\..\..\.nuget\packages\microwave.application\0.10.6.201903226-beta\lib\netstandard2.0\Microwave.Application.dll</HintPath>
       </Reference>
