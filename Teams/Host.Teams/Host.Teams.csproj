@@ -21,23 +21,4 @@
       <ProjectReference Include="..\Application.Teams\Application.Teams.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="out\publish\NuGet.config" />
-      <_ContentIncludedByDefault Remove="out\publish\publish\NuGet.config" />
-      <_ContentIncludedByDefault Remove="out\publish\publish\web.config" />
-      <_ContentIncludedByDefault Remove="out\publish\web.config" />
-      <_ContentIncludedByDefault Remove="out\publish\appsettings.json" />
-      <_ContentIncludedByDefault Remove="out\publish\Host.Teams.deps.json" />
-      <_ContentIncludedByDefault Remove="out\publish\Host.Teams.runtimeconfig.json" />
-      <_ContentIncludedByDefault Remove="out\publish\publish\appsettings.json" />
-      <_ContentIncludedByDefault Remove="out\publish\publish\Host.Teams.deps.json" />
-      <_ContentIncludedByDefault Remove="out\publish\publish\Host.Teams.runtimeconfig.json" />
-      <_ContentIncludedByDefault Remove="Pages\Shared\_CookieConsentPartial.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
-    </ItemGroup>
-
 </Project>
