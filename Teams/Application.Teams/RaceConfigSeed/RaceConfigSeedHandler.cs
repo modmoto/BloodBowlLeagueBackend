@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Teams;
 using Domain.Teams.DomainEvents;
+using Microwave.Application;
 using Microwave.Application.Results;
 using Microwave.Domain;
 using Microwave.EventStores.Ports;
@@ -11,22 +12,22 @@ namespace Application.Teams.RaceConfigSeed
 {
     public class RaceConfigSeedHandler
     {
-        private readonly IEventRepository _eventTypes;
+        private readonly IEventRepository _eventRepository;
 
-        public RaceConfigSeedHandler(IEventRepository eventTypes)
+        public RaceConfigSeedHandler(IEventRepository eventRepository)
         {
-            _eventTypes = eventTypes;
+            _eventRepository = eventRepository;
         }
 
         public async Task EnsureRaceConfigSeed()
         {
-            var result = await _eventTypes.LoadEventsByTypeAsync(nameof(RaceCreated));
+            var result = await _eventRepository.LoadEventsByTypeAsync(nameof(RaceCreated));
             var eventsAllreadyAdded = 0;
             if (result.Is<Ok>()) eventsAllreadyAdded = result.Value.Count();
             var remainingEvents = DomainEventsInSeed.Skip(eventsAllreadyAdded);
             foreach (var domainEvent in remainingEvents)
             {
-                await _eventTypes.AppendAsync(new []{ domainEvent }, eventsAllreadyAdded);
+                await _eventRepository.AppendAsync(new []{ domainEvent }, eventsAllreadyAdded);
             }
         }
 

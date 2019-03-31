@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microwave.Application" Version="0.10.7.167-beta" />
+      <PackageReference Include="Microwave.Application" Version="0.10.7.169-beta" />
     </ItemGroup>
 
     <ItemGroup>
