@@ -1,5 +1,4 @@
 ﻿using Application.Players;
-using Domain.Players.Events.ForeignEvents;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,10 +21,7 @@ namespace Host.Players.Startup
         {
             services.AddMvc();
 
-            services.AddMicrowave(
-                _config,
-                typeof(OnPlayerBoughtCreatePlayer).Assembly,
-                typeof(PlayerBought).Assembly);
+            services.AddMicrowave(_config);
 
             services.AddTransient<PlayerConfigSeedHandler>();
             services.AddTransient<PlayerCommandHandler>();

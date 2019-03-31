@@ -1,6 +1,5 @@
 ﻿using Application.Teams;
 using Application.Teams.RaceConfigSeed;
-using Domain.Teams.DomainEvents;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +20,7 @@ namespace Teams.WriteHost.Startup
             services.AddTransient<TeamCommandHandler>();
             services.AddTransient<RaceConfigSeedHandler>();
 
-            services.AddMicrowave(_writeModelConfig, typeof(TeamCreated).Assembly);
+            services.AddMicrowave(_writeModelConfig);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -32,6 +31,8 @@ namespace Teams.WriteHost.Startup
                 raceConfigSeedHandler.EnsureRaceConfigSeed().Wait();
             }
 
+
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }

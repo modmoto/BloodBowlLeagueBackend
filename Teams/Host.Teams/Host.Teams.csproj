@@ -13,7 +13,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microwave">
-          <Version>0.10.7.152-beta</Version>
+          <Version>0.10.7.167-beta</Version>
         </PackageReference>
     </ItemGroup>
 
@@ -32,6 +32,12 @@
       <_ContentIncludedByDefault Remove="out\publish\publish\appsettings.json" />
       <_ContentIncludedByDefault Remove="out\publish\publish\Host.Teams.deps.json" />
       <_ContentIncludedByDefault Remove="out\publish\publish\Host.Teams.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_CookieConsentPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
     </ItemGroup>
 
 </Project>

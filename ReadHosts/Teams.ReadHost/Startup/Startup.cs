@@ -1,11 +1,9 @@
-﻿using System.Reflection;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Application;
 using ServiceConfig;
-using Teams.ReadHost.Teams;
 
 namespace Teams.ReadHost.Startup
 {
@@ -20,7 +18,7 @@ namespace Teams.ReadHost.Startup
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddMicrowave(_config, Assembly.GetAssembly(typeof(TeamReadModel)));
+            services.AddMicrowave(_config);
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

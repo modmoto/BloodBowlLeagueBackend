@@ -1,5 +1,4 @@
-﻿using Domain.Matches.Events;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
@@ -21,7 +20,7 @@ namespace Host.Matches.Startup
         {
             services.AddMvc();
 
-            services.AddMicrowave(_config, typeof(MatchFinished).Assembly);
+            services.AddMicrowave(_config);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
