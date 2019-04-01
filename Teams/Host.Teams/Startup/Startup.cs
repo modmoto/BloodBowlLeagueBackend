@@ -32,8 +32,6 @@ namespace Teams.WriteHost.Startup
                 raceConfigSeedHandler.EnsureRaceConfigSeed().Wait();
             }
 
-
-            app.UseStaticFiles();
             app.UseMvc();
         }
     }
