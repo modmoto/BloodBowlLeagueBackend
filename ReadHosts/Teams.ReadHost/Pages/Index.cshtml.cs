@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microwave.Application.Discovery;
 
@@ -21,9 +22,10 @@ namespace Teams.ReadHost.Pages
             ConsumingServices = consumingServices;
         }
 
-        public async Task DiscoverServices()
+        public async Task<IActionResult> OnPostAsync()
         {
             await _discoveryHandler.DiscoverConsumingServices();
+            return Redirect("Index");
         }
     }
 }
