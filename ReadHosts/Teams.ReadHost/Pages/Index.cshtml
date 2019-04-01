@@ -12,14 +12,14 @@
     <div class="card-deck">
         @foreach (var item in Model.ConsumingServices.Services)
         {
-            <div class="card mb-4 pt-2">
+            <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">
                         <a href="@item.ServiceBaseAddress">@Html.DisplayFor(modelItem => item.ServiceName)</a>
                     </h5>
 
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header pt-2">
                             Readmodels
                         </div>
                         <ul class="list-group list-group-flush">
@@ -31,6 +31,7 @@
                             }
                         </ul>
                     </div>
+                    <br/>
 
                     <div class="card">
                         <div class="card-header">
