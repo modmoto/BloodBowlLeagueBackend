@@ -25,7 +25,7 @@ namespace Teams.ReadHost.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             await _discoveryHandler.DiscoverConsumingServices();
-            return Redirect("Index");
+            return Redirect("#");
         }
     }
 }

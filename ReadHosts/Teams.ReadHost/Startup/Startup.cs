@@ -12,7 +12,8 @@ namespace Teams.ReadHost.Startup
         readonly MicrowaveConfiguration _config = new MicrowaveConfiguration
         {
             ReadDatabase = new ReadDatabaseConfig { DatabaseName = "TeamReadModelDb"},
-            ServiceLocations = ServiceConfiguration.ServiceAdresses
+            ServiceLocations = ServiceConfiguration.ServiceAdresses,
+            ServiceName = "TeamsQuerryService"
         };
 
         public void ConfigureServices(IServiceCollection services)

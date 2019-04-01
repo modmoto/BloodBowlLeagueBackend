@@ -13,7 +13,8 @@ namespace Host.Matches.Startup
         {
             ReadDatabase = new ReadDatabaseConfig { DatabaseName = "MatchReadModelDb"},
             ServiceLocations = ServiceConfiguration.ServiceAdresses,
-            WriteDatabase = new WriteDatabaseConfig { DatabaseName = "MatchWriteModelDb" }
+            WriteDatabase = new WriteDatabaseConfig { DatabaseName = "MatchWriteModelDb" },
+            ServiceName = "MatchService"
         };
 
         public void ConfigureServices(IServiceCollection services)

@@ -14,7 +14,8 @@ namespace Host.Players.Startup
         {
             ReadDatabase = new ReadDatabaseConfig { DatabaseName = "PlayerReadModelDb"},
             ServiceLocations = ServiceConfiguration.ServiceAdresses,
-            WriteDatabase = new WriteDatabaseConfig { DatabaseName = "PlayerWriteModelDb" }
+            WriteDatabase = new WriteDatabaseConfig { DatabaseName = "PlayerWriteModelDb" },
+            ServiceName = "PlayerService"
         };
 
         public void ConfigureServices(IServiceCollection services)
