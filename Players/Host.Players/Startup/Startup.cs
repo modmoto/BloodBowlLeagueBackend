@@ -12,9 +12,8 @@ namespace Host.Players.Startup
     {
         readonly MicrowaveConfiguration _config = new MicrowaveConfiguration
         {
-            ReadDatabase = new ReadDatabaseConfig { DatabaseName = "PlayerReadModelDb"},
+            DatabaseConfiguration = new DatabaseConfiguration() { DatabaseName = "PlayerWriteModelDb"},
             ServiceLocations = ServiceConfiguration.ServiceAdresses,
-            WriteDatabase = new WriteDatabaseConfig { DatabaseName = "PlayerWriteModelDb" },
             ServiceName = "PlayerService"
         };
 
