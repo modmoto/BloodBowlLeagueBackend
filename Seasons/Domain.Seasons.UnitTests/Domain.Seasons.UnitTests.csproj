@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <IsPackable>false</IsPackable>
+        <RootNamespace>Domain.Matches.UnitTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Domain.Matches\Domain.Matches.csproj" />
+      <ProjectReference Include="..\Domain.Seasons\Domain.Seasons.csproj" />
     </ItemGroup>
 
 </Project>

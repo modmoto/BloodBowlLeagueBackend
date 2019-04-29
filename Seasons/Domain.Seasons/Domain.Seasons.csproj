@@ -6,13 +6,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microwave.EventStores">
+      <PackageReference Include="Microwave.Domain">
+        <Version>0.11.4.299-beta</Version>
+      </PackageReference>
+      <PackageReference Include="Microwave.Queries">
         <Version>0.11.4.299-beta</Version>
       </PackageReference>
     </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Domain.Matches\Domain.Matches.csproj" />
-    </ItemGroup>
-
 </Project>

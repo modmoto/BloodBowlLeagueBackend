@@ -161,8 +161,7 @@ namespace Domain.Matches.UnitTests
 
         private static MatchupReadModel CreateDefaultMatchup(GuidIdentity team1 = null, GuidIdentity team2 = null)
         {
-            var matchup = new MatchupReadModel();
-            matchup.Apply(new MatchCreated(GuidIdentity.Create(), team1 ?? GuidIdentity.Create(), team2 ?? GuidIdentity.Create()));
+            var matchup = new MatchupReadModel(GuidIdentity.Create(), team1 ?? GuidIdentity.Create(), team2 ?? GuidIdentity.Create());
             return matchup;
         }
 
