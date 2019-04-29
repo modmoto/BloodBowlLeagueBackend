@@ -28,7 +28,7 @@ namespace Domain.Seasons
 
                 var teamIdx = roundNumber % numberOfTeams;
 
-                var matchup = new MatchupReadModel(GuidIdentity.Create(), teamsTemp[teamIdx], teams[0]);
+                var matchup = new MatchupReadModel(teamsTemp[teamIdx], teams[0]);
                 matchups.Add(matchup);
 
                 for (var index = 1; index < numberOfMatchesInARound; index++)
@@ -36,7 +36,7 @@ namespace Domain.Seasons
                     var firstTeamIndex = (roundNumber + index) % numberOfTeams;
                     var secondTeamIndex = (roundNumber + numberOfTeams - index) % numberOfTeams;
 
-                    var matchupInner = new MatchupReadModel(GuidIdentity.Create(), teamsTemp[firstTeamIndex], teamsTemp[secondTeamIndex]);
+                    var matchupInner = new MatchupReadModel(teamsTemp[firstTeamIndex], teamsTemp[secondTeamIndex]);
                     matchups.Add(matchupInner);
                 }
 
