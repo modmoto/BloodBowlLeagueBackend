@@ -9,10 +9,10 @@
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
         <PackageReference Include="Microwave">
-          <Version>0.11.4.292-beta</Version>
+          <Version>0.11.4.299-beta</Version>
         </PackageReference>
         <PackageReference Include="Microwave.UI">
-          <Version>0.11.4.292-beta</Version>
+          <Version>0.11.4.299-beta</Version>
         </PackageReference>
     </ItemGroup>
 
