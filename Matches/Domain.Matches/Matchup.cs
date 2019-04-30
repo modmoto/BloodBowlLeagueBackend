@@ -19,9 +19,9 @@ namespace Domain.Matches
         public IEnumerable<PlayerProgression> PlayerProgressions { get; private set; }
         public bool IsFinished { get; private set; }
 
-        public static DomainResult Create(GuidIdentity trainerAtHome, GuidIdentity trainerAsGuest)
+        public static DomainResult Create(GuidIdentity teamAtHome, GuidIdentity teamAsGuest)
         {
-            var domainEvents = new MatchCreated(GuidIdentity.Create(), trainerAtHome, trainerAsGuest);
+            var domainEvents = new MatchCreated(GuidIdentity.Create(), teamAtHome, teamAsGuest);
             return DomainResult.Ok(domainEvents);
         }
 
