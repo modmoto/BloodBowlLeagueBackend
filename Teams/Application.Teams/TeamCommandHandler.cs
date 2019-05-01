@@ -29,7 +29,8 @@ namespace Application.Teams
             var teamResult = await _eventStore.LoadAsync<Team>(buyPlayerCommand.TeamId);
             var team = teamResult.Value;
             var buyPlayer = team.BuyPlayer(buyPlayerCommand.PlayerTypeId);
-            await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion);
+            var result = await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion);
+            result.Check();
         }
     }
 

@@ -19,8 +19,8 @@ namespace Teams.WriteHost
         [HttpPost("create")]
         public async Task<ActionResult> CreateTeam([FromBody] CreateTeamCommand createTeamCommand)
         {
-            var teamGuid = await _commandHandler.CreateTeam(createTeamCommand);
-            return Created($"Api/Teams/{teamGuid.Id}", null);
+            var teamId = await _commandHandler.CreateTeam(createTeamCommand);
+            return Created($"{Request.Scheme}://{Request.Host}/Api/Teams/{teamId}", teamId);
         }
 
         [HttpPost("{teamId}/buyPlayer")]
