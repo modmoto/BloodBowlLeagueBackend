@@ -22,14 +22,15 @@ namespace Domain.Seasons
 
     public class GameDayCreated : IDomainEvent
     {
-        public GameDayCreated(GuidIdentity entityId, GuidIdentity gameDayId, List<MatchupReadModel> matchups)
+        public GameDayCreated(GuidIdentity seasonId, GuidIdentity gameDayId, List<MatchupReadModel> matchups)
         {
-            EntityId = entityId;
+            SeasonId = seasonId;
             GameDayId = gameDayId;
             Matchups = matchups;
         }
 
-        public Identity EntityId { get; }
+        public Identity EntityId => SeasonId;
+        public GuidIdentity SeasonId { get; }
         public GuidIdentity GameDayId { get; }
         public List<MatchupReadModel> Matchups { get; }
     }

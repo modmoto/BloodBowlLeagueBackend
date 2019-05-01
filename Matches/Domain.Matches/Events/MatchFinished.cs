@@ -6,16 +6,17 @@ namespace Domain.Matches.Events
     public class MatchFinished : IDomainEvent
     {
         public MatchFinished(
-            Identity entityId,
+            GuidIdentity matchId,
             IEnumerable<PlayerProgression> playerProgressions,
             GameResult gameResult)
         {
-            EntityId = entityId;
+            MatchId = matchId;
             PlayerProgressions = playerProgressions;
             GameResult = gameResult;
         }
 
-        public Identity EntityId { get; }
+        public GuidIdentity MatchId { get; }
+        public Identity EntityId => MatchId;
         public IEnumerable<PlayerProgression> PlayerProgressions { get; }
         public GameResult GameResult { get; }
     }

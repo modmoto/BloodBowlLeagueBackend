@@ -8,13 +8,13 @@ namespace Teams.ReadHost.Races
 {
     public class RaceReadModel : ReadModel, IHandle<RaceCreated>
     {
-        public Identity RaceId { get; set; }
+        public StringIdentity RaceId { get; set; }
         public string RaceDescription { get; set; }
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; set; }
 
         public void Handle(RaceCreated domainEvent)
         {
-            RaceId = domainEvent.EntityId;
+            RaceId = domainEvent.RaceId;
             AllowedPlayers = domainEvent.AllowedPlayers;
             RaceDescription = domainEvent.RaceDescription;
         }

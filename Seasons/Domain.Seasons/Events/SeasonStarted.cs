@@ -5,13 +5,14 @@ namespace Domain.Seasons.Events
 {
     public class SeasonStarted : IDomainEvent
     {
-        public SeasonStarted(GuidIdentity entityId, IEnumerable<GameDay> gameDays)
+        public SeasonStarted(GuidIdentity seasonId, IEnumerable<GameDay> gameDays)
         {
-            EntityId = entityId;
+            SeasonId = seasonId;
             GameDays = gameDays;
         }
 
-        public Identity EntityId { get; }
+        public Identity EntityId => SeasonId;
+        public GuidIdentity SeasonId { get; }
         public IEnumerable<GameDay> GameDays { get; }
     }
 }

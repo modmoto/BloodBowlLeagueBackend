@@ -66,7 +66,7 @@ namespace Application.Players.UnitTests
         {
             var progressionEvents = new []{ ProgressionEvent.PlayerPassed, ProgressionEvent.PlayerMadeCasualty };
             var progressions = identity.Select(guidIdentity => new PlayerProgression(guidIdentity, progressionEvents));
-            return new MatchFinished(GuidIdentity.Create(Guid.NewGuid()), progressions);
+            return new MatchFinished(progressions);
         }
     }
 }

@@ -10,11 +10,11 @@ namespace Teams.ReadHost.Teams
         public Identity RaceId { get; set; }
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
-        public Identity TeamId { get; set; }
+        public GuidIdentity TeamId { get; set; }
 
         public void Handle(TeamCreated domainEvent)
         {
-            TeamId = domainEvent.EntityId;
+            TeamId = domainEvent.TeamId;
             RaceId = domainEvent.RaceId;
             TeamName = domainEvent.TeamName;
             TrainerName = domainEvent.TrainerName;

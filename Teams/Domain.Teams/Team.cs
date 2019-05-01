@@ -10,7 +10,7 @@ namespace Domain.Teams
     [SnapShotAfter(3)]
     public class Team : Entity, IApply<TeamCreated>, IApply<PlayerBought>
     {
-        public GuidIdentity Id { get; private set; }
+        public GuidIdentity TeamId { get; private set; }
 
         public GoldCoins TeamMoney { get; private set; }
         public IEnumerable<StringIdentity> PlayerTypes { get; private set; } = new List<StringIdentity>();
@@ -37,13 +37,13 @@ namespace Domain.Teams
 
             PlayerTypes = PlayerTypes.Append(playerTypeId);
             TeamMoney = TeamMoney.Minus(player.Cost);
-            var playerBought = new PlayerBought(Id, playerTypeId, GuidIdentity.Create(),  TeamMoney);
+            var playerBought = new PlayerBought(TeamId, playerTypeId, GuidIdentity.Create(),  TeamMoney);
             return DomainResult.Ok(playerBought);
         }
 
         public void Apply(TeamCreated teamCreated)
         {
-            Id = (GuidIdentity) teamCreated.EntityId;
+            TeamId = teamCreated.TeamId;
             AllowedPlayers = teamCreated.AllowedPlayers;
             TeamMoney = teamCreated.StartingMoney;
         }

@@ -4,11 +4,12 @@ namespace Teams.ReadHost.Players.Events
 {
     public class SkillChosen : IDomainEvent
     {
-        public Identity EntityId { get; }
+        public Identity EntityId => PlayerId;
+        public GuidIdentity PlayerId { get; }
         public StringIdentity NewSkill { get; }
-        public SkillChosen(GuidIdentity entityId, StringIdentity newSkill)
+        public SkillChosen(GuidIdentity playerId, StringIdentity newSkill)
         {
-            EntityId = entityId;
+            PlayerId = playerId;
             NewSkill = newSkill;
         }
     }

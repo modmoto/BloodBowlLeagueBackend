@@ -5,13 +5,14 @@ namespace Domain.Players.Events.Players
 {
     public class SkillChosen : IDomainEvent
     {
-        public Identity EntityId { get; }
+        public Identity EntityId => PlayerId;
+        public GuidIdentity PlayerId { get; }
         public StringIdentity NewSkill { get; }
         public IEnumerable<FreeSkillPoint> RemainingLevelUps { get; }
 
-        public SkillChosen(GuidIdentity entityId, StringIdentity newSkill, IEnumerable<FreeSkillPoint> remainingLevelUps)
+        public SkillChosen(GuidIdentity playerId, StringIdentity newSkill, IEnumerable<FreeSkillPoint> remainingLevelUps)
         {
-            EntityId = entityId;
+            PlayerId = playerId;
             NewSkill = newSkill;
             RemainingLevelUps = remainingLevelUps;
         }

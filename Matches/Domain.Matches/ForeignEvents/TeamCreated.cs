@@ -2,13 +2,12 @@
 
 namespace Domain.Matches.ForeignEvents
 {
-    public class TeamCreated : IDomainEvent
+    public class TeamCreated
     {
-        public TeamCreated(GuidIdentity entityId)
+        public TeamCreated(GuidIdentity teamId)
         {
-            EntityId = entityId;
+            TeamId = teamId;
         }
-
-        public Identity EntityId{ get; }
+        public GuidIdentity TeamId { get; }
     }
 }

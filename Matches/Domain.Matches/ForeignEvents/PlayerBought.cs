@@ -2,15 +2,15 @@
 
 namespace Domain.Matches.ForeignEvents
 {
-    public class PlayerBought : IDomainEvent
+    public class PlayerBought
     {
-        public PlayerBought(GuidIdentity entityId, GuidIdentity playerId)
+        public PlayerBought(GuidIdentity matchId, GuidIdentity playerId)
         {
-            EntityId = entityId;
+            MatchId = matchId;
             PlayerId = playerId;
         }
 
-        public Identity EntityId { get; }
+        public GuidIdentity MatchId { get; }
         public GuidIdentity PlayerId { get; }
     }
 }

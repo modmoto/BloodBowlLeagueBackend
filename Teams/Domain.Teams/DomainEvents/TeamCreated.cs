@@ -6,14 +6,14 @@ namespace Domain.Teams.DomainEvents
     public class TeamCreated : IDomainEvent
     {
         public TeamCreated(
-            GuidIdentity entityId, 
+            GuidIdentity teamId,
             StringIdentity raceId, 
             string teamName, 
             string trainerName,
             IEnumerable<AllowedPlayer> allowedPlayers,
             GoldCoins startingMoney)
         {
-            EntityId = entityId;
+            TeamId = teamId;
             RaceId = raceId;
             TeamName = teamName;
             TrainerName = trainerName;
@@ -21,11 +21,12 @@ namespace Domain.Teams.DomainEvents
             StartingMoney = startingMoney;
         }
 
-        public Identity EntityId { get; }
+        public Identity EntityId => TeamId;
         public Identity RaceId { get; }
         public string TeamName { get; }
         public string TrainerName { get; }
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; }
         public GoldCoins StartingMoney { get; }
+        public GuidIdentity TeamId { get; }
     }
 }

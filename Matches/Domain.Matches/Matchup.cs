@@ -71,14 +71,14 @@ namespace Domain.Matches
 
         public void Apply(MatchStarted domainEvent)
         {
-            MatchId = (GuidIdentity) domainEvent.EntityId;
+            MatchId = domainEvent.MatchId;
             HomeTeamPlayers = domainEvent.HomeTeam;
             GuestTeamPlayers = domainEvent.GuestTeam;
         }
 
         public void Apply(MatchCreated domainEvent)
         {
-            MatchId = (GuidIdentity) domainEvent.EntityId;
+            MatchId = domainEvent.MatchId;
             TeamAtHome = domainEvent.TrainerAtHome;
             TeamAsGuest = domainEvent.TrainerAsGuest;
         }

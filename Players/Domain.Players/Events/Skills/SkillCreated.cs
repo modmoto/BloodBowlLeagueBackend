@@ -4,13 +4,14 @@ namespace Domain.Players.Events.Skills
 {
     public class SkillCreated : IDomainEvent
     {
-        public SkillCreated(Identity entityId, SkillType skillType)
+        public SkillCreated(StringIdentity skillId, SkillType skillType)
         {
-            EntityId = entityId;
+            SkillId = skillId;
             SkillType = skillType;
         }
 
-        public Identity EntityId { get; }
+        public Identity EntityId => SkillId;
         public SkillType SkillType { get; }
+        public StringIdentity SkillId { get; }
     }
 }

@@ -4,15 +4,17 @@ namespace Teams.ReadHost.Teams.Events
 {
     public class PlayerBought : IDomainEvent
     {
-        public PlayerBought(GuidIdentity entityId, StringIdentity playerTypeId, GuidIdentity playerId, GoldCoins newTeamChestBalance)
+        public PlayerBought(GuidIdentity teamId, StringIdentity playerTypeId, GuidIdentity playerId, GoldCoins
+        newTeamChestBalance)
         {
-            EntityId = entityId;
+            TeamId = teamId;
             NewTeamChestBalance = newTeamChestBalance;
             PlayerTypeId = playerTypeId;
             PlayerId = playerId;
         }
 
-        public Identity EntityId { get; }
+        public Identity EntityId => TeamId;
+        public GuidIdentity TeamId { get; }
         public GoldCoins NewTeamChestBalance { get; }
         public StringIdentity PlayerTypeId { get; }
         public GuidIdentity PlayerId { get; }

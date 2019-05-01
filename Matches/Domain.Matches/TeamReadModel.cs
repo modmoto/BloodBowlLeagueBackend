@@ -21,7 +21,7 @@ namespace Domain.Matches
 
         public void Apply(TeamCreated domainEvent)
         {
-            TeamId = (GuidIdentity)domainEvent.EntityId;
+            TeamId = domainEvent.TeamId;
         }
     }
 }

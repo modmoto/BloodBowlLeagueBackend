@@ -18,7 +18,7 @@ namespace Teams.ReadHost.Teams
 
         public void Handle(TeamCreated domainEvent)
         {
-            TeamId = domainEvent.EntityId;
+            TeamId = domainEvent.TeamId;
             RaceId = domainEvent.RaceId;
             TeamName = domainEvent.TeamName;
             TrainerName = domainEvent.TrainerName;

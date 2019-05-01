@@ -4,13 +4,14 @@ namespace Domain.Seasons.Events
 {
     public class TeamAddedToSeason : IDomainEvent
     {
-        public TeamAddedToSeason(GuidIdentity entityId, GuidIdentity teamId)
+        public TeamAddedToSeason(GuidIdentity seasonId, GuidIdentity teamId)
         {
-            EntityId = entityId;
+            SeasonId = seasonId;
             TeamId = teamId;
         }
 
-        public Identity EntityId { get; }
+        public Identity EntityId => SeasonId;
+        public GuidIdentity SeasonId { get; }
         public GuidIdentity TeamId { get; }
     }
 }

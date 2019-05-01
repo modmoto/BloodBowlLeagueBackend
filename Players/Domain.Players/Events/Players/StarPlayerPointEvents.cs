@@ -4,49 +4,53 @@ namespace Domain.Players.Events.Players
 {
     public class PlayerPassed : IDomainEvent
     {
-        public PlayerPassed(Identity entityId, long newStarPlayerPoints)
+        public PlayerPassed(GuidIdentity playerId, long newStarPlayerPoints)
         {
+            PlayerId = playerId;
             NewStarPlayerPoints = newStarPlayerPoints;
-            EntityId = entityId;
         }
 
+        public GuidIdentity PlayerId { get; }
         public long NewStarPlayerPoints { get; }
-        public Identity EntityId { get; }
+        public Identity EntityId => PlayerId;
     }
 
     public class PlayerWasNominatedMostValuablePlayer : IDomainEvent
     {
-        public PlayerWasNominatedMostValuablePlayer(Identity entityId, long newStarPlayerPoints)
+        public PlayerWasNominatedMostValuablePlayer(GuidIdentity playerId, long newStarPlayerPoints)
         {
+            PlayerId = playerId;
             NewStarPlayerPoints = newStarPlayerPoints;
-            EntityId = entityId;
         }
 
+        public GuidIdentity PlayerId { get; }
         public long NewStarPlayerPoints { get; }
-        public Identity EntityId { get; }
+        public Identity EntityId => PlayerId;
     }
 
     public class PlayerMadeTouchdown : IDomainEvent
     {
-        public PlayerMadeTouchdown(Identity entityId, long newStarPlayerPoints)
+        public PlayerMadeTouchdown(GuidIdentity playerId, long newStarPlayerPoints)
         {
+            PlayerId = playerId;
             NewStarPlayerPoints = newStarPlayerPoints;
-            EntityId = entityId;
         }
 
+        public GuidIdentity PlayerId { get; }
         public long NewStarPlayerPoints { get; }
-        public Identity EntityId { get; }
+        public Identity EntityId => PlayerId;
     }
 
     public class PlayerMadeCasualty : IDomainEvent
     {
-        public PlayerMadeCasualty(Identity entityId, long newStarPlayerPoints)
+        public PlayerMadeCasualty(GuidIdentity playerId, long newStarPlayerPoints)
         {
+            PlayerId = playerId;
             NewStarPlayerPoints = newStarPlayerPoints;
-            EntityId = entityId;
         }
 
+        public GuidIdentity PlayerId { get; }
         public long NewStarPlayerPoints { get; }
-        public Identity EntityId { get; }
+        public Identity EntityId => PlayerId;
     }
 }

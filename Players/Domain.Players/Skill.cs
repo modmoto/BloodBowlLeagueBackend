@@ -10,7 +10,7 @@ namespace Domain.Players
 
         public void Apply(SkillCreated skillCreated)
         {
-            SkillId = (StringIdentity) skillCreated.EntityId;
+            SkillId = skillCreated.SkillId;
             SkillType = skillCreated.SkillType;
         }
     }

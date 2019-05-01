@@ -4,13 +4,14 @@ namespace Teams.ReadHost.Players.Events
 {
     public class PlayerLeveledUp : IDomainEvent
     {
-        public PlayerLeveledUp(GuidIdentity entityId, int newLevel)
+        public PlayerLeveledUp(GuidIdentity playerId, int newLevel)
         {
-            EntityId = entityId;
+            PlayerId = playerId;
             NewLevel = newLevel;
         }
 
-        public Identity EntityId { get; }
+        public Identity EntityId => PlayerId;
+        public GuidIdentity PlayerId { get; }
         public int NewLevel { get; }
     }
 }

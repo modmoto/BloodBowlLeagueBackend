@@ -4,11 +4,12 @@ namespace Domain.Seasons.Events
 {
     public class SeasonCreated : IDomainEvent
     {
-        public Identity EntityId { get; }
+        public Identity EntityId => SeasonId;
+        public GuidIdentity SeasonId { get; }
 
-        public SeasonCreated(GuidIdentity entityId)
+        public SeasonCreated(GuidIdentity seasonId)
         {
-            EntityId = entityId;
+            SeasonId = seasonId;
         }
     }
 }

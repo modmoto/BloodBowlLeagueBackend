@@ -20,7 +20,8 @@ namespace Application.Players
         {
             var eventResult = await _eventStore.LoadAsync<PlayerConfig>(domainEvent.PlayerTypeId);
             var playerConfig = eventResult.Value;
-            var result = Player.Create(domainEvent.PlayerId, (GuidIdentity) domainEvent.EntityId, domainEvent.PlayerTypeId, playerConfig);
+            var result = Player.Create(domainEvent.PlayerId, domainEvent.TeamId, domainEvent.PlayerTypeId,
+             playerConfig);
             var storeResult = await _eventStore.AppendAsync(result.DomainEvents, 0);
             storeResult.Check();
         }

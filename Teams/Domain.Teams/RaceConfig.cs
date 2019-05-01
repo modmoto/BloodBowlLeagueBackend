@@ -11,7 +11,7 @@ namespace Domain.Teams
 
         public void Apply(RaceCreated raceCreated)
         {
-            Id = (StringIdentity) raceCreated.EntityId;
+            Id = raceCreated.RaceConfigId;
             AllowedPlayers = raceCreated.AllowedPlayers;
         }
     }

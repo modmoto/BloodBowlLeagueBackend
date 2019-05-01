@@ -5,17 +5,18 @@ namespace Domain.Players.Events.ForeignEvents
     public class PlayerBought : IDomainEvent
     {
         public PlayerBought(
-            GuidIdentity entityId,
+            GuidIdentity teamId,
             StringIdentity playerTypeId,
             GuidIdentity playerId)
         {
-            EntityId = entityId;
+            TeamId = teamId;
             PlayerTypeId = playerTypeId;
             PlayerId = playerId;
         }
 
-        public Identity EntityId { get; }
+        public Identity EntityId => TeamId;
         public StringIdentity PlayerTypeId { get; }
         public GuidIdentity PlayerId { get; }
+        public GuidIdentity TeamId { get; }
     }
 }

@@ -132,7 +132,7 @@ namespace Domain.Players
 
         public void Apply(PlayerCreated playerCreated)
         {
-            PlayerId = (GuidIdentity) playerCreated.EntityId;
+            PlayerId = playerCreated.PlayerId;
             PlayerTypeId = playerCreated.PlayerTypeId;
             CurrentSkills = playerCreated.PlayerConfig.StartingSkills;
             PlayerConfig = playerCreated.PlayerConfig;

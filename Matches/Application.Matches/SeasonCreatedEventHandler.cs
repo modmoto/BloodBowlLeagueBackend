@@ -29,16 +29,14 @@ namespace Application.Matches
         }
     }
 
-    public class SeasonStarted : IDomainEvent
+    public class SeasonStarted
     {
-        public SeasonStarted(IEnumerable<GameDay> gameDays, Identity entityId)
+        public SeasonStarted(IEnumerable<GameDay> gameDays)
         {
             GameDays = gameDays;
-            EntityId = entityId;
         }
 
         public IEnumerable<GameDay> GameDays { get; }
-        public Identity EntityId { get; }
     }
 
     public class GameDay

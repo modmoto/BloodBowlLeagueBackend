@@ -21,7 +21,7 @@ namespace Teams.ReadHost.Players
 
         public void Handle(PlayerCreated domainEvent)
         {
-            PlayerId = (GuidIdentity) domainEvent.EntityId;
+            PlayerId = domainEvent.PlayerId;
             TeamId = domainEvent.TeamId;
             PlayerTypeId = domainEvent.PlayerTypeId;
         }

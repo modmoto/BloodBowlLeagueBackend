@@ -3,15 +3,12 @@ using Microwave.Domain;
 
 namespace Domain.Players.Events.ForeignEvents
 {
-    public class MatchFinished : IDomainEvent
+    public class MatchFinished
     {
-        public MatchFinished(Identity entityId, IEnumerable<PlayerProgression> playerProgressions)
+        public MatchFinished(IEnumerable<PlayerProgression> playerProgressions)
         {
-            EntityId = entityId;
             PlayerProgressions = playerProgressions;
         }
-
-        public Identity EntityId { get; }
         public IEnumerable<PlayerProgression> PlayerProgressions { get; }
     }
 

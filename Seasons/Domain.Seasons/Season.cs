@@ -57,7 +57,7 @@ namespace Domain.Seasons
 
         public void Apply(SeasonCreated domainEvent)
         {
-            SeasonId = (GuidIdentity) domainEvent.EntityId;
+            SeasonId = domainEvent.SeasonId;
         }
 
         public void Apply(SeasonStarted domainEvent)
