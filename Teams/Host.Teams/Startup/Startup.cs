@@ -12,7 +12,7 @@ namespace Teams.WriteHost.Startup
     {
         readonly MicrowaveConfiguration _writeModelConfig = new MicrowaveConfiguration
         {
-            DatabaseConfiguration = new DatabaseConfiguration { DatabaseName = "TeamWriteModelDb"},
+            DatabaseConfiguration = new DatabaseConfiguration { DatabaseName = "Teams"},
             ServiceName = "TeamService"
         };
         public void ConfigureServices(IServiceCollection services)

@@ -12,7 +12,7 @@ namespace Host.Matches.Startup
         readonly MicrowaveConfiguration _config = new MicrowaveConfiguration
         {
             ServiceLocations = ServiceConfiguration.ServiceAdresses,
-            DatabaseConfiguration = new DatabaseConfiguration { DatabaseName = "MatchWriteModelDb" },
+            DatabaseConfiguration = new DatabaseConfiguration { DatabaseName = "Matches" },
             ServiceName = "MatchService"
         };
 
