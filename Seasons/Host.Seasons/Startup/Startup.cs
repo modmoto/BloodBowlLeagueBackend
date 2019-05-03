@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Application.Matches;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
@@ -21,6 +22,8 @@ namespace Host.Matches.Startup
             services.AddMvc();
 
             services.AddMicrowave(_config);
+
+            services.AddTransient<SeasonCommandHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
