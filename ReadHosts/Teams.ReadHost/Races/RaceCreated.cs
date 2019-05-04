@@ -4,7 +4,7 @@ using Teams.ReadHost.Teams;
 
 namespace Teams.ReadHost.Races
 {
-    public class RaceCreated : IDomainEvent
+    public class RaceCreated
     {
         public RaceCreated(StringIdentity raceId, IEnumerable<AllowedPlayer> allowedPlayers, string raceDescription)
         {
@@ -13,9 +13,8 @@ namespace Teams.ReadHost.Races
             RaceDescription = raceDescription;
         }
 
-        public IEnumerable<AllowedPlayer> AllowedPlayers{ get; set; }
-        public string RaceDescription{ get; set; }
-        public Identity EntityId => RaceId;
+        public IEnumerable<AllowedPlayer> AllowedPlayers{ get; }
+        public string RaceDescription{ get; }
         public StringIdentity RaceId { get; }
     }
 }

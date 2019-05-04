@@ -2,14 +2,12 @@
 
 namespace Domain.Seasons.ForeignEvents
 {
-    public class TeamCreated : IDomainEvent
+    public class TeamCreated
     {
         public TeamCreated(GuidIdentity teamId)
         {
             TeamId = teamId;
         }
-
-        public Identity EntityId => TeamId;
         public GuidIdentity TeamId { get; }
     }
 }

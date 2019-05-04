@@ -2,7 +2,7 @@ using Microwave.Domain;
 
 namespace Teams.ReadHost.Players.Events
 {
-    public class PlayerLeveledUp : IDomainEvent
+    public class PlayerLeveledUp
     {
         public PlayerLeveledUp(GuidIdentity playerId, int newLevel)
         {
@@ -10,7 +10,6 @@ namespace Teams.ReadHost.Players.Events
             NewLevel = newLevel;
         }
 
-        public Identity EntityId => PlayerId;
         public GuidIdentity PlayerId { get; }
         public int NewLevel { get; }
     }

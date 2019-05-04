@@ -3,7 +3,7 @@ using Microwave.Domain;
 
 namespace Teams.ReadHost.Teams.Events
 {
-    public class TeamCreated : IDomainEvent
+    public class TeamCreated
     {
         public TeamCreated(
             GuidIdentity teamId,
@@ -21,7 +21,6 @@ namespace Teams.ReadHost.Teams.Events
             StartingMoney = startingMoney;
         }
 
-        public Identity EntityId => TeamId;
         public Identity RaceId{ get; }
         public string TeamName{ get; }
         public string TrainerName{ get; }

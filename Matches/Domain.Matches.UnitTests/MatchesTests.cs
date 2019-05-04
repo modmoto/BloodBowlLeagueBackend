@@ -81,10 +81,10 @@ namespace Domain.Matches.UnitTests
         {
             var teamReadModel = new TeamReadModel();
             var trainerAsGuest = GuidIdentity.Create();
-            teamReadModel.Apply(new TeamCreated(trainerAsGuest));
+            teamReadModel.Handle(new TeamCreated(trainerAsGuest));
             foreach (var playerId in playerIds)
             {
-                teamReadModel.Apply(new PlayerBought(trainerAsGuest, playerId));
+                teamReadModel.Handle(new PlayerBought(trainerAsGuest, playerId));
             }
             return teamReadModel;
         }

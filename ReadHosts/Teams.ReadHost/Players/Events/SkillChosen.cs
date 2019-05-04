@@ -2,9 +2,8 @@ using Microwave.Domain;
 
 namespace Teams.ReadHost.Players.Events
 {
-    public class SkillChosen : IDomainEvent
+    public class SkillChosen
     {
-        public Identity EntityId => PlayerId;
         public GuidIdentity PlayerId { get; }
         public StringIdentity NewSkill { get; }
         public SkillChosen(GuidIdentity playerId, StringIdentity newSkill)
