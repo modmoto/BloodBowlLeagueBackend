@@ -24,10 +24,10 @@ namespace Teams.WriteHost
         }
 
         [HttpPost("{teamId}/buyPlayer")]
-        public async Task<ActionResult> BuyPlayer(Guid teamId, [FromBody] BuyPlayerCommand createTeamCommand)
+        public async Task<ActionResult> BuyPlayer(Guid teamId, [FromBody] BuyPlayerCommand buyPlayerCommand)
         {
-            createTeamCommand.TeamId = GuidIdentity.Create(teamId);
-            await _commandHandler.BuyPlayer(createTeamCommand);
+            buyPlayerCommand.TeamId = GuidIdentity.Create(teamId);
+            await _commandHandler.BuyPlayer(buyPlayerCommand);
             return Ok();
         }
     }

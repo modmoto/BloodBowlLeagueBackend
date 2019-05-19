@@ -19,7 +19,7 @@ namespace Teams.ReadHost.Races
         public async Task<ActionResult> GetTeam(StringIdentity raceId)
         {
             var teamQuerry = await _queryRepository.Load<RaceReadModel>(raceId);
-            return Ok(teamQuerry);
+            return Ok(teamQuerry.Value);
         }
     }
 }
