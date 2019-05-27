@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
+using Microwave.Queries;
 
 namespace Teams.ReadHost.Teams.Events
 {
-    public class TeamCreated
+    public class TeamCreated : ISubscribedDomainEvent
     {
         public TeamCreated(
             GuidIdentity teamId,
@@ -27,5 +28,6 @@ namespace Teams.ReadHost.Teams.Events
         public IEnumerable<AllowedPlayer> AllowedPlayers{ get; }
         public GoldCoins StartingMoney { get; }
         public GuidIdentity TeamId { get; }
+        public Identity EntityId => TeamId;
     }
 }

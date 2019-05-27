@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Microwave.Application;
+using Microwave.Domain;
 using ServiceConfig;
 
 namespace Teams.ReadHost.Startup

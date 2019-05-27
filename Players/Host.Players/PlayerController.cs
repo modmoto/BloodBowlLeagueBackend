@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Application.Players;
 using Microsoft.AspNetCore.Mvc;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 
 namespace Host.Players
 {

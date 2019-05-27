@@ -3,9 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Players;
 using Domain.Players.Events.PlayerConfigs;
-using Microwave.Application;
-using Microwave.Application.Results;
-using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Identities;
+using Microwave.Domain.Results;
+using Microwave.EventStores;
 using Microwave.EventStores.Ports;
 
 namespace Application.Players

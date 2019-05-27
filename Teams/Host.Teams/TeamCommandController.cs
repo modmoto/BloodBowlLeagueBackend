@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Application.Teams;
 using Microsoft.AspNetCore.Mvc;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 
 namespace Teams.WriteHost
 {

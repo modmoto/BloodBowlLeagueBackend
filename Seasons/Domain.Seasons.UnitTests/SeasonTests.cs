@@ -3,7 +3,7 @@ using System.Linq;
 using Domain.Seasons;
 using Domain.Seasons.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 
 namespace Domain.Matches.UnitTests
 {

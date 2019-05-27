@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Matches;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 using Microwave.EventStores.Ports;
 using Microwave.Queries;
 
@@ -29,14 +29,17 @@ namespace Application.Matches
         }
     }
 
-    public class SeasonStarted
+    public class SeasonStarted : ISubscribedDomainEvent
     {
-        public SeasonStarted(IEnumerable<GameDay> gameDays)
+        public SeasonStarted(GuidIdentity seasonId, IEnumerable<GameDay> gameDays)
         {
+            SeasonId = seasonId;
             GameDays = gameDays;
         }
 
+        public GuidIdentity SeasonId { get; }
         public IEnumerable<GameDay> GameDays { get; }
+        public Identity EntityId => SeasonId;
     }
 
     public class GameDay

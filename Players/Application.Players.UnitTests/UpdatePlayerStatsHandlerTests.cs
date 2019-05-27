@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using Domain.Players;
 using Domain.Players.Events.ForeignEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microwave.Application.Exceptions;
-using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Exceptions;
+using Microwave.Domain.Identities;
 using Microwave.EventStores.Ports;
 using Moq;
 

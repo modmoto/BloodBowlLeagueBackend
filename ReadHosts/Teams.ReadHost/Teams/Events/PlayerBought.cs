@@ -1,8 +1,9 @@
-﻿using Microwave.Domain;
+﻿using Microwave.Domain.Identities;
+using Microwave.Queries;
 
 namespace Teams.ReadHost.Teams.Events
 {
-    public class PlayerBought
+    public class PlayerBought : ISubscribedDomainEvent
     {
         public PlayerBought(GuidIdentity teamId, StringIdentity playerTypeId, GuidIdentity playerId, GoldCoins
         newTeamChestBalance)
@@ -17,5 +18,6 @@ namespace Teams.ReadHost.Teams.Events
         public GoldCoins NewTeamChestBalance { get; }
         public StringIdentity PlayerTypeId { get; }
         public GuidIdentity PlayerId { get; }
+        public Identity EntityId => TeamId;
     }
 }

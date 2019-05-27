@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Teams;
 using Domain.Teams.DomainEvents;
-using Microwave.Application;
-using Microwave.Application.Results;
-using Microwave.Domain;
-using Microwave.EventStores.Ports;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Identities;
+using Microwave.Domain.Results;
+using Microwave.EventStores;
 
 namespace Application.Teams.RaceConfigSeed
 {

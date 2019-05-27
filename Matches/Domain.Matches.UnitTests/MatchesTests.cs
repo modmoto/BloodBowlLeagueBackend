@@ -3,7 +3,7 @@ using Domain.Matches.Errors;
 using Domain.Matches.Events;
 using Domain.Matches.ForeignEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 
 namespace Domain.Matches.UnitTests
 {

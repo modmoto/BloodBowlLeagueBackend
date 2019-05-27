@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Domain.Matches;
 using Domain.Matches.Events;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 using Microwave.EventStores.Ports;
 using Microwave.Queries;
 

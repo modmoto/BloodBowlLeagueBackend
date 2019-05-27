@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 using Microwave.Queries;
 using Teams.ReadHost.Teams;
 

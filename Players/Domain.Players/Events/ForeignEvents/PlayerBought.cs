@@ -1,8 +1,9 @@
-﻿using Microwave.Domain;
+﻿using Microwave.Domain.Identities;
+using Microwave.Queries;
 
 namespace Domain.Players.Events.ForeignEvents
 {
-    public class PlayerBought
+    public class PlayerBought : ISubscribedDomainEvent
     {
         public PlayerBought(
             GuidIdentity teamId,
@@ -17,5 +18,6 @@ namespace Domain.Players.Events.ForeignEvents
         public StringIdentity PlayerTypeId { get; }
         public GuidIdentity PlayerId { get; }
         public GuidIdentity TeamId { get; }
+        public Identity EntityId => TeamId;
     }
 }

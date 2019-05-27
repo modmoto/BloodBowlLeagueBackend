@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Identities;
 
 namespace Domain.Matches.Events
 {

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Domain.Teams.DomainErrors;
-using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Identities;
+using Microwave.Domain.Validation;
 
 namespace Domain.Teams
 {

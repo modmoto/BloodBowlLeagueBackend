@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 using Microwave.Queries;
 using Teams.ReadHost.Players.Events;
 

@@ -1,5 +1,6 @@
 using Domain.Players.Events.Skills;
-using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Identities;
 
 namespace Domain.Players
 {

@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domain.Players.Events.PlayerConfigs;
 using Domain.Players.Events.Players;
 using Domain.Players.Events.Skills;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 
 namespace Domain.Players.UnitTests
 {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Domain.Teams;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 using Microwave.EventStores.Ports;
 
 namespace Application.Teams

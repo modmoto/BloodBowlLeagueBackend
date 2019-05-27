@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Teams.DomainErrors;
 using Domain.Teams.DomainEvents;
-using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Identities;
+using Microwave.Domain.Validation;
 
 namespace Domain.Teams
 {

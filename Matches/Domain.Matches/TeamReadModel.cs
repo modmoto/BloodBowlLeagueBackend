@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Matches.ForeignEvents;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 using Microwave.Queries;
 
 namespace Domain.Matches

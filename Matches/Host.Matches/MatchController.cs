@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Application.Matches;
 using Domain.Matches.Events;
 using Microsoft.AspNetCore.Mvc;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 
 namespace Host.Matches
 {

@@ -1,8 +1,9 @@
-using Microwave.Domain;
+using Microwave.Domain.Identities;
+using Microwave.Queries;
 
 namespace Teams.ReadHost.Players.Events
 {
-    public class PlayerCreated
+    public class PlayerCreated : ISubscribedDomainEvent
     {
         public PlayerCreated(
             GuidIdentity playerId,
@@ -17,5 +18,6 @@ namespace Teams.ReadHost.Players.Events
         public GuidIdentity PlayerId { get; }
         public StringIdentity PlayerTypeId { get; }
         public GuidIdentity TeamId { get; }
+        public Identity EntityId => PlayerId;
     }
 }

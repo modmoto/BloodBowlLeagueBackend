@@ -2,7 +2,9 @@
 using System.Linq;
 using Domain.Seasons.Errors;
 using Domain.Seasons.Events;
-using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Identities;
+using Microwave.Domain.Validation;
 
 namespace Domain.Seasons
 {

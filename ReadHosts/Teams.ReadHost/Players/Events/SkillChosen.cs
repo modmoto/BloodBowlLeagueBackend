@@ -1,8 +1,9 @@
-using Microwave.Domain;
+using Microwave.Domain.Identities;
+using Microwave.Queries;
 
 namespace Teams.ReadHost.Players.Events
 {
-    public class SkillChosen
+    public class SkillChosen : ISubscribedDomainEvent
     {
         public GuidIdentity PlayerId { get; }
         public StringIdentity NewSkill { get; }
@@ -11,5 +12,7 @@ namespace Teams.ReadHost.Players.Events
             PlayerId = playerId;
             NewSkill = newSkill;
         }
+
+        public Identity EntityId => PlayerId;
     }
 }

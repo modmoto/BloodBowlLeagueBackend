@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Players;
 using Domain.Players.Events.ForeignEvents;
-using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Validation;
 using Microwave.EventStores.Ports;
 using Microwave.Queries;
 

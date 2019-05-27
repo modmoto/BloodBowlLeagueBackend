@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Seasons;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 using Microwave.EventStores.Ports;
 using Microwave.Queries;
 

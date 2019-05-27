@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
+using Microwave.Queries;
 using Teams.ReadHost.Teams;
 
 namespace Teams.ReadHost.Races
 {
-    public class RaceCreated
+    public class RaceCreated : ISubscribedDomainEvent
     {
         public RaceCreated(StringIdentity raceId, IEnumerable<AllowedPlayer> allowedPlayers, string raceDescription)
         {
@@ -16,5 +17,6 @@ namespace Teams.ReadHost.Races
         public IEnumerable<AllowedPlayer> AllowedPlayers{ get; }
         public string RaceDescription{ get; }
         public StringIdentity RaceId { get; }
+        public Identity EntityId => RaceId;
     }
 }

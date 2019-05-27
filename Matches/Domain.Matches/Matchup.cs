@@ -2,7 +2,9 @@
 using System.Linq;
 using Domain.Matches.Errors;
 using Domain.Matches.Events;
-using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Identities;
+using Microwave.Domain.Validation;
 
 namespace Domain.Matches
 {

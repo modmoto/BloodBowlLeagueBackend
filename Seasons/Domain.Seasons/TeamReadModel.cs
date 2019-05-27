@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Domain.Seasons.ForeignEvents;
-using Microwave.Domain;
+using Microwave.Domain.Identities;
 using Microwave.Queries;
 
 namespace Domain.Seasons
