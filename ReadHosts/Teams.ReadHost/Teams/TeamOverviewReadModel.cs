@@ -7,7 +7,7 @@ namespace Teams.ReadHost.Teams
 {
     public class TeamOverviewReadModel : ReadModel, IHandle<TeamCreated>
     {
-        public Identity RaceId { get; set; }
+        public StringIdentity RaceId { get; set; }
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
         public GuidIdentity TeamId { get; set; }

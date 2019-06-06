@@ -22,12 +22,12 @@ namespace Teams.ReadHost.Teams.Events
             StartingMoney = startingMoney;
         }
 
-        public Identity RaceId{ get; }
-        public string TeamName{ get; }
-        public string TrainerName{ get; }
-        public IEnumerable<AllowedPlayer> AllowedPlayers{ get; }
+        public Identity EntityId => TeamId;
+        public StringIdentity RaceId { get; }
+        public string TeamName { get; }
+        public string TrainerName { get; }
+        public IEnumerable<AllowedPlayer> AllowedPlayers { get; }
         public GoldCoins StartingMoney { get; }
         public GuidIdentity TeamId { get; }
-        public Identity EntityId => TeamId;
     }
 }

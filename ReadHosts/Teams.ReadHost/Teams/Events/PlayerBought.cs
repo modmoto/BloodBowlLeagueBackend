@@ -5,8 +5,11 @@ namespace Teams.ReadHost.Teams.Events
 {
     public class PlayerBought : ISubscribedDomainEvent
     {
-        public PlayerBought(GuidIdentity teamId, StringIdentity playerTypeId, GuidIdentity playerId, GoldCoins
-        newTeamChestBalance)
+        public PlayerBought(
+            GuidIdentity teamId,
+            StringIdentity playerTypeId,
+            GuidIdentity playerId,
+            GoldCoins newTeamChestBalance)
         {
             TeamId = teamId;
             NewTeamChestBalance = newTeamChestBalance;

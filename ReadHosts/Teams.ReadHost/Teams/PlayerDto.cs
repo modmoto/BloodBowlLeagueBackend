@@ -11,6 +11,6 @@ namespace Teams.ReadHost.Teams
         }
 
         public GuidIdentity PlayerId { get; }
-        public StringIdentity PlayerTypeId{ get; }
+        public StringIdentity PlayerTypeId { get; }
     }
 }

@@ -23,7 +23,7 @@ namespace Domain.Teams.DomainEvents
         }
 
         public Identity EntityId => TeamId;
-        public Identity RaceId { get; }
+        public StringIdentity RaceId { get; }
         public string TeamName { get; }
         public string TrainerName { get; }
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; }

@@ -10,7 +10,7 @@ namespace Teams.ReadHost.Teams
     public class TeamReadModel : ReadModel, IHandle<TeamCreated>, IHandle<PlayerBought>
     {
         public IEnumerable<PlayerDto> PlayerList { get; set; } = new List<PlayerDto>();
-        public Identity RaceId { get; set; }
+        public StringIdentity RaceId { get; set; }
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
         public Identity TeamId { get; set; }
