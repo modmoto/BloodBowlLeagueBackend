@@ -5,14 +5,14 @@ namespace Domain.Matches.ForeignEvents
 {
     public class PlayerBought : ISubscribedDomainEvent
     {
-        public PlayerBought(GuidIdentity matchId, GuidIdentity playerId)
+        public PlayerBought(GuidIdentity teamId, GuidIdentity playerId)
         {
-            MatchId = matchId;
+            TeamId = teamId;
             PlayerId = playerId;
         }
 
-        public GuidIdentity MatchId { get; }
+        public GuidIdentity TeamId { get; }
         public GuidIdentity PlayerId { get; }
-        public Identity EntityId => MatchId;
+        public Identity EntityId => TeamId;
     }
 }

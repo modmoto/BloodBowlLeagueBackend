@@ -7,16 +7,16 @@ namespace Teams.ReadHost.Races
 {
     public class RaceCreated : ISubscribedDomainEvent
     {
-        public RaceCreated(StringIdentity raceId, IEnumerable<AllowedPlayer> allowedPlayers, string raceDescription)
+        public RaceCreated(StringIdentity raceConfigId, IEnumerable<AllowedPlayer> allowedPlayers, string raceDescription)
         {
-            RaceId = raceId;
             AllowedPlayers = allowedPlayers;
             RaceDescription = raceDescription;
+            RaceConfigId = raceConfigId;
         }
 
-        public IEnumerable<AllowedPlayer> AllowedPlayers{ get; }
-        public string RaceDescription{ get; }
-        public StringIdentity RaceId { get; }
-        public Identity EntityId => RaceId;
+        public IEnumerable<AllowedPlayer> AllowedPlayers { get; }
+        public string RaceDescription { get; }
+        public Identity EntityId => RaceConfigId;
+        public StringIdentity RaceConfigId { get; }
     }
 }
