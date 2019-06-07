@@ -27,8 +27,8 @@ namespace Teams.WriteHost
         public async Task<ActionResult> BuyPlayer(Guid teamId, [FromBody] BuyPlayerCommand buyPlayerCommand)
         {
             buyPlayerCommand.TeamId = GuidIdentity.Create(teamId);
-            await _commandHandler.BuyPlayer(buyPlayerCommand);
-            return Ok();
+            var playerId = await _commandHandler.BuyPlayer(buyPlayerCommand);
+            return Created($"{Request.Scheme}://localhost:5002/Api/Players/{playerId}", playerId);
         }
     }
 }

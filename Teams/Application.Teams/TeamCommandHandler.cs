@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Domain.Teams;
+using Domain.Teams.DomainEvents;
 using Microwave.Domain.Identities;
 using Microwave.EventStores.Ports;
 
@@ -24,13 +25,13 @@ namespace Application.Teams
             return domainResult.DomainEvents.First().EntityId;
         }
 
-        public async Task BuyPlayer(BuyPlayerCommand buyPlayerCommand)
+        public async Task<Identity> BuyPlayer(BuyPlayerCommand buyPlayerCommand)
         {
             var teamResult = await _eventStore.LoadAsync<Team>(buyPlayerCommand.TeamId);
             var team = teamResult.Value;
             var buyPlayer = team.BuyPlayer(buyPlayerCommand.PlayerTypeId);
-            var result = await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion);
-            result.Check();
+            await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion);
+            return (buyPlayer.DomainEvents.First() as PlayerBought)?.PlayerId;
         }
     }
 
