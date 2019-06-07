@@ -28,7 +28,7 @@ namespace Teams.WriteHost
         {
             buyPlayerCommand.TeamId = GuidIdentity.Create(teamId);
             var playerId = await _commandHandler.BuyPlayer(buyPlayerCommand);
-            return Created($"{Request.Scheme}://localhost:5002/Api/Players/{playerId}", playerId);
+            return Ok(playerId);
         }
     }
 }
