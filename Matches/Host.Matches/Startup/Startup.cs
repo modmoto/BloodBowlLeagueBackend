@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Domain;
+using Microwave.UI;
 using ServiceConfig;
 
 namespace Host.Matches.Startup
@@ -23,6 +24,7 @@ namespace Host.Matches.Startup
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddMicrowave(_config);
+            services.AddMicrowaveUi();
 
             services.AddTransient<SeasonCreatedEventHandler>();
             services.AddTransient<MatchCommandHandler>();
@@ -31,6 +33,7 @@ namespace Host.Matches.Startup
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseMvc();
+            app.UseMicrowaveUi();
             app.RunMicrowaveQueries();
         }
     }

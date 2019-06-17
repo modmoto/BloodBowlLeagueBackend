@@ -8,10 +8,10 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microwave">
-          <Version>0.12.2</Version>
+          <Version>0.12.3</Version>
         </PackageReference>
         <PackageReference Include="Microwave.UI">
-          <Version>0.12.2</Version>
+          <Version>0.12.3</Version>
         </PackageReference>
     </ItemGroup>
 

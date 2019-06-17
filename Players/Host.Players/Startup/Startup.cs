@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Domain;
+using Microwave.UI;
 using ServiceConfig;
 
 namespace Host.Players.Startup
@@ -23,6 +24,7 @@ namespace Host.Players.Startup
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddMicrowave(_config);
+            services.AddMicrowaveUi();
 
             services.AddTransient<PlayerConfigSeedHandler>();
             services.AddTransient<PlayerCommandHandler>();
@@ -37,6 +39,7 @@ namespace Host.Players.Startup
             }
 
             app.RunMicrowaveQueries();
+            app.UseMicrowaveUi();
             app.UseMvc();
         }
     }

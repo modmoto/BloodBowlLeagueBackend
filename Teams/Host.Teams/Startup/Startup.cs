@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Domain;
+using Microwave.UI;
 
 namespace Teams.WriteHost.Startup
 {
@@ -21,7 +22,7 @@ namespace Teams.WriteHost.Startup
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<TeamCommandHandler>();
             services.AddTransient<RaceConfigSeedHandler>();
-
+            services.AddMicrowaveUi();
             services.AddMicrowave(_writeModelConfig);
         }
 
@@ -33,6 +34,7 @@ namespace Teams.WriteHost.Startup
                 raceConfigSeedHandler.EnsureRaceConfigSeed().Wait();
             }
 
+            app.UseMicrowaveUi();
             app.UseMvc();
         }
     }

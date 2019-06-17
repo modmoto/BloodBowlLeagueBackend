@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Domain;
+using Microwave.UI;
 using ServiceConfig;
 
 namespace Teams.ReadHost.Startup
@@ -21,6 +22,7 @@ namespace Teams.ReadHost.Startup
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMicrowave(_config);
+            services.AddMicrowaveUi();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -34,6 +36,7 @@ namespace Teams.ReadHost.Startup
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.RunMicrowaveQueries();
+            app.UseMicrowaveUi();
             app.UseCors("MyPolicy");
             app.UseMvc();
         }
