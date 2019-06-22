@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Domain;
+using Microwave.Persistence.MongoDb.Extensions;
 using Microwave.UI;
 using ServiceConfig;
 
@@ -23,7 +24,7 @@ namespace Host.Players.Startup
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddMicrowave(_config);
+            services.AddMicrowave(_config, new MongoDbPersistenceLayer());
             services.AddMicrowaveUi();
 
             services.AddTransient<PlayerConfigSeedHandler>();
