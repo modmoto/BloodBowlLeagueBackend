@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Microwave.Domain;
-using Microwave.Persistence.MongoDb.Extensions;
+using Microwave.Persistence.MongoDb;
 using Microwave.UI;
 
 namespace Teams.WriteHost.Startup
@@ -15,7 +14,6 @@ namespace Teams.WriteHost.Startup
     {
         readonly MicrowaveConfiguration _writeModelConfig = new MicrowaveConfiguration
         {
-            DatabaseConfiguration = new DatabaseConfiguration { DatabaseName = "Teams"},
             ServiceName = "TeamService"
         };
         public void ConfigureServices(IServiceCollection services)
@@ -24,7 +22,7 @@ namespace Teams.WriteHost.Startup
             services.AddTransient<TeamCommandHandler>();
             services.AddTransient<RaceConfigSeedHandler>();
             services.AddMicrowaveUi();
-            services.AddMicrowave(_writeModelConfig, new MongoDbPersistenceLayer());
+            services.AddMicrowave(_writeModelConfig, new MongoDbPersistenceLayer(new MicrowaveMongoDb("Teams")));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

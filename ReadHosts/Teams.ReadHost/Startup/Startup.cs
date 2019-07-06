@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Microwave.Domain;
-using Microwave.Persistence.MongoDb.Extensions;
+using Microwave.Persistence.MongoDb;
 using Microwave.UI;
 using ServiceConfig;
 
@@ -14,7 +13,6 @@ namespace Teams.ReadHost.Startup
     {
         readonly MicrowaveConfiguration _config = new MicrowaveConfiguration
         {
-            DatabaseConfiguration = new DatabaseConfiguration { DatabaseName = "TeamReadModelDb"},
             ServiceLocations = ServiceConfiguration.ServiceAdresses,
             ServiceName = "TeamsQuerryService"
         };
@@ -22,7 +20,7 @@ namespace Teams.ReadHost.Startup
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddMicrowave(_config, new MongoDbPersistenceLayer());
+            services.AddMicrowave(_config,  new MongoDbPersistenceLayer(new MicrowaveMongoDb("TeamReadModelDb")));
             services.AddMicrowaveUi();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
