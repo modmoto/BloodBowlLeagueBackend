@@ -54,7 +54,7 @@ namespace Domain.Players
         {
             switch (freeSkillType)
             {
-                case FreeSkillPoint.Normal
+                case FreeSkillPoint.Normal:
                     return PlayerCanPickNormalSkill(newSkill);
                 case FreeSkillPoint.Double:
                     return PlayerCanPickDoubleSkill(newSkill);
