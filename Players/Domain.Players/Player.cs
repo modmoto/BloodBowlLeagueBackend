@@ -40,50 +40,62 @@ namespace Domain.Players
 
             foreach (var freeSkillType in FreeSkillPoints)
             {
-                var isPossible = false;
-                switch (freeSkillType)
-                {
-                    case FreeSkillPoint.Normal:
-                    {
-                        if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) isPossible = true;
-                        break;
-                    }
-                    case FreeSkillPoint.Double:
-                    {
-                        if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) isPossible = true;
-                        if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) isPossible = true;
-                        break;
-                    }
-                    case FreeSkillPoint.PlusOneArmorOrMovement:
-                    {
-                        if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) isPossible = true;
-                        if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) isPossible = true;
-                        if (newSkill.SkillType == SkillType.PlusOneArmorOrMovement) isPossible = true;
-                        break;
-                    }
-                    case FreeSkillPoint.PlusOneAgility:
-                    {
-                        if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) isPossible = true;
-                        if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) isPossible = true;
-                        if (newSkill.SkillType == SkillType.PlusOneArmorOrMovement) isPossible = true;
-                        if (newSkill.SkillType == SkillType.PlusOneAgility) isPossible = true;
-                        break;
-                    }
-                    case FreeSkillPoint.PlusOneStrength:
-                        isPossible = true;
-                        break;
-                }
+                if (!HasPlayerFreeSkillForChosenSkill(newSkill, freeSkillType)) continue;
 
-
-                if (isPossible)
-                {
-                    var skillTypes = FreeSkillPoints.ToList();
-                    skillTypes.Remove(freeSkillType);
-                    return DomainResult.Ok(new SkillChosen(PlayerId, newSkill.SkillId, skillTypes));
-                }
+                var skillTypes = FreeSkillPoints.ToList();
+                skillTypes.Remove(freeSkillType);
+                return DomainResult.Ok(new SkillChosen(PlayerId, newSkill.SkillId, skillTypes));
             }
 
             return DomainResult.Error(new SkillNotPickable(FreeSkillPoints));
+        }
+
+        private bool HasPlayerFreeSkillForChosenSkill(Skill newSkill, FreeSkillPoint freeSkillType)
+        {
+            switch (freeSkillType)
+            {
+                case FreeSkillPoint.Normal
+                    return PlayerCanPickNormalSkill(newSkill);
+                case FreeSkillPoint.Double:
+                    return PlayerCanPickDoubleSkill(newSkill);
+                case FreeSkillPoint.PlusOneArmorOrMovement:
+                    return PlayerCanPickArmorOrMovement(newSkill);
+                case FreeSkillPoint.PlusOneAgility:
+                    return PlayerCanPickAgility(newSkill);
+                case FreeSkillPoint.PlusOneStrength:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        private bool PlayerCanPickNormalSkill(Skill newSkill)
+        {
+            return PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType);
+        }
+
+        private bool PlayerCanPickAgility(Skill newSkill)
+        {
+            if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) return true;
+            if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) return true;
+            if (newSkill.SkillType == SkillType.PlusOneArmorOrMovement) return true;
+            if (newSkill.SkillType == SkillType.PlusOneAgility) return true;
+            return false;
+        }
+
+        private bool PlayerCanPickArmorOrMovement(Skill newSkill)
+        {
+            if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) return true;
+            if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) return true;
+            if (newSkill.SkillType == SkillType.PlusOneArmorOrMovement) return true;
+            return false;
+        }
+
+        private bool PlayerCanPickDoubleSkill(Skill newSkill)
+        {
+            if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) return true;
+            if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) return true;
+            return false;
         }
 
         public DomainResult Pass()
