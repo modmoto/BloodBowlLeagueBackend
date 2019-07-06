@@ -16,7 +16,7 @@ namespace Domain.Seasons
             var teamsTemp = new List<GuidIdentity>();
 
             teamsTemp.AddRange(teams.Skip(numberOfMatchesInARound).Take(numberOfMatchesInARound));
-            teamsTemp.AddRange(teams.Skip(1).Take(numberOfMatchesInARound - 1).ToArray().Reverse());
+            teamsTemp.AddRange(teams.Skip(1).Take(numberOfMatchesInARound - 1).Reverse());
 
             var numberOfTeams = teamsTemp.Count;
 
