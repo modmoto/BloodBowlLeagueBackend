@@ -30,7 +30,7 @@ namespace Application.Teams
             var teamResult = await _eventStore.LoadAsync<Team>(buyPlayerCommand.TeamId);
             var team = teamResult.Value;
             var buyPlayer = team.BuyPlayer(buyPlayerCommand.PlayerTypeId);
-            await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion);
+            (await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion)).Check();
             return (buyPlayer.DomainEvents.First() as PlayerBought)?.PlayerId;
         }
     }
