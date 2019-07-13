@@ -22,7 +22,10 @@ namespace Host.Matches.Startup
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddMicrowave(_config, new MongoDbPersistenceLayer(new MicrowaveMongoDb("Matches")));
+            services.AddMicrowave(_config, new MongoDbPersistenceLayer
+            {
+                MicrowaveMongoDb = new MicrowaveMongoDb { DatabaseName = "Matches" }
+            });
             services.AddMicrowaveUi();
 
             services.AddTransient<SeasonCreatedEventHandler>();

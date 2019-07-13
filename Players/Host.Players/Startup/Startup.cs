@@ -22,7 +22,8 @@ namespace Host.Players.Startup
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddMicrowave(_config, new MongoDbPersistenceLayer(new MicrowaveMongoDb("Players")));
+            services.AddMicrowave(_config, new MongoDbPersistenceLayer {
+                MicrowaveMongoDb = new MicrowaveMongoDb { DatabaseName = "Players"}});
             services.AddMicrowaveUi();
 
             services.AddTransient<PlayerConfigSeedHandler>();

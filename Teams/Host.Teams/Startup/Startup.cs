@@ -22,7 +22,10 @@ namespace Teams.WriteHost.Startup
             services.AddTransient<TeamCommandHandler>();
             services.AddTransient<RaceConfigSeedHandler>();
             services.AddMicrowaveUi();
-            services.AddMicrowave(_writeModelConfig, new MongoDbPersistenceLayer(new MicrowaveMongoDb("Teams")));
+            services.AddMicrowave(_writeModelConfig, new MongoDbPersistenceLayer
+            {
+                MicrowaveMongoDb = new MicrowaveMongoDb { DatabaseName = "Teams"}
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

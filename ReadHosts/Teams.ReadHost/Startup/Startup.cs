@@ -20,7 +20,8 @@ namespace Teams.ReadHost.Startup
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddMicrowave(_config,  new MongoDbPersistenceLayer(new MicrowaveMongoDb("TeamReadModelDb")));
+            services.AddMicrowave(_config,  new MongoDbPersistenceLayer {
+                MicrowaveMongoDb = new MicrowaveMongoDb { DatabaseName = "AllReadModelDb"}});
             services.AddMicrowaveUi();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
