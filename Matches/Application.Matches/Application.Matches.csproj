@@ -7,7 +7,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microwave.EventStores">
-        <Version>0.13.2</Version>
+        <Version>0.13.5</Version>
       </PackageReference>
     </ItemGroup>
 
