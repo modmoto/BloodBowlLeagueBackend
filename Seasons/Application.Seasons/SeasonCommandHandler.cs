@@ -2,7 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Seasons;
 using Microwave.Domain.Identities;
-using Microwave.EventStores.Ports;
+using Microwave.EventStores;
 using Microwave.Queries;
 
 namespace Application.Matches

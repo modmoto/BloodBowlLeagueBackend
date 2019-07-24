@@ -6,7 +6,7 @@ using Domain.Teams.DomainEvents;
 using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 using Microwave.Domain.Results;
-using Microwave.EventStores;
+using Microwave.EventStores.Ports;
 
 namespace Application.Teams.RaceConfigSeed
 {

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Domain.Players;
 using Microwave.Domain.Identities;
-using Microwave.EventStores.Ports;
+using Microwave.EventStores;
 
 namespace Application.Players
 {

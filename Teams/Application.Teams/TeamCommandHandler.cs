@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Domain.Teams;
 using Domain.Teams.DomainEvents;
 using Microwave.Domain.Identities;
-using Microwave.EventStores.Ports;
+using Microwave.EventStores;
 
 namespace Application.Teams
 {
