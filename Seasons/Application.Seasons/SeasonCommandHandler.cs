@@ -37,10 +37,11 @@ namespace Application.Matches
             (await _eventStore.AppendAsync(domainResult.DomainEvents, seasonResult.Version)).Check();
         }
 
-        public async Task CreateSeason()
+        public async Task<Identity> CreateSeason()
         {
             var domainResult = Season.Create();
-            (await _eventStore.AppendAsync(domainResult.DomainEvents, 0)).Check();
+            await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
+            return domainResult.DomainEvents.Single().EntityId;
         }
     }
 
