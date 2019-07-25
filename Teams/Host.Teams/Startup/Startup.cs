@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Microwave.Domain.EventSourcing;
+using Microwave.EventStores.SnapShots;
 using Microwave.Persistence.MongoDb;
 using Microwave.UI;
 
@@ -18,9 +18,9 @@ namespace Teams.WriteHost.Startup
         readonly MicrowaveConfiguration _writeModelConfig = new MicrowaveConfiguration
         {
             ServiceName = "TeamService",
-            SnapShotConfigurations = new List<ISnapShotAfter>
+            SnapShotConfigurations = new List<ISnapShot>
             {
-                new SnapShotAfter<Team>(3)
+                new SnapShot<Team>(3)
             }
         };
         public void ConfigureServices(IServiceCollection services)
