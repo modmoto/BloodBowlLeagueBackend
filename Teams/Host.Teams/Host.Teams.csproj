@@ -27,6 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\ServiceConfig\ServiceConfig.csproj" />
       <ProjectReference Include="..\Application.Teams\Application.Teams.csproj" />
     </ItemGroup>
 

@@ -10,6 +10,7 @@ using Microwave;
 using Microwave.EventStores.SnapShots;
 using Microwave.Persistence.MongoDb;
 using Microwave.UI;
+using ServiceConfig;
 
 namespace Teams.WriteHost.Startup
 {
@@ -18,6 +19,7 @@ namespace Teams.WriteHost.Startup
         readonly MicrowaveConfiguration _writeModelConfig = new MicrowaveConfiguration
         {
             ServiceName = "TeamService",
+            ServiceLocations = ServiceConfiguration.ServiceAdresses,
             SnapShotConfigurations = new List<ISnapShot>
             {
                 new SnapShot<Team>(3)
