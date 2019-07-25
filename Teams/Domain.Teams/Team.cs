@@ -9,7 +9,6 @@ using Microwave.Domain.Validation;
 
 namespace Domain.Teams
 {
-    [SnapShotAfter(3)]
     public class Team : Entity, IApply<TeamCreated>, IApply<PlayerBought>
     {
         public GuidIdentity TeamId { get; private set; }
