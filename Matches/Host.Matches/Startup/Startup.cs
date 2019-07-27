@@ -12,21 +12,22 @@ namespace Host.Matches.Startup
 {
     public class Startup
     {
-        readonly MicrowaveConfiguration _config = new MicrowaveConfiguration
-        {
-            ServiceLocations = ServiceConfiguration.ServiceAdresses,
-            ServiceName = "MatchService"
-        };
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddMicrowave(_config, new MongoDbPersistenceLayer
-            {
-                MicrowaveMongoDb = new MicrowaveMongoDb { DatabaseName = "Matches" }
-            });
             services.AddMicrowaveUi();
+
+            services.AddMicrowave(c =>
+            {
+                c.WithServiceName("MatchService");
+                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
+            });
+
+            services.AddMicrowavePersistenceLayerMongoDb(c =>
+            {
+                c.WithDatabaseName("Matches");
+            });
 
             services.AddTransient<SeasonCreatedEventHandler>();
             services.AddTransient<MatchCommandHandler>();

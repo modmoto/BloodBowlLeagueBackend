@@ -16,24 +16,23 @@ namespace Teams.WriteHost.Startup
 {
     public class Startup
     {
-        readonly MicrowaveConfiguration _writeModelConfig = new MicrowaveConfiguration
-        {
-            ServiceName = "TeamService",
-            ServiceLocations = ServiceConfiguration.ServiceAdresses,
-            SnapShotConfigurations = new List<ISnapShot>
-            {
-                new SnapShot<Team>(3)
-            }
-        };
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<TeamCommandHandler>();
             services.AddTransient<RaceConfigSeedHandler>();
             services.AddMicrowaveUi();
-            services.AddMicrowave(_writeModelConfig, new MongoDbPersistenceLayer
+
+            services.AddMicrowave(c =>
             {
-                MicrowaveMongoDb = new MicrowaveMongoDb { DatabaseName = "Teams"}
+                c.WithServiceName("TeamService");
+                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
+                c.SnapShots.Add(new SnapShot<Team>(3));
+            });
+
+            services.AddMicrowavePersistenceLayerMongoDb(c =>
+            {
+                c.WithDatabaseName("Teams");
             });
         }
 
