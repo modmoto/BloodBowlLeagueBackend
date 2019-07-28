@@ -30,6 +30,7 @@ namespace Domain.Seasons
         public DomainResult StartSeason()
         {
             if (TeamCountIsUneven()) return DomainResult.Error(new CanNotStartSeasonWithUnevenTeamCount(Teams.Count()));
+            if (SeasonIsStarted) return DomainResult.Error(new CanNotStartSeasonASecondTime());
 
             var matchPairingService = new MatchPairingService();
             var domainEvents = matchPairingService.ComputePairings(SeasonId, Teams).ToList();
@@ -67,6 +68,13 @@ namespace Domain.Seasons
         {
             SeasonIsStarted = true;
             GameDays = domainEvent.GameDays;
+        }
+    }
+
+    public class CanNotStartSeasonASecondTime : DomainError
+    {
+        public CanNotStartSeasonASecondTime() : base("Season is allready started, can not start a season a second time")
+        {
         }
     }
 

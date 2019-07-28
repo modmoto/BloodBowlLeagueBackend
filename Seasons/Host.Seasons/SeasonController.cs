@@ -15,6 +15,14 @@ namespace Host.Matches
             _commandHandler = commandHandler;
         }
 
+        [HttpGet("{seasonId}")]
+        public async Task<ActionResult> GetSeason(GuidIdentity seasonId)
+        {
+            var command = new GetSeasonCommand(seasonId);
+            var season = await _commandHandler.GetSeason(command);
+            return Ok(season);
+        }
+
         [HttpPost("{seasonId}/start")]
         public async Task<ActionResult> StartSeason(GuidIdentity seasonId)
         {

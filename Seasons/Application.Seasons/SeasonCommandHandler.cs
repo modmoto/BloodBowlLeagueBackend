@@ -43,6 +43,23 @@ namespace Application.Matches
             await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             return domainResult.DomainEvents.Single().EntityId;
         }
+
+        public async Task<Season> GetSeason(GetSeasonCommand command)
+        {
+            var seasonResult = await _eventStore.LoadAsync<Season>(command.SeasonId);
+            var season = seasonResult.Value;
+            return season;
+        }
+    }
+
+    public class GetSeasonCommand
+    {
+        public GuidIdentity SeasonId { get; }
+
+        public GetSeasonCommand(GuidIdentity seasonId)
+        {
+            SeasonId = seasonId;
+        }
     }
 
     public class AddTeamToSeasonCommand
