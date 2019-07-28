@@ -24,7 +24,7 @@ namespace Application.Matches
             var season = eventStoreResult.Value;
             var domainResult = season.StartSeason();
             var domainEvents = domainResult.DomainEvents.ToList();
-            var result = await _eventStore.AppendAsync(domainEvents, 0);
+            var result = await _eventStore.AppendAsync(domainEvents, eventStoreResult.Version);
             result.Check();
         }
 

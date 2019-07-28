@@ -23,6 +23,7 @@ namespace Domain.Seasons
         public DomainResult AddTeam(GuidIdentity teamId)
         {
             if (SeasonIsStarted) return DomainResult.Error(new SeasonAllreadyStarted());
+            if (Teams.Contains(teamId)) return DomainResult.Error(new CanNotAddTeamTwice(teamId));
             return DomainResult.Ok(new TeamAddedToSeason(SeasonId, teamId));
         }
 
@@ -66,6 +67,13 @@ namespace Domain.Seasons
         {
             SeasonIsStarted = true;
             GameDays = domainEvent.GameDays;
+        }
+    }
+
+    public class CanNotAddTeamTwice : DomainError
+    {
+        public CanNotAddTeamTwice(GuidIdentity teamId) : base($"Can not add the team {teamId} twice")
+        {
         }
     }
 }
