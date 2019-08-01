@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 
 namespace Domain.Seasons
@@ -40,7 +39,7 @@ namespace Domain.Seasons
                     matchups.Add(matchupInner);
                 }
 
-                var round = new GameDay(matchups);
+                var round = GameDay.Create(matchups);
                 gameDays.Add(round);
             }
 

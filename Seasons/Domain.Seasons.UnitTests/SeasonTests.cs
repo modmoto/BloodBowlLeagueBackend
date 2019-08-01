@@ -61,7 +61,7 @@ namespace Domain.Matches.UnitTests
                 match, matchSwitched
             };
 
-            var gameDay = new GameDay(matchups);
+            var gameDay = GameDay.Create(matchups);
             return gameDay;
         }
 

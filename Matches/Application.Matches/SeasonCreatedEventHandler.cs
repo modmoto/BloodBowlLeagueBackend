@@ -28,7 +28,7 @@ namespace Application.Matches
                 foreach (var matchup in gameDay.Matchups)
                 {
                     var guestTeam = await _readModelRepository.Load<TeamReadModel>(matchup.TeamAsGuest);
-                    var homeTeam = await _readModelRepository.Load<TeamReadModel>(matchup.TeamAsGuest);
+                    var homeTeam = await _readModelRepository.Load<TeamReadModel>(matchup.TeamAtHome);
                     var domainEvents = Matchup.Create(homeTeam.Value.TeamId, guestTeam.Value.TeamId).DomainEvents;
                     matchCreatedEvents.Add(domainEvents.Single());
                 }

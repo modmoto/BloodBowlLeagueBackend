@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Domain.Seasons.Events;
 using Microwave.Domain.Identities;
-using Microwave.Domain.Validation;
 
 namespace Domain.Seasons
 {
@@ -10,10 +8,15 @@ namespace Domain.Seasons
         public GuidIdentity Id { get; }
         public IEnumerable<Matchup> Matchups { get; }
 
-        public GameDay(IEnumerable<Matchup> matchups)
+        public GameDay(GuidIdentity id, IEnumerable<Matchup> matchups)
         {
-            Id = GuidIdentity.Create();
+            Id = id;
             Matchups = matchups;
+        }
+
+        public static GameDay Create(IEnumerable<Matchup> matchups)
+        {
+            return new GameDay(GuidIdentity.Create(), matchups);
         }
     }
 }
