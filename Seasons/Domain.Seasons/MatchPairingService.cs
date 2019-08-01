@@ -7,7 +7,7 @@ namespace Domain.Seasons
 {
     public class MatchPairingService
     {
-        public IEnumerable<IDomainEvent> ComputePairings(GuidIdentity seasonId, IEnumerable<GuidIdentity> listTeam)
+        public IEnumerable<GameDay> ComputePairings(IEnumerable<GuidIdentity> listTeam)
         {
             var teams = listTeam.ToList();
             var numberOfRounds = teams.Count - 1;
@@ -20,7 +20,7 @@ namespace Domain.Seasons
 
             var numberOfTeams = teamsTemp.Count;
 
-            var domainEvents = new List<IDomainEvent>();
+            var gameDays = new List<GameDay>();
 
             for (var roundNumber = 0; roundNumber < numberOfRounds; roundNumber++)
             {
@@ -40,11 +40,11 @@ namespace Domain.Seasons
                     matchups.Add(matchupInner);
                 }
 
-                var round = GameDay.Create(seasonId, matchups);
-                domainEvents.AddRange(round.DomainEvents);
+                var round = new GameDay(matchups);
+                gameDays.Add(round);
             }
 
-            return domainEvents;
+            return gameDays;
         }
     }
 }

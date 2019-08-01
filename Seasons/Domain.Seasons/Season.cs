@@ -33,20 +33,10 @@ namespace Domain.Seasons
             if (SeasonIsStarted) return DomainResult.Error(new CanNotStartSeasonASecondTime());
 
             var matchPairingService = new MatchPairingService();
-            var domainEvents = matchPairingService.ComputePairings(SeasonId, Teams).ToList();
-            var gameDayCreatedEvents = domainEvents.Where(d => d.GetType() == typeof(GameDayCreated)).Select(d => (GameDayCreated) d);
-
-            var gameDays = new List<GameDay>();
-            foreach (var gameDayCreated in gameDayCreatedEvents)
-            {
-                var gameDay = new GameDay();
-                gameDay.Apply(gameDayCreated);
-                gameDays.Add(gameDay);
-            }
+            var gameDays = matchPairingService.ComputePairings(Teams).ToList();
 
             var seasonStarted = new SeasonStarted(SeasonId, gameDays);
-            var allEvents = domainEvents.Append(seasonStarted);
-            return DomainResult.Ok(allEvents);
+            return DomainResult.Ok(seasonStarted);
         }
 
         private bool TeamCountIsUneven()
