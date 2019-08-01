@@ -9,13 +9,13 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microwave">
-            <Version>0.13.8.845-beta</Version>
+            <Version>0.13.9</Version>
         </PackageReference>
         <PackageReference Include="Microwave.Persistence.MongoDb">
-          <Version>0.13.8.833-beta</Version>
+          <Version>0.13.9</Version>
         </PackageReference>
         <PackageReference Include="Microwave.UI">
-            <Version>0.13.8.833-beta</Version>
+            <Version>0.13.9</Version>
         </PackageReference>
     </ItemGroup>
 
