@@ -6,7 +6,7 @@ namespace Domain.Seasons.Events
 {
     public class GameDayCreated : IDomainEvent
     {
-        public GameDayCreated(GuidIdentity seasonId, GuidIdentity gameDayId, List<MatchupReadModel> matchups)
+        public GameDayCreated(GuidIdentity seasonId, GuidIdentity gameDayId, List<Matchup> matchups)
         {
             SeasonId = seasonId;
             GameDayId = gameDayId;
@@ -16,6 +16,6 @@ namespace Domain.Seasons.Events
         public Identity EntityId => SeasonId;
         public GuidIdentity SeasonId { get; }
         public GuidIdentity GameDayId { get; }
-        public List<MatchupReadModel> Matchups { get; }
+        public List<Matchup> Matchups { get; }
     }
 }

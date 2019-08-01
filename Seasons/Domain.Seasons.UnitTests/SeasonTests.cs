@@ -54,9 +54,9 @@ namespace Domain.Matches.UnitTests
             Assert.IsFalse(AssertMatchIsNeverPlayedTwice(gameDays));
         }
 
-        private static GameDay CreateGameDay(MatchupReadModel match, MatchupReadModel matchSwitched)
+        private static GameDay CreateGameDay(Matchup match, Matchup matchSwitched)
         {
-            var matchups = new List<MatchupReadModel>
+            var matchups = new List<Matchup>
             {
                 match, matchSwitched
             };
@@ -159,9 +159,9 @@ namespace Domain.Matches.UnitTests
         }
 
 
-        private static MatchupReadModel CreateDefaultMatchup(GuidIdentity team1 = null, GuidIdentity team2 = null)
+        private static Matchup CreateDefaultMatchup(GuidIdentity team1 = null, GuidIdentity team2 = null)
         {
-            var matchup = new MatchupReadModel(team1 ?? GuidIdentity.Create(), team2 ?? GuidIdentity.Create());
+            var matchup = new Matchup(team1 ?? GuidIdentity.Create(), team2 ?? GuidIdentity.Create());
             return matchup;
         }
 

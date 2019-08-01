@@ -2,12 +2,12 @@
 
 namespace Domain.Seasons
 {
-    public class MatchupReadModel
+    public class Matchup
     {
         public GuidIdentity TeamAtHome { get; }
         public GuidIdentity TeamAsGuest { get; }
 
-        public MatchupReadModel(GuidIdentity teamAtHome, GuidIdentity teamAsGuest)
+        public Matchup(GuidIdentity teamAtHome, GuidIdentity teamAsGuest)
         {
             TeamAtHome = teamAtHome;
             TeamAsGuest = teamAsGuest;

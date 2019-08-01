@@ -8,9 +8,9 @@ namespace Domain.Seasons
     public class GameDay
     {
         public GuidIdentity Id { get; private set; }
-        public IEnumerable<MatchupReadModel> Matchups { get; private set; }
+        public IEnumerable<Matchup> Matchups { get; private set; }
 
-        public static DomainResult Create(GuidIdentity seasonId, List<MatchupReadModel> matchups)
+        public static DomainResult Create(GuidIdentity seasonId, List<Matchup> matchups)
         {
             return DomainResult.Ok(new GameDayCreated(seasonId, GuidIdentity.Create(), matchups));
         }
