@@ -1,8 +1,9 @@
 using System;
+using Domain.Seasons.ForeignEvents;
 using Microwave.Domain.Identities;
 using Microwave.Queries;
 
-namespace Application.Matches.TeamReadModels
+namespace Domain.Seasons
 {
     public class TeamReadModel : ReadModel, IHandle<TeamCreated>
     {

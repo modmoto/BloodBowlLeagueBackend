@@ -9,5 +9,8 @@
       <PackageReference Include="Microwave.Domain">
         <Version>0.13.9</Version>
       </PackageReference>
+      <PackageReference Include="Microwave.Queries">
+        <Version>0.13.9</Version>
+      </PackageReference>
     </ItemGroup>
 </Project>
