@@ -6,10 +6,10 @@
 
     <ItemGroup>
       <PackageReference Include="Microwave">
-        <Version>0.13.8</Version>
+        <Version>0.13.8.845-beta</Version>
       </PackageReference>
       <PackageReference Include="Microwave.Domain">
-        <Version>0.13.8</Version>
+        <Version>0.13.8.845-beta</Version>
       </PackageReference>
     </ItemGroup>
 
