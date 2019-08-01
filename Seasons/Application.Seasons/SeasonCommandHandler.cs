@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Matches.TeamReadModels;
 using Domain.Seasons;
 using Microwave.Domain.Identities;
 using Microwave.EventStores;
