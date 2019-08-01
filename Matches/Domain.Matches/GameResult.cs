@@ -20,9 +20,9 @@ namespace Domain.Matches
             return new GameResult(true, null, null);
         }
 
-        private static GameResult WinResult(PointsOfTeam team, PointsOfTeam looser)
+        private static GameResult WinResult(PointsOfTeam winner, PointsOfTeam looser)
         {
-            return new GameResult(false, team, looser);
+            return new GameResult(false, winner, looser);
         }
 
         public static GameResult CreatGameResult(PointsOfTeam homeTouchDowns, PointsOfTeam guestTouchDowns)
