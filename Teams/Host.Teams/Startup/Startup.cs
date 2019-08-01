@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Application.Teams;
+﻿using Application.Teams;
 using Application.Teams.RaceConfigSeed;
 using Domain.Teams;
 using Microsoft.AspNetCore.Builder;
