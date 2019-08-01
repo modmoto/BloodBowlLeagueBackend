@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Domain.Matches;
+using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 using Microwave.EventStores;
 using Microwave.Queries;
@@ -10,21 +12,32 @@ namespace Application.Matches
     public class SeasonCreatedEventHandler : IHandleAsync<SeasonStarted>
     {
         private readonly IEventStore _eventStore;
+        private readonly IReadModelRepository _readModelRepository;
 
-        public SeasonCreatedEventHandler(IEventStore eventStore)
+        public SeasonCreatedEventHandler(IEventStore eventStore, IReadModelRepository readModelRepository)
         {
             _eventStore = eventStore;
+            _readModelRepository = readModelRepository;
         }
+
         public async Task HandleAsync(SeasonStarted domainEvent)
         {
+            var matchCreatedEvents = new List<IDomainEvent>();
             foreach (var gameDay in domainEvent.GameDays)
             {
                 foreach (var matchup in gameDay.Matchups)
                 {
-                    var domainEvents = Matchup.Create(matchup.TeamAtHome, matchup.TeamAsGuest).DomainEvents;
-                    var result = await _eventStore.AppendAsync(domainEvents, 0);
-                    result.Check();
+                    var guestTeam = await _readModelRepository.Load<TeamReadModel>(matchup.TeamAsGuest);
+                    var homeTeam = await _readModelRepository.Load<TeamReadModel>(matchup.TeamAsGuest);
+                    var domainEvents = Matchup.Create(homeTeam.Value.TeamId, guestTeam.Value.TeamId).DomainEvents;
+                    matchCreatedEvents.Add(domainEvents.Single());
                 }
+            }
+
+            foreach (var createdEvent in matchCreatedEvents)
+            {
+                var result = await _eventStore.AppendAsync(createdEvent, 0);
+                result.Check();
             }
         }
     }
