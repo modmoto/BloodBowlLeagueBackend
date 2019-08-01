@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Microwave.Domain.EventSourcing;
+using Domain.Seasons.Events;
 using Microwave.Domain.Identities;
 using Microwave.Domain.Validation;
 
@@ -20,20 +20,5 @@ namespace Domain.Seasons
             Id = domainEvent.GameDayId;
             Matchups = domainEvent.Matchups;
         }
-    }
-
-    public class GameDayCreated : IDomainEvent
-    {
-        public GameDayCreated(GuidIdentity seasonId, GuidIdentity gameDayId, List<MatchupReadModel> matchups)
-        {
-            SeasonId = seasonId;
-            GameDayId = gameDayId;
-            Matchups = matchups;
-        }
-
-        public Identity EntityId => SeasonId;
-        public GuidIdentity SeasonId { get; }
-        public GuidIdentity GameDayId { get; }
-        public List<MatchupReadModel> Matchups { get; }
     }
 }
