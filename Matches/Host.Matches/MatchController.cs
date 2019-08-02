@@ -25,11 +25,18 @@ namespace Host.Matches
         }
 
         [HttpPost("{matchId}/finish")]
-        public async Task<ActionResult> FinishMatch(GuidIdentity guidIdentity, [FromBody] IEnumerable<PlayerProgression> progressions)
+        public async Task<ActionResult> FinishMatch(GuidIdentity matchId, [FromBody] IEnumerable<PlayerProgression> progressions)
         {
-            var finishMatchCommand = new FinishMatchCommand(guidIdentity, progressions);
+            var finishMatchCommand = new FinishMatchCommand(matchId, progressions);
             await _commandHandler.FinishMatch(finishMatchCommand);
             return Ok();
+        }
+
+        [HttpGet("{matchId}")]
+        public async Task<ActionResult> GetMatch(GuidIdentity matchId)
+        {
+            var match = await _commandHandler.GetMatch(matchId);
+            return Ok(match);
         }
 
         [HttpPost("{matchId}/start")]
