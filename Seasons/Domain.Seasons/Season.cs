@@ -36,7 +36,7 @@ namespace Domain.Seasons
             var matchPairingService = new MatchPairingService();
             var gameDays = matchPairingService.ComputePairings(Teams).ToList();
 
-            var seasonStarted = new SeasonStarted(SeasonId, gameDays);
+            var seasonStarted = new SeasonStarted(SeasonId, gameDays, DateTimeOffset.UtcNow);
             return DomainResult.Ok(seasonStarted);
         }
 
