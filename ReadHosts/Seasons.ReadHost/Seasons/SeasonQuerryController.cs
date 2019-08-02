@@ -15,10 +15,10 @@ namespace Seasons.ReadHost.Seasons
             _queryRepository = queryRepository;
         }
 
-        [HttpGet("{teamId}")]
-        public async Task<ActionResult> GetSeason(GuidIdentity teamId)
+        [HttpGet("{seasonId}")]
+        public async Task<ActionResult> GetSeason(GuidIdentity seasonId)
         {
-            var teamQuerry = await _queryRepository.Load<SeasonReadModel>(teamId);
+            var teamQuerry = await _queryRepository.Load<SeasonReadModel>(seasonId);
             return Ok(teamQuerry.Value);
         }
 
