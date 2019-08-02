@@ -24,9 +24,9 @@ namespace Host.Matches
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult> CreateSeason()
+        public async Task<ActionResult> CreateSeason(CreateSeasonCommand command)
         {
-            var result = await _commandHandler.CreateSeason();
+            var result = await _commandHandler.CreateSeason(command);
             return Created($"{Request.Scheme}{Request.Path}/seasons/{result.Id}", null);
         }
 

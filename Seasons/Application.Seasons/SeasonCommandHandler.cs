@@ -38,9 +38,9 @@ namespace Application.Matches
             (await _eventStore.AppendAsync(domainResult.DomainEvents, seasonResult.Version)).Check();
         }
 
-        public async Task<Identity> CreateSeason()
+        public async Task<Identity> CreateSeason(CreateSeasonCommand command)
         {
-            var domainResult = Season.Create();
+            var domainResult = Season.Create(command.SeasonName);
             await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             return domainResult.DomainEvents.Single().EntityId;
         }
@@ -51,6 +51,11 @@ namespace Application.Matches
             var season = seasonResult.Value;
             return season;
         }
+    }
+
+    public class CreateSeasonCommand
+    {
+        public string SeasonName { get; set; }
     }
 
     public class GetSeasonCommand

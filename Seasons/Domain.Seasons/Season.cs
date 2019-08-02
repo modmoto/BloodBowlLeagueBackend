@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Domain.Seasons.Errors;
 using Domain.Seasons.Events;
@@ -15,9 +16,9 @@ namespace Domain.Seasons
         public IEnumerable<GameDay> GameDays { get; private set; } = new List<GameDay>();
         public bool SeasonIsStarted { get; private set; }
 
-        public static DomainResult Create()
+        public static DomainResult Create(string seasonName)
         {
-            return DomainResult.Ok(new SeasonCreated(GuidIdentity.Create()));
+            return DomainResult.Ok(new SeasonCreated(GuidIdentity.Create(), seasonName, DateTimeOffset.UtcNow));
         }
 
         public DomainResult AddTeam(GuidIdentity teamId)

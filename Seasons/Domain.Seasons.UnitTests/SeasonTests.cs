@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Seasons;
@@ -181,7 +182,7 @@ namespace Domain.Matches.UnitTests
         {
             var season = new Season();
             var seasonId = GuidIdentity.Create();
-            season.Apply(new SeasonCreated(seasonId));
+            season.Apply(new SeasonCreated(seasonId, "DummyName", DateTimeOffset.UtcNow));
             foreach (var guidIdentity in identities)
             {
                 season.Apply(new TeamAddedToSeason(seasonId, guidIdentity));
