@@ -50,12 +50,6 @@ namespace Application.Matches
             var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             storeResult.Check();
         }
-
-        public async Task<Matchup> GetMatch(GuidIdentity matchId)
-        {
-            var result = await _eventStore.LoadAsync<Matchup>(matchId);
-            return result.Value;
-        }
     }
 
     public class StartMatchCommand

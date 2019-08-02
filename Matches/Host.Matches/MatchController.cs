@@ -32,13 +32,6 @@ namespace Host.Matches
             return Ok();
         }
 
-        [HttpGet("{matchId}")]
-        public async Task<ActionResult> GetMatch(GuidIdentity matchId)
-        {
-            var match = await _commandHandler.GetMatch(matchId);
-            return Ok(match);
-        }
-
         [HttpPost("{matchId}/start")]
         public async Task<ActionResult> StartMatch(GuidIdentity guidIdentity)
         {

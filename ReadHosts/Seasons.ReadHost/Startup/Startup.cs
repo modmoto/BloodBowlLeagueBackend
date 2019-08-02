@@ -7,7 +7,7 @@ using Microwave.Persistence.MongoDb;
 using Microwave.UI;
 using ServiceConfig;
 
-namespace Teams.ReadHost.Startup
+namespace Seasons.ReadHost.Startup
 {
     public class Startup
     {
@@ -18,13 +18,13 @@ namespace Teams.ReadHost.Startup
 
             services.AddMicrowave(c =>
             {
-                c.WithServiceName("TeamsQuerryService");
+                c.WithServiceName("SeasonsQuerryService");
                 c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
             });
 
             services.AddMicrowavePersistenceLayerMongoDb(c =>
             {
-                c.WithDatabaseName("TeamsReadModelDb");
+                c.WithDatabaseName("SeasonsReadModelDb");
             });
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
