@@ -19,12 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="entrypoint.sh">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\ServiceConfig\ServiceConfig.csproj" />
     </ItemGroup>
 </Project>
