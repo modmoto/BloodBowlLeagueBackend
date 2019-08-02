@@ -58,7 +58,7 @@ namespace Domain.Matches.UnitTests
             var domainResult = match.Finish(playerProgressions);
 
             Assert.IsFalse(match.IsFinished);
-            Assert.IsTrue(domainResult.DomainErrors.Single().GetType() == typeof(PlayerWasNotPartOfTheTeamOnMatchCreation));
+            Assert.IsTrue(domainResult.DomainErrors.Single().GetType() == typeof(PlayerWasNotPartOfTheTeamWhenStartingTheMatch));
         }
 
         private static PlayerProgression PlayerProgressionTouchdown(GuidIdentity playerId)

@@ -14,23 +14,33 @@ namespace Domain.Matches
         IApply<MatchCreated>
     {
         public GuidIdentity MatchId { get; private set; }
-        public IEnumerable<GuidIdentity> GuestTeamPlayers { get; private set; }
         public IEnumerable<GuidIdentity> HomeTeamPlayers { get; private set; }
-        public GuidIdentity TeamAtHome { get; private set; }
+        public IEnumerable<GuidIdentity> GuestTeamPlayers { get; private set; }
         public GuidIdentity TeamAsGuest { get; private set; }
-        public IEnumerable<PlayerProgression> PlayerProgressions { get; private set; }
+        public GuidIdentity TeamAtHome { get; private set; }
         public bool IsFinished { get; private set; }
 
-        public static DomainResult Create(GuidIdentity teamAtHome, GuidIdentity teamAsGuest)
+        public static DomainResult Create(
+            GuidIdentity matchId,
+            TeamReadModel teamAtHome,
+            TeamReadModel teamAsGuest)
         {
-            var domainEvents = new MatchCreated(GuidIdentity.Create(), teamAtHome, teamAsGuest);
+            if (teamAtHome == teamAsGuest) return DomainResult.Error(new TeamsCanNotBeTheSame(
+                teamAtHome.TeamId, teamAsGuest.TeamId));
+
+            var domainEvents = new MatchCreated(matchId, teamAtHome.TeamId, teamAsGuest.TeamId);
             return DomainResult.Ok(domainEvents);
+        }
+
+        public static DomainResult Create(
+            TeamReadModel teamAtHome,
+            TeamReadModel teamAsGuest)
+        {
+            return Create(GuidIdentity.Create(), teamAtHome, teamAsGuest);
         }
 
         public DomainResult Start(TeamReadModel teamAtHome, TeamReadModel teamAsGuest)
         {
-            if (TeamAtHome != teamAtHome.TeamId || TeamAsGuest != teamAsGuest.TeamId) return DomainResult.Error
-            (new TrainerHaveToBeTheSameAsOnGameCreation(TeamAtHome, TeamAsGuest));
             HomeTeamPlayers = teamAtHome.Players;
             GuestTeamPlayers = teamAsGuest.Players;
             return DomainResult.Ok(new MatchStarted(MatchId, HomeTeamPlayers, GuestTeamPlayers));
@@ -45,7 +55,7 @@ namespace Domain.Matches
             var guestTeamProgression = progressions.Where(p => GuestTeamPlayers.Contains(p.PlayerId));
             var unrelatedPlayers = progressions.Where(p =>
                 !HomeTeamPlayers.Contains(p.PlayerId) && !GuestTeamPlayers.Contains(p.PlayerId)).Select(p => p.PlayerId).ToList();
-            if (unrelatedPlayers.Any()) return DomainResult.Error(new PlayerWasNotPartOfTheTeamOnMatchCreation(unrelatedPlayers));
+            if (unrelatedPlayers.Any()) return DomainResult.Error(new PlayerWasNotPartOfTheTeamWhenStartingTheMatch(unrelatedPlayers));
 
             var homeTouchDowns = CountTouchDowns(homeTeamProgression);
             var guestTouchDowns = CountTouchDowns(guestTeamProgression);
@@ -68,12 +78,10 @@ namespace Domain.Matches
         public void Apply(MatchFinished domainEvent)
         {
             IsFinished = true;
-            PlayerProgressions = domainEvent.PlayerProgressions;
         }
 
         public void Apply(MatchStarted domainEvent)
         {
-            MatchId = domainEvent.MatchId;
             HomeTeamPlayers = domainEvent.HomeTeam;
             GuestTeamPlayers = domainEvent.GuestTeam;
         }
@@ -81,8 +89,8 @@ namespace Domain.Matches
         public void Apply(MatchCreated domainEvent)
         {
             MatchId = domainEvent.MatchId;
-            TeamAtHome = domainEvent.TrainerAtHome;
-            TeamAsGuest = domainEvent.TrainerAsGuest;
+            TeamAtHome = domainEvent.TeamAtHome;
+            TeamAsGuest = domainEvent.TeamAsGuest;
         }
     }
 }

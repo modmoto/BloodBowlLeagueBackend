@@ -6,15 +6,15 @@ namespace Domain.Matches.Events
     public class MatchCreated : IDomainEvent
     {
         public Identity EntityId => MatchId;
-        public GuidIdentity TrainerAtHome { get; }
-        public GuidIdentity TrainerAsGuest { get; }
+        public GuidIdentity TeamAtHome { get; }
+        public GuidIdentity TeamAsGuest { get; }
         public GuidIdentity MatchId { get; }
 
-        public MatchCreated(GuidIdentity matchId, GuidIdentity trainerAtHome, GuidIdentity trainerAsGuest)
+        public MatchCreated(GuidIdentity matchId, GuidIdentity teamAtHome, GuidIdentity teamAsGuest)
         {
             MatchId = matchId;
-            TrainerAtHome = trainerAtHome;
-            TrainerAsGuest = trainerAsGuest;
+            TeamAtHome = teamAtHome;
+            TeamAsGuest = teamAsGuest;
         }
     }
 }

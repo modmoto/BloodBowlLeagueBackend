@@ -46,7 +46,7 @@ namespace Application.Matches
         {
             var homeTeam = (await _readModelRepository.Load<TeamReadModel>(command.HomeTeam)).Value;
             var guestTeam = (await _readModelRepository.Load<TeamReadModel>(command.GuestTeam)).Value;
-            var domainResult = Matchup.Create(homeTeam.TeamId, guestTeam.TeamId);
+            var domainResult = Matchup.Create(homeTeam, guestTeam);
             var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             storeResult.Check();
         }

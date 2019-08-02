@@ -29,7 +29,11 @@ namespace Application.Matches
                 {
                     var guestTeam = await _readModelRepository.Load<TeamReadModel>(matchup.TeamAsGuest);
                     var homeTeam = await _readModelRepository.Load<TeamReadModel>(matchup.TeamAtHome);
-                    var domainEvents = Matchup.Create(homeTeam.Value.TeamId, guestTeam.Value.TeamId).DomainEvents;
+                    var domainEvents = Matchup.Create(
+                            matchup.MatchId,
+                            homeTeam.Value,
+                            guestTeam.Value)
+                        .DomainEvents;
                     matchCreatedEvents.Add(domainEvents.Single());
                 }
             }
@@ -40,29 +44,5 @@ namespace Application.Matches
                 result.Check();
             }
         }
-    }
-
-    public class SeasonStarted : ISubscribedDomainEvent
-    {
-        public SeasonStarted(GuidIdentity seasonId, IEnumerable<GameDay> gameDays)
-        {
-            SeasonId = seasonId;
-            GameDays = gameDays;
-        }
-
-        public GuidIdentity SeasonId { get; }
-        public IEnumerable<GameDay> GameDays { get; }
-        public Identity EntityId => SeasonId;
-    }
-
-    public class GameDay
-    {
-        public IEnumerable<MatchupReadModel> Matchups { get; set; }
-    }
-
-    public class MatchupReadModel
-    {
-        public GuidIdentity TeamAtHome { get; set; }
-        public GuidIdentity TeamAsGuest { get; set; }
     }
 }
