@@ -6,7 +6,10 @@ using Seasons.ReadHost.Seasons.Events;
 
 namespace Seasons.ReadHost.Seasons
 {
-    public class SeasonReadModel : ReadModel, IHandle<SeasonCreated>, IHandle<SeasonStarted>, IHandle<TeamAddedToSeason>
+    public class SeasonReadModel : ReadModel,
+        IHandle<SeasonCreated>,
+        IHandle<SeasonStarted>,
+        IHandle<TeamAddedToSeason>
     {
         public override Type GetsCreatedOn => typeof(SeasonCreated);
 
