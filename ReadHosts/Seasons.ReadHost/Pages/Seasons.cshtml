@@ -19,10 +19,10 @@
                              <div>
                                  @(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)
                              </div>
-                             @if (!m.IsFinished)
+                             @if (m.IsFinished)
                              {
                                  <div>
-                                     finished with @m.GameResult.Looser.TouchDowns : @m.GameResult.Winner.TouchDowns
+                                     finished with @m.GameResult.HomeTeam.TouchDowns : @m.GameResult.GuestTeam.TouchDowns
                                  </div>
                              }
                           </li>

@@ -5,52 +5,46 @@ namespace Domain.Matches
     public class GameResult
     {
         public bool IsDraw { get; }
-        public PointsOfTeam Winner { get; }
-        public PointsOfTeam Looser { get; }
-        public long HomeTouchDowns { get; }
-        public long GuestTouchDowns { get; }
+        public PointsOfTeam HomeTeam { get; }
+        public PointsOfTeam GuestTeam { get; }
+        public Identity Winner => GetTeamWithMoreTouchDowns(HomeTeam, GuestTeam);
+        public Identity Looser => GetTeamWithMoreTouchDowns(GuestTeam, HomeTeam);
 
+        private Identity GetTeamWithMoreTouchDowns(PointsOfTeam team1, PointsOfTeam team2)
+        {
+            if (team1.TouchDowns == team2.TouchDowns) return null;
+            var teamId = team1.TouchDowns > team2.TouchDowns
+                ? team1.TeamId
+                : team2.TeamId;
+            return teamId;
+        }
         private GameResult(
             bool isDraw,
-            PointsOfTeam winner,
-            PointsOfTeam looser,
-            long homeTouchDowns,
-            long guestTouchDowns)
+            PointsOfTeam homeTeam,
+            PointsOfTeam guestTeam)
         {
             IsDraw = isDraw;
-            Winner = winner;
-            Looser = looser;
-            HomeTouchDowns = homeTouchDowns;
-            GuestTouchDowns = guestTouchDowns;
-        }
-
-        private static GameResult WinResultHome(PointsOfTeam home, PointsOfTeam guest)
-        {
-            return new GameResult(false, home, guest, home.TouchDowns, guest.TouchDowns);
-        }
-
-        private static GameResult WinResultGuest(PointsOfTeam home, PointsOfTeam guest)
-        {
-            return new GameResult(false, guest, home, home.TouchDowns, guest.TouchDowns);
+            HomeTeam = homeTeam;
+            GuestTeam = guestTeam;
         }
 
         public static GameResult CreatGameResult(PointsOfTeam homeTouchDowns, PointsOfTeam guestTouchDowns)
         {
-            GameResult gameResult;
-            if (homeTouchDowns == guestTouchDowns) gameResult = Draw(homeTouchDowns, guestTouchDowns);
-            else
-            {
-                gameResult = homeTouchDowns.TouchDowns > guestTouchDowns.TouchDowns
-                    ? WinResultHome(homeTouchDowns, guestTouchDowns)
-                    : WinResultGuest(homeTouchDowns, guestTouchDowns);
-            }
+            var gameResult = homeTouchDowns == guestTouchDowns
+                ? Draw(homeTouchDowns, guestTouchDowns)
+                : WinResult(homeTouchDowns, guestTouchDowns);
 
             return gameResult;
         }
 
         private static GameResult Draw(PointsOfTeam homeTouchDowns, PointsOfTeam guestTouchDowns)
         {
-            return new GameResult(true, null, null, homeTouchDowns.TouchDowns, guestTouchDowns.TouchDowns);
+            return new GameResult(true, homeTouchDowns, guestTouchDowns);
+        }
+
+        private static GameResult WinResult(PointsOfTeam home, PointsOfTeam guest)
+        {
+            return new GameResult(false, home, guest);
         }
     }
 
