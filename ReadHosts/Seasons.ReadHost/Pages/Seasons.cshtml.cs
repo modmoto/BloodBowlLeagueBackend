@@ -23,6 +23,7 @@ namespace Pages
         public Guid SeasonId { get; set; }
         public SeasonReadModel Season { get; set; }
         public IEnumerable<TeamReadModel> Teams { get; set; }
+        public IEnumerable<TeamReadModel> AddedTeams => Teams.Where(t => Season.Teams.Contains(t.TeamId));
 
         public Seasons(IReadModelRepository readModelRepository)
         {
@@ -47,7 +48,7 @@ namespace Pages
             var teamObject = JsonConvert.SerializeObject(new { teamId = teamId.ToString() });
             var content = new StringContent(teamObject, Encoding.UTF8, "application/json");
             var requestUri = new Uri($"http://localhost:5004/Api/Seasons/{SeasonId}/add-team");
-            await httpClient.PostAsync(requestUri, content);
+            var result = await httpClient.PostAsync(requestUri, content);
             return Redirect(SeasonId.ToString());
         }
     }
