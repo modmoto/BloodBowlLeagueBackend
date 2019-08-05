@@ -47,7 +47,7 @@ namespace Pages
             var teamObject = JsonConvert.SerializeObject(new { teamId = teamId.ToString() });
             var content = new StringContent(teamObject, Encoding.UTF8, "application/json");
             var requestUri = new Uri($"http://localhost:5004/Api/Seasons/{SeasonId}/add-team");
-            var result = await httpClient.PostAsync(requestUri, content);
+            await httpClient.PostAsync(requestUri, content);
             return Redirect(SeasonId.ToString());
         }
     }
