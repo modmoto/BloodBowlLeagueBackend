@@ -8,4 +8,9 @@ namespace Seasons.ReadHost.Seasons
         public GuidIdentity Id { get; set; }
         public IEnumerable<MatchupDto> Matchups { get; set; }
     }
+
+    public class MatchupDto
+    {
+        public GuidIdentity MatchId { get; set; }
+    }
 }

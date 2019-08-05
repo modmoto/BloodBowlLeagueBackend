@@ -10,6 +10,7 @@ using Microwave.Domain.Identities;
 using Microwave.Domain.Results;
 using Microwave.Queries;
 using Newtonsoft.Json;
+using Seasons.ReadHost.Matches;
 using Seasons.ReadHost.Seasons;
 using Seasons.ReadHost.Teams;
 
@@ -24,6 +25,7 @@ namespace Pages
         public SeasonReadModel Season { get; set; }
         public IEnumerable<TeamReadModel> Teams { get; set; }
         public IEnumerable<TeamReadModel> AddedTeams => Teams.Where(t => Season.Teams.Contains(t.TeamId));
+        public IEnumerable<MatchupReadModel> Matches { get; set; }
 
         public Seasons(IReadModelRepository readModelRepository)
         {
@@ -34,11 +36,13 @@ namespace Pages
         {
             var season = await _readModelRepository.Load<SeasonReadModel>(GuidIdentity.Create(SeasonId));
             var teams = await _readModelRepository.LoadAll<TeamReadModel>();
+            var matches = await _readModelRepository.LoadAll<MatchupReadModel>();
             if (season.Is<Ok>())
             {
                 Season = season.Value;
             }
             Teams = teams.Value;
+            Matches = matches.Value;
         }
 
         public async Task<IActionResult> OnPost()
@@ -55,6 +59,11 @@ namespace Pages
         public TeamReadModel FullTeam(GuidIdentity teamId)
         {
             return Teams.Single(t => t.TeamId == teamId);
+        }
+
+        public MatchupReadModel FullMatch(GuidIdentity matchId)
+        {
+            return Matches.Single(m => m.MatchId == matchId);
         }
     }
 }

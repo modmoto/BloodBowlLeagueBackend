@@ -17,10 +17,12 @@ namespace Seasons.ReadHost.Matches
         public GuidIdentity TeamAsGuest { get; private set; }
         public GuidIdentity TeamAtHome { get; private set; }
         public bool IsFinished { get; private set; }
+        public GameResult GameResult { get; set; }
 
         public void Handle(MatchFinished domainEvent)
         {
             IsFinished = true;
+            GameResult = domainEvent.GameResult;
         }
 
         public void Handle(MatchStarted domainEvent)

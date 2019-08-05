@@ -14,7 +14,18 @@
                      <ul class="list-group m-3 pb-3">
                      @foreach (var matchup in gameDay.Matchups)
                      {
-                         <li class="list-group-item">@(Model.FullTeam(matchup.TeamAtHome).TeamName) vs @(Model.FullTeam(matchup.TeamAsGuest).TeamName)</li>
+                         var m = Model.FullMatch(matchup.MatchId);
+                         <li class="list-group-item">
+                             <div>
+                                 @(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)
+                             </div>
+                             @if (!m.IsFinished)
+                             {
+                                 <div>
+                                     finished with @m.GameResult.Looser.TouchDowns : @m.GameResult.Winner.TouchDowns
+                                 </div>
+                             }
+                          </li>
                      }
                      </ul>
                  </div>
