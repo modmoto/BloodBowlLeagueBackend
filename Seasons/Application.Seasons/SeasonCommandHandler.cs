@@ -71,7 +71,7 @@ namespace Application.Matches
     public class AddTeamToSeasonCommand
     {
         public GuidIdentity SeasonId { get; set; }
-        public Identity TeamId { get; set; }
+        public GuidIdentity TeamId { get; set; }
     }
 
     public class StartSeasonCommand

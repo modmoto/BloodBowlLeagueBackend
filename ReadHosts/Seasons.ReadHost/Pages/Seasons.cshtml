@@ -1,0 +1,44 @@
+@page "{seasonId:Guid?}"
+@model Pages.Seasons
+
+<div>
+    <h5 class="card-title">Season: @Model.Season.SeasonName</h5>
+    @if (Model.Season.IsStarted)
+        {
+            @foreach (var gameDay in Model.Season.GameDays)
+             {
+                 <a href="GameDays/@gameDay.Id" class="list-group-item list-group-item-action">
+                     <div class="d-flex w-100 justify-content-between">
+                         <h5 class="mb-1">@gameDay.Id</h5>
+                     </div>
+                 </a>
+             }
+        }
+        else
+        {
+            <h5 class="card-title">Allready added Teams:</h5>
+             @foreach (var team in Model.Season.Teams)
+             {
+                 <a href="Teams/@team.Id" class="list-group-item list-group-item-action">
+                     <div class="d-flex w-100 justify-content-between">
+                         <h5 class="mb-1">@team.Id</h5>
+                     </div>
+                 </a>
+             }
+
+            <form class="my-2 my-lg-0 p-3 ml-auto" method="post">
+                <div class="form-group">
+                    <label for="teamSelectBox">Select a team</label>
+                    <select class="form-control" id="teamSelectBox" name="teamId">
+                        @foreach (var team in Model.Teams)
+                        {
+                            <option value="@team.TeamId.ToString()">
+                                @(team.TeamName) (@(team.TrainerName), @(team.RaceId.Id))
+                            </option>
+                        }
+                    </select>
+                  </div>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Team to Season</button>
+            </form>
+        }
+</div>

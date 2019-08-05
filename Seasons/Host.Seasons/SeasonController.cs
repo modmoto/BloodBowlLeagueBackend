@@ -31,7 +31,7 @@ namespace Host.Matches
         }
 
         [HttpPost("{seasonId}/add-team")]
-        public async Task<ActionResult> StartMatch(GuidIdentity seasonId, [FromBody] AddTeamToSeasonCommand command)
+        public async Task<ActionResult> AddTeam(GuidIdentity seasonId, [FromBody] AddTeamToSeasonCommand command)
         {
             command.SeasonId = seasonId;
             await _commandHandler.AddTeamToSeason(command);

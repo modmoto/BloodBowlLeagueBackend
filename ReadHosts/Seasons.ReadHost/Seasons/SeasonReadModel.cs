@@ -17,9 +17,14 @@ namespace Seasons.ReadHost.Seasons
         public IEnumerable<GameDayDto> GameDays { get; set; }
         public IList<GuidIdentity> Teams { get; set; } = new List<GuidIdentity>();
 
+        public string SeasonName { get; set; }
+
+        public bool IsStarted { get; set; }
+
         public void Handle(SeasonCreated domainEvent)
         {
             SeasonId = domainEvent.SeasonId;
+            SeasonName = domainEvent.SeasonName;
         }
 
         public void Handle(SeasonStarted domainEvent)
@@ -27,8 +32,6 @@ namespace Seasons.ReadHost.Seasons
             IsStarted = true;
             GameDays = domainEvent.GameDays;
         }
-
-        public bool IsStarted { get; set; }
 
         public void Handle(TeamAddedToSeason domainEvent)
         {
