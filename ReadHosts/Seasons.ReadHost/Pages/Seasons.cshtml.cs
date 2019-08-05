@@ -51,5 +51,10 @@ namespace Pages
             var result = await httpClient.PostAsync(requestUri, content);
             return Redirect(SeasonId.ToString());
         }
+
+        public TeamReadModel FullTeam(GuidIdentity teamId)
+        {
+            return Teams.Single(t => t.TeamId == teamId);
+        }
     }
 }

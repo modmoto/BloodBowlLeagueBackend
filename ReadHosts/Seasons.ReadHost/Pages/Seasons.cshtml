@@ -5,13 +5,20 @@
     <h5 class="card-title">Season: @Model.Season.SeasonName</h5>
     @if (Model.Season.IsStarted)
         {
+            int i = 0;
             @foreach (var gameDay in Model.Season.GameDays)
              {
-                 <a href="GameDays/@gameDay.Id" class="list-group-item list-group-item-action">
-                     <div class="d-flex w-100 justify-content-between">
-                         <h5 class="mb-1">@gameDay.Id</h5>
-                     </div>
-                 </a>
+                 i++;
+                 <div>
+                     <h5 class="mb-1">Gameday @(i):</h5>
+                     <ul class="list-group m-3 pb-3">
+                     @foreach (var matchup in gameDay.Matchups)
+                     {
+                         <li class="list-group-item">@(Model.FullTeam(matchup.TeamAtHome).TeamName) vs @(Model.FullTeam(matchup.TeamAsGuest).TeamName)</li>
+                     }
+                     </ul>
+                 </div>
+
              }
         }
         else
@@ -19,7 +26,7 @@
              <h5 class="card-title">Allready added Teams:</h5>
              @foreach (var team in Model.AddedTeams)
              {
-                 <a href="Teams/@team.TeamId" class="list-group-item list-group-item-action">
+                 <a href="http://localhost:5000/Teams/@team.TeamId" class="list-group-item list-group-item-action">
                      <div class="d-flex w-100 justify-content-between">
                          <h5 class="mb-1">@team.TeamName (@(team.TrainerName), @(team.RaceId.Id))</h5>
                      </div>
