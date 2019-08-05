@@ -9,7 +9,6 @@ using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Exceptions;
 using Microwave.Domain.Identities;
 using Microwave.EventStores;
-using Microwave.EventStores.Ports;
 using Moq;
 
 namespace Application.Players.UnitTests

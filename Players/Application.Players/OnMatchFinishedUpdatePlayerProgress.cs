@@ -7,7 +7,6 @@ using Domain.Players.Events.ForeignEvents;
 using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Validation;
 using Microwave.EventStores;
-using Microwave.EventStores.Ports;
 using Microwave.Queries;
 
 namespace Application.Players

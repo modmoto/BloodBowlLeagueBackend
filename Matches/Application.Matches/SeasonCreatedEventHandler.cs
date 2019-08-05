@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Matches;
 using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
 using Microwave.EventStores;
 using Microwave.Queries;
 
