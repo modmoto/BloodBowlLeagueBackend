@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Domain.Matches;
 using Domain.Matches.Events;
+using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 using Microwave.EventStores;
 using Microwave.Queries;
@@ -42,13 +44,14 @@ namespace Application.Matches
             storeResult.Check();
         }
 
-        public async Task CreateMatches(CreateMatchCommand command)
+        public async Task<Identity> CreateMatches(CreateMatchCommand command)
         {
             var homeTeam = (await _readModelRepository.Load<TeamReadModel>(command.HomeTeam)).Value;
             var guestTeam = (await _readModelRepository.Load<TeamReadModel>(command.GuestTeam)).Value;
             var domainResult = Matchup.Create(homeTeam, guestTeam);
             var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             storeResult.Check();
+            return domainResult.DomainEvents.Single().EntityId;
         }
     }
 

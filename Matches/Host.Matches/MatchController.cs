@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Matches;
 using Domain.Matches.Events;
@@ -20,8 +21,8 @@ namespace Host.Matches
         [HttpPost("create")]
         public async Task<ActionResult> CreateMatch([FromBody] CreateMatchCommand command)
         {
-            await _commandHandler.CreateMatches(command);
-            return Ok();
+            var teamId = await _commandHandler.CreateMatches(command);
+            return Created($"{Request.Scheme}://{Request.Host}/Api/Teams/{teamId}", teamId);
         }
 
         [HttpPost("{matchId}/finish")]
