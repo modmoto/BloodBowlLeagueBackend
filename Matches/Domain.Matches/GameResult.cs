@@ -12,13 +12,13 @@ namespace Domain.Matches
 
         private Identity GetTeamWithMoreTouchDowns()
         {
-            if (HomeTeam.TouchDowns == GuestTeam.TouchDowns) return null;
+            if (IsDraw) return null;
             return HomeTeam.TouchDowns > GuestTeam.TouchDowns ? HomeTeam.TeamId : GuestTeam.TeamId;
         }
 
         private Identity GetTeamWithLessTouchDowns()
         {
-            if (HomeTeam.TouchDowns == GuestTeam.TouchDowns) return null;
+            if (IsDraw) return null;
             return HomeTeam.TouchDowns < GuestTeam.TouchDowns ? HomeTeam.TeamId : GuestTeam.TeamId;
         }
 
