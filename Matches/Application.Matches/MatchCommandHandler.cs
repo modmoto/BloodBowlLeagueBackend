@@ -79,13 +79,7 @@ namespace Application.Matches
 
     public class FinishMatchCommand
     {
-        public FinishMatchCommand(GuidIdentity matchId, IEnumerable<PlayerProgression> playerProgressions)
-        {
-            MatchId = matchId;
-            PlayerProgressions = playerProgressions;
-        }
-
-        public GuidIdentity MatchId { get; }
-        public IEnumerable<PlayerProgression> PlayerProgressions { get; }
+        public GuidIdentity MatchId { get; set; }
+        public IEnumerable<PlayerProgression> PlayerProgressions { get; set; }
     }
 }

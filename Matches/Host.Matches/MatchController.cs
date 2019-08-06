@@ -21,14 +21,14 @@ namespace Host.Matches
         [HttpPost("create")]
         public async Task<ActionResult> CreateMatch([FromBody] CreateMatchCommand command)
         {
-            var teamId = await _commandHandler.CreateMatches(command);
-            return Created($"{Request.Scheme}://{Request.Host}/Api/Teams/{teamId}", teamId);
+            var matchId = await _commandHandler.CreateMatches(command);
+            return Created($"{Request.Scheme}://{Request.Host}/Api/Matches/{matchId}", matchId);
         }
 
         [HttpPost("{matchId}/finish")]
-        public async Task<ActionResult> FinishMatch(GuidIdentity matchId, [FromBody] IEnumerable<PlayerProgression> progressions)
+        public async Task<ActionResult> FinishMatch(GuidIdentity matchId, [FromBody] FinishMatchCommand finishMatchCommand)
         {
-            var finishMatchCommand = new FinishMatchCommand(matchId, progressions);
+            finishMatchCommand.MatchId = matchId;
             await _commandHandler.FinishMatch(finishMatchCommand);
             return Ok();
         }
