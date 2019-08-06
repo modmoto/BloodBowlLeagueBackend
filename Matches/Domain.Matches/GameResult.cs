@@ -7,17 +7,21 @@ namespace Domain.Matches
         public bool IsDraw { get; }
         public PointsOfTeam HomeTeam { get; }
         public PointsOfTeam GuestTeam { get; }
-        public Identity Winner => GetTeamWithMoreTouchDowns(HomeTeam, GuestTeam);
-        public Identity Looser => GetTeamWithMoreTouchDowns(GuestTeam, HomeTeam);
+        public Identity Winner => GetTeamWithMoreTouchDowns();
+        public Identity Looser => GetTeamWithLessTouchDowns();
 
-        private Identity GetTeamWithMoreTouchDowns(PointsOfTeam team1, PointsOfTeam team2)
+        private Identity GetTeamWithMoreTouchDowns()
         {
-            if (team1.TouchDowns == team2.TouchDowns) return null;
-            var teamId = team1.TouchDowns > team2.TouchDowns
-                ? team1.TeamId
-                : team2.TeamId;
-            return teamId;
+            if (HomeTeam.TouchDowns == GuestTeam.TouchDowns) return null;
+            return HomeTeam.TouchDowns > GuestTeam.TouchDowns ? HomeTeam.TeamId : GuestTeam.TeamId;
         }
+
+        private Identity GetTeamWithLessTouchDowns()
+        {
+            if (HomeTeam.TouchDowns == GuestTeam.TouchDowns) return null;
+            return HomeTeam.TouchDowns < GuestTeam.TouchDowns ? HomeTeam.TeamId : GuestTeam.TeamId;
+        }
+
         private GameResult(
             bool isDraw,
             PointsOfTeam homeTeam,
