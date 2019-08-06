@@ -33,7 +33,6 @@ namespace Domain.Matches.UnitTests
 
             var domainResult = match.Finish(playerProgressions);
 
-            Assert.IsTrue(match.IsFinished);
             var domainEvent = domainResult.DomainEvents.First() as MatchFinished;
             Assert.AreEqual(teamReadModel.TeamId, domainEvent.GameResult.Winner);
             Assert.AreEqual(teamReadModel2.TeamId, domainEvent.GameResult.Looser);
@@ -57,7 +56,6 @@ namespace Domain.Matches.UnitTests
 
             var domainResult = match.Finish(playerProgressions);
 
-            Assert.IsFalse(match.IsFinished);
             Assert.IsTrue(domainResult.DomainErrors.Single().GetType() == typeof(PlayerWasNotPartOfTheTeamWhenStartingTheMatch));
         }
 

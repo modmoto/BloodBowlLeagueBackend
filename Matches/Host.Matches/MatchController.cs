@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Application.Matches;
-using Domain.Matches.Events;
 using Microsoft.AspNetCore.Mvc;
 using Microwave.Domain.Identities;
 
@@ -34,9 +31,9 @@ namespace Host.Matches
         }
 
         [HttpPost("{matchId}/start")]
-        public async Task<ActionResult> StartMatch(GuidIdentity guidIdentity)
+        public async Task<ActionResult> StartMatch(GuidIdentity matchId)
         {
-            var startMatchCommand = new StartMatchCommand(guidIdentity);
+            var startMatchCommand = new StartMatchCommand(matchId);
             await _commandHandler.StartMatch(startMatchCommand);
             return Ok();
         }

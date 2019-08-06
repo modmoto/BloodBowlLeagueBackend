@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Matches;
 using Domain.Matches.Events;
-using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 using Microwave.EventStores;
 using Microwave.Queries;
@@ -39,7 +38,6 @@ namespace Application.Matches
             var guestTeam = (await _readModelRepository.Load<TeamReadModel>(match.TeamAsGuest)).Value;
 
             var domainResult = match.Start(homeTeam, guestTeam);
-            domainResult.EnsureSucces();
             var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, eventStoreResult.Version);
             storeResult.Check();
         }

@@ -18,7 +18,9 @@ namespace Domain.Matches
         public IEnumerable<GuidIdentity> GuestTeamPlayers { get; private set; }
         public GuidIdentity TeamAsGuest { get; private set; }
         public GuidIdentity TeamAtHome { get; private set; }
-        public bool IsFinished { get; private set; }
+        private bool _isFinished;
+        private bool _isStarted;
+
 
         public static DomainResult Create(
             GuidIdentity matchId,
@@ -43,12 +45,14 @@ namespace Domain.Matches
         {
             HomeTeamPlayers = teamAtHome.Players;
             GuestTeamPlayers = teamAsGuest.Players;
+            _isStarted = true;
             return DomainResult.Ok(new MatchStarted(MatchId, HomeTeamPlayers, GuestTeamPlayers));
         }
 
         public DomainResult Finish(IEnumerable<PlayerProgression> playerProgressions)
         {
-            if (IsFinished) return DomainResult.Error(new MatchAllreadyFinished());
+            if (_isStarted) return DomainResult.Error(new MatchDidNotStartYet());
+            if (_isFinished) return DomainResult.Error(new MatchAllreadyFinished());
             var progressions = playerProgressions.ToList();
 
             var homeTeamProgression = progressions.Where(p => HomeTeamPlayers.Contains(p.PlayerId));
@@ -66,7 +70,7 @@ namespace Domain.Matches
             var gameResult = GameResult.CreatGameResult(homeResult, guestResult);
 
             var matchResultUploaded = new MatchFinished(MatchId, progressions, gameResult);
-            IsFinished = true;
+            _isFinished = true;
             return DomainResult.Ok(matchResultUploaded);
         }
 
@@ -77,7 +81,7 @@ namespace Domain.Matches
 
         public void Apply(MatchFinished domainEvent)
         {
-            IsFinished = true;
+            _isFinished = true;
         }
 
         public void Apply(MatchStarted domainEvent)
