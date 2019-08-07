@@ -43,10 +43,8 @@ namespace Domain.Matches
 
         public DomainResult Start(TeamReadModel teamAtHome, TeamReadModel teamAsGuest)
         {
-            HomeTeamPlayers = teamAtHome.Players;
-            GuestTeamPlayers = teamAsGuest.Players;
-            _isStarted = true;
-            return DomainResult.Ok(new MatchStarted(MatchId, HomeTeamPlayers, GuestTeamPlayers));
+            var matchStarted = new MatchStarted(MatchId, teamAtHome.Players, teamAsGuest.Players);
+            return DomainResult.Ok(matchStarted);
         }
 
         public DomainResult Finish(IEnumerable<PlayerProgression> playerProgressions)
@@ -70,7 +68,6 @@ namespace Domain.Matches
             var gameResult = GameResult.CreatGameResult(homeResult, guestResult);
 
             var matchResultUploaded = new MatchFinished(MatchId, progressions, gameResult);
-            _isFinished = true;
             return DomainResult.Ok(matchResultUploaded);
         }
 
@@ -86,6 +83,7 @@ namespace Domain.Matches
 
         public void Apply(MatchStarted domainEvent)
         {
+            _isStarted = true;
             HomeTeamPlayers = domainEvent.HomeTeam;
             GuestTeamPlayers = domainEvent.GuestTeam;
         }
