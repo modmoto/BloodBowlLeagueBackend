@@ -49,7 +49,7 @@ namespace Domain.Matches
 
         public DomainResult Finish(IEnumerable<PlayerProgression> playerProgressions)
         {
-            if (_isStarted) return DomainResult.Error(new MatchDidNotStartYet());
+            if (!_isStarted) return DomainResult.Error(new MatchDidNotStartYet());
             if (_isFinished) return DomainResult.Error(new MatchAllreadyFinished());
             var progressions = playerProgressions.ToList();
 
