@@ -11,7 +11,7 @@ namespace Seasons.ReadHost.Seasons
         IHandle<SeasonStarted>,
         IHandle<SeasonCreated>
     {
-        public IList<SeasonOverviewDto> AllSeasons { get; set; } = new List<SeasonOverviewDto>();
+        public IList<SeasonOverviewDto> AllSeasons { get; } = new List<SeasonOverviewDto>();
 
         public void Handle(SeasonCreated domainEvent)
         {
