@@ -1,0 +1,42 @@
+﻿@page
+@model Pages.IndexModel
+
+<div class="my-2 my-lg-0 p-3 ml-auto" >
+    <h3>Teams:</h3>
+    <div class="list-group">
+        @if (Model.AllTeams.Any())
+        {
+            @foreach (var team in Model.AllTeams)
+             {
+                 <a href="Teams/@team.TeamId" class="list-group-item list-group-item-action">
+                     <div class="d-flex w-100 justify-content-between">
+                         <h5 class="mb-1">@team.TeamName (@team.TrainerName, @team.RaceId)</h5>
+                     </div>
+                 </a>
+             }
+        }
+        else
+        {
+            <h5 class="card-title">None</h5>
+        }
+    </div>
+    <div class="pt-4">
+        <form method="post">
+            <div class="form-group">
+                <label for="teamNameTextInput">Create a new Team</label>
+                <input type="text" class="form-control" id="teamNameTextInput" name="teamNameTextInput" placeholder="Enter season name">
+                <input type="text" class="form-control" id="trainerNameTextInput" name="trainerNameTextInput" placeholder="Enter season name">
+                <select class="form-control" id="teamSelectBox" name="raceIdDropDownInput">
+                    @foreach (var team in Model.AllRaces)
+                    {
+                        <option value="@team.RaceConfigId.Id">
+                            @(team.RaceDescription)
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create new Team</button>
+        </form>
+    </div>
+</div>
