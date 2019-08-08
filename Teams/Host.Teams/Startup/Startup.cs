@@ -51,6 +51,20 @@ namespace Teams.WriteHost.Startup
                     new List<AllowedPlayer>(),
                     new GoldCoins(1000000)),
                 new TeamCreated(
+                    GuidIdentity.Create(new Guid("772F7E84-4237-4634-AF85-5C0D72FF8DBD")),
+                    StringIdentity.Create("Amazonen"),
+                    "Karlsruher Könige",
+                    "Walter",
+                    new List<AllowedPlayer>(),
+                    new GoldCoins(1000000)),
+                new TeamCreated(
+                    GuidIdentity.Create(new Guid("38C41447-21F6-4941-BD7E-AC97EF866197")),
+                    StringIdentity.Create("Orks"),
+                    "Berghausen Brüglerz",
+                    "Rahel",
+                    new List<AllowedPlayer>(),
+                    new GoldCoins(1000000)),
+                new TeamCreated(
                     GuidIdentity.Create(new Guid("13552A55-D612-40D5-88F9-5106A05CCBAC")),
                     StringIdentity.Create("Dwarfes"),
                     "Rat Bullz",
