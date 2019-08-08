@@ -25,8 +25,6 @@ namespace Teams.ReadHost.Teams
             TeamChest = domainEvent.StartingMoney;
         }
 
-        public long TeamVersion { get; private set; }
-
         public void Handle(PlayerBought domainEvent)
         {
             TeamChest = domainEvent.NewTeamChestBalance;
