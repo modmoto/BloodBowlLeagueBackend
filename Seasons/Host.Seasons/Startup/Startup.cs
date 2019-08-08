@@ -1,10 +1,12 @@
-﻿using Application.Matches;
+﻿using System.Collections.Generic;
+using Application.Matches;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Microwave.Persistence.MongoDb;
+using Microwave.Domain.EventSourcing;
+using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using ServiceConfig;
 
@@ -22,9 +24,11 @@ namespace Host.Matches.Startup
                 c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
             });
 
-            services.AddMicrowavePersistenceLayerMongoDb(c =>
+            var domainEvents = new List<IDomainEvent>();
+
+            services.AddMicrowavePersistenceLayerInMemory(c =>
             {
-                c.WithDatabaseName("Seasons");
+                c.WithEventSeeds(domainEvents);
             });
 
             services.AddMicrowaveUi();

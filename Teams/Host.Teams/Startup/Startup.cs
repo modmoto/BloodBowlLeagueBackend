@@ -1,4 +1,5 @@
-﻿using Application.Teams;
+﻿using System.Collections.Generic;
+using Application.Teams;
 using Application.Teams.RaceConfigSeed;
 using Domain.Teams;
 using Microsoft.AspNetCore.Builder;
@@ -6,8 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
+using Microwave.Domain.EventSourcing;
 using Microwave.EventStores.SnapShots;
-using Microwave.Persistence.MongoDb;
+using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using ServiceConfig;
 
@@ -29,9 +31,11 @@ namespace Teams.WriteHost.Startup
                 c.SnapShots.Add(new SnapShot<Team>(3));
             });
 
-            services.AddMicrowavePersistenceLayerMongoDb(c =>
+            var domainEvents = new List<IDomainEvent>();
+
+            services.AddMicrowavePersistenceLayerInMemory(c =>
             {
-                c.WithDatabaseName("Teams");
+                c.WithEventSeeds(domainEvents);
             });
         }
 

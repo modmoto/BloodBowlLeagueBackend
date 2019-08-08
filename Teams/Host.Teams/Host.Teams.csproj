@@ -16,13 +16,13 @@
         </PackageReference>
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microwave">
-          <Version>0.14.0.947-beta</Version>
+          <Version>0.14.0.950-beta</Version>
         </PackageReference>
-        <PackageReference Include="Microwave.Persistence.MongoDb">
-          <Version>0.14.0.947-beta</Version>
+        <PackageReference Include="Microwave.Persistence.InMemory">
+          <Version>0.14.0.950-beta</Version>
         </PackageReference>
         <PackageReference Include="Microwave.UI">
-            <Version>0.14.0.947-beta</Version>
+            <Version>0.14.0.950-beta</Version>
         </PackageReference>
     </ItemGroup>
 

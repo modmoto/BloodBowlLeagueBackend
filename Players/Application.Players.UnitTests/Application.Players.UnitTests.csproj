@@ -8,7 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-        <PackageReference Include="Microwave.EventStores" Version="0.14.0.947-beta" />
+        <PackageReference Include="Microwave.EventStores" Version="0.14.0.950-beta" />
         <PackageReference Include="Moq" Version="4.12.0" />
         <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
         <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
