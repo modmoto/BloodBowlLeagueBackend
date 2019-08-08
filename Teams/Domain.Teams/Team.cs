@@ -20,8 +20,13 @@ namespace Domain.Teams
         public static DomainResult Create(StringIdentity raceId, string teamName, string trainerName, IEnumerable<AllowedPlayer>
         allowedPlayers)
         {
-            return DomainResult.Ok(new TeamCreated(GuidIdentity.Create(Guid.NewGuid()), raceId, teamName,
-            trainerName, allowedPlayers, new GoldCoins(1000000)));
+            return DomainResult.Ok(new TeamCreated(
+                GuidIdentity.Create(Guid.NewGuid()),
+                raceId, 
+                teamName,
+                trainerName, 
+                allowedPlayers, 
+                new GoldCoins(1000000)));
         }
 
         public DomainResult BuyPlayer(StringIdentity playerTypeId)
