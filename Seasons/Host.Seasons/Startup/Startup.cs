@@ -51,13 +51,19 @@ namespace Host.Matches.Startup
         {
             get
             {
-                var created = Season.Create("Meine Neue Season");
+                var created = Season.Create("Meine gestartete Season");
                 var season = new Season();
                 season.Apply(created.DomainEvents);
                 var addTeam1 = season.AddTeam(GuidIdentity.Create(new Guid("2798435C-9C72-4ECE-BD7D-00BECBACCED7")));
                 var addTeam2 = season.AddTeam(GuidIdentity.Create(new Guid("406D35EE-421A-4D45-9F34-1834D5ACD215")));
                 var addTeam3 = season.AddTeam(GuidIdentity.Create(new Guid("772F7E84-4237-4634-AF85-5C0D72FF8DBD")));
                 var addTeam4 = season.AddTeam(GuidIdentity.Create(new Guid("38C41447-21F6-4941-BD7E-AC97EF866197")));
+
+                season.Apply(addTeam1.DomainEvents);
+                season.Apply(addTeam2.DomainEvents);
+                season.Apply(addTeam3.DomainEvents);
+                season.Apply(addTeam4.DomainEvents);
+
                 var startSeason = season.StartSeason();
                 var events = new List<IDomainEvent>();
                 events.AddRange(created.DomainEvents);
@@ -66,6 +72,14 @@ namespace Host.Matches.Startup
                 events.AddRange(addTeam3.DomainEvents);
                 events.AddRange(addTeam4.DomainEvents);
                 events.AddRange(startSeason.DomainEvents);
+
+                var created2 = Season.Create("Meine frische Season");
+                var season2 = new Season();
+                season2.Apply(created.DomainEvents);
+                var addTeam5 = season2.AddTeam(GuidIdentity.Create(new Guid("2798435C-9C72-4ECE-BD7D-00BECBACCED7")));
+
+                events.AddRange(created2.DomainEvents);
+                events.AddRange(addTeam5.DomainEvents);
 
                 return events;
             }

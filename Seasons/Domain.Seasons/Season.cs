@@ -30,6 +30,7 @@ namespace Domain.Seasons
 
         public DomainResult StartSeason()
         {
+            if (Teams.Count() < 2) return DomainResult.Error(new SeasonMustHaveAtLeast2Teams(Teams.Count()));
             if (TeamCountIsUneven()) return DomainResult.Error(new CanNotStartSeasonWithUnevenTeamCount(Teams.Count()));
             if (SeasonIsStarted) return DomainResult.Error(new CanNotStartSeasonASecondTime());
 
