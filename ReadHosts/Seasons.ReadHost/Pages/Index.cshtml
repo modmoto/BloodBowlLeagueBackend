@@ -1,8 +1,8 @@
 ﻿@page
 @model Pages.IndexModel
 
-<div>
-    <h3 class="p-3">Seasons:</h3>
+<div class="my-2 my-lg-0 p-3 ml-auto" >
+    <h3>Seasons:</h3>
     <div class="list-group">
         @if (Model.AllSeasons.AllSeasons.Any())
         {
@@ -26,15 +26,17 @@
         }
         else
         {
-             <h5 class="card-title">None</h5>
+            <h5 class="card-title">None</h5>
         }
     </div>
-    <form class="my-2 my-lg-0 p-3 ml-auto" method="post">
-        <div class="form-group">
-            <label for="seasonNameTextInput">Season name</label>
-            <input type="text" class="form-control" id="seasonNameTextInput" name="seasonNameTextInput" placeholder="Enter season name">
-        </div>
+    <div class="pt-4">
+        <form method="post">
+            <div class="form-group">
+                <label for="seasonNameTextInput">Create a new Season</label>
+                <input type="text" class="form-control" id="seasonNameTextInput" name="seasonNameTextInput" placeholder="Enter season name">
+            </div>
 
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create new Season</button>
-    </form>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create new Season</button>
+        </form>
+    </div>
 </div>

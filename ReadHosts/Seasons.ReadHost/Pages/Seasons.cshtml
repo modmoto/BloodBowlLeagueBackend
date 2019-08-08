@@ -1,8 +1,8 @@
 @page "{seasonId:Guid?}"
 @model Pages.Seasons
 
-<div>
-    <h3 class="p-3">Season: @Model.Season.SeasonName</h3>
+<div class="my-2 my-lg-0 p-3 ml-auto">
+    <h3 class="pb-3">Season: @Model.Season.SeasonName</h3>
     @if (Model.Season.IsStarted)
         {
             int i = 0;
@@ -10,8 +10,8 @@
              {
                  i++;
                  <div>
-                     <h5 class="mb-1 pl-3">Gameday @(i):</h5>
-                     <ul class="list-group m-3 pb-3">
+                     <h5>Gameday @(i):</h5>
+                     <ul class="list-group pb-3 mb-1 pl-3">
                      @foreach (var matchup in gameDay.Matchups)
                      {
                          var m = Model.FullMatch(matchup.MatchId);
@@ -44,7 +44,7 @@
                  </a>
              }
 
-            <form class="my-2 my-lg-0 p-3 ml-auto" method="post">
+            <form method="post">
                 <div class="form-group">
                     <label for="teamSelectBox">Select a team</label>
                     <select class="form-control" id="teamSelectBox" name="teamId">
