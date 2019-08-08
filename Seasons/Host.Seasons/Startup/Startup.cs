@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Application.Matches;
 using Domain.Seasons;
-using Domain.Seasons.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -67,13 +66,6 @@ namespace Host.Matches.Startup
                 events.AddRange(addTeam3.DomainEvents);
                 events.AddRange(addTeam4.DomainEvents);
                 events.AddRange(startSeason.DomainEvents);
-
-                var entityId = typeof(IDomainEvent).GetProperty(nameof(IDomainEvent.EntityId));
-                var guidIdentity = GuidIdentity.Create(new Guid("715AB00A-36DC-4192-910F-C6988401E819"));
-                foreach (var domainEvent in events)
-                {
-                    entityId.SetValue(domainEvent, guidIdentity);
-                }
 
                 return events;
             }
