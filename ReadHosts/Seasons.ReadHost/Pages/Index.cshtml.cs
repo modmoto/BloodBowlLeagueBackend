@@ -9,7 +9,7 @@ using Microwave.Queries;
 using Newtonsoft.Json;
 using Seasons.ReadHost.Seasons;
 
-namespace Pages
+namespace Seasons.ReadHost.Pages
 {
     public class IndexModel : PageModel
     {

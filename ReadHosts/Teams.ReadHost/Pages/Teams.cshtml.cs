@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microwave.Queries;
 using Newtonsoft.Json;
 
-namespace Pages
+namespace Teams.ReadHost.Pages
 {
     public class Teams : PageModel
     {

@@ -24,8 +24,8 @@
         <form method="post">
             <div class="form-group">
                 <label for="teamNameTextInput">Create a new Team</label>
-                <input type="text" class="form-control" id="teamNameTextInput" name="teamNameTextInput" placeholder="Enter season name">
-                <input type="text" class="form-control" id="trainerNameTextInput" name="trainerNameTextInput" placeholder="Enter season name">
+                <input type="text" class="form-control mb-3" id="teamNameTextInput" name="teamNameTextInput" placeholder="Enter team name">
+                <input type="text" class="form-control mb-3" id="trainerNameTextInput" name="trainerNameTextInput" placeholder="Enter trainer name">
                 <select class="form-control" id="teamSelectBox" name="raceIdDropDownInput">
                     @foreach (var team in Model.AllRaces)
                     {

@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using Teams.ReadHost.Races;
 using Teams.ReadHost.Teams;
 
-namespace Pages
+namespace Teams.ReadHost.Pages
 {
     public class IndexModel : PageModel
     {
@@ -34,15 +34,15 @@ namespace Pages
 
         public async Task<IActionResult> OnPost()
         {
-            var teamName = Request.Form["teamNameTextInput"];
-            var trainerName = Request.Form["trainerNameTextInput"];
-            var raceId = Request.Form["raceIdDropDownInput"];
+            var teamName = Request.Form["teamNameTextInput"].ToString();
+            var trainerName = Request.Form["trainerNameTextInput"].ToString();
+            var raceId = Request.Form["raceIdDropDownInput"].ToString();
             var httpClient = new HttpClient();
             var teamObject = JsonConvert.SerializeObject(new { teamName, trainerName, raceId });
             var content = new StringContent(teamObject, Encoding.UTF8, "application/json");
             var requestUri = new Uri("http://localhost:5001/Api/Teams/create");
             await httpClient.PostAsync(requestUri, content);
-            return Redirect("http://localhost:5006");
+            return Redirect("http://localhost:5000");
         }
     }
 }

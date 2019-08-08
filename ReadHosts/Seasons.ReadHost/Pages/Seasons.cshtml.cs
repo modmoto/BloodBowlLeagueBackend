@@ -14,7 +14,7 @@ using Seasons.ReadHost.Matches;
 using Seasons.ReadHost.Seasons;
 using Seasons.ReadHost.Teams;
 
-namespace Pages
+namespace Seasons.ReadHost.Pages
 {
     public class Seasons : PageModel
     {
