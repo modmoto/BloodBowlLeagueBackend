@@ -15,7 +15,7 @@ namespace Seasons.ReadHost.Seasons
 
         public GuidIdentity SeasonId { get; set; }
         public IEnumerable<GameDayDto> GameDays { get; set; }
-        public IList<GuidIdentity> Teams { get; set; } = new List<GuidIdentity>();
+        public IList<GuidIdentity> Teams { get; } = new List<GuidIdentity>();
 
         public string SeasonName { get; set; }
 
