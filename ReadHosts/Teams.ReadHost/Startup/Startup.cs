@@ -24,12 +24,7 @@ namespace Teams.ReadHost.Startup
                 c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
             });
 
-            var domainEvents = new List<IDomainEvent>();
-
-            services.AddMicrowavePersistenceLayerInMemory(c =>
-            {
-                c.WithEventSeeds(domainEvents);
-            });
+            services.AddMicrowavePersistenceLayerInMemory();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
