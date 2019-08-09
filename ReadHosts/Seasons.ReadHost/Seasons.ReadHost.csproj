@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\ServiceConfig\ServiceConfig.csproj" />
+      <ProjectReference Include="..\ReadHosts.Common\ReadHosts.Common.csproj" />
     </ItemGroup>
 
 </Project>

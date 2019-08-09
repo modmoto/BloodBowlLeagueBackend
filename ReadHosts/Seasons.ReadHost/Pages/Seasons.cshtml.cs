@@ -10,6 +10,7 @@ using Microwave.Domain.Identities;
 using Microwave.Domain.Results;
 using Microwave.Queries;
 using Newtonsoft.Json;
+using ReadHosts.Common;
 using Seasons.ReadHost.Matches;
 using Seasons.ReadHost.Seasons;
 using Seasons.ReadHost.Teams;
@@ -19,6 +20,7 @@ namespace Seasons.ReadHost.Pages
     public class Seasons : PageModel
     {
         private readonly IReadModelRepository _readModelRepository;
+        private readonly MessageMitigator _mitigator;
 
         [BindProperty(SupportsGet = true)]
         public Guid SeasonId { get; set; }
@@ -27,9 +29,12 @@ namespace Seasons.ReadHost.Pages
         public IEnumerable<TeamReadModel> AddedTeams => Teams.Where(t => Season.Teams.Contains(t.TeamId));
         public IEnumerable<MatchupReadModel> Matches { get; set; }
 
-        public Seasons(IReadModelRepository readModelRepository)
+        public Seasons(
+            IReadModelRepository readModelRepository,
+            MessageMitigator mitigator)
         {
             _readModelRepository = readModelRepository;
+            _mitigator = mitigator;
         }
 
         public async Task OnGet()
@@ -48,12 +53,9 @@ namespace Seasons.ReadHost.Pages
         public async Task<IActionResult> OnPost()
         {
             var teamId = Request.Form["teamId"];
-            var httpClient = new HttpClient();
-            var teamObject = JsonConvert.SerializeObject(new { teamId = teamId.ToString() });
-            var content = new StringContent(teamObject, Encoding.UTF8, "application/json");
-            var requestUri = new Uri($"http://localhost:5004/Api/Seasons/{SeasonId}/add-team");
-            await httpClient.PostAsync(requestUri, content);
-
+            await _mitigator.PostAsync(
+                new Uri($"http://localhost:5004/Api/Seasons/{SeasonId}/add-team"),
+                new {teamId = teamId.ToString()});
             return Redirect(SeasonId.ToString());
         }
 

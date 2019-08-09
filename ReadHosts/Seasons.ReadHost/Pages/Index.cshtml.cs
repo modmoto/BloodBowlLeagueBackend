@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microwave.Domain.Results;
 using Microwave.Queries;
-using Newtonsoft.Json;
+using ReadHosts.Common;
 using Seasons.ReadHost.Seasons;
 
 namespace Seasons.ReadHost.Pages
@@ -14,12 +12,16 @@ namespace Seasons.ReadHost.Pages
     public class IndexModel : PageModel
     {
         private readonly IReadModelRepository _readModelRepository;
+        private readonly MessageMitigator _mitigator;
 
         public AllSeasonsOverview AllSeasons { get; set; }
 
-        public IndexModel(IReadModelRepository readModelRepository)
+        public IndexModel(
+            IReadModelRepository readModelRepository,
+            MessageMitigator mitigator)
         {
             _readModelRepository = readModelRepository;
+            _mitigator = mitigator;
         }
 
         public async Task OnGetAsync()
@@ -31,11 +33,8 @@ namespace Seasons.ReadHost.Pages
         public async Task<IActionResult> OnPost()
         {
             var seasonName = Request.Form["seasonNameTextInput"];
-            var httpClient = new HttpClient();
-            var teamObject = JsonConvert.SerializeObject(new { seasonName = seasonName.ToString() });
-            var content = new StringContent(teamObject, Encoding.UTF8, "application/json");
-            var requestUri = new Uri("http://localhost:5004/Api/Seasons/create");
-            await httpClient.PostAsync(requestUri, content);
+            var ob = new { seasonName = seasonName.ToString() };
+            await _mitigator.PostAsync(new Uri("http://localhost:5004/Api/Seasons/create"), ob);
             return Redirect("http://localhost:5006");
         }
     }

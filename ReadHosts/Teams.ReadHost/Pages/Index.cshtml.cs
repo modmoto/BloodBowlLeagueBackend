@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microwave.Queries;
 using Newtonsoft.Json;
+using ReadHosts.Common;
 using Teams.ReadHost.Races;
 using Teams.ReadHost.Teams;
 
@@ -15,13 +16,17 @@ namespace Teams.ReadHost.Pages
     public class IndexModel : PageModel
     {
         private readonly IReadModelRepository _readModelRepository;
+        private readonly MessageMitigator _mitigator;
 
         public IEnumerable<TeamOverviewReadModel> AllTeams { get; set; }
         public IEnumerable<RaceReadModel> AllRaces { get; set; }
 
-        public IndexModel(IReadModelRepository readModelRepository)
+        public IndexModel(
+            IReadModelRepository readModelRepository,
+            MessageMitigator mitigator)
         {
             _readModelRepository = readModelRepository;
+            _mitigator = mitigator;
         }
 
         public async Task OnGetAsync()
@@ -37,11 +42,9 @@ namespace Teams.ReadHost.Pages
             var teamName = Request.Form["teamNameTextInput"].ToString();
             var trainerName = Request.Form["trainerNameTextInput"].ToString();
             var raceId = Request.Form["raceIdDropDownInput"].ToString();
-            var httpClient = new HttpClient();
-            var teamObject = JsonConvert.SerializeObject(new { teamName, trainerName, raceId });
-            var content = new StringContent(teamObject, Encoding.UTF8, "application/json");
-            var requestUri = new Uri("http://localhost:5001/Api/Teams/create");
-            await httpClient.PostAsync(requestUri, content);
+            await _mitigator.PostAsync(
+                new Uri("http://localhost:5001/Api/Teams/create"),
+                new {teamName, trainerName, raceId});
             return Redirect("http://localhost:5000");
         }
     }

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Persistence.InMemory;
 using Microwave.UI;
+using ReadHosts.Common;
 using ServiceConfig;
 
 namespace Seasons.ReadHost.Startup
@@ -30,6 +31,8 @@ namespace Seasons.ReadHost.Startup
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
+
+            services.AddTransient<MessageMitigator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
