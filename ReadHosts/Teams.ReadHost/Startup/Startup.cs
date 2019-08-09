@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Microwave.Domain.EventSourcing;
 using Microwave.Persistence.InMemory;
+using Microwave.Persistence.MongoDb;
 using Microwave.UI;
 using ServiceConfig;
 
@@ -24,12 +23,13 @@ namespace Teams.ReadHost.Startup
                 c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
             });
 
-            var domainEvents = new List<IDomainEvent>();
+//            services.AddMicrowavePersistenceLayerMongoDb(c =>
+//            {
+//                c.WithDatabaseName("AllReadModelDb");
+//                c.WithDatabaseName("TeamsReadModelDb");
+//            });
 
-            services.AddMicrowavePersistenceLayerInMemory(c =>
-            {
-                c.WithEventSeeds(domainEvents);
-            });
+            services.AddMicrowavePersistenceLayerInMemory();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
