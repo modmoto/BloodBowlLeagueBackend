@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Persistence.InMemory;
-using Microwave.Persistence.MongoDb;
 using Microwave.UI;
 using ServiceConfig;
 
@@ -22,12 +21,6 @@ namespace Teams.ReadHost.Startup
                 c.WithServiceName("TeamsQuerryService");
                 c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
             });
-
-//            services.AddMicrowavePersistenceLayerMongoDb(c =>
-//            {
-//                c.WithDatabaseName("AllReadModelDb");
-//                c.WithDatabaseName("TeamsReadModelDb");
-//            });
 
             services.AddMicrowavePersistenceLayerInMemory();
 
