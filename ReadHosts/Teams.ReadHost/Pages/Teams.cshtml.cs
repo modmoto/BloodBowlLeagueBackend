@@ -21,10 +21,6 @@ namespace Teams.ReadHost.Pages
             _readModelRepository = readModelRepository;
         }
 
-        public async Task OnGet()
-        {
-        }
-
         public async Task<IActionResult> OnPost()
         {
             var teamId = Request.Form["teamId"];
