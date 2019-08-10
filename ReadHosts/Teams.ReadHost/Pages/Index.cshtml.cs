@@ -44,7 +44,7 @@ namespace Teams.ReadHost.Pages
             var raceId = Request.Form["raceIdDropDownInput"].ToString();
             await _mitigator.PostAsync(
                 new Uri("http://localhost:5001/Api/Teams/create"),
-                new {teamName, trainerName, raceId});
+                new { teamName, trainerName, raceId });
             return Redirect("http://localhost:5000");
         }
     }

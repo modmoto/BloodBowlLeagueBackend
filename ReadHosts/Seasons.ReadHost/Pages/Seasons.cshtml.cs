@@ -55,7 +55,7 @@ namespace Seasons.ReadHost.Pages
             var teamId = Request.Form["teamId"];
             await _mitigator.PostAsync(
                 new Uri($"http://localhost:5004/Api/Seasons/{SeasonId}/add-team"),
-                new {teamId = teamId.ToString()});
+                new { teamId = teamId.ToString() });
             return Redirect(SeasonId.ToString());
         }
 
