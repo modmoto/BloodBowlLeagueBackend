@@ -30,7 +30,7 @@ namespace Host.Players.Startup
             var domainEvents = new List<IDomainEvent>
             {
                 new PlayerConfigCreated(StringIdentity.Create("DE_LineMan"),
-                    new List<StringIdentity>(),
+                    new List<Skill>(),
                     new List<SkillType>
                     {
                         SkillType.General
@@ -41,9 +41,9 @@ namespace Host.Players.Startup
                     }
                 ),
                 new PlayerConfigCreated(StringIdentity.Create("DE_Blitzer"),
-                    new List<StringIdentity>
+                    new List<Skill>
                     {
-                        Skills.Block
+                        Skill.Block
                     },
                     new List<SkillType>
                     {
@@ -55,9 +55,9 @@ namespace Host.Players.Startup
                     }
                 ),
                 new PlayerConfigCreated(StringIdentity.Create("DE_WitchElve"),
-                    new List<StringIdentity>
+                    new List<Skill>
                     {
-                        Skills.Dodge
+                        Skill.Dodge
                     },
                     new List<SkillType>
                     {

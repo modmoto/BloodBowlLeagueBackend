@@ -8,10 +8,10 @@ namespace Domain.Players.Events.Players
     {
         public Identity EntityId => PlayerId;
         public GuidIdentity PlayerId { get; }
-        public StringIdentity NewSkill { get; }
+        public Skill NewSkill { get; }
         public IEnumerable<FreeSkillPoint> RemainingLevelUps { get; }
 
-        public SkillChosen(GuidIdentity playerId, StringIdentity newSkill, IEnumerable<FreeSkillPoint> remainingLevelUps)
+        public SkillChosen(GuidIdentity playerId, Skill newSkill, IEnumerable<FreeSkillPoint> remainingLevelUps)
         {
             PlayerId = playerId;
             NewSkill = newSkill;

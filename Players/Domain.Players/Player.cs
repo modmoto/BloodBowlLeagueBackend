@@ -20,7 +20,7 @@ namespace Domain.Players
         public StringIdentity PlayerTypeId { get; private set; }
         public PlayerConfig PlayerConfig { get; private set; }
         public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
-        public IEnumerable<StringIdentity> CurrentSkills { get; private set; } = new List<StringIdentity>();
+        public IEnumerable<Skill> CurrentSkills { get; private set; } = new List<Skill>();
         public long StarPlayerPoints { get; private set; }
 
         public static DomainResult Create(
@@ -36,7 +36,8 @@ namespace Domain.Players
         public DomainResult ChooseSkill(Skill newSkill)
         {
             if (!FreeSkillPoints.Any()) return DomainResult.Error(new NoLevelUpsAvailable());
-            if (CurrentSkills.Any(s => s == newSkill.SkillId)) return DomainResult.Error(new CanNotPickSkillTwice(CurrentSkills));
+            if (CurrentSkills.Any(s => s.Equals(newSkill))) return DomainResult.Error(
+                new CanNotPickSkillTwice(CurrentSkills.Select(s => s.SkillId)));
 
             foreach (var freeSkillType in FreeSkillPoints)
             {
@@ -44,7 +45,7 @@ namespace Domain.Players
 
                 var skillTypes = FreeSkillPoints.ToList();
                 skillTypes.Remove(freeSkillType);
-                return DomainResult.Ok(new SkillChosen(PlayerId, newSkill.SkillId, skillTypes));
+                return DomainResult.Ok(new SkillChosen(PlayerId, newSkill, skillTypes));
             }
 
             return DomainResult.Error(new SkillNotPickable(FreeSkillPoints));

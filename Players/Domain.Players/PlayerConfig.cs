@@ -15,7 +15,7 @@ namespace Domain.Players
 
         }
 
-        public IEnumerable<StringIdentity> StartingSkills { get; private set; }
+        public IEnumerable<Skill> StartingSkills { get; private set; }
 
         public IEnumerable<SkillType> SkillsOnDefault { get; private set; }
 

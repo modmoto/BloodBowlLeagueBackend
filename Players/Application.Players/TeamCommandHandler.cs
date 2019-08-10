@@ -16,9 +16,8 @@ namespace Application.Players
 
         public async Task LevelUp(GuidIdentity playerId, LevelUpPlayerComand levelUpCommand)
         {
-            var skill = (await _eventStore.LoadAsync<Skill>(levelUpCommand.SkillId)).Value;
             var player = (await _eventStore.LoadAsync<Player>(playerId)).Value;
-            var result = player.ChooseSkill(skill);
+            var result = player.ChooseSkill(Skill.Create(levelUpCommand.SkillId));
 
             (await _eventStore.AppendAsync(result.DomainEvents, (await _eventStore.LoadAsync<Player>(playerId)).Version)).Check();
         }
