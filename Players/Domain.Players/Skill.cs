@@ -14,5 +14,13 @@ namespace Domain.Players
             SkillId = skillCreated.SkillId;
             SkillType = skillCreated.SkillType;
         }
+
+        public static Skill Block => new Skill();
+    }
+
+    public static class Skills
+    {
+        public static StringIdentity Block => StringIdentity.Create("Block");
+        public static StringIdentity Dodge => StringIdentity.Create("Dodge");
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Application.Teams;
-using Application.Teams.RaceConfigSeed;
 using Domain.Teams;
 using Domain.Teams.DomainEvents;
 using Microsoft.AspNetCore.Builder;
@@ -24,7 +23,6 @@ namespace Teams.WriteHost.Startup
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<TeamCommandHandler>();
-            services.AddTransient<RaceConfigSeedHandler>();
             services.AddMicrowaveUi();
 
             services.AddMicrowave(c =>
@@ -70,7 +68,24 @@ namespace Teams.WriteHost.Startup
                     "Rat Bullz",
                     "Silas",
                     new List<AllowedPlayer>(),
-                    new GoldCoins(1000000))
+                    new GoldCoins(1000000)),
+
+                new RaceCreated(StringIdentity.Create("DarkElves"), new List<AllowedPlayer>
+                {
+                    new AllowedPlayer(StringIdentity.Create("DE_LineMan"), 16, new GoldCoins(70000), "Lineman"),
+                    new AllowedPlayer(StringIdentity.Create("DE_Assassine"), 2, new GoldCoins(90000), "Assasine"),
+                    new AllowedPlayer(StringIdentity.Create("DE_Blitzer"), 4, new GoldCoins(100000), "Blitzer"),
+                    new AllowedPlayer(StringIdentity.Create("DE_WitchElve"), 2, new GoldCoins(110000), "Witch Elve")
+                }, "Dark Elves"),
+
+                new RaceCreated(StringIdentity.Create("Humans"), new List<AllowedPlayer>
+                {
+                    new AllowedPlayer(StringIdentity.Create("HU_LineMan"), 16, new GoldCoins(50000), "Lineman"),
+                    new AllowedPlayer(StringIdentity.Create("HU_Blitzer"), 4, new GoldCoins(90000), "Blitzer"),
+                    new AllowedPlayer(StringIdentity.Create("HU_Catcher"), 4, new GoldCoins(70000), "Catcher"),
+                    new AllowedPlayer(StringIdentity.Create("HU_Thrower"), 2, new GoldCoins(70000), "Thrower"),
+                    new AllowedPlayer(StringIdentity.Create("HU_Ogre"), 1, new GoldCoins(70000), "Ogre")
+                }, "Humans")
             };
 
             services.AddMicrowavePersistenceLayerInMemory(c =>
@@ -81,12 +96,6 @@ namespace Teams.WriteHost.Startup
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var raceConfigSeedHandler = serviceScope.ServiceProvider.GetService<RaceConfigSeedHandler>();
-                raceConfigSeedHandler.EnsureRaceConfigSeed().Wait();
-            }
-
             app.UseMicrowaveUi();
             app.UseMvc();
         }

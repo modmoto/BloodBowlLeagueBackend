@@ -6,7 +6,10 @@ namespace Domain.Players.Events.Players
 {
     public class PlayerLeveledUp : IDomainEvent
     {
-        public PlayerLeveledUp(GuidIdentity playerId, IEnumerable<FreeSkillPoint> freeSkillPoints, int newLevel)
+        public PlayerLeveledUp(
+            GuidIdentity playerId,
+            IEnumerable<FreeSkillPoint> freeSkillPoints,
+            int newLevel)
         {
             PlayerId = playerId;
             FreeSkillPoints = freeSkillPoints;
