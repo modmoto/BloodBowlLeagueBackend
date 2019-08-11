@@ -17,14 +17,9 @@ namespace Domain.Players
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as Skill);
+            var skill = obj as Skill;
+            return SkillId == skill?.SkillId;
         }
-
-        private bool Equals(Skill other)
-        {
-            return Equals(SkillId, other.SkillId);
-        }
-
         public override int GetHashCode()
         {
             return SkillId != null ? SkillId.GetHashCode() : 0;
