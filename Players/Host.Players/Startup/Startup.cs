@@ -29,6 +29,7 @@ namespace Host.Players.Startup
 
             var domainEvents = new List<IDomainEvent>
             {
+                // Darkelves
                 new PlayerConfigCreated(StringIdentity.Create("DE_LineMan"),
                     new List<Skill>(),
                     new List<SkillType>
@@ -67,7 +68,149 @@ namespace Host.Players.Startup
                     {
                         SkillType.General
                     }
-                )
+                ),
+
+                // Humans
+                new PlayerConfigCreated(StringIdentity.Create("HU_LineMan"),
+                new List<Skill>(),
+                new List<SkillType>
+                {
+                    SkillType.General
+                },
+                new List<SkillType>
+                {
+                    SkillType.General
+                }
+                ),
+                new PlayerConfigCreated(StringIdentity.Create("HU_Blitzer"),
+                    new List<Skill>
+                    {
+                        Skill.Block
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    }
+                ),
+                new PlayerConfigCreated(StringIdentity.Create("HU_Catcher"),
+                    new List<Skill>
+                    {
+                        Skill.Catch
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    }
+                ),
+                new PlayerConfigCreated(StringIdentity.Create("HU_Thrower"),
+                    new List<Skill>
+                    {
+                        Skill.Throw,
+                        Skill.PickUp
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    }
+                ),
+                new PlayerConfigCreated(StringIdentity.Create("HU_Ogre"),
+                    new List<Skill>
+                    {
+                        Skill.MightyBlow
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    }
+                ),
+
+                // Dwarfs
+                new PlayerConfigCreated(StringIdentity.Create("DW_Blocker"),
+                    new List<Skill>
+                    {
+                        Skill.Block
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    }
+                ),
+                new PlayerConfigCreated(StringIdentity.Create("DW_Runner"),
+                    new List<Skill>
+                    {
+                        Skill.Block
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    }
+                ),
+                new PlayerConfigCreated(StringIdentity.Create("DW_Blitzer"),
+                    new List<Skill>
+                    {
+                        Skill.Catch
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    }
+                ),
+                new PlayerConfigCreated(StringIdentity.Create("DW_TrollSlayer"),
+                    new List<Skill>
+                    {
+                        Skill.Throw,
+                        Skill.PickUp
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    }
+                ),
+                new PlayerConfigCreated(StringIdentity.Create("DW_DeathRoller"),
+                    new List<Skill>
+                    {
+                        Skill.MightyBlow
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    },
+                    new List<SkillType>
+                    {
+                        SkillType.General
+                    })
             };
 
             services.AddMicrowavePersistenceLayerInMemory(c =>
