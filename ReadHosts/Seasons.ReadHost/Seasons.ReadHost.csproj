@@ -7,13 +7,13 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
         <PackageReference Include="Microwave">
-            <Version>0.14.2.1015-beta</Version>
+            <Version>0.14.3</Version>
         </PackageReference>
         <PackageReference Include="Microwave.Persistence.InMemory">
-            <Version>0.14.2.1015-beta</Version>
+            <Version>0.14.3</Version>
         </PackageReference>
         <PackageReference Include="Microwave.UI">
-            <Version>0.14.2.1015-beta</Version>
+            <Version>0.14.3</Version>
         </PackageReference>
     </ItemGroup>
 
