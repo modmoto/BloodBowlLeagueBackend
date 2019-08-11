@@ -31,19 +31,17 @@ namespace Domain.Teams
 
         public DomainResult BuyPlayer(StringIdentity playerTypeId)
         {
-            var player = AllowedPlayers.FirstOrDefault(ap => ap.PlayerTypeId.Equals(playerTypeId));
-            if (player == null) return DomainResult.Error(new CanNotUsePlayerInThisRaceError(playerTypeId));
-            int ammount = PlayerTypes.Count(p => p.Equals(playerTypeId));
+            var playerBuyConfig = AllowedPlayers.FirstOrDefault(ap => ap.PlayerTypeId.Equals(playerTypeId));
+            if (playerBuyConfig == null) return DomainResult.Error(new CanNotUsePlayerInThisRaceError(playerTypeId));
 
-            var canUsePlayer = player.CanUsePlayer(ammount);
-            if (canUsePlayer.Failed) return DomainResult.Error(canUsePlayer.DomainErrors);
+            var amountOfPlayerTypeToBuy = PlayerTypes.Count(p => p.Equals(playerTypeId));
+            if (amountOfPlayerTypeToBuy >= playerBuyConfig.MaximumPlayers) return DomainResult.Error(new TeamFullError(playerBuyConfig.MaximumPlayers));
 
-            if (!player.Cost.LessThan(TeamMoney))
-                return DomainResult.Error(new FewMoneyInTeamChestError(player.Cost.Value, TeamMoney.Value));
+            if (playerBuyConfig.Cost.MoreThan(TeamMoney))
+                return DomainResult.Error(new FewMoneyInTeamChestError(playerBuyConfig.Cost.Value, TeamMoney.Value));
 
-            PlayerTypes = PlayerTypes.Append(playerTypeId);
-            TeamMoney = TeamMoney.Minus(player.Cost);
-            var playerBought = new PlayerBought(TeamId, playerTypeId, GuidIdentity.Create(),  TeamMoney);
+            var newTeamMoney = TeamMoney.Minus(playerBuyConfig.Cost);
+            var playerBought = new PlayerBought(TeamId, playerTypeId, GuidIdentity.Create(), newTeamMoney);
             return DomainResult.Ok(playerBought);
         }
 

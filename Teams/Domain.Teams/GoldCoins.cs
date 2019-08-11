@@ -9,14 +9,14 @@
             Value = value;
         }
 
-        public bool LessThan(GoldCoins otherValue)
-        {
-            return Value < otherValue.Value;
-        }
-
         public GoldCoins Minus(GoldCoins otherCost)
         {
             return new GoldCoins(Value - otherCost.Value);
+        }
+
+        public bool MoreThan(GoldCoins otherValue)
+        {
+            return Value > otherValue.Value;
         }
     }
 }

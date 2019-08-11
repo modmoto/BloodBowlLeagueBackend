@@ -1,33 +1,18 @@
-﻿using System.Collections.Generic;
-using Domain.Teams.DomainErrors;
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
-using Microwave.Domain.Validation;
+﻿using Microwave.Domain.Identities;
 
 namespace Domain.Teams
 {
     public class AllowedPlayer
     {
-        public AllowedPlayer(StringIdentity playerTypeId, int maximumPlayers, GoldCoins cost, string playerDescription)
+        public AllowedPlayer(StringIdentity playerTypeId, int maximumPlayers, GoldCoins cost)
         {
             PlayerTypeId = playerTypeId;
             MaximumPlayers = maximumPlayers;
             Cost = cost;
-            PlayerDescription = playerDescription;
-        }
-
-        public DomainResult CanUsePlayer(int ammount)
-        {
-            var moreThanMax = ammount < MaximumPlayers;
-
-            if (!moreThanMax) return DomainResult.Error(new TeamFullError(MaximumPlayers));
-
-            return DomainResult.Ok(new List<IDomainEvent>());
         }
 
         public StringIdentity PlayerTypeId { get; }
         public int MaximumPlayers { get; }
         public GoldCoins Cost { get; }
-        public string PlayerDescription { get; }
     }
 }

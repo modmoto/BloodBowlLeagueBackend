@@ -79,19 +79,19 @@ namespace Teams.WriteHost.Startup
 
                 new RaceCreated(StringIdentity.Create("DarkElves"), new List<AllowedPlayer>
                 {
-                    new AllowedPlayer(StringIdentity.Create("DE_LineMan"), 16, new GoldCoins(70000), "Lineman"),
-                    new AllowedPlayer(StringIdentity.Create("DE_Assassine"), 2, new GoldCoins(90000), "Assasine"),
-                    new AllowedPlayer(StringIdentity.Create("DE_Blitzer"), 4, new GoldCoins(100000), "Blitzer"),
-                    new AllowedPlayer(StringIdentity.Create("DE_WitchElve"), 2, new GoldCoins(110000), "Witch Elve")
+                    new AllowedPlayer(StringIdentity.Create("DE_LineMan"), 16, new GoldCoins(70000)),
+                    new AllowedPlayer(StringIdentity.Create("DE_Assassine"), 2, new GoldCoins(90000)),
+                    new AllowedPlayer(StringIdentity.Create("DE_Blitzer"), 4, new GoldCoins(100000)),
+                    new AllowedPlayer(StringIdentity.Create("DE_WitchElve"), 2, new GoldCoins(110000))
                 }, "Dark Elves"),
 
                 new RaceCreated(StringIdentity.Create("Humans"), new List<AllowedPlayer>
                 {
-                    new AllowedPlayer(StringIdentity.Create("HU_LineMan"), 16, new GoldCoins(50000), "Lineman"),
-                    new AllowedPlayer(StringIdentity.Create("HU_Blitzer"), 4, new GoldCoins(90000), "Blitzer"),
-                    new AllowedPlayer(StringIdentity.Create("HU_Catcher"), 4, new GoldCoins(70000), "Catcher"),
-                    new AllowedPlayer(StringIdentity.Create("HU_Thrower"), 2, new GoldCoins(70000), "Thrower"),
-                    new AllowedPlayer(StringIdentity.Create("HU_Ogre"), 1, new GoldCoins(70000), "Ogre")
+                    new AllowedPlayer(StringIdentity.Create("HU_LineMan"), 16, new GoldCoins(50000)),
+                    new AllowedPlayer(StringIdentity.Create("HU_Blitzer"), 4, new GoldCoins(90000)),
+                    new AllowedPlayer(StringIdentity.Create("HU_Catcher"), 4, new GoldCoins(70000)),
+                    new AllowedPlayer(StringIdentity.Create("HU_Thrower"), 2, new GoldCoins(70000)),
+                    new AllowedPlayer(StringIdentity.Create("HU_Ogre"), 1, new GoldCoins(70000))
                 }, "Humans")
             };
 
