@@ -18,5 +18,16 @@
         {
             return Value > otherValue.Value;
         }
+
+        public override bool Equals(object obj)
+        {
+            var goldCoins = obj as GoldCoins;
+            return goldCoins?.Value == Value;
+        }
+
+        public override int GetHashCode()
+        {
+            return Value;
+        }
     }
 }
