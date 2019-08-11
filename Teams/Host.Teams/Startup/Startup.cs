@@ -69,6 +69,13 @@ namespace Teams.WriteHost.Startup
                     "Silas",
                     new List<AllowedPlayer>(),
                     new GoldCoins(1000000)),
+                new TeamCreated(
+                    GuidIdentity.Create(new Guid("D5BB0FDA-BBE5-4271-8311-460AE5AD3DDA")),
+                    StringIdentity.Create("Nerds"),
+                    "Spikey Bits",
+                    "Merlin",
+                    new List<AllowedPlayer>(),
+                    new GoldCoins(1000000)),
 
                 new RaceCreated(StringIdentity.Create("DarkElves"), new List<AllowedPlayer>
                 {

@@ -75,11 +75,13 @@ namespace Host.Matches.Startup
 
                 var created2 = Season.Create("Meine frische Season");
                 var season2 = new Season();
-                season2.Apply(created.DomainEvents);
-                var addTeam5 = season2.AddTeam(GuidIdentity.Create(new Guid("2798435C-9C72-4ECE-BD7D-00BECBACCED7")));
+                season2.Apply(created2.DomainEvents);
+                var addTeam5 = season2.AddTeam(GuidIdentity.Create(new Guid("D5BB0FDA-BBE5-4271-8311-460AE5AD3DDA")));
+                var addTeam6 = season2.AddTeam(GuidIdentity.Create(new Guid("38C41447-21F6-4941-BD7E-AC97EF866197")));
 
                 events.AddRange(created2.DomainEvents);
                 events.AddRange(addTeam5.DomainEvents);
+                events.AddRange(addTeam6.DomainEvents);
 
                 return events;
             }
