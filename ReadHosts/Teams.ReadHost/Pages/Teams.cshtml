@@ -9,7 +9,7 @@
     {
          <li class="list-group-item">
              <div>
-                @player.PlayerId Lvl: @player.Level (@player.Skills.Select(s => $"{s.Id}, "))
+                @player.PlayerId Lvl: @player.Level (@string.Join(", ", player.Skills.Select(s => s.Id)))
              </div>
           </li>
      }
