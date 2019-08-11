@@ -6,7 +6,9 @@ using Teams.ReadHost.Teams.Events;
 
 namespace Teams.ReadHost.Teams
 {
-    public class TeamReadModel : ReadModel<TeamCreated>, IHandle<TeamCreated>, IHandle<PlayerBought>
+    public class TeamReadModel : ReadModel<TeamCreated>,
+        IHandle<TeamCreated>,
+        IHandle<PlayerBought>
     {
         public IEnumerable<PlayerDto> PlayerList { get; set; } = new List<PlayerDto>();
         public StringIdentity RaceId { get; set; }

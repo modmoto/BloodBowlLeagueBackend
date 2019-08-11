@@ -2,5 +2,30 @@
 @model Pages.Teams
 
 <div class="my-2 my-lg-0 p-3 ml-auto">
-    <h3 class="pb-3">Team: </h3>
+    <h3 class="pb-3">Team: @Model.Team.TeamName (@Model.Team.TrainerName), G: @Model.Team.TeamChest.Value</h3>
+    <h3>Players:</h3>
+    <ul class="list-group pb-3 mb-1 pl-3">
+    @foreach (var player in Model.Players)
+    {
+         <li class="list-group-item">
+             <div>
+                @player.PlayerId Lvl: @player.Level (@player.Skills.Select(s => $"{s.Id}, "))
+             </div>
+          </li>
+     }
+     </ul>
+     <form method="post">
+         <div class="form-group">
+             <label for="playerTypeSelectBox">Buy a player</label>
+             <select class="form-control" id="playerTypeSelectBox" name="playerType">
+                 @foreach (var playerOption in Model.Team.AllowedPlayers)
+                 {
+                     <option value="@playerOption.PlayerTypeId.Id">
+                         @(playerOption.PlayerTypeId) (@(playerOption.Cost) G)
+                     </option>
+                 }
+             </select>
+           </div>
+         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buy Player</button>
+     </form>
 </div>

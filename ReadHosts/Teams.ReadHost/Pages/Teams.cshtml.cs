@@ -38,7 +38,9 @@ namespace Teams.ReadHost.Pages
             var players = await _readModelRepository.LoadAllAsync<PlayerReadModel>();
 
             var team = result.Value;
-            var playerReadModels = players.Value.Where(p => team.PlayerList.Any(t => t.PlayerId == p.PlayerId));
+            var playersValue = players.Value;
+            var playerReadModels = playersValue.Where(p =>
+                team.PlayerList.Any(a => a.PlayerId == p.PlayerId));
             Players = playerReadModels;
             Team = team;
         }
