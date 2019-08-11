@@ -38,13 +38,13 @@ namespace Domain.Players
         public static Skill Create(StringIdentity skillId)
         {
             var skillClassType = typeof(Skill);
-            var staticSkillCreates = skillClassType.GetProperties(BindingFlags.Static);
+            var staticSkillCreates = skillClassType.GetProperties(BindingFlags.Public | BindingFlags.Static);
             var foundSkill = staticSkillCreates.SingleOrDefault(p => p.Name == skillId.Id);
             if (foundSkill == null) return NullSkill;
             var createdSkill = foundSkill.GetValue(null, null) as Skill;
             return createdSkill;
         }
 
-        private static Skill NullSkill => new Skill(StringIdentity.Create("NotFoundSkill"), default(SkillType));
+        public static Skill NullSkill => new Skill(StringIdentity.Create("NotFoundSkill"), default(SkillType));
     }
 }
