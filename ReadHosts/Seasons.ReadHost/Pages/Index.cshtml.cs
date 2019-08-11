@@ -26,7 +26,7 @@ namespace Seasons.ReadHost.Pages
 
         public async Task OnGetAsync()
         {
-            var loadAll = await _readModelRepository.Load<AllSeasonsOverview>();
+            var loadAll = await _readModelRepository.LoadAsync<AllSeasonsOverview>();
             AllSeasons = loadAll.Is<Ok>() ? loadAll.Value : new AllSeasonsOverview();
         }
 

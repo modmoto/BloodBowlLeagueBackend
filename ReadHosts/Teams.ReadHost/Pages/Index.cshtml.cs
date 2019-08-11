@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microwave.Queries;
-using Newtonsoft.Json;
 using ReadHosts.Common;
 using Teams.ReadHost.Races;
 using Teams.ReadHost.Teams;
@@ -31,8 +28,8 @@ namespace Teams.ReadHost.Pages
 
         public async Task OnGetAsync()
         {
-            var teams = await _readModelRepository.LoadAll<TeamOverviewReadModel>();
-            var races = await _readModelRepository.LoadAll<RaceReadModel>();
+            var teams = await _readModelRepository.LoadAllAsync<TeamOverviewReadModel>();
+            var races = await _readModelRepository.LoadAllAsync<RaceReadModel>();
             AllTeams = teams.Value;
             AllRaces = races.Value;
         }

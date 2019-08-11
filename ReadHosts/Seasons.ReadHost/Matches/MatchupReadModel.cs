@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microwave.Domain.Identities;
 using Microwave.Queries;
 using Seasons.ReadHost.Matches.Events;
 
 namespace Seasons.ReadHost.Matches
 {
-    public class MatchupReadModel : ReadModel,
+    public class MatchupReadModel : ReadModel<MatchCreated>,
         IHandle<MatchFinished>,
         IHandle<MatchStarted>,
         IHandle<MatchCreated>
@@ -37,7 +36,5 @@ namespace Seasons.ReadHost.Matches
             TeamAtHome = domainEvent.TeamAtHome;
             TeamAsGuest = domainEvent.TeamAsGuest;
         }
-
-        public override Type GetsCreatedOn => typeof(MatchCreated);
     }
 }

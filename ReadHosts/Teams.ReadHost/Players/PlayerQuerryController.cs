@@ -18,7 +18,7 @@ namespace Teams.ReadHost.Players
         [HttpGet("{playerId}")]
         public async Task<ActionResult> GetPlayer(GuidIdentity playerId)
         {
-            var player = await _queryRepository.Load<PlayerReadModel>(playerId);
+            var player = await _queryRepository.LoadAsync<PlayerReadModel>(playerId);
             return Ok(player.Value);
         }
     }

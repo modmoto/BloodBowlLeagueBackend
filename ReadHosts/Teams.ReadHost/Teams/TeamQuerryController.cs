@@ -18,14 +18,14 @@ namespace Teams.ReadHost.Teams
         [HttpGet("{teamId}")]
         public async Task<ActionResult> GetTeam(GuidIdentity teamId)
         {
-            var teamQuerry = await _queryRepository.Load<TeamReadModel>(teamId);
+            var teamQuerry = await _queryRepository.LoadAsync<TeamReadModel>(teamId);
             return Ok(teamQuerry.Value);
         }
 
         [HttpGet]
         public async Task<ActionResult> GetTeams()
         {
-            var teamQuerry = await _queryRepository.LoadAll<TeamOverviewReadModel>();
+            var teamQuerry = await _queryRepository.LoadAllAsync<TeamOverviewReadModel>();
             return Ok(teamQuerry.Value);
         }
     }

@@ -1,11 +1,10 @@
-﻿using System;
-using Microwave.Domain.Identities;
+﻿using Microwave.Domain.Identities;
 using Microwave.Queries;
 using Teams.ReadHost.Teams.Events;
 
 namespace Teams.ReadHost.Teams
 {
-    public class TeamOverviewReadModel : ReadModel, IHandle<TeamCreated>
+    public class TeamOverviewReadModel : ReadModel<TeamCreated>, IHandle<TeamCreated>
     {
         public StringIdentity RaceId { get; set; }
         public string TrainerName { get; set; }
@@ -19,7 +18,5 @@ namespace Teams.ReadHost.Teams
             TeamName = domainEvent.TeamName;
             TrainerName = domainEvent.TrainerName;
         }
-
-        public override Type GetsCreatedOn => typeof(TeamCreated);
     }
 }

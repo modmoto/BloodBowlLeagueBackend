@@ -23,7 +23,7 @@ namespace Teams.WriteHost
             return Created($"{Request.Scheme}://{Request.Host}/Api/Teams/{teamId}", teamId);
         }
 
-        [HttpPost("{teamId}/buyPlayer")]
+        [HttpPost("{teamId}/buy-player")]
         public async Task<ActionResult> BuyPlayer(Guid teamId, [FromBody] BuyPlayerCommand buyPlayerCommand)
         {
             buyPlayerCommand.TeamId = GuidIdentity.Create(teamId);

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Domain.Players.Events.PlayerConfigs;
 using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
 
 namespace Domain.Players
 {

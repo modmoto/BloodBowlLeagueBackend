@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microwave.Domain.Identities;
 using Microwave.Queries;
@@ -7,10 +6,11 @@ using Teams.ReadHost.Teams.Events;
 
 namespace Teams.ReadHost.Teams
 {
-    public class TeamReadModel : ReadModel, IHandle<TeamCreated>, IHandle<PlayerBought>
+    public class TeamReadModel : ReadModel<TeamCreated>, IHandle<TeamCreated>, IHandle<PlayerBought>
     {
         public IEnumerable<PlayerDto> PlayerList { get; set; } = new List<PlayerDto>();
         public StringIdentity RaceId { get; set; }
+        public IEnumerable<AllowedPlayer> AllowedPlayers { get; private set; } = new List<AllowedPlayer>();
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
         public Identity TeamId { get; set; }
@@ -23,6 +23,7 @@ namespace Teams.ReadHost.Teams
             TeamName = domainEvent.TeamName;
             TrainerName = domainEvent.TrainerName;
             TeamChest = domainEvent.StartingMoney;
+            AllowedPlayers = domainEvent.AllowedPlayers;
         }
 
         public void Handle(PlayerBought domainEvent)
@@ -31,7 +32,5 @@ namespace Teams.ReadHost.Teams
             var playerDto = new PlayerDto(domainEvent.PlayerId, domainEvent.PlayerTypeId);
             PlayerList = PlayerList.Append(playerDto);
         }
-
-        public override Type GetsCreatedOn => typeof(TeamCreated);
     }
 }

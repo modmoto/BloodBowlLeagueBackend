@@ -18,14 +18,14 @@ namespace Seasons.ReadHost.Matches
         [HttpGet("{matchupId}")]
         public async Task<ActionResult> GetSeason(GuidIdentity matchupId)
         {
-            var teamQuerry = await _queryRepository.Load<MatchupReadModel>(matchupId);
+            var teamQuerry = await _queryRepository.LoadAsync<MatchupReadModel>(matchupId);
             return Ok(teamQuerry.Value);
         }
 
         [HttpGet]
         public async Task<ActionResult> GetSeasons()
         {
-            var teamQuerry = await _queryRepository.LoadAll<MatchupReadModel>();
+            var teamQuerry = await _queryRepository.LoadAllAsync<MatchupReadModel>();
             return Ok(teamQuerry.Value);
         }
     }

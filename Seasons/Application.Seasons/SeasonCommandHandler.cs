@@ -33,7 +33,7 @@ namespace Application.Matches
         {
             var seasonResult = await _eventStore.LoadAsync<Season>(command.SeasonId);
             var season = seasonResult.Value;
-            var team = (await _readModelRepository.Load<TeamReadModel>(command.TeamId)).Value;
+            var team = (await _readModelRepository.LoadAsync<TeamReadModel>(command.TeamId)).Value;
             var domainResult = season.AddTeam(team.TeamId);
             (await _eventStore.AppendAsync(domainResult.DomainEvents, seasonResult.Version)).Check();
         }

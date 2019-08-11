@@ -34,8 +34,8 @@ namespace Application.Matches
         {
             var eventStoreResult = await _eventStore.LoadAsync<Matchup>(command.MatchId);
             var match = eventStoreResult.Value;
-            var homeTeam = (await _readModelRepository.Load<TeamReadModel>(match.TeamAtHome)).Value;
-            var guestTeam = (await _readModelRepository.Load<TeamReadModel>(match.TeamAsGuest)).Value;
+            var homeTeam = (await _readModelRepository.LoadAsync<TeamReadModel>(match.TeamAtHome)).Value;
+            var guestTeam = (await _readModelRepository.LoadAsync<TeamReadModel>(match.TeamAsGuest)).Value;
 
             var domainResult = match.Start(homeTeam, guestTeam);
             var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, eventStoreResult.Version);
@@ -44,8 +44,8 @@ namespace Application.Matches
 
         public async Task<Identity> CreateMatches(CreateMatchCommand command)
         {
-            var homeTeam = (await _readModelRepository.Load<TeamReadModel>(command.HomeTeam)).Value;
-            var guestTeam = (await _readModelRepository.Load<TeamReadModel>(command.GuestTeam)).Value;
+            var homeTeam = (await _readModelRepository.LoadAsync<TeamReadModel>(command.HomeTeam)).Value;
+            var guestTeam = (await _readModelRepository.LoadAsync<TeamReadModel>(command.GuestTeam)).Value;
             var domainResult = Matchup.Create(homeTeam, guestTeam);
             var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             storeResult.Check();

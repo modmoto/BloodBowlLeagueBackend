@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microwave.Domain.Identities;
@@ -7,7 +6,7 @@ using Teams.ReadHost.Players.Events;
 
 namespace Teams.ReadHost.Players
 {
-    public class PlayerReadModel : ReadModel,
+    public class PlayerReadModel : ReadModel<PlayerCreated>,
         IHandle<PlayerCreated>,
         IHandle<SkillChosen>,
         IHandle<PlayerLeveledUp>
@@ -17,7 +16,6 @@ namespace Teams.ReadHost.Players
         public StringIdentity PlayerTypeId{ get; private set; }
         public IEnumerable<StringIdentity> Skills { get; private set; } = new List<StringIdentity>();
         public int Level { get; set; }
-        public override Type GetsCreatedOn => typeof(PlayerCreated);
 
         public void Handle(PlayerCreated domainEvent)
         {
