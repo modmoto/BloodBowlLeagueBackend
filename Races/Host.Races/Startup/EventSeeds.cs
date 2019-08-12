@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using Domain.Races;
-using Domain.Races.DomainEvents;
+using Domain.Races.Races;
+using Domain.Races.Races.DomainEvents;
+using Domain.Races.Skills;
+using Domain.Races.Skills.DomainEvents;
 using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 
@@ -42,6 +45,14 @@ namespace Teams.WriteHost.Startup
                 var events = new List<IDomainEvent>
                 {
                     darkElvesCreated,
+                    Skill.Block,
+                    Skill.Catch,
+                    Skill.Dodge,
+                    Skill.Pass,
+                    Skill.Throw,
+                    Skill.MightyBlow,
+                    Skill.PickUp,
+                    Skill.PlusOneStrength,
 //                    humansCreated,
 //                    dwarfsCreated
                 };

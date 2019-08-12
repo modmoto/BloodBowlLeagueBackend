@@ -20,7 +20,7 @@ namespace Domain.Players
         public GuidIdentity PlayerId { get; private set; }
         public PlayerConfig PlayerConfig { get; private set; }
         public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
-        public IEnumerable<Skill> CurrentSkills { get; private set; } = new List<Skill>();
+        public IEnumerable<SkillReadModel> CurrentSkills { get; private set; } = new List<SkillReadModel>();
         public long StarPlayerPoints { get; private set; }
 
         public static DomainResult Create(
@@ -37,7 +37,7 @@ namespace Domain.Players
             return DomainResult.Ok(playerCreated);
         }
 
-        public DomainResult ChooseSkill(Skill newSkill)
+        public DomainResult ChooseSkill(SkillReadModel newSkill)
         {
             if (!FreeSkillPoints.Any()) return DomainResult.Error(new NoLevelUpsAvailable());
             if (CurrentSkills.Any(s => s.Equals(newSkill))) return DomainResult.Error(
@@ -55,7 +55,7 @@ namespace Domain.Players
             return DomainResult.Error(new SkillNotPickable(FreeSkillPoints));
         }
 
-        private bool HasPlayerFreeSkillForChosenSkill(Skill newSkill, FreeSkillPoint freeSkillType)
+        private bool HasPlayerFreeSkillForChosenSkill(SkillReadModel newSkill, FreeSkillPoint freeSkillType)
         {
             switch (freeSkillType)
             {
@@ -74,12 +74,12 @@ namespace Domain.Players
             }
         }
 
-        private bool PlayerCanPickNormalSkill(Skill newSkill)
+        private bool PlayerCanPickNormalSkill(SkillReadModel newSkill)
         {
             return PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType);
         }
 
-        private bool PlayerCanPickAgility(Skill newSkill)
+        private bool PlayerCanPickAgility(SkillReadModel newSkill)
         {
             if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) return true;
             if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) return true;
@@ -88,7 +88,7 @@ namespace Domain.Players
             return false;
         }
 
-        private bool PlayerCanPickArmorOrMovement(Skill newSkill)
+        private bool PlayerCanPickArmorOrMovement(SkillReadModel newSkill)
         {
             if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) return true;
             if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) return true;
@@ -96,7 +96,7 @@ namespace Domain.Players
             return false;
         }
 
-        private bool PlayerCanPickDoubleSkill(Skill newSkill)
+        private bool PlayerCanPickDoubleSkill(SkillReadModel newSkill)
         {
             if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) return true;
             if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) return true;

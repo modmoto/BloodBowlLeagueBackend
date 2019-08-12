@@ -1,4 +1,4 @@
-﻿namespace Domain.Races
+﻿namespace Domain.Races.Races
 {
     public class GoldCoins
     {

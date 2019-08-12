@@ -1,4 +1,4 @@
-namespace Domain.Races
+namespace Domain.Races.Skills
 {
     public enum SkillType
     {

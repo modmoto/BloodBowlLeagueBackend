@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using Domain.Races.Skills;
 using Microwave.Domain.Identities;
 
-namespace Domain.Races
+namespace Domain.Races.Races
 {
     public class AllowedPlayer
     {
@@ -42,7 +43,7 @@ namespace Domain.Races
                 StringIdentity.Create("DE_Assassine"),
                 2,
                 new GoldCoins(90000),
-                new [] { Skill.Dodge },
+                new [] { Skill.Create(Skill.Dodge) },
                 new [] { SkillType.General },
                 new [] { SkillType.General });
 
@@ -51,7 +52,7 @@ namespace Domain.Races
                 StringIdentity.Create("DE_Blitzer"),
                 4,
                 new GoldCoins(100000),
-                new [] { Skill.Block },
+                new [] { Skill.Create(Skill.Block) },
                 new [] { SkillType.General },
                 new [] { SkillType.General });
 
@@ -60,7 +61,7 @@ namespace Domain.Races
                 StringIdentity.Create("DE_WitchElve"),
                 2,
                 new GoldCoins(110000),
-                new [] { Skill.Dodge },
+                new [] { Skill.Create(Skill.Dodge) },
                 new [] { SkillType.General },
                 new [] { SkillType.General });
     }

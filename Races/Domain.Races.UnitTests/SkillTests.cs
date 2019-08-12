@@ -1,7 +1,8 @@
+using Domain.Races.Skills;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microwave.Domain.Identities;
 
-namespace Domain.Players.UnitTests
+namespace Domain.Races.UnitTests
 {
     [TestClass]
     public class SkillTests

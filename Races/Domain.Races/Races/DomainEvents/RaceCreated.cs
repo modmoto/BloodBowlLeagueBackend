@@ -2,7 +2,7 @@
 using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 
-namespace Domain.Races.DomainEvents
+namespace Domain.Races.Races.DomainEvents
 {
     public class RaceCreated : IDomainEvent
     {

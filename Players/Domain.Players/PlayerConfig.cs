@@ -7,7 +7,7 @@ namespace Domain.Players
     {
         public PlayerConfig(
             StringIdentity playerTypeId,
-            IEnumerable<Skill> startingSkills,
+            IEnumerable<SkillReadModel> startingSkills,
             IEnumerable<SkillType> skillsOnDefault,
             IEnumerable<SkillType> skillsOnDouble)
         {
@@ -18,7 +18,7 @@ namespace Domain.Players
         }
 
         public StringIdentity PlayerTypeId { get; }
-        public IEnumerable<Skill> StartingSkills { get; }
+        public IEnumerable<SkillReadModel> StartingSkills { get; }
         public IEnumerable<SkillType> SkillsOnDefault { get; }
         public IEnumerable<SkillType> SkillsOnDouble { get; }
     }

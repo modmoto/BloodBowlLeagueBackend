@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Domain.Races.DomainEvents;
+using Domain.Races.Races.DomainEvents;
 using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 
-namespace Domain.Races
+namespace Domain.Races.Races
 {
     public class Race : Entity, IApply<RaceCreated>
     {
