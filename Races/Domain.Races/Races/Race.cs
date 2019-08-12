@@ -12,7 +12,7 @@ namespace Domain.Races.Races
 
         public void Apply(RaceCreated raceCreated)
         {
-            Id = raceCreated.RaceConfigId;
+            Id = raceCreated.RaceId;
             AllowedPlayers = raceCreated.AllowedPlayers;
         }
     }

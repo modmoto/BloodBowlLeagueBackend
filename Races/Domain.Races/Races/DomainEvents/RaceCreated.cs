@@ -6,15 +6,15 @@ namespace Domain.Races.Races.DomainEvents
 {
     public class RaceCreated : IDomainEvent
     {
-        public RaceCreated(StringIdentity raceConfigId, IEnumerable<AllowedPlayer> allowedPlayers)
+        public RaceCreated(StringIdentity raceId, IEnumerable<AllowedPlayer> allowedPlayers)
         {
             AllowedPlayers = allowedPlayers;
-            RaceConfigId = raceConfigId;
+            RaceId = raceId;
         }
 
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; }
 
-        public Identity EntityId => RaceConfigId;
-        public StringIdentity RaceConfigId { get; }
+        public Identity EntityId => RaceId;
+        public StringIdentity RaceId { get; }
     }
 }
