@@ -20,7 +20,7 @@ namespace Teams.WriteHost.Startup
 
             services.AddMicrowave(c =>
             {
-                c.WithServiceName("TeamService");
+                c.WithServiceName("RaceService");
                 c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
             });
 
