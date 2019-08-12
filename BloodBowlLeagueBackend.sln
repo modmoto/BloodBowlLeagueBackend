@@ -54,8 +54,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Teams.UnitTests", "T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Races", "Races", "{D67ADD6B-1317-4308-BB42-37BFB34DE7CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host.Races", "Races\Host.Races\Host.Races.csproj", "{57A5159E-E660-4BEF-B768-29BCF0061B5E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Races", "Races\Domain.Races\Domain.Races.csproj", "{BD579BB1-E9BB-4001-A5F1-A7508B990C2A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host.Races", "Races\Host.Races\Host.Races.csproj", "{C8A47A88-617A-456D-8ACE-FC6BB9307021}"
