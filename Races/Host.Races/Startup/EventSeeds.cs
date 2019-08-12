@@ -24,27 +24,31 @@ namespace Teams.WriteHost.Startup
                             AllowedPlayer.DarkElveWitchElve
                         });
 
-//                var humansCreated = new RaceCreated(StringIdentity.Create("Humans"), new List<AllowedPlayer>
-//                {
-//                    new AllowedPlayer(StringIdentity.Create("HU_LineMan"), 16, new GoldCoins(50000)),
-//                    new AllowedPlayer(StringIdentity.Create("HU_Blitzer"), 4, new GoldCoins(90000)),
-//                    new AllowedPlayer(StringIdentity.Create("HU_Catcher"), 4, new GoldCoins(70000)),
-//                    new AllowedPlayer(StringIdentity.Create("HU_Thrower"), 2, new GoldCoins(70000)),
-//                    new AllowedPlayer(StringIdentity.Create("HU_Ogre"), 1, new GoldCoins(70000))
-//                });
-//
-//                var dwarfsCreated = new RaceCreated(StringIdentity.Create("Dwarfs"), new List<AllowedPlayer>
-//                {
-//                    new AllowedPlayer(StringIdentity.Create("DW_Blocker"), 16, new GoldCoins(70000)),
-//                    new AllowedPlayer(StringIdentity.Create("DW_Runner"), 2, new GoldCoins(80000)),
-//                    new AllowedPlayer(StringIdentity.Create("DW_Blitzer"), 2, new GoldCoins(80000)),
-//                    new AllowedPlayer(StringIdentity.Create("DW_TrollSlayer"), 2, new GoldCoins(90000)),
-//                    new AllowedPlayer(StringIdentity.Create("DW_DeathRoller"), 1, new GoldCoins(160000))
-//                });
+                var humansCreated = new RaceCreated(StringIdentity.Create("Humans"),
+                    new List<AllowedPlayer>
+                    {
+                        AllowedPlayer.HumanBlitzer,
+                        AllowedPlayer.HumanCatcher,
+                        AllowedPlayer.HumanOgre,
+                        AllowedPlayer.HumanThrower,
+                        AllowedPlayer.HumanLineMan
+                    });
+
+                var dwarfsCreated = new RaceCreated(StringIdentity.Create("Dwarfs"),
+                    new List<AllowedPlayer>
+                    {
+                        AllowedPlayer.DwarfBlitzer,
+                        AllowedPlayer.DwarfBlocker,
+                        AllowedPlayer.DwarfRunner,
+                        AllowedPlayer.DwarfTrollSlayer,
+                        AllowedPlayer.DwarfDeathRoller,
+                    });
 
                 var events = new List<IDomainEvent>
                 {
                     darkElvesCreated,
+                    humansCreated,
+                    dwarfsCreated,
                     Skill.Block,
                     Skill.Catch,
                     Skill.Dodge,
@@ -53,8 +57,6 @@ namespace Teams.WriteHost.Startup
                     Skill.MightyBlow,
                     Skill.PickUp,
                     Skill.PlusOneStrength,
-//                    humansCreated,
-//                    dwarfsCreated
                 };
                 return events;
             }
