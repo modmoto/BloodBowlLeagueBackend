@@ -6,7 +6,7 @@ namespace Domain.Players
 {
     public class Skill
     {
-        private Skill(StringIdentity skillId, SkillType skillType)
+        public Skill(StringIdentity skillId, SkillType skillType)
         {
             SkillId = skillId;
             SkillType = skillType;
@@ -14,16 +14,6 @@ namespace Domain.Players
 
         public StringIdentity SkillId { get; }
         public SkillType SkillType { get; }
-
-        public override bool Equals(object obj)
-        {
-            var skill = obj as Skill;
-            return SkillId == skill?.SkillId;
-        }
-        public override int GetHashCode()
-        {
-            return SkillId != null ? SkillId.GetHashCode() : 0;
-        }
 
         public static Skill Create(StringIdentity skillId)
         {
