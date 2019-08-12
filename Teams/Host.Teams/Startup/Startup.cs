@@ -43,6 +43,7 @@ namespace Teams.WriteHost.Startup
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseMicrowaveUi();
+            app.RunMicrowaveQueries();
             app.UseMvc();
         }
     }
