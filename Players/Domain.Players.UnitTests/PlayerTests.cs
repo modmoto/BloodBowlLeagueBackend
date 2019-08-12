@@ -13,11 +13,38 @@ namespace Domain.Players.UnitTests
         public void LevelUp_NoSkillAvailable()
         {
             var player = new Player();
-            var skillLevelUp = Skill.Block;
+            var skillLevelUp = Block();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
 
             Assert.IsFalse(domainResult.IsOk);
+        }
+
+        private static SkillReadModel Block()
+        {
+            return new SkillReadModel
+            {
+                SkillId = StringIdentity.Create("Block"),
+                SkillType = SkillType.General
+            };
+        }
+
+        private static SkillReadModel PlusOneStrength()
+        {
+            return new SkillReadModel
+            {
+                SkillId = StringIdentity.Create("PlusOneStrength"),
+                SkillType = SkillType.PlusOneStrength
+            };
+        }
+
+        private static SkillReadModel Pass()
+        {
+            return new SkillReadModel
+            {
+                SkillId = StringIdentity.Create("Pass"),
+                SkillType = SkillType.Passing
+            };
         }
 
         [TestMethod]
@@ -25,7 +52,7 @@ namespace Domain.Players.UnitTests
         {
             var player = new Player();
             player.Apply(PlayerLeveledUp(new [] { FreeSkillPoint.PlusOneStrength }));
-            var skillLevelUp = Skill.PlusOneStrength;
+            var skillLevelUp = PlusOneStrength();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
 
@@ -38,7 +65,7 @@ namespace Domain.Players.UnitTests
         {
             var player = new Player();
             player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.PlusOneStrength }));
-            var skillLevelUp = Skill.Pass;
+            var skillLevelUp = Pass();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
 
@@ -52,7 +79,7 @@ namespace Domain.Players.UnitTests
             var player = new Player();
             player.Apply(PlayerCreated());
             player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.PlusOneArmorOrMovement }));
-            var skillLevelUp = Skill.PlusOneStrength;
+            var skillLevelUp = PlusOneStrength();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
 
@@ -65,7 +92,7 @@ namespace Domain.Players.UnitTests
             var player = new Player();
             player.Apply(PlayerCreated());
             player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Double }));
-            var skillLevelUp = Skill.Block;
+            var skillLevelUp = Block();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
 
@@ -78,7 +105,7 @@ namespace Domain.Players.UnitTests
             var player = new Player();
             player.Apply(PlayerCreated());
             player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Double }));
-            var skillLevelUp = Skill.Pass;
+            var skillLevelUp = Pass();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
 
@@ -91,7 +118,7 @@ namespace Domain.Players.UnitTests
             var player = new Player();
             player.Apply(PlayerCreated());
             player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Normal }));
-            var skillLevelUp = Skill.Pass;
+            var skillLevelUp = Pass();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
 
@@ -105,9 +132,9 @@ namespace Domain.Players.UnitTests
             player.Apply(PlayerCreated());
             player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Normal }));
             player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Normal }));
-            player.Apply(SkillPicked(Skill.Block));
+            player.Apply(SkillPicked(Block()));
 
-            var skillLevelUp = Skill.Block;
+            var skillLevelUp = Block();
 
             var domainResult2 = player.ChooseSkill(skillLevelUp);
 
@@ -119,7 +146,7 @@ namespace Domain.Players.UnitTests
             return new PlayerLeveledUp(GuidIdentity.Create(), freeSkillPoints ?? new []{ FreeSkillPoint.PlusOneStrength }, 2);
         }
 
-        private static SkillChosen SkillPicked(Skill skill)
+        private static SkillChosen SkillPicked(SkillReadModel skill)
         {
             return new SkillChosen(GuidIdentity.Create(), skill, new List<FreeSkillPoint>());
         }
@@ -130,7 +157,7 @@ namespace Domain.Players.UnitTests
         {
             var playerConfig = new PlayerConfig(
                 StringIdentity.Create("whatever"),
-                new List<Skill>(),
+                new List<SkillReadModel>(),
                 defaultSkills ?? new[] {SkillType.General},
                 doubleSkills ?? new[] {SkillType.Passing});
             return playerConfig;
