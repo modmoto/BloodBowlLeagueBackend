@@ -23,7 +23,10 @@ namespace Application.Teams
         {
             var readModelResult = await _readModelRepository.LoadAsync<RaceReadModel>(createTeamCommand.RaceId);
             var race = readModelResult.Value;
-            var domainResult = Team.Create(race.RaceId, createTeamCommand.TeamName, createTeamCommand.TrainerName, race.AllowedPlayers);
+            var domainResult = Team.Create(
+                race.RaceConfigId,
+                createTeamCommand.TeamName,
+                createTeamCommand.TrainerName, race.AllowedPlayers);
             await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
             return domainResult.DomainEvents.First().EntityId;
         }

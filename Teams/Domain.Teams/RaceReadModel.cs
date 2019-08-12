@@ -1,23 +1,19 @@
 ﻿using System.Collections.Generic;
-using Domain.Teams.DomainEvents;
 using Domain.Teams.ForeignEvents;
-using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 using Microwave.Queries;
 
 namespace Domain.Teams
 {
-    public class RaceReadModel :
-        ReadModel<RaceCreated>,
-        IHandle<RaceCreated>
+    public class RaceReadModel : ReadModel<RaceCreated>, IHandle<RaceCreated>
     {
-        public IEnumerable<AllowedPlayer> AllowedPlayers { get; private set; } = new List<AllowedPlayer>();
-        public StringIdentity RaceId { get; private set; }
+        public StringIdentity RaceConfigId { get; set; }
+        public IEnumerable<AllowedPlayer> AllowedPlayers { get; set; }
 
-        public void Handle(RaceCreated raceCreated)
+        public void Handle(RaceCreated domainEvent)
         {
-            RaceId = raceCreated.RaceId;
-            AllowedPlayers = raceCreated.AllowedPlayers;
+            RaceConfigId = domainEvent.RaceId;
+            AllowedPlayers = domainEvent.AllowedPlayers;
         }
     }
 }
