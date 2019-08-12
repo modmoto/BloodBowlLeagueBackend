@@ -6,7 +6,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microwave.WebApi">
-        <Version>0.14.3</Version>
+        <Version>0.14.4</Version>
       </PackageReference>
     </ItemGroup>
 

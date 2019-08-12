@@ -47,12 +47,12 @@ namespace Teams.ReadHost.Pages
 
         public async Task<IActionResult> OnPost()
         {
-            var teamId = Request.Form["playerType"];
+            var playerTypeId = Request.Form["playerType"].ToString();
             var result = await _readModelRepository.LoadAsync<TeamReadModel>(GuidIdentity.Create(TeamId));
 
             await _mitigator.PostAsync(
                 new Uri($"http://localhost:5001/Api/Teams/{TeamId}/buy-player"),
-                new { playerTypeId = teamId.ToString(), TeamVersion = result.Value.Version });
+                new { playerTypeId , TeamVersion = result.Value.Version });
             return Redirect(TeamId.ToString());
         }
     }
