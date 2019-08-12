@@ -8,7 +8,8 @@ using Microwave.Domain.Validation;
 
 namespace Domain.Players
 {
-    public class Player : Entity, IApply<PlayerCreated>,
+    public class Player : Entity,
+        IApply<PlayerCreated>,
         IApply<PlayerLeveledUp>,
         IApply<SkillChosen>,
         IApply<PlayerPassed>,
@@ -17,7 +18,6 @@ namespace Domain.Players
         IApply<PlayerMadeCasualty>
     {
         public GuidIdentity PlayerId { get; private set; }
-        public StringIdentity PlayerTypeId { get; private set; }
         public PlayerConfig PlayerConfig { get; private set; }
         public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
         public IEnumerable<Skill> CurrentSkills { get; private set; } = new List<Skill>();
@@ -26,10 +26,14 @@ namespace Domain.Players
         public static DomainResult Create(
             GuidIdentity playerId,
             GuidIdentity teamId,
-            StringIdentity playerTypeId,
-            PlayerConfig playerConfig)
+            AllowedPlayer allowedPlayer)
         {
-            var playerCreated = new PlayerCreated(playerId, teamId, playerTypeId, playerConfig);
+            var playerConfig = new PlayerConfig(
+                allowedPlayer.PlayerTypeId,
+                allowedPlayer.StartingSkills,
+                allowedPlayer.SkillsOnDefault,
+                allowedPlayer.SkillsOnDouble);
+            var playerCreated = new PlayerCreated(playerId, teamId, playerConfig);
             return DomainResult.Ok(playerCreated);
         }
 
@@ -148,7 +152,6 @@ namespace Domain.Players
         public void Apply(PlayerCreated playerCreated)
         {
             PlayerId = playerCreated.PlayerId;
-            PlayerTypeId = playerCreated.PlayerTypeId;
             CurrentSkills = playerCreated.PlayerConfig.StartingSkills;
             PlayerConfig = playerCreated.PlayerConfig;
         }

@@ -4,21 +4,24 @@ using Domain.Teams;
 using Domain.Teams.DomainEvents;
 using Microwave.Domain.Identities;
 using Microwave.EventStores;
+using Microwave.Queries;
 
 namespace Application.Teams
 {
     public class TeamCommandHandler
     {
         private readonly IEventStore _eventStore;
+        private readonly IReadModelRepository _readModelRepository;
 
-        public TeamCommandHandler(IEventStore eventStore)
+        public TeamCommandHandler(IEventStore eventStore, IReadModelRepository readModelRepository)
         {
             _eventStore = eventStore;
+            _readModelRepository = readModelRepository;
         }
 
         public async Task<Identity> CreateTeam(CreateTeamCommand createTeamCommand)
         {
-            var readModelResult = await _eventStore.LoadAsync<RaceConfig>(createTeamCommand.RaceId);
+            var readModelResult = await _readModelRepository.LoadAsync<RaceReadModel>(createTeamCommand.RaceId);
             var race = readModelResult.Value;
             var domainResult = Team.Create(race.Id, createTeamCommand.TeamName, createTeamCommand.TrainerName, race.AllowedPlayers);
             await _eventStore.AppendAsync(domainResult.DomainEvents, 0);

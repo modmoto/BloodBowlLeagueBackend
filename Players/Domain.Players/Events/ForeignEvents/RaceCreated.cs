@@ -2,7 +2,7 @@
 using Microwave.Domain.Identities;
 using Microwave.Queries;
 
-namespace Domain.Teams.DomainEvents
+namespace Domain.Players.Events.ForeignEvents
 {
     public class RaceCreated : ISubscribedDomainEvent
     {

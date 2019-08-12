@@ -1,47 +1,39 @@
-﻿using System.Collections.Generic;
-using Application.Players;
-using Domain.Players;
-using Domain.Players.Events.ForeignEvents;
+﻿using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
+using Microwave.EventStores.SnapShots;
 using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using ServiceConfig;
 
-namespace Host.Players.Startup
+namespace Teams.WriteHost.Startup
 {
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMicrowaveUi();
 
             services.AddMicrowave(c =>
             {
-                c.WithServiceName("PlayerService");
+                c.WithServiceName("TeamService");
                 c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
             });
 
-            var domainEvents = new List<IDomainEvent>();
+            var domainEvents = EventSeeds.Seeds;
 
             services.AddMicrowavePersistenceLayerInMemory(c =>
             {
                 c.WithEventSeeds(domainEvents);
             });
-
-            services.AddMicrowaveUi();
-
-            services.AddTransient<PlayerCommandHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.RunMicrowaveQueries();
             app.UseMicrowaveUi();
             app.UseMvc();
         }

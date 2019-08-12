@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Domain.Players.Events.PlayerConfigs;
 using Domain.Players.Events.Players;
 using Microwave.Domain.Identities;
 
@@ -129,13 +128,11 @@ namespace Domain.Players.UnitTests
             IEnumerable<SkillType> defaultSkills = null,
             IEnumerable<SkillType> doubleSkills = null)
         {
-            var playerConfig = new PlayerConfig();
-            var playerTypeId = StringIdentity.Create("whatever");
-            playerConfig.Apply(new PlayerConfigCreated(
-                playerTypeId,
+            var playerConfig = new PlayerConfig(
+                StringIdentity.Create("whatever"),
                 new List<Skill>(),
                 defaultSkills ?? new[] {SkillType.General},
-                doubleSkills ?? new[] {SkillType.Passing}));
+                doubleSkills ?? new[] {SkillType.Passing});
             return playerConfig;
         }
 
@@ -144,7 +141,7 @@ namespace Domain.Players.UnitTests
             IEnumerable<SkillType> doubleSkills = null)
         {
             var playerConfig = PlayerConfig(defaultSkills, doubleSkills);
-            return new PlayerCreated(GuidIdentity.Create(), GuidIdentity.Create(), StringIdentity.Create("whatever"), playerConfig);
+            return new PlayerCreated(GuidIdentity.Create(), GuidIdentity.Create(), playerConfig);
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 
-namespace Domain.Players.Events.PlayerConfigs
+namespace Domain.Races.DomainEvents
 {
     public class PlayerConfigCreated : IDomainEvent
     {
