@@ -1,13 +1,11 @@
 using System.Collections.Generic;
-using Domain.Races;
 using Domain.Races.Races;
 using Domain.Races.Races.DomainEvents;
 using Domain.Races.Skills;
-using Domain.Races.Skills.DomainEvents;
 using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 
-namespace Teams.WriteHost.Startup
+namespace Host.Races.Startup
 {
     public class EventSeeds
     {
@@ -15,40 +13,11 @@ namespace Teams.WriteHost.Startup
         {
             get
             {
-                var darkElvesCreated = new RaceCreated(StringIdentity.Create("DarkElves"),
-                    new List<AllowedPlayer>
-                        {
-                            AllowedPlayer.DarkElveAssasine,
-                            AllowedPlayer.DarkElveBlitzer,
-                            AllowedPlayer.DarkElveLineMan,
-                            AllowedPlayer.DarkElveWitchElve
-                        });
-
-                var humansCreated = new RaceCreated(StringIdentity.Create("Humans"),
-                    new List<AllowedPlayer>
-                    {
-                        AllowedPlayer.HumanBlitzer,
-                        AllowedPlayer.HumanCatcher,
-                        AllowedPlayer.HumanOgre,
-                        AllowedPlayer.HumanThrower,
-                        AllowedPlayer.HumanLineMan
-                    });
-
-                var dwarfsCreated = new RaceCreated(StringIdentity.Create("Dwarfs"),
-                    new List<AllowedPlayer>
-                    {
-                        AllowedPlayer.DwarfBlitzer,
-                        AllowedPlayer.DwarfBlocker,
-                        AllowedPlayer.DwarfRunner,
-                        AllowedPlayer.DwarfTrollSlayer,
-                        AllowedPlayer.DwarfDeathRoller,
-                    });
-
                 var events = new List<IDomainEvent>
                 {
-                    darkElvesCreated,
-                    humansCreated,
-                    dwarfsCreated,
+                    DarkElfTeam,
+                    HumanTeam,
+                    DwarfTeam,
                     Skill.Block,
                     Skill.Catch,
                     Skill.Dodge,
@@ -61,5 +30,34 @@ namespace Teams.WriteHost.Startup
                 return events;
             }
         }
+
+        public static IDomainEvent DwarfTeam => new RaceCreated(StringIdentity.Create("Dwarfs"),
+            new List<AllowedPlayer>
+            {
+                AllowedPlayer.DwarfBlitzer,
+                AllowedPlayer.DwarfBlocker,
+                AllowedPlayer.DwarfRunner,
+                AllowedPlayer.DwarfTrollSlayer,
+                AllowedPlayer.DwarfDeathRoller,
+            });
+
+        public static IDomainEvent HumanTeam => new RaceCreated(StringIdentity.Create("Humans"),
+            new List<AllowedPlayer>
+            {
+                AllowedPlayer.HumanBlitzer,
+                AllowedPlayer.HumanCatcher,
+                AllowedPlayer.HumanOgre,
+                AllowedPlayer.HumanThrower,
+                AllowedPlayer.HumanLineMan
+            });
+
+        public static IDomainEvent DarkElfTeam => new RaceCreated(StringIdentity.Create("DarkElves"),
+            new List<AllowedPlayer>
+            {
+                AllowedPlayer.DarkElveAssasine,
+                AllowedPlayer.DarkElveBlitzer,
+                AllowedPlayer.DarkElveLineMan,
+                AllowedPlayer.DarkElveWitchElve
+            });
     }
 }

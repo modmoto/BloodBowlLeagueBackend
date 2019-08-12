@@ -3,7 +3,6 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <DebugType>full</DebugType>
-        <RootNamespace>Teams.WriteHost</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

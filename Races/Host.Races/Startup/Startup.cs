@@ -1,15 +1,13 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Microwave.EventStores.SnapShots;
 using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using ServiceConfig;
 
-namespace Teams.WriteHost.Startup
+namespace Host.Races.Startup
 {
     public class Startup
     {

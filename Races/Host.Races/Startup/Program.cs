@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Teams.WriteHost.Startup
+namespace Host.Races.Startup
 {
     public class Program
     {
