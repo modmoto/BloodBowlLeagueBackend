@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Domain.Teams.DomainEvents;
+using Domain.Teams.ForeignEvents;
 using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 using Microwave.Queries;

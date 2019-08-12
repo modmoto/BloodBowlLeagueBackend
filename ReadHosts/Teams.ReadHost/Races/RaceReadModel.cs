@@ -12,7 +12,7 @@ namespace Teams.ReadHost.Races
 
         public void Handle(RaceCreated domainEvent)
         {
-            RaceConfigId = domainEvent.RaceConfigId;
+            RaceConfigId = domainEvent.RaceId;
             AllowedPlayers = domainEvent.AllowedPlayers;
         }
     }
