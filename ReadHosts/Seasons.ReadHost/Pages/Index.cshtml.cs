@@ -32,8 +32,8 @@ namespace Seasons.ReadHost.Pages
 
         public async Task<IActionResult> OnPost()
         {
-            var seasonName = Request.Form["seasonNameTextInput"];
-            var ob = new { seasonName = seasonName.ToString() };
+            var seasonName = Request.Form["seasonNameTextInput"].ToString();
+            var ob = new { seasonName };
             await _mitigator.PostAsync(new Uri("http://localhost:5004/Api/Seasons/create"), ob);
             return Redirect("http://localhost:5006");
         }
