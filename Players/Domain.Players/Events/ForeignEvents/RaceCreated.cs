@@ -6,14 +6,14 @@ namespace Domain.Players.Events.ForeignEvents
 {
     public class RaceCreated : ISubscribedDomainEvent
     {
-        public RaceCreated(StringIdentity raceConfigId, IEnumerable<AllowedPlayer> allowedPlayers)
+        public RaceCreated(StringIdentity raceId, IEnumerable<AllowedPlayer> allowedPlayers)
         {
             AllowedPlayers = allowedPlayers;
-            RaceConfigId = raceConfigId;
+            RaceId = raceId;
         }
 
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; }
-        public Identity EntityId => RaceConfigId;
-        public StringIdentity RaceConfigId { get; }
+        public Identity EntityId => RaceId;
+        public StringIdentity RaceId { get; }
     }
 }
