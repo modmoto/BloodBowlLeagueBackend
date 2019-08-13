@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
 using Application.Players;
-using Domain.Players;
-using Domain.Players.Events.ForeignEvents;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
 using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using ServiceConfig;

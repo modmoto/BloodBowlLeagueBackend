@@ -1,4 +1,5 @@
 ﻿@page
+@using Ui.Translations
 @model Pages.IndexModel
 
 <div class="my-2 my-lg-0 p-3 ml-auto" >
@@ -10,7 +11,7 @@
              {
                  <a href="Teams/@team.TeamId" class="list-group-item list-group-item-action">
                      <div class="d-flex w-100 justify-content-between">
-                         <h5 class="mb-1">@team.TeamName (@team.TrainerName, @team.RaceId)</h5>
+                         <h5 class="mb-1">@team.TeamName (@team.TrainerName, @RaceTranslations.ResourceManager.GetString(team.RaceId.Id))</h5>
                      </div>
                  </a>
              }
@@ -29,9 +30,9 @@
                 <select class="form-control" id="teamSelectBox" name="raceIdDropDownInput">
                     @foreach (var team in Model.AllRaces)
                     {
-                        <option value="@team.RaceConfigId.Id">
-                            @(team.RaceConfigId)
-                        </option>
+                    <option value="@team.RaceConfigId.Id">
+                        @RaceTranslations.ResourceManager.GetString(team.RaceConfigId.Id)
+                    </option>
                     }
                 </select>
             </div>
