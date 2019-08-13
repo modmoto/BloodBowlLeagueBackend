@@ -36,19 +36,14 @@ namespace Domain.Races.Skills
             return new Skill(createdSkill.SkillId, createdSkill.SkillType);
         }
 
-        public static Skill Create(SkillCreated created)
-        {
-            return new Skill(created.SkillId, created.SkillType);
-        }
-
-        public static SkillCreated NullSkill => new SkillCreated(StringIdentity.Create("NotFoundSkill"), default(SkillType));
-        public static SkillCreated Catch => new SkillCreated(StringIdentity.Create(nameof(Catch)), SkillType.Agility);
-        public static SkillCreated Block => new SkillCreated(StringIdentity.Create(nameof(Block)), SkillType.General);
-        public static SkillCreated Dodge => new SkillCreated(StringIdentity.Create(nameof(Dodge)), SkillType.Agility);
-        public static SkillCreated Pass => new SkillCreated(StringIdentity.Create(nameof(Pass)), SkillType.Passing);
-        public static SkillCreated PlusOneStrength => new SkillCreated(StringIdentity.Create(nameof(PlusOneStrength)), SkillType.PlusOneStrength);
-        public static SkillCreated PickUp => new SkillCreated(StringIdentity.Create(nameof(PickUp)), SkillType.Agility);
-        public static SkillCreated Throw => new SkillCreated(StringIdentity.Create(nameof(Throw)), SkillType.Passing);
-        public static SkillCreated MightyBlow => new SkillCreated(StringIdentity.Create(nameof(MightyBlow)), SkillType.Strength);
+        public static Skill NullSkill => new Skill(StringIdentity.Create("NotFoundSkill"), default(SkillType));
+        public static Skill Catch => new Skill(StringIdentity.Create(nameof(Catch)), SkillType.Agility);
+        public static Skill Block => new Skill(StringIdentity.Create(nameof(Block)), SkillType.General);
+        public static Skill Dodge => new Skill(StringIdentity.Create(nameof(Dodge)), SkillType.Agility);
+        public static Skill Pass => new Skill(StringIdentity.Create(nameof(Pass)), SkillType.Passing);
+        public static Skill PlusOneStrength => new Skill(StringIdentity.Create(nameof(PlusOneStrength)), SkillType.PlusOneStrength);
+        public static Skill PickUp => new Skill(StringIdentity.Create(nameof(PickUp)), SkillType.Agility);
+        public static Skill Throw => new Skill(StringIdentity.Create(nameof(Throw)), SkillType.Passing);
+        public static Skill MightyBlow => new Skill(StringIdentity.Create(nameof(MightyBlow)), SkillType.Strength);
     }
 }

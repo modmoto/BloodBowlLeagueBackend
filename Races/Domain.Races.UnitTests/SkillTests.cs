@@ -11,14 +11,14 @@ namespace Domain.Races.UnitTests
         public void SkillFromString()
         {
             var skill = Skill.Create(StringIdentity.Create("Dodge"));
-            Assert.AreEqual(Skill.Create(Skill.Dodge), skill);
+            Assert.AreEqual(Skill.Dodge, skill);
         }
 
         [TestMethod]
         public void UnknownSkill()
         {
             var skill = Skill.Create(StringIdentity.Create("WirdsNieGeben"));
-            Assert.AreEqual(Skill.Create(Skill.NullSkill), skill);
+            Assert.AreEqual(Skill.NullSkill, skill);
         }
     }
 }
