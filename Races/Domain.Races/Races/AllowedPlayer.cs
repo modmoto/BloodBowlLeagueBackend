@@ -113,14 +113,6 @@ namespace Domain.Races.Races
                 new [] { SkillType.General });
 
         // Dwarfs
-//        {
-//            new AllowedPlayer(StringIdentity.Create("DW_Blocker"), 16, new GoldCoins(70000)),
-//            new AllowedPlayer(StringIdentity.Create("DW_Runner"), 2, new GoldCoins(80000)),
-//            new AllowedPlayer(StringIdentity.Create("DW_Blitzer"), 2, new GoldCoins(80000)),
-//            new AllowedPlayer(StringIdentity.Create("DW_TrollSlayer"), 2, new GoldCoins(90000)),
-//            new AllowedPlayer(StringIdentity.Create("DW_DeathRoller"), 1, new GoldCoins(160000))
-//        });
-
         public static AllowedPlayer DwarfBlocker =>
             new AllowedPlayer(
                 StringIdentity.Create("DW_Blocker"),

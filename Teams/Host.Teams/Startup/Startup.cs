@@ -57,20 +57,6 @@ namespace Teams.WriteHost.Startup
                 var events = new List<IDomainEvent>
                 {
                     new TeamCreated(
-                        GuidIdentity.Create(new Guid("2798435C-9C72-4ECE-BD7D-00BECBACCED7")),
-                        StringIdentity.Create("DarkElves"),
-                        "Simons Team",
-                        "Der Simon",
-                        DarkElvPlayers,
-                        new GoldCoins(1000000)),
-                    new TeamCreated(
-                        GuidIdentity.Create(new Guid("406D35EE-421A-4D45-9F34-1834D5ACD215")),
-                        StringIdentity.Create("Humans"),
-                        "Simons Scheiss Team",
-                        "Der Simon Poppinga",
-                        HumanPlayers,
-                        new GoldCoins(1000000)),
-                    new TeamCreated(
                         GuidIdentity.Create(new Guid("772F7E84-4237-4634-AF85-5C0D72FF8DBD")),
                         StringIdentity.Create("Humans"),
                         "Karlsruher Könige",
@@ -99,6 +85,77 @@ namespace Teams.WriteHost.Startup
                         DarkElvPlayers,
                         new GoldCoins(1000000)),
                 };
+
+                events.AddRange(NightElveTeamWithPlayers);
+                events.AddRange(HumanTeamWithPlayers);
+
+                return events;
+            }
+        }
+
+        public static IEnumerable<IDomainEvent> NightElveTeamWithPlayers
+        {
+            get
+            {
+                var team1 = GuidIdentity.Create(new Guid("2798435C-9C72-4ECE-BD7D-00BECBACCED7"));
+
+                var events = new List<IDomainEvent>
+                {
+                    new TeamCreated(
+                        team1,
+                        StringIdentity.Create("DarkElves"),
+                        "Simons Team",
+                        "Der Simon",
+                        DarkElvPlayers,
+                        new GoldCoins(1000000)),
+                    new PlayerBought(
+                        team1,
+                        StringIdentity.Create("DE_LineMan"),
+                        GuidIdentity.Create(new Guid("EC48B7FF-B76D-471F-99B0-761EC43C4101")),
+                        new GoldCoins(930000)),
+                    new PlayerBought(
+                        team1,
+                        StringIdentity.Create("DE_LineMan"),
+                        GuidIdentity.Create(new Guid("C2DEDB29-C59D-4D8F-B854-6B44D04E6C7A")),
+                        new GoldCoins(860000)),
+                    new PlayerBought(
+                        team1,
+                        StringIdentity.Create("DE_LineMan"),
+                        GuidIdentity.Create(new Guid("E86E63E2-8C3C-4CFF-8719-68BD844CD7F7")),
+                        new GoldCoins(790000))
+                };
+
+                return events;
+            }
+        }
+
+        public static IEnumerable<IDomainEvent> HumanTeamWithPlayers
+        {
+            get
+            {
+                var team2 = GuidIdentity.Create(new Guid("406D35EE-421A-4D45-9F34-1834D5ACD215"));
+
+                var events = new List<IDomainEvent>
+                {
+                    new TeamCreated(
+                        team2,
+                        StringIdentity.Create("Humans"),
+                        "Simons Scheiss Team",
+                        "Der Simon Poppinga",
+                        HumanPlayers,
+                        new GoldCoins(1000000)),
+                    new PlayerBought(
+                        team2,
+                        StringIdentity.Create("HU_LineMan"),
+                        GuidIdentity.Create(new Guid("9CF84B11-5852-4D09-BB08-5357E6DA04C8")),
+                        new GoldCoins(950000)),
+                    new PlayerBought(
+                        team2,
+                        StringIdentity.Create("HU_LineMan"),
+                        GuidIdentity.Create(new Guid("1796B724-B55F-47A3-A498-153379C516EA")),
+                        new GoldCoins(900000)),
+                };
+
                 return events;
             }
         }

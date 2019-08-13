@@ -9,16 +9,6 @@
             Value = value;
         }
 
-        public GoldCoins Minus(GoldCoins otherCost)
-        {
-            return new GoldCoins(Value - otherCost.Value);
-        }
-
-        public bool MoreThan(GoldCoins otherValue)
-        {
-            return Value > otherValue.Value;
-        }
-
         public override bool Equals(object obj)
         {
             var goldCoins = obj as GoldCoins;
