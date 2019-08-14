@@ -18,7 +18,7 @@ namespace Host.Matches
         [HttpPost("create")]
         public async Task<ActionResult> CreateMatch([FromBody] CreateMatchCommand command)
         {
-            var matchId = await _commandHandler.CreateMatches(command);
+            var matchId = await _commandHandler.CreateMatch(command);
             return Created($"{Request.Scheme}://{Request.Host}/Api/Matches/{matchId}", matchId);
         }
 
