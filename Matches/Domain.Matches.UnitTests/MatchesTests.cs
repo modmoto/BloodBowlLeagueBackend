@@ -29,9 +29,10 @@ namespace Domain.Matches.UnitTests
 
             var playerProgression1 = PlayerProgressionTouchdown(player2Id);
             var playerProgression2 = PlayerProgressionNormal(player4Id);
-            var playerProgressions = new []{ playerProgression1, playerProgression2 };
 
-            var domainResult = match.Finish(playerProgressions);
+            match.RecordMatchEvent(playerProgression1);
+            match.RecordMatchEvent(playerProgression2);
+            var domainResult = match.Finish();
 
             var domainEvent = domainResult.DomainEvents.First() as MatchFinished;
             Assert.AreEqual(teamReadModel.TeamId, domainEvent.GameResult.Winner);
