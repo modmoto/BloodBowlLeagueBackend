@@ -16,17 +16,35 @@
                      @foreach (var matchup in gameDay.Matchups)
                      {
                          var m = Model.FullMatch(matchup.MatchId);
-                         <a href="http://localhost:5006/Matches/@m.MatchId" class="list-group-item list-group-item-action">
-                             <div>
+                         @if (!m.IsStarted)
+                         {
+                             <li class="list-group-item">
+                                 <div class="float-left">
+                                     <div>
+                                         @(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)
+                                     </div>
+                                 </div>
+                                 <form class="float-right"
+                                       method="post"
+                                       asp-page-handler="StartMatch"
+                                       asp-route-matchId="@m.MatchId"
+                                       method="post">
+                                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Start Match!</button>
+                                  </form>
+                             </li>
+                         }
+                         else
+                         {
+                             <a href="http://localhost:5006/Matches/@m.MatchId" class="list-group-item list-group-item-action">
                                  @(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)
-                              </div>
+                             </a>
                              @if (m.IsFinished)
                              {
                                  <div>
                                      finished with @m.GameResult.HomeTeam.TouchDowns : @m.GameResult.GuestTeam.TouchDowns
                                  </div>
                              }
-                          </a>
+                         }
                      }
                      </ul>
                  </div>
@@ -45,7 +63,7 @@
                  </a>
              }
 
-            <form method="post">
+            <form method="post" asp-page-handler="AddTeam" method="post">
                 <div class="form-group">
                     <label for="teamSelectBox">Select a team</label>
                     <select class="form-control" id="teamSelectBox" name="teamId">
