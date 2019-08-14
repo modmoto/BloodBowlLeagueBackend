@@ -30,6 +30,14 @@ namespace Host.Matches
             return Ok();
         }
 
+        [HttpPost("{matchId}/progress")]
+        public async Task<ActionResult> FinishMatch(GuidIdentity matchId, [FromBody] ProgressMatchCommand progressMatchCommand)
+        {
+            progressMatchCommand.MatchId = matchId;
+            await _commandHandler.ProgressMatch(progressMatchCommand);
+            return Ok();
+        }
+
         [HttpPost("{matchId}/start")]
         public async Task<ActionResult> StartMatch(GuidIdentity matchId)
         {

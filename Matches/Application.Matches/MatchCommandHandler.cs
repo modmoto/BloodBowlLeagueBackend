@@ -51,6 +51,16 @@ namespace Application.Matches
             storeResult.Check();
             return domainResult.DomainEvents.Single().EntityId;
         }
+
+        public async Task ProgressMatch(ProgressMatchCommand command)
+        {
+            var eventStoreResult = await _eventStore.LoadAsync<Matchup>(command.MatchId);
+            var match = eventStoreResult.Value;
+            var domainResult = match.ProgressMatch(command.PlayerProgression);
+            domainResult.EnsureSucces();
+            var storeResult = await _eventStore.AppendAsync(domainResult.DomainEvents, eventStoreResult.Version);
+            storeResult.Check();
+        }
     }
 
     public class StartMatchCommand

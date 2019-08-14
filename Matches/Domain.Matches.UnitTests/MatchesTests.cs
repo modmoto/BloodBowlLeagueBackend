@@ -30,8 +30,12 @@ namespace Domain.Matches.UnitTests
             var playerProgression1 = PlayerProgressionTouchdown(player2Id);
             var playerProgression2 = PlayerProgressionNormal(player4Id);
 
-            match.RecordMatchEvent(playerProgression1);
-            match.RecordMatchEvent(playerProgression2);
+            var prog1 = match.ProgressMatch(playerProgression1);
+            var prog2 = match.ProgressMatch(playerProgression2);
+
+            match.Apply(prog1.DomainEvents);
+            match.Apply(prog2.DomainEvents);
+
             var domainResult = match.Finish();
 
             var domainEvent = domainResult.DomainEvents.First() as MatchFinished;
@@ -53,11 +57,9 @@ namespace Domain.Matches.UnitTests
             match.Apply(new MatchStarted(GuidIdentity.Create(), teamReadModel.Players, teamReadModel2.Players));
 
             var playerProgression1 = PlayerProgressionTouchdown(player2Id);
-            var playerProgressions = new []{ playerProgression1 };
+            var progressMatch = match.ProgressMatch(playerProgression1);
 
-            var domainResult = match.Finish(playerProgressions);
-
-            Assert.IsTrue(domainResult.DomainErrors.Single().GetType() == typeof(PlayerWasNotPartOfTheTeamWhenStartingTheMatch));
+            Assert.IsTrue(progressMatch.DomainErrors.Single().GetType() == typeof(PlayerWasNotPartOfTheTeamWhenStartingTheMatch));
         }
 
         private static PlayerProgression PlayerProgressionTouchdown(GuidIdentity playerId)

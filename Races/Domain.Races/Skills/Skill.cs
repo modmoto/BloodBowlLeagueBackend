@@ -32,7 +32,7 @@ namespace Domain.Races.Skills
             var staticSkillCreates = skillClassType.GetProperties(BindingFlags.Public | BindingFlags.Static);
             var foundSkill = staticSkillCreates.SingleOrDefault(p => p.Name == skillId.Id);
             if (foundSkill == null) return new Skill(NullSkill.SkillId, NullSkill.SkillType);
-            var createdSkill = foundSkill.GetValue(null, null) as SkillCreated;
+            var createdSkill = foundSkill.GetValue(null, null) as Skill;
             return new Skill(createdSkill.SkillId, createdSkill.SkillType);
         }
 

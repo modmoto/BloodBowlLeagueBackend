@@ -70,7 +70,7 @@ namespace Domain.Matches
             return DomainResult.Ok(matchResultUploaded);
         }
 
-        public DomainResult RecordMatchEvent(PlayerProgression playerProgression)
+        public DomainResult ProgressMatch(PlayerProgression playerProgression)
         {
             if (!_isStarted) return DomainResult.Error(new MatchDidNotStartYet());
             if (_isFinished) return DomainResult.Error(new MatchAllreadyFinished());
