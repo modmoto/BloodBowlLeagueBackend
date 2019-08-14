@@ -16,17 +16,17 @@
                      @foreach (var matchup in gameDay.Matchups)
                      {
                          var m = Model.FullMatch(matchup.MatchId);
-                         <li class="list-group-item">
+                         <a href="http://localhost:5006/Matches/@m.MatchId" class="list-group-item list-group-item-action">
                              <div>
                                  @(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)
-                             </div>
+                              </div>
                              @if (m.IsFinished)
                              {
                                  <div>
                                      finished with @m.GameResult.HomeTeam.TouchDowns : @m.GameResult.GuestTeam.TouchDowns
                                  </div>
                              }
-                          </li>
+                          </a>
                      }
                      </ul>
                  </div>
