@@ -1,26 +1,26 @@
-using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
+using Microwave.Queries;
 
-namespace Domain.Players.Events.Players
+namespace Seasons.ReadHost.Players.Events
 {
-    public class PlayerCreated : IDomainEvent
+    public class PlayerCreated : ISubscribedDomainEvent
     {
         public PlayerCreated(
             GuidIdentity playerId,
+            StringIdentity playerTypeId,
             GuidIdentity teamId,
-            PlayerConfig playerConfig,
             string name)
         {
             PlayerId = playerId;
+            PlayerTypeId = playerTypeId;
             TeamId = teamId;
-            PlayerConfig = playerConfig;
             Name = name;
         }
 
         public string Name { get; }
-        public Identity EntityId => PlayerId;
-        public GuidIdentity TeamId { get; }
-        public PlayerConfig PlayerConfig { get; }
         public GuidIdentity PlayerId { get; }
+        public StringIdentity PlayerTypeId { get; }
+        public GuidIdentity TeamId { get; }
+        public Identity EntityId => PlayerId;
     }
 }

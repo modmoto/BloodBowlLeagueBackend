@@ -1,5 +1,6 @@
 @page "{matchId:Guid?}"
 @using global::Seasons.ReadHost.Matches
+@using Ui.Translations
 @model Pages.Matches
 
 <div class="my-2 my-lg-0 p-3 ml-auto">
@@ -9,13 +10,13 @@
         @foreach (var progression in Model.Match.PlayerProgressions)
         {
             <li class="list-group-item">
-                @progression.PlayerId: @string.Join(',', progression.ProgressionEvent)
+                @Model.FullPlayer(progression.PlayerId).Name : @RaceTranslations.ResourceManager.GetString(progression.ProgressionEvent.ToString())
             </li>
         }
     </ul>
     <form method="post">
         <div class="form-group">
-            <label for="playerSelectBox">Select a player</label>
+            <label for="playerSelectBox">Player</label>
             <select class="form-control" id="playerSelectBox" name="playerId">
                 @foreach (var player in Model.AllPlayers)
                 {
@@ -24,12 +25,12 @@
                     </option>
                 }
             </select>
-            <label for="progressionelectBox">Select a player</label>
+            <label for="progressionelectBox">Progress</label>
             <select class="form-control" id="progressionelectBox" name="progressionEvent">
                 @foreach (var progressionEvent in Enum.GetValues(typeof(ProgressionEvent)))
                 {
                     <option value="@progressionEvent.ToString()">
-                        @progressionEvent.ToString()
+                        @RaceTranslations.ResourceManager.GetString(progressionEvent.ToString())
                     </option>
                 }
             </select>

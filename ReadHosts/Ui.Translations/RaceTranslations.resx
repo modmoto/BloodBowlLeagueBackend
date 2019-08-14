@@ -168,4 +168,16 @@
   <data name="HU_Thrower" xml:space="preserve">
     <value>Thrower</value>
   </data>
+  <data name="NominatedMostValuablePlayer" xml:space="preserve">
+    <value>Was nominated MVP</value>
+  </data>
+  <data name="PlayerPassed" xml:space="preserve">
+    <value>Threw a pass</value>
+  </data>
+  <data name="PlayerMadeCasualty" xml:space="preserve">
+    <value>Made a casualty</value>
+  </data>
+  <data name="PlayerMadeTouchdown" xml:space="preserve">
+    <value>Touchdown!</value>
+  </data>
 </root>

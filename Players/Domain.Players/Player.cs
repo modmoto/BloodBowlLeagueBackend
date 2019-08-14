@@ -26,14 +26,15 @@ namespace Domain.Players
         public static DomainResult Create(
             GuidIdentity playerId,
             GuidIdentity teamId,
-            AllowedPlayer allowedPlayer)
+            AllowedPlayer allowedPlayer,
+            string name)
         {
             var playerConfig = new PlayerConfig(
                 allowedPlayer.PlayerTypeId,
                 allowedPlayer.StartingSkills,
                 allowedPlayer.SkillsOnDefault,
                 allowedPlayer.SkillsOnDouble);
-            var playerCreated = new PlayerCreated(playerId, teamId, playerConfig);
+            var playerCreated = new PlayerCreated(playerId, teamId, playerConfig, name);
             return DomainResult.Ok(playerCreated);
         }
 

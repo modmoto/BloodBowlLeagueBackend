@@ -8,6 +8,7 @@ using Microwave.Domain.Identities;
 using Microwave.Queries;
 using ReadHosts.Common;
 using Seasons.ReadHost.Matches;
+using Seasons.ReadHost.Players;
 using Seasons.ReadHost.Teams;
 
 namespace Seasons.ReadHost.Pages
@@ -21,6 +22,7 @@ namespace Seasons.ReadHost.Pages
         public Guid MatchId { get; set; }
         public MatchupReadModel Match { get; set; }
         public IEnumerable<TeamReadModel> Teams { get; set; }
+        public IEnumerable<PlayerReadModel> Players { get; set; }
         public TeamReadModel GuestTeam => FullTeam(Match.TeamAsGuest);
         public TeamReadModel HomeTeam => FullTeam(Match.TeamAtHome);
         public IEnumerable<GuidIdentity> AllPlayers
@@ -46,8 +48,10 @@ namespace Seasons.ReadHost.Pages
         {
             var result = await _readModelRepository.LoadAsync<MatchupReadModel>(GuidIdentity.Create(MatchId));
             var teamResult = await _readModelRepository.LoadAllAsync<TeamReadModel>();
+            var playerResult = await _readModelRepository.LoadAllAsync<PlayerReadModel>();
             Match = result.Value;
             Teams = teamResult.Value;
+            Players = playerResult.Value;
         }
 
         public async Task<IActionResult> OnPost()
@@ -66,6 +70,11 @@ namespace Seasons.ReadHost.Pages
         public TeamReadModel FullTeam(GuidIdentity teamId)
         {
             return Teams.Single(t => t.TeamId == teamId);
+        }
+
+        public PlayerReadModel FullPlayer(GuidIdentity playerId)
+        {
+            return Players.Single(t => t.PlayerId == playerId);
         }
     }
 }

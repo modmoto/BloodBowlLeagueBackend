@@ -12,6 +12,9 @@
       <PackageReference Include="Microwave.Queries">
         <Version>0.14.4</Version>
       </PackageReference>
+      <PackageReference Include="RandomNameGeneratorLibrary">
+        <Version>1.2.2</Version>
+      </PackageReference>
     </ItemGroup>
 
     <ItemGroup>

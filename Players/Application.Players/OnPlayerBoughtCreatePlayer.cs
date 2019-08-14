@@ -11,11 +11,16 @@ namespace Application.Players
     {
         private readonly IEventStore _eventStore;
         private readonly IReadModelRepository _readModelRepository;
+        private readonly NameService _nameService;
 
-        public OnPlayerBoughtCreatePlayer(IEventStore eventStore, IReadModelRepository readModelRepository)
+        public OnPlayerBoughtCreatePlayer(
+            IEventStore eventStore, 
+            IReadModelRepository readModelRepository,
+            NameService nameService)
         {
             _eventStore = eventStore;
             _readModelRepository = readModelRepository;
+            _nameService = nameService;
         }
 
         public async Task HandleAsync(PlayerBought domainEvent)
@@ -28,7 +33,8 @@ namespace Application.Players
             var result = Player.Create(
                 domainEvent.PlayerId,
                 domainEvent.TeamId,
-                playerRule);
+                playerRule,
+                _nameService.CreateNameFor(race));
             var storeResult = await _eventStore.AppendAsync(result.DomainEvents, 0);
             storeResult.Check();
         }
