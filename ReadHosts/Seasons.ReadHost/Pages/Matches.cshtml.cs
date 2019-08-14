@@ -53,7 +53,7 @@ namespace Seasons.ReadHost.Pages
         public async Task<IActionResult> OnPost()
         {
             var playerId = Request.Form["playerId"].ToString();
-            var progressionEventRaw = Request.Form["playerId"].ToString();
+            var progressionEventRaw = Request.Form["progressionEvent"].ToString();
             Enum.TryParse<ProgressionEvent>(progressionEventRaw, out var progressionEvent);
             await _mitigator.PostAsync(
                 new Uri($"http://localhost:5003/Api/Matches/{MatchId}/progress"),

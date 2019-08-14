@@ -28,7 +28,7 @@
             <select class="form-control" id="progressionelectBox" name="progressionEvent">
                 @foreach (var progressionEvent in Enum.GetValues(typeof(ProgressionEvent)))
                 {
-                    <option value="progressionEvent.ToString()">
+                    <option value="@progressionEvent.ToString()">
                         @progressionEvent.ToString()
                     </option>
                 }
