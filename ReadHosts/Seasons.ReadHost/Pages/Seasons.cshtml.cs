@@ -47,12 +47,19 @@ namespace Seasons.ReadHost.Pages
             Matches = matches.Value;
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostAddTeam(string teamId)
         {
-            var teamId = Request.Form["teamId"].ToString();
             await _mitigator.PostAsync(
                 new Uri($"http://localhost:5004/Api/Seasons/{SeasonId}/add-team"),
                 new { teamId });
+            return Redirect(SeasonId.ToString());
+        }
+
+        public async Task<IActionResult> OnPostStartMatch(Guid matchId)
+        {
+            await _mitigator.PostAsync(
+                new Uri($"http://localhost:5003/Api/Matches/{matchId}/start"),
+                new { });
             return Redirect(SeasonId.ToString());
         }
 

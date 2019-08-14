@@ -65,16 +65,14 @@ namespace Domain.Matches.UnitTests
         private static PlayerProgression PlayerProgressionTouchdown(GuidIdentity playerId)
         {
             playerId = playerId ?? GuidIdentity.Create();
-            var playerProgression = new PlayerProgression(playerId,
-                new[] {ProgressionEvent.PlayerPassed, ProgressionEvent.PlayerMadeTouchdown});
+            var playerProgression = new PlayerProgression(playerId, ProgressionEvent.PlayerMadeTouchdown);
             return playerProgression;
         }
 
         private static PlayerProgression PlayerProgressionNormal(GuidIdentity playerId)
         {
             playerId = playerId ?? GuidIdentity.Create();
-            var playerProgression = new PlayerProgression(playerId,
-                new[] {ProgressionEvent.PlayerPassed, ProgressionEvent.PlayerMadeCasualty});
+            var playerProgression = new PlayerProgression(playerId, ProgressionEvent.PlayerPassed);
             return playerProgression;
         }
 

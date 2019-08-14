@@ -24,14 +24,14 @@ namespace Domain.Matches.Events
 
     public class PlayerProgression
     {
-        public PlayerProgression(GuidIdentity playerId, IEnumerable<ProgressionEvent> progressionEvents)
+        public PlayerProgression(GuidIdentity playerId, ProgressionEvent progressionEvent)
         {
             PlayerId = playerId;
-            ProgressionEvents = progressionEvents;
+            ProgressionEvent = progressionEvent;
         }
 
         public GuidIdentity PlayerId { get; }
-        public IEnumerable<ProgressionEvent> ProgressionEvents { get; }
+        public ProgressionEvent ProgressionEvent { get; }
     }
 
     public enum ProgressionEvent

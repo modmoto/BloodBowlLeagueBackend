@@ -87,7 +87,8 @@ namespace Domain.Matches
 
         private static int CountTouchDowns(IEnumerable<PlayerProgression> trainerResults)
         {
-            return trainerResults.Sum(playerProgression => playerProgression.ProgressionEvents.Count(ev => ev == ProgressionEvent.PlayerMadeTouchdown));
+            return trainerResults.Count(playerProgression =>
+                playerProgression.ProgressionEvent == ProgressionEvent.PlayerMadeTouchdown);
         }
 
         public void Apply(MatchFinished domainEvent)
