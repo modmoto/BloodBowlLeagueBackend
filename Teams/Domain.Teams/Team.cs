@@ -45,17 +45,17 @@ namespace Domain.Teams
             return DomainResult.Ok(playerBought);
         }
 
-        public void Apply(TeamCreated teamCreated)
+        public void Apply(TeamCreated domainEvent)
         {
-            TeamId = teamCreated.TeamId;
-            AllowedPlayers = teamCreated.AllowedPlayers;
-            TeamMoney = teamCreated.StartingMoney;
+            TeamId = domainEvent.TeamId;
+            AllowedPlayers = domainEvent.AllowedPlayers;
+            TeamMoney = domainEvent.StartingMoney;
         }
 
-        public void Apply(PlayerBought playerBought)
+        public void Apply(PlayerBought domainEvent)
         {
-            TeamMoney = playerBought.NewTeamChestBalance;
-            PlayerTypes = PlayerTypes.Append(playerBought.PlayerTypeId);
+            TeamMoney = domainEvent.NewTeamChestBalance;
+            PlayerTypes = PlayerTypes.Append(domainEvent.PlayerTypeId);
         }
     }
 }

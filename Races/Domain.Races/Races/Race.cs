@@ -10,10 +10,10 @@ namespace Domain.Races.Races
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; private set; } = new List<AllowedPlayer>();
         public StringIdentity Id { get; private set; }
 
-        public void Apply(RaceCreated raceCreated)
+        public void Apply(RaceCreated domainEvent)
         {
-            Id = raceCreated.RaceId;
-            AllowedPlayers = raceCreated.AllowedPlayers;
+            Id = domainEvent.RaceId;
+            AllowedPlayers = domainEvent.AllowedPlayers;
         }
     }
 }

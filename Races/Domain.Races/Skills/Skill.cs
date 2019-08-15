@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Reflection;
-using Domain.Races.Skills.DomainEvents;
 using Microwave.Domain.Identities;
 
 namespace Domain.Races.Skills
