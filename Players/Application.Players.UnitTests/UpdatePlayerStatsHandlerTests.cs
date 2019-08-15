@@ -17,31 +17,37 @@ namespace Application.Players.UnitTests
     [TestClass]
     public class UpdatePlayerStatsHandlerTests
     {
+        private Mock<IEventStore> _eventStore;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            _eventStore = new Mock<IEventStore>();
+            _eventStore.Setup(es => es.AppendAsync(It.IsAny<IEnumerable<IDomainEvent>>(), It.IsAny<long>()))
+                        .ReturnsAsync(Result.Ok());
+        }
+
         [TestMethod]
         public async Task UploadNewStatEvent_HappyPath()
         {
-            var mock = new Mock<IEventStore>();
             var identity = GuidIdentity.Create(Guid.NewGuid());
-            mock.Setup(es => es.LoadAsync<Player>(identity))
+            _eventStore.Setup(es => es.LoadAsync<Player>(identity))
                 .ReturnsAsync(EventStoreResult<Player>.Ok(new Player(), 0));
-            mock.Setup(es => es.AppendAsync(It.IsAny<IEnumerable<IDomainEvent>>(), It.IsAny<long>()))
-                .ReturnsAsync(Result.Ok());
 
-            var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(mock.Object);
+            var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(_eventStore.Object);
             var matchResultUploaded = MatchResultUploaded(identity);
 
             await onMatchUploadedUpdatePlayerProgress.HandleAsync(matchResultUploaded);
-            mock.Verify(m => m.AppendAsync(It.IsAny<IEnumerable<IDomainEvent>>(), 0), Times.Exactly(2));
+            _eventStore.Verify(m => m.AppendAsync(It.IsAny<IEnumerable<IDomainEvent>>(), 0), Times.Exactly(2));
         }
 
         [TestMethod]
         public async Task UploadNewStatEvent_PlayerNotFound()
         {
-            var mock = new Mock<IEventStore>();
-            mock.Setup(es => es.LoadAsync<Player>(It.IsAny<GuidIdentity>()))
+            _eventStore.Setup(es => es.LoadAsync<Player>(It.IsAny<GuidIdentity>()))
                 .ReturnsAsync(EventStoreResult<Player>.NotFound(GuidIdentity.Create()));
 
-            var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(mock.Object);
+            var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(_eventStore.Object);
             var matchResultUploaded = MatchResultUploaded(GuidIdentity.Create(Guid.NewGuid()));
 
             await Assert.ThrowsExceptionAsync<NotFoundException>(
@@ -51,16 +57,14 @@ namespace Application.Players.UnitTests
         [TestMethod]
         public async Task UploadNewStatEvent_SecondPlayerNotFound()
         {
-            var mock = new Mock<IEventStore>();
             var idNotFound = GuidIdentity.Create();
             var idFound = GuidIdentity.Create();
-            mock.Setup(es => es.LoadAsync<Player>(idFound))
+            _eventStore.Setup(es => es.LoadAsync<Player>(idFound))
                 .ReturnsAsync(EventStoreResult<Player>.Ok(new Player(), 0));
-            mock.Setup(es => es.LoadAsync<Player>(idNotFound))
+            _eventStore.Setup(es => es.LoadAsync<Player>(idNotFound))
                 .ReturnsAsync(EventStoreResult<Player>.NotFound(GuidIdentity.Create()));
-            mock.Setup(es => es.AppendAsync(It.IsAny<IEnumerable<IDomainEvent>>(), It.IsAny<long>()))
-                .ReturnsAsync(Result.Ok());
-            var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(mock.Object);
+
+            var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(_eventStore.Object);
 
             var matchResultUploaded = MatchResultUploaded(idFound, idNotFound);
 
