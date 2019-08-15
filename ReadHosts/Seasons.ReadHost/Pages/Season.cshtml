@@ -16,34 +16,14 @@
                      @foreach (var matchup in gameDay.Matchups)
                      {
                          var m = Model.FullMatch(matchup.MatchId);
-                         @if (!m.IsStarted)
+                         <a href="http://localhost:5006/Matches/@m.MatchId" class="list-group-item list-group-item-action">
+                             @(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)
+                         </a>
+                         @if (m.IsFinished)
                          {
-                             <li class="list-group-item">
-                                 <div class="float-left">
-                                     <div>
-                                         @(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)
-                                     </div>
-                                 </div>
-                                 <form class="float-right"
-                                       method="post"
-                                       asp-page-handler="StartMatch"
-                                       asp-route-matchId="@m.MatchId"
-                                       method="post">
-                                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Start Match!</button>
-                                  </form>
-                             </li>
-                         }
-                         else
-                         {
-                             <a href="http://localhost:5006/Matches/@m.MatchId" class="list-group-item list-group-item-action">
-                                 @(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)
-                             </a>
-                             @if (m.IsFinished)
-                             {
-                                 <div>
-                                     finished with @m.GameResult.HomeTeam.TouchDowns : @m.GameResult.GuestTeam.TouchDowns
-                                 </div>
-                             }
+                             <div>
+                                 finished with @m.GameResult.HomeTeam.TouchDowns : @m.GameResult.GuestTeam.TouchDowns
+                             </div>
                          }
                      }
                      </ul>

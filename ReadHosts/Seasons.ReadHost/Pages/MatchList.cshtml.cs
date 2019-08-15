@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microwave.Domain.Identities;
 using Microwave.Queries;
+using ReadHosts.Common;
 using Seasons.ReadHost.Matches;
 using Seasons.ReadHost.Teams;
 
@@ -12,13 +15,16 @@ namespace Seasons.ReadHost.Pages
     public class MatchList : PageModel
     {
         private readonly IReadModelRepository _readModelRepository;
-
+        private readonly MessageMitigator _mitigator;
         public IEnumerable<MatchupReadModel> Matches { get; set; }
         public IEnumerable<TeamReadModel> Teams { get; set; }
 
-        public MatchList(IReadModelRepository readModelRepository)
+        public MatchList(
+            IReadModelRepository readModelRepository,
+            MessageMitigator mitigator)
         {
             _readModelRepository = readModelRepository;
+            _mitigator = mitigator;
         }
 
         public async Task OnGet()
@@ -27,6 +33,16 @@ namespace Seasons.ReadHost.Pages
             var teamResult = await _readModelRepository.LoadAllAsync<TeamReadModel>();
             Matches = result.Value;
             Teams = teamResult.Value;
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            var homeTeam = Request.Form["homeTeam"].ToString();
+            var guestTeam = Request.Form["guestTeam"].ToString();
+            await _mitigator.PostAsync(
+                new Uri($"http://localhost:5003/Api/Matches/create"),
+                new { homeTeam, guestTeam });
+            return Redirect("http://localhost:5006/MatchList");
         }
 
         public TeamReadModel FullTeam(GuidIdentity teamId)

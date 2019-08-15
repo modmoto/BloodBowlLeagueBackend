@@ -54,7 +54,7 @@ namespace Seasons.ReadHost.Pages
             Players = playerResult.Value;
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostAddProgress()
         {
             var playerId = Request.Form["playerId"].ToString();
             var progressionEventRaw = Request.Form["progressionEvent"].ToString();
@@ -64,6 +64,14 @@ namespace Seasons.ReadHost.Pages
                 new { PlayerProgression = new PlayerProgression(
                         GuidIdentity.Create(new Guid(playerId)),
                         progressionEvent)});
+            return Redirect(MatchId.ToString());
+        }
+
+        public async Task<IActionResult> OnPostStartMatch(GuidIdentity matchId)
+        {
+            await _mitigator.PostAsync(
+                new Uri($"http://localhost:5003/Api/Matches/{MatchId}/start"),
+                new { });
             return Redirect(MatchId.ToString());
         }
 
