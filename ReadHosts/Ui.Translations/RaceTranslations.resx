@@ -180,4 +180,61 @@
   <data name="PlayerMadeTouchdown" xml:space="preserve">
     <value>Touchdown!</value>
   </data>
+  <data name="SkillType_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="SkillType_Extraordinary" xml:space="preserve">
+    <value>Extraordinary</value>
+  </data>
+  <data name="SkillType_Mutation" xml:space="preserve">
+    <value>Mutation</value>
+  </data>
+  <data name="SkillType_Passing" xml:space="preserve">
+    <value>Passing</value>
+  </data>
+  <data name="SkillType_Strength" xml:space="preserve">
+    <value>Strength</value>
+  </data>
+  <data name="SkillType_Agility" xml:space="preserve">
+    <value>Agility</value>
+  </data>
+  <data name="SkillType_PlusOneAgility" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="SkillType_PlusOneArmorOrMovement" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="SkillType_PlusOneStrength" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="Skill_Block" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="Skill_Catch" xml:space="preserve">
+    <value>Catch</value>
+  </data>
+  <data name="Skill_Dodge" xml:space="preserve">
+    <value>Dodge</value>
+  </data>
+  <data name="Skill_MightyBlow" xml:space="preserve">
+    <value>Mighty Blow</value>
+  </data>
+  <data name="Skill_Throw" xml:space="preserve">
+    <value>Throw</value>
+  </data>
+  <data name="Skill_PickUp" xml:space="preserve">
+    <value>PickUp</value>
+  </data>
+  <data name="Skill_PlusOneAgility" xml:space="preserve">
+    <value>Plus one agility</value>
+  </data>
+  <data name="Skill_PlusOneArmor" xml:space="preserve">
+    <value>Plus one armor</value>
+  </data>
+  <data name="Skill_PlusOneMovement" xml:space="preserve">
+    <value>Plus one movement</value>
+  </data>
+  <data name="Skill_PlusOneStrength" xml:space="preserve">
+    <value>Plus one strength</value>
+  </data>
 </root>

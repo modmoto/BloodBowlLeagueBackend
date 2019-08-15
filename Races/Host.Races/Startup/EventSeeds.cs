@@ -26,6 +26,9 @@ namespace Host.Races.Startup
                     new SkillCreated(Skill.Throw.SkillId, Skill.Throw.SkillType),
                     new SkillCreated(Skill.MightyBlow.SkillId, Skill.MightyBlow.SkillType),
                     new SkillCreated(Skill.PickUp.SkillId, Skill.PickUp.SkillType),
+                    new SkillCreated(Skill.PlusOneAgility.SkillId, Skill.PlusOneAgility.SkillType),
+                    new SkillCreated(Skill.PlusOneArmor.SkillId, Skill.PlusOneArmor.SkillType),
+                    new SkillCreated(Skill.PlusOneMovement.SkillId, Skill.PlusOneMovement.SkillType),
                     new SkillCreated(Skill.PlusOneStrength.SkillId, Skill.PlusOneStrength.SkillType),
                 };
                 return events;

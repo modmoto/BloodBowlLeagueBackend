@@ -1,4 +1,4 @@
-namespace Domain.Races.Skills
+namespace Teams.ReadHost.Races
 {
     public enum SkillType
     {

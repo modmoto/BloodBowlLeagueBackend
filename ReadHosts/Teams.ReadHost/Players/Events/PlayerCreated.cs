@@ -24,9 +24,4 @@ namespace Teams.ReadHost.Players.Events
         public Identity EntityId => PlayerId;
         public string Name { get;  }
     }
-
-    public class PlayerConfig
-    {
-        public StringIdentity PlayerTypeId { get; set; }
-    }
 }

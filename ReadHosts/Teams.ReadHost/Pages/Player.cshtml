@@ -1,4 +1,5 @@
 @page "{playerId:Guid?}"
+@using Ui.Translations
 @model Pages.PlayerModel
 
 <div class="my-2 my-lg-0 p-3 ml-auto">
@@ -6,8 +7,28 @@
     <h3>SSP: @Model.Player.StarPlayerPoints</h3>
     @if (Model.Player.FreeSkillPoints.Any())
     {
-        <div>
-            Select a skill
-        </div>
+        <form method="post">
+            <div class="form-group">
+                <label for="skillSelectBox">Select a new Skill</label>
+                <select class="form-control" id="skillSelectBox" name="skillType">
+                    @foreach (var skill in Model.RelevantSkills)
+                    {
+                        <option value="@skill.SkillId">
+                            @RaceTranslations.ResourceManager.GetString($"Skill_{skill.SkillId.Id}")
+                            @{
+                                var value = RaceTranslations.ResourceManager.GetString($"SkillType_{skill.SkillType.ToString()}");
+                                if (value == " ")
+                                {
+                                    value = "";
+                                }
+                                value = $"({value})";
+                            }
+                            @value
+                        </option>
+                    }
+                </select>
+            </div>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Level up Player!</button>
+        </form>
     }
  </div>

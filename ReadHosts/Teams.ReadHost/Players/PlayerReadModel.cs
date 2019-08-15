@@ -17,7 +17,8 @@ namespace Teams.ReadHost.Players
     {
         public GuidIdentity PlayerId { get; private set; }
         public GuidIdentity TeamId { get; private set; }
-        public StringIdentity PlayerTypeId{ get; private set; }
+        public StringIdentity PlayerTypeId { get; private set; }
+        public PlayerConfig PlayerConfig { get; private set; }
         public IEnumerable<StringIdentity> Skills { get; private set; } = new List<StringIdentity>();
 
         public long StarPlayerPoints { get; set; }
@@ -31,6 +32,7 @@ namespace Teams.ReadHost.Players
             PlayerId = domainEvent.PlayerId;
             TeamId = domainEvent.TeamId;
             PlayerTypeId = domainEvent.PlayerTypeId;
+            PlayerConfig = domainEvent.PlayerConfig;
             Name = domainEvent.Name;
         }
 

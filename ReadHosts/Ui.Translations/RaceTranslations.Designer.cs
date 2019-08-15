@@ -171,5 +171,119 @@ namespace Ui.Translations {
                 return ResourceManager.GetString("PlayerMadeTouchdown", resourceCulture);
             }
         }
+        
+        public static string SkillType_General {
+            get {
+                return ResourceManager.GetString("SkillType_General", resourceCulture);
+            }
+        }
+        
+        public static string SkillType_Extraordinary {
+            get {
+                return ResourceManager.GetString("SkillType_Extraordinary", resourceCulture);
+            }
+        }
+        
+        public static string SkillType_Mutation {
+            get {
+                return ResourceManager.GetString("SkillType_Mutation", resourceCulture);
+            }
+        }
+        
+        public static string SkillType_Passing {
+            get {
+                return ResourceManager.GetString("SkillType_Passing", resourceCulture);
+            }
+        }
+        
+        public static string SkillType_Strength {
+            get {
+                return ResourceManager.GetString("SkillType_Strength", resourceCulture);
+            }
+        }
+        
+        public static string SkillType_Agility {
+            get {
+                return ResourceManager.GetString("SkillType_Agility", resourceCulture);
+            }
+        }
+        
+        public static string SkillType_PlusOneAgility {
+            get {
+                return ResourceManager.GetString("SkillType_PlusOneAgility", resourceCulture);
+            }
+        }
+        
+        public static string SkillType_PlusOneArmorOrMovement {
+            get {
+                return ResourceManager.GetString("SkillType_PlusOneArmorOrMovement", resourceCulture);
+            }
+        }
+        
+        public static string SkillType_PlusOneStrength {
+            get {
+                return ResourceManager.GetString("SkillType_PlusOneStrength", resourceCulture);
+            }
+        }
+        
+        public static string Skill_Block {
+            get {
+                return ResourceManager.GetString("Skill_Block", resourceCulture);
+            }
+        }
+        
+        public static string Skill_Catch {
+            get {
+                return ResourceManager.GetString("Skill_Catch", resourceCulture);
+            }
+        }
+        
+        public static string Skill_Dodge {
+            get {
+                return ResourceManager.GetString("Skill_Dodge", resourceCulture);
+            }
+        }
+        
+        public static string Skill_MightyBlow {
+            get {
+                return ResourceManager.GetString("Skill_MightyBlow", resourceCulture);
+            }
+        }
+        
+        public static string Skill_Throw {
+            get {
+                return ResourceManager.GetString("Skill_Throw", resourceCulture);
+            }
+        }
+        
+        public static string Skill_PickUp {
+            get {
+                return ResourceManager.GetString("Skill_PickUp", resourceCulture);
+            }
+        }
+        
+        public static string Skill_PlusOneAgility {
+            get {
+                return ResourceManager.GetString("Skill_PlusOneAgility", resourceCulture);
+            }
+        }
+        
+        public static string Skill_PlusOneArmor {
+            get {
+                return ResourceManager.GetString("Skill_PlusOneArmor", resourceCulture);
+            }
+        }
+        
+        public static string Skill_PlusOneMovement {
+            get {
+                return ResourceManager.GetString("Skill_PlusOneMovement", resourceCulture);
+            }
+        }
+        
+        public static string Skill_PlusOneStrength {
+            get {
+                return ResourceManager.GetString("Skill_PlusOneStrength", resourceCulture);
+            }
+        }
     }
 }
