@@ -5,11 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="~/css/fontawesome.min.css">
     <link rel="stylesheet" href="~/css/solid.min.css">
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css"/>
 </head>
 <body>
 <div class="container">
     <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:5006">Seasons</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:5006/Matches">Matches</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:5000">Teams</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <main role="main">
             @RenderBody()
         </main>
