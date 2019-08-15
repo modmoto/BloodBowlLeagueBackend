@@ -74,6 +74,14 @@ namespace Seasons.ReadHost.Pages
                 new { });
             return Redirect(MatchId.ToString());
         }
+        
+        public async Task<IActionResult> OnPostFinishMatch(GuidIdentity matchId)
+        {
+            await _mitigator.PostAsync(
+                new Uri($"http://localhost:5003/Api/Matches/{MatchId}/finish"),
+                new { });
+            return Redirect(MatchId.ToString());
+        }
 
         public TeamReadModel FullTeam(GuidIdentity teamId)
         {
