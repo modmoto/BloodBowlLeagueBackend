@@ -176,7 +176,7 @@ namespace Teams.WriteHost.Startup
                 new AllowedPlayer(StringIdentity.Create("HU_Blitzer"), 4, new GoldCoins(90000)),
                 new AllowedPlayer(StringIdentity.Create("HU_Catcher"), 4, new GoldCoins(70000)),
                 new AllowedPlayer(StringIdentity.Create("HU_Thrower"), 2, new GoldCoins(70000)),
-                new AllowedPlayer(StringIdentity.Create("HU_Ogre"), 1, new GoldCoins(70000))
+                new AllowedPlayer(StringIdentity.Create("HU_Ogre"), 1, new GoldCoins(150000))
             };
 
         public static IEnumerable<AllowedPlayer> DwarfPlayers =>
