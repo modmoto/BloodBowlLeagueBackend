@@ -25,6 +25,7 @@ namespace Seasons.ReadHost.Matches
         public void Handle(MatchFinished domainEvent)
         {
             IsFinished = true;
+            GameResult = domainEvent.GameResult;
         }
 
         public void Handle(MatchStarted domainEvent)

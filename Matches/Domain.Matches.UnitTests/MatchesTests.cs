@@ -41,6 +41,9 @@ namespace Domain.Matches.UnitTests
             var domainEvent = domainResult.DomainEvents.First() as MatchFinished;
             Assert.AreEqual(teamReadModel.TeamId, domainEvent.GameResult.Winner);
             Assert.AreEqual(teamReadModel2.TeamId, domainEvent.GameResult.Looser);
+
+            Assert.AreEqual(1, domainEvent.GameResult.HomeTeam.TouchDowns);
+            Assert.AreEqual(0, domainEvent.GameResult.GuestTeam.TouchDowns);
         }
 
         [TestMethod]
