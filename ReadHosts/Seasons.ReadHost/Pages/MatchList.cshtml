@@ -7,7 +7,7 @@
         @foreach (var m in Model.Matches)
         {
             <a href="http://localhost:5006/Match/@m.MatchId" class="list-group-item list-group-item-action">
-                @(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)
+                @(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName) @(m.IsStarted ? "(Started)" : "")
             </a>
         }
     </ul>
