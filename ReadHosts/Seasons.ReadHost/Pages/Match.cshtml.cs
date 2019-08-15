@@ -13,30 +13,30 @@ using Seasons.ReadHost.Teams;
 
 namespace Seasons.ReadHost.Pages
 {
-    public class Matches : PageModel
+    public class Match : PageModel
     {
         private readonly IReadModelRepository _readModelRepository;
         private readonly MessageMitigator _mitigator;
 
         [BindProperty(SupportsGet = true)]
         public Guid MatchId { get; set; }
-        public MatchupReadModel Match { get; set; }
+        public MatchupReadModel SingleMatch { get; set; }
         public IEnumerable<TeamReadModel> Teams { get; set; }
         public IEnumerable<PlayerReadModel> Players { get; set; }
-        public TeamReadModel GuestTeam => FullTeam(Match.TeamAsGuest);
-        public TeamReadModel HomeTeam => FullTeam(Match.TeamAtHome);
+        public TeamReadModel GuestTeam => FullTeam(SingleMatch.TeamAsGuest);
+        public TeamReadModel HomeTeam => FullTeam(SingleMatch.TeamAtHome);
         public IEnumerable<GuidIdentity> AllPlayers
         {
             get
             {
                 var guidIdentities = new List<GuidIdentity>();
-                guidIdentities.AddRange(Match.GuestTeamPlayers);
-                guidIdentities.AddRange(Match.HomeTeamPlayers);
+                guidIdentities.AddRange(SingleMatch.GuestTeamPlayers);
+                guidIdentities.AddRange(SingleMatch.HomeTeamPlayers);
                 return guidIdentities;
             }
         }
 
-        public Matches(
+        public Match(
             IReadModelRepository readModelRepository,
             MessageMitigator mitigator)
         {
@@ -49,7 +49,7 @@ namespace Seasons.ReadHost.Pages
             var result = await _readModelRepository.LoadAsync<MatchupReadModel>(GuidIdentity.Create(MatchId));
             var teamResult = await _readModelRepository.LoadAllAsync<TeamReadModel>();
             var playerResult = await _readModelRepository.LoadAllAsync<PlayerReadModel>();
-            Match = result.Value;
+            SingleMatch = result.Value;
             Teams = teamResult.Value;
             Players = playerResult.Value;
         }

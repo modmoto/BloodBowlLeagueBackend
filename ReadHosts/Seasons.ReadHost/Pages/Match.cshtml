@@ -1,13 +1,13 @@
 @page "{matchId:Guid?}"
 @using global::Seasons.ReadHost.Matches
 @using Ui.Translations
-@model Pages.Matches
+@model Pages.Match
 
 <div class="my-2 my-lg-0 p-3 ml-auto">
     <h3 class="pb-3">@Model.HomeTeam.TeamName vs @Model.GuestTeam.TeamName</h3>
     <h5>Stuff that happened:</h5>
     <ul class="list-group pb-3 mb-1 pl-3">
-        @foreach (var progression in Model.Match.PlayerProgressions)
+        @foreach (var progression in Model.SingleMatch.PlayerProgressions)
         {
             <li class="list-group-item">
                 @Model.FullPlayer(progression.PlayerId).Name : @RaceTranslations.ResourceManager.GetString(progression.ProgressionEvent.ToString())
