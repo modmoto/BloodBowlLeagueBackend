@@ -1,0 +1,20 @@
+@page
+@model Pages.PlayerListModel
+
+<div class="my-2 my-lg-0 p-3 ml-auto">
+    <h3>Players:</h3>
+    <div class="list-group">
+    @foreach (var player in Model.PlayerList)
+    {
+         <a href="http://localhost:5000/Player/@player.PlayerId" class="list-group-item list-group-item-action">
+             <h5 class="mb-1">
+                 @player.Name Lvl: @player.Level
+                 @if(player.Skills.Any())
+                 {
+                     string.Join(", ", player.Skills.Select(s => s.Id));
+                 }
+             </h5>
+         </a>
+     }
+     </div>
+</div>

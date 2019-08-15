@@ -8,16 +8,19 @@ namespace Teams.ReadHost.Players.Events
         public PlayerCreated(
             GuidIdentity playerId,
             StringIdentity playerTypeId,
-            GuidIdentity teamId)
+            GuidIdentity teamId,
+            string name)
         {
             PlayerId = playerId;
             PlayerTypeId = playerTypeId;
             TeamId = teamId;
+            Name = name;
         }
 
         public GuidIdentity PlayerId { get; }
         public StringIdentity PlayerTypeId { get; }
         public GuidIdentity TeamId { get; }
         public Identity EntityId => PlayerId;
+        public string Name { get;  }
     }
 }

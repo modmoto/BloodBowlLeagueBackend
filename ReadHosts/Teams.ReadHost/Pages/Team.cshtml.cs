@@ -12,7 +12,7 @@ using Teams.ReadHost.Teams;
 
 namespace Teams.ReadHost.Pages
 {
-    public class Teams : PageModel
+    public class TeamModel : PageModel
     {
         private readonly IReadModelRepository _readModelRepository;
         private readonly MessageMitigator _mitigator;
@@ -24,7 +24,7 @@ namespace Teams.ReadHost.Pages
         public Guid TeamId { get; set; }
 
 
-        public Teams(
+        public TeamModel(
             IReadModelRepository readModelRepository,
             MessageMitigator mitigator)
         {

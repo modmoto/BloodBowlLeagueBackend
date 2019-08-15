@@ -9,7 +9,7 @@
         {
             @foreach (var team in Model.AllTeams)
              {
-                 <a href="Teams/@team.TeamId" class="list-group-item list-group-item-action">
+                 <a href="Team/@team.TeamId" class="list-group-item list-group-item-action">
                      <div class="d-flex w-100 justify-content-between">
                          <h5 class="mb-1">@team.TeamName (@team.TrainerName, @RaceTranslations.ResourceManager.GetString(team.RaceId.Id))</h5>
                      </div>
@@ -18,7 +18,7 @@
         }
         else
         {
-            <h5 class="card-title">None</h5>
+            <h5>None</h5>
         }
     </div>
     <div class="pt-4">

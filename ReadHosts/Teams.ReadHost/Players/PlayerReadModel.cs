@@ -16,12 +16,14 @@ namespace Teams.ReadHost.Players
         public StringIdentity PlayerTypeId{ get; private set; }
         public IEnumerable<StringIdentity> Skills { get; private set; } = new List<StringIdentity>();
         public int Level { get; set; }
+        public string Name { get; private set; }
 
         public void Handle(PlayerCreated domainEvent)
         {
             PlayerId = domainEvent.PlayerId;
             TeamId = domainEvent.TeamId;
             PlayerTypeId = domainEvent.PlayerTypeId;
+            Name = domainEvent.Name;
         }
 
         public void Handle(SkillChosen domainEvent)
