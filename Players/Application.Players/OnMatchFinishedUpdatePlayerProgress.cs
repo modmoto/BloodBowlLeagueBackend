@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Domain.Players;
 using Domain.Players.Events.ForeignEvents;
 using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Identities;
 using Microwave.Domain.Validation;
 using Microwave.EventStores;
 using Microwave.Queries;
@@ -22,7 +23,7 @@ namespace Application.Players
 
         public async Task HandleAsync(MatchFinished domainEvent)
         {
-            var resultList = new List<Tuple<EventStoreResult<Player>, IEnumerable<IDomainEvent>>>();
+            var resultList = new Dictionary<GuidIdentity, Tuple<List<IDomainEvent>, long>>();
             foreach (var playerProgression in domainEvent.PlayerProgressions)
             {
                 var domainResults = new List<DomainResult>();
@@ -48,14 +49,22 @@ namespace Application.Players
 
                 var domainEvents = domainResults.SelectMany(res => res.DomainEvents);
 
-                resultList.Add(new Tuple<EventStoreResult<Player>, IEnumerable<IDomainEvent>>(result, domainEvents));
+                if (resultList.TryGetValue(player.PlayerId, out var playerTuple))
+                {
+                    var events = playerTuple.Item1;
+                    events.AddRange(domainEvents);
+                    resultList[player.PlayerId] = new Tuple<List<IDomainEvent>, long>(events, result.Version);
+                }
+                else
+                {
+                    resultList[player.PlayerId] = new Tuple<List<IDomainEvent>, long>(domainEvents.ToList(), result.Version);
+                }
             }
 
-            foreach (var tuple in resultList)
+            foreach (var playerResult in resultList)
             {
-                var eventStoreResult = tuple.Item1;
-                var domainEvents = tuple.Item2;
-                await _eventStore.AppendAsync(domainEvents, eventStoreResult.Version);
+                var result = await _eventStore.AppendAsync(playerResult.Value.Item1, playerResult.Value.Item2);
+                result.Check();
             }
         }
     }
