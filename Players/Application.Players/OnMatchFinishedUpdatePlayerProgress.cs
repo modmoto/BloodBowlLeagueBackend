@@ -23,7 +23,6 @@ namespace Application.Players
 
         public async Task HandleAsync(MatchFinished domainEvent)
         {
-            var resultList = new Dictionary<GuidIdentity, Tuple<List<IDomainEvent>, long>>();
             foreach (var playerProgression in domainEvent.PlayerProgressions)
             {
                 var domainResults = new List<DomainResult>();
@@ -49,22 +48,8 @@ namespace Application.Players
 
                 var domainEvents = domainResults.SelectMany(res => res.DomainEvents);
 
-                if (resultList.TryGetValue(player.PlayerId, out var playerTuple))
-                {
-                    var events = playerTuple.Item1;
-                    events.AddRange(domainEvents);
-                    resultList[player.PlayerId] = new Tuple<List<IDomainEvent>, long>(events, result.Version);
-                }
-                else
-                {
-                    resultList[player.PlayerId] = new Tuple<List<IDomainEvent>, long>(domainEvents.ToList(), result.Version);
-                }
-            }
-
-            foreach (var playerResult in resultList)
-            {
-                var result = await _eventStore.AppendAsync(playerResult.Value.Item1, playerResult.Value.Item2);
-                result.Check();
+                var resultStore = await _eventStore.AppendAsync(domainEvents, result.Version);
+                resultStore.Check();
             }
         }
     }
