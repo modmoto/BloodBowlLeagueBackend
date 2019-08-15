@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Exceptions;
 using Microwave.Domain.Identities;
+using Microwave.Domain.Results;
 using Microwave.EventStores;
 using Moq;
 
@@ -23,6 +24,8 @@ namespace Application.Players.UnitTests
             var identity = GuidIdentity.Create(Guid.NewGuid());
             mock.Setup(es => es.LoadAsync<Player>(identity))
                 .ReturnsAsync(EventStoreResult<Player>.Ok(new Player(), 0));
+            mock.Setup(es => es.AppendAsync(It.IsAny<IEnumerable<IDomainEvent>>(), It.IsAny<long>()))
+                .ReturnsAsync(Result.Ok());
 
             var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(mock.Object);
             var matchResultUploaded = MatchResultUploaded(identity);
@@ -55,6 +58,8 @@ namespace Application.Players.UnitTests
                 .ReturnsAsync(EventStoreResult<Player>.Ok(new Player(), 0));
             mock.Setup(es => es.LoadAsync<Player>(idNotFound))
                 .ReturnsAsync(EventStoreResult<Player>.NotFound(GuidIdentity.Create()));
+            mock.Setup(es => es.AppendAsync(It.IsAny<IEnumerable<IDomainEvent>>(), It.IsAny<long>()))
+                .ReturnsAsync(Result.Ok());
             var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(mock.Object);
 
             var matchResultUploaded = MatchResultUploaded(idFound, idNotFound);
@@ -65,9 +70,12 @@ namespace Application.Players.UnitTests
 
         private static MatchFinished MatchResultUploaded(params GuidIdentity[] identity)
         {
-            var progressions1 = identity.Select(guidIdentity => new PlayerProgression(guidIdentity, ProgressionEvent
-            .PlayerPassed)).ToList();
-            var progressions2 = identity.Select(guidIdentity => new PlayerProgression(guidIdentity, ProgressionEvent.PlayerMadeTouchdown));
+            var progressions1 = identity.Select(guidIdentity => new PlayerProgression(
+                guidIdentity,
+                ProgressionEvent.PlayerPassed)).ToList();
+            var progressions2 = identity.Select(guidIdentity => new PlayerProgression(
+                guidIdentity,
+                ProgressionEvent.PlayerMadeTouchdown));
             progressions1.AddRange(progressions2);
             return new MatchFinished(GuidIdentity.Create(), progressions1);
         }
