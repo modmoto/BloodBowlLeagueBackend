@@ -50,11 +50,6 @@ namespace Domain.Matches
         {
             return new GameResult(false, home, guest);
         }
-
-        public static GameResult Default(GuidIdentity teamAtHome, GuidIdentity teamAsGuest)
-        {
-            return new GameResult(true, new PointsOfTeam(teamAtHome, 0), new PointsOfTeam(teamAsGuest, 0));
-        }
     }
 
     public class PointsOfTeam
