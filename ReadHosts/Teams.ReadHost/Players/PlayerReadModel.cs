@@ -34,6 +34,9 @@ namespace Teams.ReadHost.Players
             PlayerTypeId = domainEvent.PlayerTypeId;
             PlayerConfig = domainEvent.PlayerConfig;
             Name = domainEvent.Name;
+            var startingSkills = Skills.ToList();
+            startingSkills.AddRange(domainEvent.PlayerConfig.StartingSkills.Select(s => s.SkillId));
+            Skills = startingSkills;
         }
 
         public void Handle(SkillChosen domainEvent)

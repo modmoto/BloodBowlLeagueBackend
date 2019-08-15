@@ -146,7 +146,7 @@ namespace Teams.WriteHost.Startup
                         new GoldCoins(1000000)),
                     new PlayerBought(
                         team2,
-                        StringIdentity.Create("HU_LineMan"),
+                        StringIdentity.Create("HU_Blitzer"),
                         GuidIdentity.Create(new Guid("9CF84B11-5852-4D09-BB08-5357E6DA04C8")),
                         new GoldCoins(950000)),
                     new PlayerBought(

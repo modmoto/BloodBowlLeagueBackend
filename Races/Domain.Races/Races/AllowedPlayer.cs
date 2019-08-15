@@ -36,17 +36,17 @@ namespace Domain.Races.Races
                 16,
                 new GoldCoins(70000),
                 new List<Skill>(),
-                new [] { SkillType.General },
-                new [] { SkillType.General });
+                new [] { SkillType.General, SkillType.Agility },
+                new [] { SkillType.Strength, SkillType.Passing });
 
         public static AllowedPlayer DarkElveAssasine =>
             new AllowedPlayer(
                 StringIdentity.Create("DE_Assassine"),
                 2,
                 new GoldCoins(90000),
-                new [] { Skill.Dodge },
-                new [] { SkillType.General },
-                new [] { SkillType.General });
+                new [] { Skill.Shadowing, Skill.Stab },
+                new [] { SkillType.General, SkillType.Agility },
+                new [] { SkillType.Strength, SkillType.Passing });
 
         public static AllowedPlayer DarkElveBlitzer =>
             new AllowedPlayer(
@@ -54,17 +54,25 @@ namespace Domain.Races.Races
                 4,
                 new GoldCoins(100000),
                 new [] { Skill.Block },
-                new [] { SkillType.General },
-                new [] { SkillType.General });
+                new [] { SkillType.General, SkillType.Agility },
+                new [] { SkillType.Passing, SkillType.Strength });
 
         public static AllowedPlayer DarkElveWitchElve =>
             new AllowedPlayer(
                 StringIdentity.Create("DE_WitchElve"),
                 2,
                 new GoldCoins(110000),
-                new [] { Skill.Dodge },
+                new [] { Skill.Dodge, Skill.JumUp, Skill.Frenzy },
                 new [] { SkillType.General },
                 new [] { SkillType.General });
+        public static AllowedPlayer DarkElveRuner =>
+            new AllowedPlayer(
+                StringIdentity.Create("DE_Runner"),
+                2,
+                new GoldCoins(80000),
+                new [] { Skill.DumpOff },
+                new [] { SkillType.General, SkillType.Agility, SkillType.Passing },
+                new [] { SkillType.Strength });
 
         // Humans
         public static AllowedPlayer HumanLineMan =>
@@ -74,14 +82,14 @@ namespace Domain.Races.Races
                 new GoldCoins(50000),
                 new List<Skill>(),
                 new [] { SkillType.General },
-                new [] { SkillType.General });
+                new [] { SkillType.Agility, SkillType.Strength, SkillType.Passing });
 
         public static AllowedPlayer HumanBlitzer =>
             new AllowedPlayer(
                 StringIdentity.Create("HU_Blitzer"),
                 4,
                 new GoldCoins(90000),
-                new [] { Skill.Dodge },
+                new [] { Skill.Block },
                 new [] { SkillType.General },
                 new [] { SkillType.General });
 
@@ -90,27 +98,27 @@ namespace Domain.Races.Races
                 StringIdentity.Create("HU_Catcher"),
                 4,
                 new GoldCoins(70000),
-                new [] { Skill.Block },
-                new [] { SkillType.General },
-                new [] { SkillType.General });
+                new [] { Skill.Catch, Skill.Dodge },
+                new [] { SkillType.Agility, SkillType.General },
+                new [] { SkillType.Strength, SkillType.Passing });
 
         public static AllowedPlayer HumanThrower =>
             new AllowedPlayer(
                 StringIdentity.Create("HU_Thrower"),
                 2,
                 new GoldCoins(70000),
-                new [] { Skill.Dodge },
-                new [] { SkillType.General },
-                new [] { SkillType.General });
+                new [] { Skill.SureHands, Skill.Pass },
+                new [] { SkillType.Passing, SkillType.General },
+                new [] { SkillType.Agility, SkillType.Strength });
 
         public static AllowedPlayer HumanOgre =>
             new AllowedPlayer(
                 StringIdentity.Create("HU_Ogre"),
                 1,
-                new GoldCoins(150000),
-                new [] { Skill.Dodge },
-                new [] { SkillType.General },
-                new [] { SkillType.General });
+                new GoldCoins(140000),
+                new [] { Skill.MightyBlow },
+                new [] { SkillType.Strength },
+                new [] { SkillType.General, SkillType.Agility, SkillType.Passing });
 
         // Dwarfs
         public static AllowedPlayer DwarfBlocker =>

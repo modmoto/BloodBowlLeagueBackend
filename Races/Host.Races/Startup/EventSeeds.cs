@@ -23,9 +23,8 @@ namespace Host.Races.Startup
                     new SkillCreated(Skill.Catch.SkillId, Skill.Catch.SkillType),
                     new SkillCreated(Skill.Dodge.SkillId, Skill.Dodge.SkillType),
                     new SkillCreated(Skill.Pass.SkillId, Skill.Pass.SkillType),
-                    new SkillCreated(Skill.Throw.SkillId, Skill.Throw.SkillType),
+                    new SkillCreated(Skill.SureHands.SkillId, Skill.SureHands.SkillType),
                     new SkillCreated(Skill.MightyBlow.SkillId, Skill.MightyBlow.SkillType),
-                    new SkillCreated(Skill.PickUp.SkillId, Skill.PickUp.SkillType),
                     new SkillCreated(Skill.PlusOneAgility.SkillId, Skill.PlusOneAgility.SkillType),
                     new SkillCreated(Skill.PlusOneArmor.SkillId, Skill.PlusOneArmor.SkillType),
                     new SkillCreated(Skill.PlusOneMovement.SkillId, Skill.PlusOneMovement.SkillType),
@@ -61,7 +60,8 @@ namespace Host.Races.Startup
                 AllowedPlayer.DarkElveAssasine,
                 AllowedPlayer.DarkElveBlitzer,
                 AllowedPlayer.DarkElveLineMan,
-                AllowedPlayer.DarkElveWitchElve
+                AllowedPlayer.DarkElveWitchElve,
+                AllowedPlayer.DarkElveRuner
             });
     }
 }

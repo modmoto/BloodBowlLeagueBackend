@@ -250,15 +250,15 @@ namespace Ui.Translations {
             }
         }
         
-        public static string Skill_Throw {
+        public static string Skill_SureHands {
             get {
-                return ResourceManager.GetString("Skill_Throw", resourceCulture);
+                return ResourceManager.GetString("Skill_SureHands", resourceCulture);
             }
         }
         
-        public static string Skill_PickUp {
+        public static string Skill_Pass {
             get {
-                return ResourceManager.GetString("Skill_PickUp", resourceCulture);
+                return ResourceManager.GetString("Skill_Pass", resourceCulture);
             }
         }
         

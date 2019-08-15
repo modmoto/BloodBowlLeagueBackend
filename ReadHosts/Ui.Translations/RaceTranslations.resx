@@ -219,11 +219,11 @@
   <data name="Skill_MightyBlow" xml:space="preserve">
     <value>Mighty Blow</value>
   </data>
-  <data name="Skill_Throw" xml:space="preserve">
-    <value>Throw</value>
+  <data name="Skill_SureHands" xml:space="preserve">
+    <value>Sure Hands</value>
   </data>
-  <data name="Skill_PickUp" xml:space="preserve">
-    <value>PickUp</value>
+  <data name="Skill_Pass" xml:space="preserve">
+    <value>Pass</value>
   </data>
   <data name="Skill_PlusOneAgility" xml:space="preserve">
     <value>Plus one agility</value>

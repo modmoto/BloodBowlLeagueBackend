@@ -5,6 +5,7 @@
 <div class="my-2 my-lg-0 p-3 ml-auto">
     <h3>@Model.Player.Name (Lvl: @Model.Player.Level)</h3>
     <h3>SSP: @Model.Player.StarPlayerPoints</h3>
+    <h3>Skills: @string.Join(',', Model.Player.Skills.Select(s => RaceTranslations.ResourceManager.GetString($"Skill_{s.Id}")))</h3>
     @if (Model.Player.FreeSkillPoints.Any())
     {
         <form method="post">
@@ -21,7 +22,10 @@
                                 {
                                     value = "";
                                 }
-                                value = $"({value})";
+                                else
+                                {
+                                    value = $"({value})";
+                                }
                             }
                             @value
                         </option>

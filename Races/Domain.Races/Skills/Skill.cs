@@ -40,12 +40,16 @@ namespace Domain.Races.Skills
         public static Skill Block => new Skill(StringIdentity.Create(nameof(Block)), SkillType.General);
         public static Skill Dodge => new Skill(StringIdentity.Create(nameof(Dodge)), SkillType.Agility);
         public static Skill Pass => new Skill(StringIdentity.Create(nameof(Pass)), SkillType.Passing);
-        public static Skill PickUp => new Skill(StringIdentity.Create(nameof(PickUp)), SkillType.Agility);
-        public static Skill Throw => new Skill(StringIdentity.Create(nameof(Throw)), SkillType.Passing);
+        public static Skill SureHands => new Skill(StringIdentity.Create(nameof(SureHands)), SkillType.Passing);
         public static Skill MightyBlow => new Skill(StringIdentity.Create(nameof(MightyBlow)), SkillType.Strength);
         public static Skill PlusOneMovement => new Skill(StringIdentity.Create(nameof(PlusOneMovement)), SkillType.PlusOneArmorOrMovement);
         public static Skill PlusOneArmor => new Skill(StringIdentity.Create(nameof(PlusOneArmor)), SkillType.PlusOneArmorOrMovement);
         public static Skill PlusOneAgility => new Skill(StringIdentity.Create(nameof(PlusOneAgility)), SkillType.PlusOneAgility);
         public static Skill PlusOneStrength => new Skill(StringIdentity.Create(nameof(PlusOneStrength)), SkillType.PlusOneStrength);
+        public static Skill Shadowing => new Skill(StringIdentity.Create(nameof(Shadowing)), SkillType.Extraordinary);
+        public static Skill Stab => new Skill(StringIdentity.Create(nameof(Stab)), SkillType.Extraordinary);
+        public static Skill JumUp => new Skill(StringIdentity.Create(nameof(JumUp)), SkillType.Agility);
+        public static Skill Frenzy => new Skill(StringIdentity.Create(nameof(Frenzy)), SkillType.Strength);
+        public static Skill DumpOff => new Skill(StringIdentity.Create(nameof(DumpOff)), SkillType.Passing);
     }
 }
