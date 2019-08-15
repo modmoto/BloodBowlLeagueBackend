@@ -8,7 +8,17 @@
     {
          <a href="http://localhost:5000/Player/@player.PlayerId" class="list-group-item list-group-item-action">
              <h5 class="mb-1">
-                 @player.Name Lvl: @player.Level
+                 @{
+                     if (player.FreeSkillPoints.Any())
+                     {
+                         <em class="fas fa-angle-double-up fa-lg pt-1 pr-3 float-right"
+                             data-toggle="tooltip"
+                             data-placement="right"
+                             title="Player has a free Skill!">
+                         </em>
+                     }
+                 }
+                 @player.Name SSP: @player.StarPlayerPoints
                  @if(player.Skills.Any())
                  {
                      string.Join(", ", player.Skills.Select(s => s.Id));

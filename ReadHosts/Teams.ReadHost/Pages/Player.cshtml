@@ -4,4 +4,10 @@
 <div class="my-2 my-lg-0 p-3 ml-auto">
     <h3>@Model.Player.Name (Lvl: @Model.Player.Level)</h3>
     <h3>SSP: @Model.Player.StarPlayerPoints</h3>
-</div>
+    @if (Model.Player.FreeSkillPoints.Any())
+    {
+        <div>
+            Select a skill
+        </div>
+    }
+ </div>

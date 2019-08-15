@@ -24,6 +24,8 @@ namespace Teams.ReadHost.Players
         public int Level { get; set; } = 1;
         public string Name { get; private set; }
 
+        public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
+
         public void Handle(PlayerCreated domainEvent)
         {
             PlayerId = domainEvent.PlayerId;
@@ -40,6 +42,7 @@ namespace Teams.ReadHost.Players
         public void Handle(PlayerLeveledUp domainEvent)
         {
             Level = domainEvent.NewLevel;
+            FreeSkillPoints = FreeSkillPoints.Append(domainEvent.NewFreeSkillPoint);
         }
 
         public void Handle(PlayerPassed domainEvent)

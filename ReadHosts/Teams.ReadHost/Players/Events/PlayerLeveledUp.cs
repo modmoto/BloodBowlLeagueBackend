@@ -5,14 +5,24 @@ namespace Teams.ReadHost.Players.Events
 {
     public class PlayerLeveledUp : ISubscribedDomainEvent
     {
-        public PlayerLeveledUp(GuidIdentity playerId, int newLevel)
+        public PlayerLeveledUp(
+            GuidIdentity playerId,
+            FreeSkillPoint newFreeSkillPoint,
+            int newLevel)
         {
             PlayerId = playerId;
+            NewFreeSkillPoint = newFreeSkillPoint;
             NewLevel = newLevel;
         }
 
-        public GuidIdentity PlayerId { get; }
-        public int NewLevel { get; }
         public Identity EntityId => PlayerId;
+        public GuidIdentity PlayerId { get; }
+        public FreeSkillPoint NewFreeSkillPoint { get; }
+        public int NewLevel { get; }
+    }
+
+    public enum FreeSkillPoint
+    {
+        Normal, Double, PlusOneArmorOrMovement, PlusOneAgility, PlusOneStrength
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Domain.Players.DomainErrors;
 using Domain.Players.Events.Players;
@@ -140,11 +141,16 @@ namespace Domain.Players
         {
             var domainEvents = new List<IDomainEvent>();
             domainEvents.Add(defaultEvent);
+
             if (NextLevelIsDue(newPoints))
-                domainEvents.Add(new PlayerLeveledUp(PlayerId, new List<FreeSkillPoint>(), Level + 1));
+            {
+                var freeSkillPointFactory = new FreeSkillPointFactory();
+                var freeSkillPoint = freeSkillPointFactory.Create();
+                domainEvents.Add(new PlayerLeveledUp(PlayerId, freeSkillPoint, Level + 1));
+            }
+
             return domainEvents;
         }
-
         private bool NextLevelIsDue(long starPlayerPoints)
         {
             var level = _levelUpPoints.Count(upPoint => starPlayerPoints >= upPoint);
@@ -186,7 +192,7 @@ namespace Domain.Players
 
         public void Apply(PlayerLeveledUp leveledUp)
         {
-            FreeSkillPoints = leveledUp.FreeSkillPoints;
+            FreeSkillPoints = FreeSkillPoints.Append(leveledUp.NewFreeSkillPoint);
             Level = leveledUp.NewLevel;
         }
     }
