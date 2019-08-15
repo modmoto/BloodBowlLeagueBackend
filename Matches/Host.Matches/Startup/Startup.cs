@@ -29,8 +29,6 @@ namespace Host.Matches.Startup
                 c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
             });
 
-            var domainEvents = new List<IDomainEvent>();
-
             services.AddMicrowavePersistenceLayerInMemory(c =>
             {
                 c.WithEventSeeds(EventSeeds.Seeds);
