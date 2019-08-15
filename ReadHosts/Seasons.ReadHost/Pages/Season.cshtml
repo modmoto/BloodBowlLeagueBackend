@@ -17,7 +17,13 @@
                      {
                          var m = Model.FullMatch(matchup.MatchId);
                          <a href="http://localhost:5006/Match/@m.MatchId" class="list-group-item list-group-item-action">
-                             @(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)
+                             <div class="float-left">@(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)</div>
+                             @if (m.IsStarted)
+                             {
+                                 <div class="float-right">
+                                     @(m.GameResult.HomeTeam.TouchDowns) : @(m.GameResult.GuestTeam.TouchDowns)
+                                 </div>
+                             }
                          </a>
                          @if (m.IsFinished)
                          {

@@ -5,6 +5,7 @@
 
 <div class="my-2 my-lg-0 p-3 ml-auto">
     <h3 class="pb-3">@Model.HomeTeam.TeamName vs @Model.GuestTeam.TeamName</h3>
+    <h3 class="pb-3">@Model.SingleMatch.GameResult.HomeTeam.TouchDowns : @Model.SingleMatch.GameResult.GuestTeam.TouchDowns </h3>
     @if (Model.SingleMatch.IsStarted)
     {
         <h5>Stuff that happened:</h5>

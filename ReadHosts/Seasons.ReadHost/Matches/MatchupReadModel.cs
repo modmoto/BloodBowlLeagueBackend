@@ -8,6 +8,7 @@ namespace Seasons.ReadHost.Matches
 {
     public class MatchupReadModel : ReadModel<MatchCreated>,
         IHandle<MatchFinished>,
+        IHandle<MatchCreated>,
         IHandle<MatchStarted>,
         IHandle<MatchProgressed>
     {
@@ -24,7 +25,6 @@ namespace Seasons.ReadHost.Matches
         public void Handle(MatchFinished domainEvent)
         {
             IsFinished = true;
-            GameResult = domainEvent.GameResult;
         }
 
         public void Handle(MatchStarted domainEvent)
@@ -39,10 +39,16 @@ namespace Seasons.ReadHost.Matches
             MatchId = domainEvent.MatchId;
             TeamAtHome = domainEvent.TeamAtHome;
             TeamAsGuest = domainEvent.TeamAsGuest;
+            GameResult = new GameResult
+            {
+                HomeTeam = new PointsOfTeam(),
+                GuestTeam = new PointsOfTeam()
+            };
         }
 
         public void Handle(MatchProgressed domainEvent)
         {
+            GameResult = domainEvent.GameResult;
             PlayerProgressions = PlayerProgressions.Append(domainEvent.PlayerProgression);
         }
     }
