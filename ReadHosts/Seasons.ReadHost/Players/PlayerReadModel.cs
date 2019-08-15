@@ -9,7 +9,7 @@ namespace Seasons.ReadHost.Players
     {
         public GuidIdentity PlayerId { get; private set; }
         public GuidIdentity TeamId { get; private set; }
-        public StringIdentity PlayerTypeId{ get; private set; }
+        public PlayerConfig PlayerConfig { get; private set; }
 
         public string Name { get; private set; }
 
@@ -17,7 +17,7 @@ namespace Seasons.ReadHost.Players
         {
             PlayerId = domainEvent.PlayerId;
             TeamId = domainEvent.TeamId;
-            PlayerTypeId = domainEvent.PlayerTypeId;
+            PlayerConfig = domainEvent.PlayerConfig;
             Name = domainEvent.Name;
         }
     }

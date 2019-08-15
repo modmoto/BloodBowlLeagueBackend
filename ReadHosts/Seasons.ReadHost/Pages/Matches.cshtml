@@ -18,10 +18,10 @@
         <div class="form-group">
             <label for="playerSelectBox">Player</label>
             <select class="form-control" id="playerSelectBox" name="playerId">
-                @foreach (var player in Model.AllPlayers)
+                @foreach (var playerId in Model.AllPlayers)
                 {
-                    <option value="@player">
-                        @(player)
+                    <option value="@playerId">
+                        @Model.FullPlayer(playerId).Name (@RaceTranslations.ResourceManager.GetString(Model.FullPlayer(playerId).PlayerConfig.PlayerTypeId.Id))
                     </option>
                 }
             </select>

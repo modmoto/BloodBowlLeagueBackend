@@ -7,20 +7,31 @@ namespace Seasons.ReadHost.Players.Events
     {
         public PlayerCreated(
             GuidIdentity playerId,
-            StringIdentity playerTypeId,
+            PlayerConfig playerConfig,
             GuidIdentity teamId,
             string name)
         {
             PlayerId = playerId;
-            PlayerTypeId = playerTypeId;
+            PlayerConfig = playerConfig;
             TeamId = teamId;
             Name = name;
         }
 
         public string Name { get; }
         public GuidIdentity PlayerId { get; }
-        public StringIdentity PlayerTypeId { get; }
+        public PlayerConfig PlayerConfig { get; }
         public GuidIdentity TeamId { get; }
         public Identity EntityId => PlayerId;
+    }
+
+    public class PlayerConfig
+    {
+        public PlayerConfig(
+            StringIdentity playerTypeId)
+        {
+            PlayerTypeId = playerTypeId;
+        }
+
+        public StringIdentity PlayerTypeId { get; }
     }
 }
