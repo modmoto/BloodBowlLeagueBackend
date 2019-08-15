@@ -21,7 +21,7 @@ namespace Teams.ReadHost.Players
         public IEnumerable<StringIdentity> Skills { get; private set; } = new List<StringIdentity>();
 
         public long StarPlayerPoints { get; set; }
-        public int Level { get; set; }
+        public int Level { get; set; } = 1;
         public string Name { get; private set; }
 
         public void Handle(PlayerCreated domainEvent)

@@ -20,6 +20,19 @@ namespace Domain.Players.UnitTests
             Assert.IsFalse(domainResult.IsOk);
         }
 
+        [TestMethod]
+        public void PlayerLevelsUp()
+        {
+            var player = new Player();
+            var nominateForMostValuablePlayer = player.NominateForMostValuablePlayer();
+            player.Apply(nominateForMostValuablePlayer.DomainEvents);
+            var result = player.Block();
+            player.Apply(result.DomainEvents);
+
+            Assert.AreEqual(2, ((PlayerLeveledUp) result.DomainEvents.Last()).NewLevel);
+            Assert.AreEqual(2, player.Level);
+        }
+
         private static SkillReadModel Block()
         {
             return new SkillReadModel

@@ -54,7 +54,7 @@ namespace Host.Matches.Startup
             {
                 var created = new SeasonCreated(
                     GuidIdentity.Create(new Guid("7A097EAE-BE35-4B4D-A23D-98A6B57534F3")),
-                    "Gestartetet Season",
+                    "Gestartete Season",
                     DateTimeOffset.Now);
                 var season = new Season();
                 season.Apply(created);

@@ -23,6 +23,10 @@ namespace Domain.Players
         public IEnumerable<SkillReadModel> CurrentSkills { get; private set; } = new List<SkillReadModel>();
         public long StarPlayerPoints { get; private set; }
 
+        public int Level { get; private set; } = 1;
+
+        private readonly IEnumerable<int> _levelUpPoints = new[] { 6, 16, 31, 51, 76, 176 };
+
         public static DomainResult Create(
             GuidIdentity playerId,
             GuidIdentity teamId,
@@ -106,22 +110,45 @@ namespace Domain.Players
 
         public DomainResult Pass()
         {
-            return DomainResult.Ok(new PlayerPassed(PlayerId, StarPlayerPoints + 1));
+            var newStarPlayerPoints = StarPlayerPoints + 1;
+            var domainEvents = LevelUpEvents(new PlayerPassed(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
+            return DomainResult.Ok(domainEvents);
         }
 
         public DomainResult Block()
         {
-            return DomainResult.Ok(new PlayerMadeCasualty(PlayerId, StarPlayerPoints + 2));
+            var newStarPlayerPoints = StarPlayerPoints + 2;
+            var domainEvents = LevelUpEvents(new PlayerMadeCasualty(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
+            return DomainResult.Ok(domainEvents);
         }
 
         public DomainResult Move()
         {
-            return DomainResult.Ok(new PlayerMadeTouchdown(PlayerId, StarPlayerPoints + 3));
+            var newStarPlayerPoints = StarPlayerPoints + 3;
+            var domainEvents = LevelUpEvents(new PlayerMadeTouchdown(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
+            return DomainResult.Ok(domainEvents);
         }
 
         public DomainResult NominateForMostValuablePlayer()
         {
-            return DomainResult.Ok(new PlayerWasNominatedMostValuablePlayer(PlayerId, StarPlayerPoints + 5));
+            var newStarPlayerPoints = StarPlayerPoints + 5;
+            var domainEvents = LevelUpEvents(new PlayerWasNominatedMostValuablePlayer(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
+            return DomainResult.Ok(domainEvents);
+        }
+
+        private IEnumerable<IDomainEvent> LevelUpEvents(IDomainEvent defaultEvent, long newPoints)
+        {
+            var domainEvents = new List<IDomainEvent>();
+            domainEvents.Add(defaultEvent);
+            if (NextLevelIsDue(newPoints))
+                domainEvents.Add(new PlayerLeveledUp(PlayerId, new List<FreeSkillPoint>(), Level + 1));
+            return domainEvents;
+        }
+
+        private bool NextLevelIsDue(long starPlayerPoints)
+        {
+            var level = _levelUpPoints.Count(upPoint => starPlayerPoints >= upPoint);
+            return level + 1 > Level;
         }
 
         public void Apply(PlayerPassed domainEvent)
@@ -160,6 +187,7 @@ namespace Domain.Players
         public void Apply(PlayerLeveledUp leveledUp)
         {
             FreeSkillPoints = leveledUp.FreeSkillPoints;
+            Level = leveledUp.NewLevel;
         }
     }
 }
