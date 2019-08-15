@@ -1,10 +1,10 @@
 @page
-@model Pages.MatchList
+@model Pages.Matches
 
 <div class="my-2 my-lg-0 p-3 ml-auto">
     <h3 class="pb-3">Matches:</h3>
     <ul class="list-group pb-3 mb-1 pl-3">
-        @foreach (var m in Model.Matches)
+        @foreach (var m in Model.MatchList)
         {
             <a href="http://localhost:5006/Match/@m.MatchId" class="list-group-item list-group-item-action">
                 @(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName) @(m.IsStarted ? "(Started)" : "")

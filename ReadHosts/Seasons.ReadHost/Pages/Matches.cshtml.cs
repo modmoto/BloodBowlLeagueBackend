@@ -12,14 +12,14 @@ using Seasons.ReadHost.Teams;
 
 namespace Seasons.ReadHost.Pages
 {
-    public class MatchList : PageModel
+    public class Matches : PageModel
     {
         private readonly IReadModelRepository _readModelRepository;
         private readonly MessageMitigator _mitigator;
-        public IEnumerable<MatchupReadModel> Matches { get; set; }
+        public IEnumerable<MatchupReadModel> MatchList { get; set; }
         public IEnumerable<TeamReadModel> Teams { get; set; }
 
-        public MatchList(
+        public Matches(
             IReadModelRepository readModelRepository,
             MessageMitigator mitigator)
         {
@@ -31,7 +31,7 @@ namespace Seasons.ReadHost.Pages
         {
             var result = await _readModelRepository.LoadAllAsync<MatchupReadModel>();
             var teamResult = await _readModelRepository.LoadAllAsync<TeamReadModel>();
-            Matches = result.Value;
+            MatchList = result.Value;
             Teams = teamResult.Value;
         }
 
@@ -42,7 +42,7 @@ namespace Seasons.ReadHost.Pages
             await _mitigator.PostAsync(
                 new Uri($"http://localhost:5003/Api/Matches/create"),
                 new { homeTeam, guestTeam });
-            return Redirect("http://localhost:5006/MatchList");
+            return Redirect("http://localhost:5006/Matches");
         }
 
         public TeamReadModel FullTeam(GuidIdentity teamId)

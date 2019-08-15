@@ -8,7 +8,7 @@
         {
             @foreach (var season in Model.AllSeasons.AllSeasons)
              {
-                 <a href="Seasons/@season.SeasonId" class="list-group-item list-group-item-action">
+                 <a href="Season/@season.SeasonId" class="list-group-item list-group-item-action">
                      <div class="d-flex w-100 justify-content-between">
                          <h5 class="mb-1">@season.SeasonName</h5>
                          @if (!season.Started)
