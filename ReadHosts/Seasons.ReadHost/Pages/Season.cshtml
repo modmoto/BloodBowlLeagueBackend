@@ -43,7 +43,7 @@
                  </a>
              }
 
-            <form method="post" asp-page-handler="AddTeam" method="post">
+            <form method="post" asp-page-handler="AddTeam" class="pt-3">
                 <div class="form-group">
                     <label for="teamSelectBox">Select a team</label>
                     <select class="form-control" id="teamSelectBox" name="teamId">
@@ -54,8 +54,12 @@
                             </option>
                         }
                     </select>
-                  </div>
+                </div>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Team to Season</button>
             </form>
-        }
+            <hr/>
+            <form method="post" asp-page-handler="StartSeason" class="pt-3">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Start Season</button>
+            </form>
+}
 </div>

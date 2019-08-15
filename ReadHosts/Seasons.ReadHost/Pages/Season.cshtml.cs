@@ -55,10 +55,10 @@ namespace Seasons.ReadHost.Pages
             return Redirect(SeasonId.ToString());
         }
 
-        public async Task<IActionResult> OnPostStartMatch(Guid matchId)
+        public async Task<IActionResult> OnPostStartSeason()
         {
             await _mitigator.PostAsync(
-                new Uri($"http://localhost:5003/Api/Matches/{matchId}/start"),
+                new Uri($"http://localhost:5004/Api/Seasons/{SeasonId}/start"),
                 new { });
             return Redirect(SeasonId.ToString());
         }
