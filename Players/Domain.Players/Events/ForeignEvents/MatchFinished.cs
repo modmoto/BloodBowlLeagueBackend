@@ -6,24 +6,27 @@ namespace Domain.Players.Events.ForeignEvents
 {
     public class MatchFinished : ISubscribedDomainEvent
     {
-        public MatchFinished(IEnumerable<PlayerProgression> playerProgressions)
+        public MatchFinished(GuidIdentity matchId, IEnumerable<PlayerProgression> playerProgressions)
         {
+            MatchId = matchId;
             PlayerProgressions = playerProgressions;
         }
+
+        public GuidIdentity MatchId { get; }
+        public Identity EntityId => MatchId;
         public IEnumerable<PlayerProgression> PlayerProgressions { get; }
-        public Identity EntityId { get; }
     }
 
     public class PlayerProgression
     {
-        public PlayerProgression(GuidIdentity playerId, IEnumerable<ProgressionEvent> progressionEvents)
+        public PlayerProgression(GuidIdentity playerId, ProgressionEvent progressionEvent)
         {
             PlayerId = playerId;
-            ProgressionEvents = progressionEvents;
+            ProgressionEvent = progressionEvent;
         }
 
         public GuidIdentity PlayerId { get; }
-        public IEnumerable<ProgressionEvent> ProgressionEvents { get; }
+        public ProgressionEvent ProgressionEvent { get; }
     }
 
     public enum ProgressionEvent

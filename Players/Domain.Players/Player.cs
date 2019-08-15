@@ -131,17 +131,17 @@ namespace Domain.Players
 
         public void Apply(PlayerMadeCasualty domainEvent)
         {
-            StarPlayerPoints += domainEvent.NewStarPlayerPoints;
+            StarPlayerPoints = domainEvent.NewStarPlayerPoints;
         }
 
         public void Apply(PlayerMadeTouchdown domainEvent)
         {
-            StarPlayerPoints += domainEvent.NewStarPlayerPoints;
+            StarPlayerPoints = domainEvent.NewStarPlayerPoints;
         }
 
         public void Apply(PlayerWasNominatedMostValuablePlayer domainEvent)
         {
-            StarPlayerPoints += domainEvent.NewStarPlayerPoints;
+            StarPlayerPoints = domainEvent.NewStarPlayerPoints;
         }
 
         public void Apply(SkillChosen domainEvent)

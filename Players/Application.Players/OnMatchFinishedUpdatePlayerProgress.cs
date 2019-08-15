@@ -29,23 +29,21 @@ namespace Application.Players
                 var result = await _eventStore.LoadAsync<Player>(playerProgression.PlayerId);
 
                 var player = result.Value;
-                foreach (var progressionEvent in playerProgression.ProgressionEvents)
+
+                switch (playerProgression.ProgressionEvent)
                 {
-                    switch (progressionEvent)
-                    {
-                        case ProgressionEvent.PlayerPassed:
-                            domainResults.Add(player.Pass());
-                            break;
-                        case ProgressionEvent.PlayerMadeCasualty:
-                            domainResults.Add(player.Block());
-                            break;
-                        case ProgressionEvent.PlayerMadeTouchdown:
-                            domainResults.Add(player.Move());
-                            break;
-                        case ProgressionEvent.NominatedMostValuablePlayer:
-                            domainResults.Add(player.NominateForMostValuablePlayer());
-                            break;
-                    }
+                    case ProgressionEvent.PlayerPassed:
+                        domainResults.Add(player.Pass());
+                        break;
+                    case ProgressionEvent.PlayerMadeCasualty:
+                        domainResults.Add(player.Block());
+                        break;
+                    case ProgressionEvent.PlayerMadeTouchdown:
+                        domainResults.Add(player.Move());
+                        break;
+                    case ProgressionEvent.NominatedMostValuablePlayer:
+                        domainResults.Add(player.NominateForMostValuablePlayer());
+                        break;
                 }
 
                 var domainEvents = domainResults.SelectMany(res => res.DomainEvents);

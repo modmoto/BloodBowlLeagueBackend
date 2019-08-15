@@ -28,7 +28,7 @@ namespace Application.Players.UnitTests
             var matchResultUploaded = MatchResultUploaded(identity);
 
             await onMatchUploadedUpdatePlayerProgress.HandleAsync(matchResultUploaded);
-            mock.Verify(m => m.AppendAsync(It.IsAny<IEnumerable<IDomainEvent>>(), 0), Times.Once);
+            mock.Verify(m => m.AppendAsync(It.IsAny<IEnumerable<IDomainEvent>>(), 0), Times.Exactly(2));
         }
 
         [TestMethod]
@@ -65,9 +65,11 @@ namespace Application.Players.UnitTests
 
         private static MatchFinished MatchResultUploaded(params GuidIdentity[] identity)
         {
-            var progressionEvents = new []{ ProgressionEvent.PlayerPassed, ProgressionEvent.PlayerMadeCasualty };
-            var progressions = identity.Select(guidIdentity => new PlayerProgression(guidIdentity, progressionEvents));
-            return new MatchFinished(progressions);
+            var progressions1 = identity.Select(guidIdentity => new PlayerProgression(guidIdentity, ProgressionEvent
+            .PlayerPassed)).ToList();
+            var progressions2 = identity.Select(guidIdentity => new PlayerProgression(guidIdentity, ProgressionEvent.PlayerMadeTouchdown));
+            progressions1.AddRange(progressions2);
+            return new MatchFinished(GuidIdentity.Create(), progressions1);
         }
     }
 }

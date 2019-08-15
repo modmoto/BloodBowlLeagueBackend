@@ -9,12 +9,18 @@ namespace Teams.ReadHost.Players
     public class PlayerReadModel : ReadModel<PlayerCreated>,
         IHandle<PlayerCreated>,
         IHandle<SkillChosen>,
-        IHandle<PlayerLeveledUp>
+        IHandle<PlayerLeveledUp>,
+        IHandle<PlayerPassed>,
+        IHandle<PlayerMadeCasualty>,
+        IHandle<PlayerMadeTouchdown>,
+        IHandle<PlayerWasNominatedMostValuablePlayer>
     {
         public GuidIdentity PlayerId { get; private set; }
         public GuidIdentity TeamId { get; private set; }
         public StringIdentity PlayerTypeId{ get; private set; }
         public IEnumerable<StringIdentity> Skills { get; private set; } = new List<StringIdentity>();
+
+        public long StarPlayerPoints { get; set; }
         public int Level { get; set; }
         public string Name { get; private set; }
 
@@ -34,6 +40,26 @@ namespace Teams.ReadHost.Players
         public void Handle(PlayerLeveledUp domainEvent)
         {
             Level = domainEvent.NewLevel;
+        }
+
+        public void Handle(PlayerPassed domainEvent)
+        {
+            StarPlayerPoints = domainEvent.NewStarPlayerPoints;
+        }
+
+        public void Handle(PlayerMadeCasualty domainEvent)
+        {
+            StarPlayerPoints = domainEvent.NewStarPlayerPoints;
+        }
+
+        public void Handle(PlayerMadeTouchdown domainEvent)
+        {
+            StarPlayerPoints = domainEvent.NewStarPlayerPoints;
+        }
+
+        public void Handle(PlayerWasNominatedMostValuablePlayer domainEvent)
+        {
+            StarPlayerPoints = domainEvent.NewStarPlayerPoints;
         }
     }
 }
