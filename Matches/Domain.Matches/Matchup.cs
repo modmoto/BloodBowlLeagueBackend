@@ -20,9 +20,6 @@ namespace Domain.Matches
         public GuidIdentity TeamAsGuest { get; private set; }
         public IEnumerable<PlayerProgression> PlayerProgressions { get; private set; } = new List<PlayerProgression>();
 
-        private List<PlayerProgression> HomeTeamProgressions => PlayerProgressions.Where(p => HomeTeamPlayers.Contains(p.PlayerId)).ToList();
-        private List<PlayerProgression> GuestTeamProgressions => PlayerProgressions.Where(p => GuestTeamPlayers.Contains(p.PlayerId)).ToList();
-
         public GuidIdentity TeamAtHome { get; private set; }
         private bool _isFinished;
         private bool _isStarted;
@@ -58,7 +55,7 @@ namespace Domain.Matches
             if (!_isStarted) return DomainResult.Error(new MatchDidNotStartYet());
             if (_isFinished) return DomainResult.Error(new MatchAllreadyFinished());
 
-            var gameResult = CreateGameResult();
+            var gameResult = CreateGameResult(PlayerProgressions);
 
             var matchResultUploaded = new MatchFinished(MatchId, PlayerProgressions, gameResult);
             return DomainResult.Ok(matchResultUploaded);
@@ -74,16 +71,18 @@ namespace Domain.Matches
                 && !GuestTeamPlayers.Contains(playerProgression.PlayerId);
             if (playerIsNotInHomeOrGuestTeam) return DomainResult.Error(new PlayerWasNotPartOfTheTeamWhenStartingTheMatch(playerProgression.PlayerId));
 
-            var gameResult = CreateGameResult(playerProgression);
+            var playerProgressions = PlayerProgressions.Append(playerProgression);
+            var gameResult = CreateGameResult(playerProgressions);
 
             var matchResultUploaded = new MatchProgressed(MatchId, playerProgression, gameResult);
             return DomainResult.Ok(matchResultUploaded);
         }
 
-        private GameResult CreateGameResult()
+        private GameResult CreateGameResult(IEnumerable<PlayerProgression> playerProgressions)
         {
-            var homeTouchDowns = CountTouchDowns(HomeTeamProgressions);
-            var guestTouchDowns = CountTouchDowns(GuestTeamProgressions);
+            var trainerResults = playerProgressions.ToList();
+            var homeTouchDowns = CountTouchDownsHome(trainerResults);
+            var guestTouchDowns = CountTouchDownsGuest(trainerResults);
 
             var homeResult = new PointsOfTeam(TeamAtHome, homeTouchDowns);
             var guestResult = new PointsOfTeam(TeamAsGuest, guestTouchDowns);
@@ -92,24 +91,16 @@ namespace Domain.Matches
             return gameResult;
         }
 
-        private GameResult CreateGameResult(PlayerProgression playerProgression)
+        private int CountTouchDownsHome(IEnumerable<PlayerProgression> trainerResults)
         {
-            if (HomeTeamPlayers.Contains(playerProgression.PlayerId))
-            {
-                HomeTeamProgressions.Add(playerProgression);
-            }
-            else
-            {
-                GuestTeamProgressions.Add(playerProgression);
-            }
-
-            return CreateGameResult();
+            return trainerResults.Count(playerProgression => HomeTeamPlayers.Contains(playerProgression.PlayerId) &&
+                                                             playerProgression.ProgressionEvent == ProgressionEvent.PlayerMadeTouchdown);
         }
 
-        private static int CountTouchDowns(IEnumerable<PlayerProgression> trainerResults)
+        private int CountTouchDownsGuest(IEnumerable<PlayerProgression> trainerResults)
         {
-            return trainerResults.Count(playerProgression =>
-                playerProgression.ProgressionEvent == ProgressionEvent.PlayerMadeTouchdown);
+            return trainerResults.Count(playerProgression => GuestTeamPlayers.Contains(playerProgression.PlayerId) &&
+                                                             playerProgression.ProgressionEvent == ProgressionEvent.PlayerMadeTouchdown);
         }
 
         public void Apply(MatchFinished domainEvent)
