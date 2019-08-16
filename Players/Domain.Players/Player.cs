@@ -148,32 +148,32 @@ namespace Domain.Players
         public DomainResult Pass()
         {
             var newStarPlayerPoints = StarPlayerPoints + 1;
-            var domainEvents = LevelUpEvents(new PlayerPassed(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
+            var domainEvents = CreateLevelUpEvents(new PlayerPassed(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
             return DomainResult.Ok(domainEvents);
         }
 
         public DomainResult Block()
         {
             var newStarPlayerPoints = StarPlayerPoints + 2;
-            var domainEvents = LevelUpEvents(new PlayerMadeCasualty(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
+            var domainEvents = CreateLevelUpEvents(new PlayerMadeCasualty(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
             return DomainResult.Ok(domainEvents);
         }
 
         public DomainResult Move()
         {
             var newStarPlayerPoints = StarPlayerPoints + 3;
-            var domainEvents = LevelUpEvents(new PlayerMadeTouchdown(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
+            var domainEvents = CreateLevelUpEvents(new PlayerMadeTouchdown(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
             return DomainResult.Ok(domainEvents);
         }
 
         public DomainResult NominateForMostValuablePlayer()
         {
             var newStarPlayerPoints = StarPlayerPoints + 5;
-            var domainEvents = LevelUpEvents(new PlayerWasNominatedMostValuablePlayer(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
+            var domainEvents = CreateLevelUpEvents(new PlayerWasNominatedMostValuablePlayer(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
             return DomainResult.Ok(domainEvents);
         }
 
-        private IEnumerable<IDomainEvent> LevelUpEvents(IDomainEvent defaultEvent, long newPoints)
+        private IEnumerable<IDomainEvent> CreateLevelUpEvents(IDomainEvent defaultEvent, long newPoints)
         {
             var domainEvents = new List<IDomainEvent>();
             domainEvents.Add(defaultEvent);
