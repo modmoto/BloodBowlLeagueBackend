@@ -31,7 +31,50 @@ namespace Domain.Players.UnitTests
 
             Assert.AreEqual(2, ((PlayerLeveledUp) result.DomainEvents.Last()).NewLevel);
             Assert.AreEqual(2, player.Level);
-            Assert.AreEqual(0, ((PlayerLeveledUp) result.DomainEvents.Last()).NewFreeSkillPoints.Count());
+            Assert.AreEqual(1, ((PlayerLeveledUp) result.DomainEvents.Last()).NewFreeSkillPoints.Count());
+        }
+
+        [TestMethod]
+        public void PlayerLeveledUpTwice()
+        {
+            var player = DefaultPlayer();
+
+            var nominateForMostValuablePlayer1 = player.NominateForMostValuablePlayer();
+            player.Apply(nominateForMostValuablePlayer1.DomainEvents);
+            var nominateForMostValuablePlayer2 = player.NominateForMostValuablePlayer();
+            player.Apply(nominateForMostValuablePlayer2.DomainEvents);
+            var nominateForMostValuablePlayer3 = player.NominateForMostValuablePlayer();
+            player.Apply(nominateForMostValuablePlayer3.DomainEvents);
+            var nominateForMostValuablePlayer4 = player.NominateForMostValuablePlayer();
+
+            Assert.AreEqual(2, ((PlayerLeveledUp) nominateForMostValuablePlayer4.DomainEvents.Last()).NewFreeSkillPoints.Count());
+        }
+
+        [TestMethod]
+        public void PlayerLeveledUpTwice_LevelUpOnce()
+        {
+            var player = DefaultPlayer();
+
+            var nominateForMostValuablePlayer1 = player.NominateForMostValuablePlayer();
+            player.Apply(nominateForMostValuablePlayer1.DomainEvents);
+            var nominateForMostValuablePlayer2 = player.NominateForMostValuablePlayer();
+            player.Apply(nominateForMostValuablePlayer2.DomainEvents);
+            var nominateForMostValuablePlayer3 = player.NominateForMostValuablePlayer();
+            player.Apply(nominateForMostValuablePlayer3.DomainEvents);
+            var nominateForMostValuablePlayer4 = player.NominateForMostValuablePlayer();
+            player.Apply(nominateForMostValuablePlayer4.DomainEvents);
+
+            var domainResult = player.ChooseSkill(Block());
+
+            Assert.AreEqual(1, ((SkillChosen) domainResult.DomainEvents.Last()).NewFreeSkillPoints.Count());
+        }
+
+        private static Player DefaultPlayer()
+        {
+            var player = new Player();
+            var playerCreated = PlayerCreated();
+            player.Apply(playerCreated);
+            return player;
         }
 
         private static SkillReadModel Block()
