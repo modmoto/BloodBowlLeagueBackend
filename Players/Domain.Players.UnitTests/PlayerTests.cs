@@ -53,6 +53,15 @@ namespace Domain.Players.UnitTests
         [TestMethod]
         public void PlayerLeveledUpTwice_LevelUpOnce()
         {
+            var player = PlayerWith20SSP();
+
+            var domainResult = player.ChooseSkill(Block());
+
+            Assert.AreEqual(1, ((SkillChosen) domainResult.DomainEvents.Last()).NewFreeSkillPoints.Count());
+        }
+
+        private static Player PlayerWith20SSP()
+        {
             var player = DefaultPlayer();
 
             var nominateForMostValuablePlayer1 = player.NominateForMostValuablePlayer();
@@ -63,10 +72,7 @@ namespace Domain.Players.UnitTests
             player.Apply(nominateForMostValuablePlayer3.DomainEvents);
             var nominateForMostValuablePlayer4 = player.NominateForMostValuablePlayer();
             player.Apply(nominateForMostValuablePlayer4.DomainEvents);
-
-            var domainResult = player.ChooseSkill(Block());
-
-            Assert.AreEqual(1, ((SkillChosen) domainResult.DomainEvents.Last()).NewFreeSkillPoints.Count());
+            return player;
         }
 
         private static Player DefaultPlayer()
