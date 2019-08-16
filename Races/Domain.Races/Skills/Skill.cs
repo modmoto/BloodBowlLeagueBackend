@@ -40,7 +40,7 @@ namespace Domain.Races.Skills
         public static Skill Block => new Skill(StringIdentity.Create(nameof(Block)), SkillType.General);
         public static Skill Dodge => new Skill(StringIdentity.Create(nameof(Dodge)), SkillType.Agility);
         public static Skill Pass => new Skill(StringIdentity.Create(nameof(Pass)), SkillType.Passing);
-        public static Skill SureHands => new Skill(StringIdentity.Create(nameof(SureHands)), SkillType.Passing);
+        public static Skill SureHands => new Skill(StringIdentity.Create(nameof(SureHands)), SkillType.General);
         public static Skill MightyBlow => new Skill(StringIdentity.Create(nameof(MightyBlow)), SkillType.Strength);
         public static Skill PlusOneMovement => new Skill(StringIdentity.Create(nameof(PlusOneMovement)), SkillType.PlusOneArmorOrMovement);
         public static Skill PlusOneArmor => new Skill(StringIdentity.Create(nameof(PlusOneArmor)), SkillType.PlusOneArmorOrMovement);

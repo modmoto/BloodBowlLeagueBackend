@@ -90,8 +90,8 @@ namespace Domain.Races.Races
                 4,
                 new GoldCoins(90000),
                 new [] { Skill.Block },
-                new [] { SkillType.General },
-                new [] { SkillType.General });
+                new [] { SkillType.General, SkillType.Strength },
+                new [] { SkillType.Passing, SkillType.Agility });
 
         public static AllowedPlayer HumanCatcher =>
             new AllowedPlayer(

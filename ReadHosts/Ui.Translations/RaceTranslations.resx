@@ -198,15 +198,6 @@
   <data name="SkillType_Agility" xml:space="preserve">
     <value>Agility</value>
   </data>
-  <data name="SkillType_PlusOneAgility" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="SkillType_PlusOneArmorOrMovement" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="SkillType_PlusOneStrength" xml:space="preserve">
-    <value> </value>
-  </data>
   <data name="Skill_Block" xml:space="preserve">
     <value>Block</value>
   </data>

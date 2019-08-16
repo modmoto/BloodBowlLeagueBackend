@@ -30,8 +30,7 @@ namespace Teams.ReadHost.Pages
                 if (playerFreeSkillPoint >= FreeSkillPoint.Double)
                 {
                     var readModels = _skills.Where(s =>
-                        Player.PlayerConfig.SkillsOnDouble.Contains(s.SkillType)
-                        && skillReadModels.All(sr => sr.SkillId != s.SkillId)).ToList();
+                        Player.PlayerConfig.SkillsOnDouble.Contains(s.SkillType)).ToList();
                     skillReadModels.AddRange(readModels);
                 }
 

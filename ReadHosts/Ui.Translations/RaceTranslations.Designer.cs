@@ -208,24 +208,6 @@ namespace Ui.Translations {
             }
         }
         
-        public static string SkillType_PlusOneAgility {
-            get {
-                return ResourceManager.GetString("SkillType_PlusOneAgility", resourceCulture);
-            }
-        }
-        
-        public static string SkillType_PlusOneArmorOrMovement {
-            get {
-                return ResourceManager.GetString("SkillType_PlusOneArmorOrMovement", resourceCulture);
-            }
-        }
-        
-        public static string SkillType_PlusOneStrength {
-            get {
-                return ResourceManager.GetString("SkillType_PlusOneStrength", resourceCulture);
-            }
-        }
-        
         public static string Skill_Block {
             get {
                 return ResourceManager.GetString("Skill_Block", resourceCulture);

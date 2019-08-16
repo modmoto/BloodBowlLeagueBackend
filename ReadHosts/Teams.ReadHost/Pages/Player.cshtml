@@ -18,11 +18,7 @@
                             @RaceTranslations.ResourceManager.GetString($"Skill_{skill.SkillId.Id}")
                             @{
                                 var value = RaceTranslations.ResourceManager.GetString($"SkillType_{skill.SkillType.ToString()}");
-                                if (value == " ")
-                                {
-                                    value = "";
-                                }
-                                else
+                                if (value != null)
                                 {
                                     value = $"({value})";
                                 }

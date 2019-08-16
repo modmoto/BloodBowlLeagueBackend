@@ -166,7 +166,8 @@ namespace Teams.WriteHost.Startup
                 new AllowedPlayer(StringIdentity.Create("DE_LineMan"), 16, new GoldCoins(70000)),
                 new AllowedPlayer(StringIdentity.Create("DE_Assassine"), 2, new GoldCoins(90000)),
                 new AllowedPlayer(StringIdentity.Create("DE_Blitzer"), 4, new GoldCoins(100000)),
-                new AllowedPlayer(StringIdentity.Create("DE_WitchElve"), 2, new GoldCoins(110000))
+                new AllowedPlayer(StringIdentity.Create("DE_WitchElve"), 2, new GoldCoins(110000)),
+                new AllowedPlayer(StringIdentity.Create("DE_Runner"), 2, new GoldCoins(80000))
             };
 
         public static IEnumerable<AllowedPlayer> HumanPlayers =>
