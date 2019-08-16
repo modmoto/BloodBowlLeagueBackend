@@ -56,8 +56,43 @@ namespace Domain.Players
                 }
             }
 
-            // todo liste kleiner machen
-            return DomainResult.Ok(new SkillChosen(PlayerId, newSkill, new List<FreeSkillPoint>()));
+            var newFreeSkills = GetMinimalSkillToRemove(FreeSkillPoints, newSkill);
+
+            return DomainResult.Ok(new SkillChosen(PlayerId, newSkill, newFreeSkills));
+        }
+
+        private IEnumerable<FreeSkillPoint> GetMinimalSkillToRemove(
+            IEnumerable<FreeSkillPoint> freeSkillPoints,
+            SkillReadModel newSkill)
+        {
+            var skillPoints = freeSkillPoints.ToList();
+            if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType))
+            {
+                return RemoveBiggerThan(skillPoints, FreeSkillPoint.Normal);
+            }
+
+            if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType))
+            {
+                return RemoveBiggerThan(skillPoints, FreeSkillPoint.Double);
+            }
+
+            switch (newSkill.SkillType)
+            {
+                case SkillType.PlusOneArmorOrMovement:
+                    return RemoveBiggerThan(skillPoints, FreeSkillPoint.PlusOneArmorOrMovement);
+                case SkillType.PlusOneAgility:
+                    return RemoveBiggerThan(skillPoints, FreeSkillPoint.PlusOneAgility);
+                default:
+                    return RemoveBiggerThan(skillPoints, FreeSkillPoint.PlusOneStrength);
+            }
+        }
+
+        private IEnumerable<FreeSkillPoint> RemoveBiggerThan(IEnumerable<FreeSkillPoint> skillPoints, FreeSkillPoint normal)
+        {
+            var freeSkillPoints = skillPoints.ToList();
+            var smallest = freeSkillPoints.Where(s => s >= normal).Min();
+            freeSkillPoints.Remove(smallest);
+            return freeSkillPoints;
         }
 
         private bool HasPlayerFreeSkillForChosenSkill(

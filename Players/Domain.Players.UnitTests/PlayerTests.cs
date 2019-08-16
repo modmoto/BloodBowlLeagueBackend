@@ -107,7 +107,7 @@ namespace Domain.Players.UnitTests
         [TestMethod]
         public void LevelUp_StrengthSkillAvailable()
         {
-            var player = new Player();
+            var player = DefaultPlayer();
             player.Apply(PlayerLeveledUp(new [] { FreeSkillPoint.PlusOneStrength }));
             var skillLevelUp = PlusOneStrength();
 
@@ -120,7 +120,7 @@ namespace Domain.Players.UnitTests
         [TestMethod]
         public void LevelUp_StrengtSkillAvailable_SkillOfLowerPower()
         {
-            var player = new Player();
+            var player = DefaultPlayer();
             player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.PlusOneStrength }));
             var skillLevelUp = Pass();
 
@@ -133,8 +133,7 @@ namespace Domain.Players.UnitTests
         [TestMethod]
         public void LevelUp_StrengthWanted_ButOnlyArmorPossible()
         {
-            var player = new Player();
-            player.Apply(PlayerCreated());
+            var player = DefaultPlayer();
             player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.PlusOneArmorOrMovement }));
             var skillLevelUp = PlusOneStrength();
 
