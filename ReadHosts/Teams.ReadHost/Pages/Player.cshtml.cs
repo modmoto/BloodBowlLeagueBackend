@@ -26,30 +26,32 @@ namespace Teams.ReadHost.Pages
             get
             {
                 if (!Player.HasFreeSkill) return new List<SkillReadModel>();
-                var playerFreeSkillPoint = Player.FreeSkillPoint;
                 var skillReadModels = _skills.Where(s => Player.PlayerConfig.SkillsOnDefault.Contains(s.SkillType)).ToList();
 
-                if (playerFreeSkillPoint >= FreeSkillPoint.Double)
+                foreach (var freeSkillPoint in Player.FreeSkillPoints)
                 {
-                    var readModels = _skills.Where(s =>
-                        Player.PlayerConfig.SkillsOnDouble.Contains(s.SkillType)).ToList();
-                    skillReadModels.AddRange(readModels);
-                }
+                    if (freeSkillPoint >= FreeSkillPoint.Double)
+                    {
+                        var readModels = _skills.Where(s =>
+                            Player.PlayerConfig.SkillsOnDouble.Contains(s.SkillType)).ToList();
+                        skillReadModels.AddRange(readModels);
+                    }
 
-                if (playerFreeSkillPoint >= FreeSkillPoint.PlusOneArmorOrMovement)
-                {
-                    skillReadModels.AddRange(_skills.Where(s => s.SkillId == StringIdentity.Create("PlusOneArmor")));
-                    skillReadModels.AddRange(_skills.Where(s => s.SkillId == StringIdentity.Create("PlusOneMovement")));
-                }
+                    if (freeSkillPoint >= FreeSkillPoint.PlusOneArmorOrMovement)
+                    {
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == StringIdentity.Create("PlusOneArmor")));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == StringIdentity.Create("PlusOneMovement")));
+                    }
 
-                if (playerFreeSkillPoint >= FreeSkillPoint.PlusOneAgility)
-                {
-                    skillReadModels.AddRange(_skills.Where(s => s.SkillId == StringIdentity.Create("PlusOneAgility")));
-                }
+                    if (freeSkillPoint >= FreeSkillPoint.PlusOneAgility)
+                    {
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == StringIdentity.Create("PlusOneAgility")));
+                    }
 
-                if (playerFreeSkillPoint == FreeSkillPoint.PlusOneStrength)
-                {
-                    skillReadModels.AddRange(_skills.Where(s => s.SkillId == StringIdentity.Create("PlusOneStrength")));
+                    if (freeSkillPoint == FreeSkillPoint.PlusOneStrength)
+                    {
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == StringIdentity.Create("PlusOneStrength")));
+                    }
                 }
 
                 return skillReadModels;

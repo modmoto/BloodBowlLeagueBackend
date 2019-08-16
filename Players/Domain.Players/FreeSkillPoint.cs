@@ -14,11 +14,17 @@ namespace Domain.Players
             var random = new Random();
             var firstDice = random.Next(1, 6);
             var secondDice = random.Next(1, 6);
-            if (secondDice + firstDice == 12) return FreeSkillPoint.PlusOneStrength;
-            if (secondDice + firstDice == 11) return FreeSkillPoint.PlusOneAgility;
-            if (secondDice + firstDice == 10) return FreeSkillPoint.PlusOneArmorOrMovement;
-            if (secondDice == firstDice) return FreeSkillPoint.Double;
-            return FreeSkillPoint.Normal;
+            switch (secondDice + firstDice)
+            {
+                case 12:
+                    return FreeSkillPoint.PlusOneStrength;
+                case 11:
+                    return FreeSkillPoint.PlusOneAgility;
+                case 10:
+                    return FreeSkillPoint.PlusOneArmorOrMovement;
+            }
+
+            return secondDice == firstDice ? FreeSkillPoint.Double : FreeSkillPoint.Normal;
         }
     }
 }

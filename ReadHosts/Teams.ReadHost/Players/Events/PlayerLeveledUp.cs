@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microwave.Domain.Identities;
 using Microwave.Queries;
 
@@ -7,17 +8,17 @@ namespace Teams.ReadHost.Players.Events
     {
         public PlayerLeveledUp(
             GuidIdentity playerId,
-            FreeSkillPoint newFreeSkillPoint,
+            IEnumerable<FreeSkillPoint> newFreeSkillPoints,
             int newLevel)
         {
             PlayerId = playerId;
-            NewFreeSkillPoint = newFreeSkillPoint;
+            NewFreeSkillPoints = newFreeSkillPoints;
             NewLevel = newLevel;
         }
 
         public Identity EntityId => PlayerId;
         public GuidIdentity PlayerId { get; }
-        public FreeSkillPoint NewFreeSkillPoint { get; }
+        public IEnumerable<FreeSkillPoint> NewFreeSkillPoints { get; }
         public int NewLevel { get; }
     }
 
