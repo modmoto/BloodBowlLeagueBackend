@@ -37,30 +37,26 @@ namespace Domain.Players.UnitTests
         [TestMethod]
         public void PlayerLeveledUpTwice()
         {
-            var player = DefaultPlayer();
+            var player = PlayerWith15SSP();
+            var events = player.NominateForMostValuablePlayer();
+            player.Apply(events.DomainEvents);
 
-            var nominateForMostValuablePlayer1 = player.NominateForMostValuablePlayer();
-            player.Apply(nominateForMostValuablePlayer1.DomainEvents);
-            var nominateForMostValuablePlayer2 = player.NominateForMostValuablePlayer();
-            player.Apply(nominateForMostValuablePlayer2.DomainEvents);
-            var nominateForMostValuablePlayer3 = player.NominateForMostValuablePlayer();
-            player.Apply(nominateForMostValuablePlayer3.DomainEvents);
-            var nominateForMostValuablePlayer4 = player.NominateForMostValuablePlayer();
-
-            Assert.AreEqual(2, ((PlayerLeveledUp) nominateForMostValuablePlayer4.DomainEvents.Last()).NewFreeSkillPoints.Count());
+            Assert.AreEqual(2, ((PlayerLeveledUp) events.DomainEvents.Last()).NewFreeSkillPoints.Count());
         }
 
         [TestMethod]
         public void PlayerLeveledUpTwice_LevelUpOnce()
         {
-            var player = PlayerWith20SSP();
+            var player = PlayerWith15SSP();
+            var events = player.NominateForMostValuablePlayer();
+            player.Apply(events.DomainEvents);
 
             var domainResult = player.ChooseSkill(Block());
 
             Assert.AreEqual(1, ((SkillChosen) domainResult.DomainEvents.Last()).NewFreeSkillPoints.Count());
         }
 
-        private static Player PlayerWith20SSP()
+        private static Player PlayerWith15SSP()
         {
             var player = DefaultPlayer();
 
@@ -70,8 +66,6 @@ namespace Domain.Players.UnitTests
             player.Apply(nominateForMostValuablePlayer2.DomainEvents);
             var nominateForMostValuablePlayer3 = player.NominateForMostValuablePlayer();
             player.Apply(nominateForMostValuablePlayer3.DomainEvents);
-            var nominateForMostValuablePlayer4 = player.NominateForMostValuablePlayer();
-            player.Apply(nominateForMostValuablePlayer4.DomainEvents);
             return player;
         }
 
