@@ -9,13 +9,11 @@ namespace Domain.Players.Events.Players
         public Identity EntityId => PlayerId;
         public GuidIdentity PlayerId { get; }
         public SkillReadModel NewSkill { get; }
-        public IEnumerable<FreeSkillPoint> RemainingLevelUps { get; }
 
-        public SkillChosen(GuidIdentity playerId, SkillReadModel newSkill, IEnumerable<FreeSkillPoint> remainingLevelUps)
+        public SkillChosen(GuidIdentity playerId, SkillReadModel newSkill)
         {
             PlayerId = playerId;
             NewSkill = newSkill;
-            RemainingLevelUps = remainingLevelUps;
         }
     }
 }

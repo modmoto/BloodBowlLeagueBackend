@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microwave.Domain.Identities;
 using Microwave.Queries;
+using ReadHosts.Common;
 using Teams.ReadHost.Players;
 using Teams.ReadHost.Players.Events;
 using Teams.ReadHost.Races;
@@ -15,6 +16,7 @@ namespace Teams.ReadHost.Pages
     public class PlayerModel : PageModel
     {
         private readonly IReadModelRepository _readModelRepository;
+        private readonly MessageMitigator _mitigator;
         private IEnumerable<SkillReadModel> _skills;
 
         public PlayerReadModel Player { get; set; }
@@ -23,8 +25,8 @@ namespace Teams.ReadHost.Pages
         {
             get
             {
-                if (!Player.FreeSkillPoints.Any()) return new List<SkillReadModel>();
-                var playerFreeSkillPoint = Player.FreeSkillPoints.Single();
+                if (!Player.HasFreeSkill) return new List<SkillReadModel>();
+                var playerFreeSkillPoint = Player.FreeSkillPoint;
                 var skillReadModels = _skills.Where(s => Player.PlayerConfig.SkillsOnDefault.Contains(s.SkillType)).ToList();
 
                 if (playerFreeSkillPoint >= FreeSkillPoint.Double)
@@ -58,9 +60,10 @@ namespace Teams.ReadHost.Pages
         public Guid PlayerId { get; set; }
 
 
-        public PlayerModel(IReadModelRepository readModelRepository)
+        public PlayerModel(IReadModelRepository readModelRepository, MessageMitigator mitigator)
         {
             _readModelRepository = readModelRepository;
+            _mitigator = mitigator;
         }
 
         public async Task OnGet()
@@ -69,6 +72,16 @@ namespace Teams.ReadHost.Pages
             var resultSkills = await _readModelRepository.LoadAllAsync<SkillReadModel>();
             Player = resultPlayer.Value;
             _skills = resultSkills.Value;
+        }
+
+         public async Task<IActionResult> OnPost()
+        {
+            var skillId = Request.Form["skillId"].ToString();
+
+            await _mitigator.PostAsync(
+                new Uri($"http://localhost:5002/Api/Players/{PlayerId}/level-up"),
+                new { skillId });
+            return Redirect(PlayerId.ToString());
         }
     }
 }

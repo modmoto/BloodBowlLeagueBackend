@@ -16,10 +16,11 @@ namespace Host.Players
         }
 
         [HttpPost("{playerId}/level-up")]
-        public async Task<ActionResult> LevelUpPlayer(GuidIdentity playerId, [FromBody] LevelUpPlayerComand
-        createTeamCommand)
+        public async Task<ActionResult> LevelUpPlayer(
+            GuidIdentity playerId,
+            [FromBody] LevelUpPlayerComand levelUpCommand)
         {
-            await _commandHandler.LevelUp(playerId, createTeamCommand);
+            await _commandHandler.LevelUp(playerId, levelUpCommand);
             return Ok();
         }
     }

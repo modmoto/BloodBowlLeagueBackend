@@ -19,7 +19,7 @@ namespace Domain.Players
     {
         public GuidIdentity PlayerId { get; private set; }
         public PlayerConfig PlayerConfig { get; private set; }
-        public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
+        public FreeSkillPoint? FreeSkillPointInst { get; private set; }
         public IEnumerable<SkillReadModel> CurrentSkills { get; private set; } = new List<SkillReadModel>();
         public long StarPlayerPoints { get; private set; }
 
@@ -44,23 +44,17 @@ namespace Domain.Players
 
         public DomainResult ChooseSkill(SkillReadModel newSkill)
         {
-            if (!FreeSkillPoints.Any()) return DomainResult.Error(new NoLevelUpsAvailable());
+            if (FreeSkillPointInst == null) return DomainResult.Error(new NoLevelUpsAvailable());
             if (CurrentSkills.Any(s => s.Equals(newSkill))) return DomainResult.Error(
                 new CanNotPickSkillTwice(CurrentSkills.Select(s => s.SkillId)));
 
-            foreach (var freeSkillType in FreeSkillPoints)
-            {
-                if (!HasPlayerFreeSkillForChosenSkill(newSkill, freeSkillType)) continue;
+            if (!HasPlayerFreeSkillForChosenSkill(newSkill, FreeSkillPointInst))
+                return DomainResult.Error(new SkillNotPickable(FreeSkillPointInst));
 
-                var skillTypes = FreeSkillPoints.ToList();
-                skillTypes.Remove(freeSkillType);
-                return DomainResult.Ok(new SkillChosen(PlayerId, newSkill, skillTypes));
-            }
-
-            return DomainResult.Error(new SkillNotPickable(FreeSkillPoints));
+            return DomainResult.Ok(new SkillChosen(PlayerId, newSkill));
         }
 
-        private bool HasPlayerFreeSkillForChosenSkill(SkillReadModel newSkill, FreeSkillPoint freeSkillType)
+        private bool HasPlayerFreeSkillForChosenSkill(SkillReadModel newSkill, FreeSkillPoint? freeSkillType)
         {
             switch (freeSkillType)
             {
@@ -179,7 +173,7 @@ namespace Domain.Players
         public void Apply(SkillChosen domainEvent)
         {
             CurrentSkills = CurrentSkills.Append(domainEvent.NewSkill);
-            FreeSkillPoints = domainEvent.RemainingLevelUps;
+            FreeSkillPointInst = null;
         }
 
         public void Apply(PlayerCreated playerCreated)
@@ -191,7 +185,7 @@ namespace Domain.Players
 
         public void Apply(PlayerLeveledUp leveledUp)
         {
-            FreeSkillPoints = FreeSkillPoints.Append(leveledUp.NewFreeSkillPoint);
+            FreeSkillPointInst = leveledUp.NewFreeSkillPoint;
             Level = leveledUp.NewLevel;
         }
     }

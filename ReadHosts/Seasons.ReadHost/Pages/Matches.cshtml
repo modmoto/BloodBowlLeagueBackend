@@ -8,12 +8,22 @@
         {
         <a href="http://localhost:5006/Match/@m.MatchId" class="list-group-item list-group-item-action">
             <div class="float-left">@(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)</div>
-            @if (m.IsStarted)
-            {
-                <div class="float-right">
-                    @(m.GameResult.HomeTeam.TouchDowns) : @(m.GameResult.GuestTeam.TouchDowns)
-                </div>
-            }
+             <div class="float-right">
+             @if (!m.IsFinished && m.IsStarted)
+               {
+                   <em class="fas fa-football-ball pt-1 pr-3 float-left"
+                       data-toggle="tooltip"
+                       data-placement="right"
+                       title="Game is going on">
+                   </em>
+               }
+             @if (m.IsStarted)
+             {
+                 <div class="float-right">
+                     @(m.GameResult.HomeTeam.TouchDowns) : @(m.GameResult.GuestTeam.TouchDowns)
+                 </div>
+             }
+             </div>
         </a>
         }
     </ul>

@@ -161,7 +161,7 @@ namespace Domain.Players.UnitTests
 
         private static SkillChosen SkillPicked(SkillReadModel skill)
         {
-            return new SkillChosen(GuidIdentity.Create(), skill, new List<FreeSkillPoint>());
+            return new SkillChosen(GuidIdentity.Create(), skill);
         }
 
         private static PlayerConfig PlayerConfig(

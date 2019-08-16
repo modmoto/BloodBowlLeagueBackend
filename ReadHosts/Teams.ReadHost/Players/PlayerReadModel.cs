@@ -25,7 +25,8 @@ namespace Teams.ReadHost.Players
         public int Level { get; set; } = 1;
         public string Name { get; private set; }
 
-        public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
+        public FreeSkillPoint? FreeSkillPoint { get; private set; }
+        public bool HasFreeSkill => FreeSkillPoint.HasValue;
 
         public void Handle(PlayerCreated domainEvent)
         {
@@ -41,13 +42,14 @@ namespace Teams.ReadHost.Players
 
         public void Handle(SkillChosen domainEvent)
         {
-            Skills = Skills.Append(domainEvent.NewSkill);
+            Skills = Skills.Append(domainEvent.NewSkill.SkillId);
+            FreeSkillPoint = null;
         }
 
         public void Handle(PlayerLeveledUp domainEvent)
         {
             Level = domainEvent.NewLevel;
-            FreeSkillPoints = FreeSkillPoints.Append(domainEvent.NewFreeSkillPoint);
+            FreeSkillPoint = domainEvent.NewFreeSkillPoint;
         }
 
         public void Handle(PlayerPassed domainEvent)
