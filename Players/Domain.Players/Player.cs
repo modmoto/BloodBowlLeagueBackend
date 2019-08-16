@@ -44,14 +44,16 @@ namespace Domain.Players
 
         public DomainResult ChooseSkill(SkillReadModel newSkill)
         {
-            if (FreeSkillPoints == null) return DomainResult.Error(new NoLevelUpsAvailable());
+            if (!FreeSkillPoints.Any()) return DomainResult.Error(new NoLevelUpsAvailable());
             if (CurrentSkills.Any(s => s.Equals(newSkill))) return DomainResult.Error(
                 new CanNotPickSkillTwice(CurrentSkills.Select(s => s.SkillId)));
 
             foreach (var freeSkillPoint in FreeSkillPoints)
             {
                 if (!HasPlayerFreeSkillForChosenSkill(newSkill, freeSkillPoint))
+                {
                     return DomainResult.Error(new SkillNotPickable(freeSkillPoint));
+                }
             }
 
             // todo liste kleiner machen
@@ -182,7 +184,7 @@ namespace Domain.Players
         public void Apply(SkillChosen domainEvent)
         {
             CurrentSkills = CurrentSkills.Append(domainEvent.NewSkill);
-            FreeSkillPoints = null;
+            FreeSkillPoints = domainEvent.NewFreeSkillPoints;
         }
 
         public void Apply(PlayerCreated playerCreated)
