@@ -267,5 +267,35 @@ namespace Ui.Translations {
                 return ResourceManager.GetString("Skill_PlusOneStrength", resourceCulture);
             }
         }
+        
+        public static string FreeSkillPoint_Normal {
+            get {
+                return ResourceManager.GetString("FreeSkillPoint_Normal", resourceCulture);
+            }
+        }
+        
+        public static string FreeSkillPoint_Double {
+            get {
+                return ResourceManager.GetString("FreeSkillPoint_Double", resourceCulture);
+            }
+        }
+        
+        public static string FreeSkillPoint_PlusOneArmorOrMovement {
+            get {
+                return ResourceManager.GetString("FreeSkillPoint_PlusOneArmorOrMovement", resourceCulture);
+            }
+        }
+        
+        public static string FreeSkillPoint_PlusOneAgility {
+            get {
+                return ResourceManager.GetString("FreeSkillPoint_PlusOneAgility", resourceCulture);
+            }
+        }
+        
+        public static string FreeSkillPoint_PlusOneStrength {
+            get {
+                return ResourceManager.GetString("FreeSkillPoint_PlusOneStrength", resourceCulture);
+            }
+        }
     }
 }

@@ -228,4 +228,19 @@
   <data name="Skill_PlusOneStrength" xml:space="preserve">
     <value>Plus one strength</value>
   </data>
+  <data name="FreeSkillPoint_Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="FreeSkillPoint_Double" xml:space="preserve">
+    <value>Double</value>
+  </data>
+  <data name="FreeSkillPoint_PlusOneArmorOrMovement" xml:space="preserve">
+    <value>Plus one armor or movement</value>
+  </data>
+  <data name="FreeSkillPoint_PlusOneAgility" xml:space="preserve">
+    <value>Plus one agility</value>
+  </data>
+  <data name="FreeSkillPoint_PlusOneStrength" xml:space="preserve">
+    <value>Plus one strength</value>
+  </data>
 </root>

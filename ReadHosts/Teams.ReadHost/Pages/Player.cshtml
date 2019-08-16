@@ -8,9 +8,9 @@
     <h3>Skills: @string.Join(',', Model.Player.Skills.Select(s => RaceTranslations.ResourceManager.GetString($"Skill_{s.Id}")))</h3>
     @if (Model.Player.HasFreeSkill)
     {
+        <h5>Player has a free skill point of: @string.Join(',', Model.Player.FreeSkillPoints.Select(s => RaceTranslations.ResourceManager.GetString($"FreeSkillPoint_{s.ToString()}")))</h5>
         <form method="post">
             <div class="form-group">
-                <label for="skillSelectBox">Select a new Skill</label>
                 <select class="form-control" id="skillSelectBox" name="skillId">
                     @foreach (var skill in Model.RelevantSkills)
                     {
