@@ -30,5 +30,21 @@ namespace Teams.WriteHost
             var playerId = await _commandHandler.BuyPlayer(buyPlayerCommand);
             return Ok(playerId);
         }
+
+        [HttpPost("{teamId}/remove-player")]
+        public async Task<ActionResult> RemovePlayer(Guid teamId, [FromBody] RemovePlayerCommand buyPlayerCommand)
+        {
+            buyPlayerCommand.TeamId = GuidIdentity.Create(teamId);
+            await _commandHandler.RemovePlayer(buyPlayerCommand);
+            return Ok();
+        }
+
+
+        [HttpPost("{teamId}/finish")]
+        public async Task<ActionResult> FinishTeam([FromBody] FinishTeamCommand finishTeamCommand)
+        {
+            await _commandHandler.FinishTeam(finishTeamCommand);
+            return Ok();
+        }
     }
 }

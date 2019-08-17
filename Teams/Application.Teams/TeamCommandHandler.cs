@@ -39,12 +39,41 @@ namespace Application.Teams
             (await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion)).Check();
             return (buyPlayer.DomainEvents.First() as PlayerBought)?.PlayerId;
         }
+
+        public async Task FinishTeam(FinishTeamCommand command)
+        {
+            var teamResult = await _eventStore.LoadAsync<Team>(command.TeamId);
+            var team = teamResult.Value;
+            var finishTeam = team.Finish();
+            (await _eventStore.AppendAsync(finishTeam.DomainEvents, command.TeamVersion)).Check();
+        }
+
+        public async Task RemovePlayer(RemovePlayerCommand removePlayerCommand)
+        {
+            var teamResult = await _eventStore.LoadAsync<Team>(removePlayerCommand.TeamId);
+            var team = teamResult.Value;
+            var removePlayer = team.RemovePlayer(removePlayerCommand.PlayerId);
+            (await _eventStore.AppendAsync(removePlayer.DomainEvents, removePlayerCommand.TeamVersion)).Check();
+        }
     }
 
     public class BuyPlayerCommand
     {
         public GuidIdentity TeamId { get; set; }
         public StringIdentity PlayerTypeId { get; set; }
+        public long TeamVersion { get; set; }
+    }
+
+    public class RemovePlayerCommand
+    {
+        public GuidIdentity TeamId { get; set; }
+        public GuidIdentity PlayerId { get; set; }
+        public long TeamVersion { get; set; }
+    }
+
+    public class FinishTeamCommand
+    {
+        public GuidIdentity TeamId { get; set; }
         public long TeamVersion { get; set; }
     }
 

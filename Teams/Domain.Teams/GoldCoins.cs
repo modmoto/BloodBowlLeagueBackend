@@ -29,5 +29,10 @@
         {
             return Value;
         }
+
+        public GoldCoins Plus(GoldCoins otherCost)
+        {
+            return new GoldCoins(Value + otherCost.Value);
+        }
     }
 }
