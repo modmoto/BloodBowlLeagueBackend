@@ -45,7 +45,7 @@ namespace Teams.ReadHost.Pages
             Team = team;
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostAddPlayer()
         {
             var playerTypeId = Request.Form["playerType"].ToString();
             var result = await _readModelRepository.LoadAsync<TeamReadModel>(GuidIdentity.Create(TeamId));
@@ -53,6 +53,26 @@ namespace Teams.ReadHost.Pages
             await _mitigator.PostAsync(
                 new Uri($"http://localhost:5001/Api/Teams/{TeamId}/buy-player"),
                 new { playerTypeId , TeamVersion = result.Value.Version });
+            return Redirect(TeamId.ToString());
+        }
+
+        public async Task<IActionResult> OnPostRemovePlayer(Guid playerId)
+        {
+            var result = await _readModelRepository.LoadAsync<TeamReadModel>(GuidIdentity.Create(TeamId));
+
+            await _mitigator.PostAsync(
+                new Uri($"http://localhost:5001/Api/Teams/{TeamId}/remove-player"),
+                new { playerId , TeamVersion = result.Value.Version });
+            return Redirect(TeamId.ToString());
+        }
+
+        public async Task<IActionResult> OnPostFinishTeam()
+        {
+            var result = await _readModelRepository.LoadAsync<TeamReadModel>(GuidIdentity.Create(TeamId));
+
+            await _mitigator.PostAsync(
+                new Uri($"http://localhost:5001/Api/Teams/{TeamId}/finish"),
+                new { TeamId , TeamVersion = result.Value.Version });
             return Redirect(TeamId.ToString());
         }
     }

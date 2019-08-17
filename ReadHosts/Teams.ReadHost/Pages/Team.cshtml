@@ -20,6 +20,17 @@
                          </em>
                      }
                  }
+                 @{
+                      if (!Model.Team.IsFinished)
+                      {
+                          <form method="post"
+                                asp-page-handler="RemovePlayer"
+                                asp-route-playerId="@player.PlayerId.Guid"
+                                class="float-right">
+                              <button class="btn btn-outline-error my-2 my-sm-0" type="submit">Remove Player</button>
+                          </form>
+                      }
+                  }
                  @player.Name SSP: @player.StarPlayerPoints
                  @if(player.Skills.Any())
                  {
@@ -29,7 +40,7 @@
           </a>
      }
      </ul>
-     <form method="post">
+     <form method="post" asp-page-handler="AddPlayer">
          <div class="form-group">
              <label for="playerTypeSelectBox">Buy a player</label>
              <select class="form-control" id="playerTypeSelectBox" name="playerType">
@@ -41,6 +52,15 @@
                  }
              </select>
            </div>
-         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buy Player</button>
+         <button class="btn btn-success my-2 my-sm-0" type="submit">Buy Player</button>
      </form>
+     @if (!Model.Team.IsFinished)
+     {
+         <hr/>
+         <form method="post"
+               asp-page-handler="FinishTeam"
+               class="pt-3">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Finish Team</button>
+        </form>
+     }
 </div>

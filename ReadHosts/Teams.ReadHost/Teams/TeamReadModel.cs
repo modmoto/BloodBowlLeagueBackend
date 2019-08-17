@@ -8,7 +8,9 @@ namespace Teams.ReadHost.Teams
 {
     public class TeamReadModel : ReadModel<TeamCreated>,
         IHandle<TeamCreated>,
-        IHandle<PlayerBought>
+        IHandle<PlayerBought>,
+        IHandle<PlayerRemoved>,
+        IHandle<TeamFinished>
     {
         public IEnumerable<PlayerDto> PlayerList { get; set; } = new List<PlayerDto>();
         public StringIdentity RaceId { get; set; }
@@ -17,6 +19,7 @@ namespace Teams.ReadHost.Teams
         public string TeamName { get; set; }
         public Identity TeamId { get; set; }
         public GoldCoins TeamChest { get; set; }
+        public bool IsFinished { get; set; }
 
         public void Handle(TeamCreated domainEvent)
         {
@@ -33,6 +36,18 @@ namespace Teams.ReadHost.Teams
             TeamChest = domainEvent.NewTeamChestBalance;
             var playerDto = new PlayerDto(domainEvent.PlayerId, domainEvent.PlayerTypeId);
             PlayerList = PlayerList.Append(playerDto);
+        }
+
+        public void Handle(PlayerRemoved domainEvent)
+        {
+            var playerDtos = PlayerList.Where(p => p.PlayerId != domainEvent.PlayerId);
+            PlayerList = playerDtos;
+            TeamChest = domainEvent.NewTeamChestBalance;
+        }
+
+        public void Handle(TeamFinished domainEvent)
+        {
+            IsFinished = true;
         }
     }
 }
