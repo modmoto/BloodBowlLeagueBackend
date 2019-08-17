@@ -110,12 +110,6 @@ namespace Teams.WriteHost.Startup
                         team1,
                         StringIdentity.Create("DE_LineMan"),
                         GuidIdentity.Create(new Guid("F9C331B7-AC52-46FF-B565-CFD6E690106B")),
-                        new GoldCoins(790000)),
-                    new TeamCreated(team1,
-                        StringIdentity.Create("DarkElves"),
-                        "Team in DraftMode",
-                        "Mark",
-                        DarkElvPlayers,
                         new GoldCoins(790000))
                 };
 
