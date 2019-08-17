@@ -45,7 +45,7 @@ namespace Domain.Players
         public DomainResult ChooseSkill(SkillReadModel newSkill)
         {
             if (!FreeSkillPoints.Any()) return DomainResult.Error(new NoLevelUpsAvailable());
-            if (CurrentSkills.Any(s => s.Equals(newSkill))) return DomainResult.Error(
+            if (CurrentSkills.Any(s => s.SkillId == newSkill.SkillId)) return DomainResult.Error(
                 new CanNotPickSkillTwice(CurrentSkills.Select(s => s.SkillId)));
 
             foreach (var freeSkillPoint in FreeSkillPoints)

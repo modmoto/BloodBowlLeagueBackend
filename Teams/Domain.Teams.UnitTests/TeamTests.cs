@@ -30,7 +30,7 @@ namespace Domain.Teams.UnitTests
             var bought = team.BuyPlayer(playerTypeId);
 
             Assert.IsTrue(bought.IsOk);
-            var playerBought = (PlayerBought) bought.DomainEvents.Single();
+            var playerBought = (PlayerAddedToDraft) bought.DomainEvents.Single();
             Assert.AreEqual(playerTypeId, playerBought.PlayerTypeId);
             Assert.AreEqual(new GoldCoins(950000), playerBought.NewTeamChestBalance);
         }
