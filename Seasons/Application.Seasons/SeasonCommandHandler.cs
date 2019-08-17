@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Matches.TeamReadModels;
 using Domain.Seasons;
+using Domain.Seasons.TeamReadModels;
 using Microwave.Domain.Identities;
 using Microwave.EventStores;
 using Microwave.Queries;
@@ -34,7 +34,7 @@ namespace Application.Matches
             var seasonResult = await _eventStore.LoadAsync<Season>(command.SeasonId);
             var season = seasonResult.Value;
             var team = (await _readModelRepository.LoadAsync<TeamReadModel>(command.TeamId)).Value;
-            var domainResult = season.AddTeam(team.TeamId);
+            var domainResult = season.AddTeam(team);
             (await _eventStore.AppendAsync(domainResult.DomainEvents, seasonResult.Version)).Check();
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Seasons.Errors;
 using Domain.Seasons.Events;
+using Domain.Seasons.TeamReadModels;
 using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
 using Microwave.Domain.Validation;
@@ -21,11 +22,12 @@ namespace Domain.Seasons
             return DomainResult.Ok(new SeasonCreated(GuidIdentity.Create(), seasonName, DateTimeOffset.UtcNow));
         }
 
-        public DomainResult AddTeam(GuidIdentity teamId)
+        public DomainResult AddTeam(TeamReadModel teamId)
         {
             if (SeasonIsStarted) return DomainResult.Error(new SeasonAllreadyStarted());
-            if (Teams.Contains(teamId)) return DomainResult.Error(new CanNotAddTeamTwice(teamId));
-            return DomainResult.Ok(new TeamAddedToSeason(SeasonId, teamId));
+            if (!teamId.IsFinished) return DomainResult.Error(new TeamHasToBeFinishedToAddToSeason());
+            if (Teams.Any(t => t == teamId.TeamId)) return DomainResult.Error(new CanNotAddTeamTwice(teamId.TeamId));
+            return DomainResult.Ok(new TeamAddedToSeason(SeasonId, teamId.TeamId));
         }
 
         public DomainResult StartSeason()
@@ -60,6 +62,14 @@ namespace Domain.Seasons
         {
             SeasonIsStarted = true;
             GameDays = domainEvent.GameDays;
+        }
+    }
+
+    public class TeamHasToBeFinishedToAddToSeason : DomainError
+    {
+        public TeamHasToBeFinishedToAddToSeason()
+            : base("Team has to be finished to add to season")
+        {
         }
     }
 

@@ -46,7 +46,7 @@
              <h5 class="card-title">Allready added Teams:</h5>
              @foreach (var team in Model.AddedTeams)
              {
-                 <a href="http://localhost:5000/Teams/@team.TeamId" class="list-group-item list-group-item-action">
+                 <a href="http://localhost:5000/Team/@team.TeamId" class="list-group-item list-group-item-action">
                      <div class="d-flex w-100 justify-content-between">
                          <h5 class="mb-1">@team.TeamName (@(team.TrainerName), @RaceTranslations.ResourceManager.GetString(team.RaceId.Id))</h5>
                      </div>

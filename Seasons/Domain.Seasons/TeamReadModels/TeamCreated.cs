@@ -1,7 +1,7 @@
 ﻿using Microwave.Domain.Identities;
 using Microwave.Queries;
 
-namespace Application.Matches.TeamReadModels
+namespace Domain.Seasons.TeamReadModels
 {
     public class TeamCreated : ISubscribedDomainEvent
     {
