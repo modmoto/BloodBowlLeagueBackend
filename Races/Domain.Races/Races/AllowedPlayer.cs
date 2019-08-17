@@ -62,7 +62,7 @@ namespace Domain.Races.Races
                 StringIdentity.Create("DE_WitchElve"),
                 2,
                 new GoldCoins(110000),
-                new [] { Skill.Dodge, Skill.JumUp, Skill.Frenzy },
+                new [] { Skill.Dodge, Skill.JumpUp, Skill.Frenzy },
                 new [] { SkillType.General },
                 new [] { SkillType.General });
         public static AllowedPlayer DarkElveRuner =>

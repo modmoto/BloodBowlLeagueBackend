@@ -48,7 +48,7 @@ namespace Domain.Races.Skills
         public static Skill PlusOneStrength => new Skill(StringIdentity.Create(nameof(PlusOneStrength)), SkillType.PlusOneStrength);
         public static Skill Shadowing => new Skill(StringIdentity.Create(nameof(Shadowing)), SkillType.Extraordinary);
         public static Skill Stab => new Skill(StringIdentity.Create(nameof(Stab)), SkillType.Extraordinary);
-        public static Skill JumUp => new Skill(StringIdentity.Create(nameof(JumUp)), SkillType.Agility);
+        public static Skill JumpUp => new Skill(StringIdentity.Create(nameof(JumpUp)), SkillType.Agility);
         public static Skill Frenzy => new Skill(StringIdentity.Create(nameof(Frenzy)), SkillType.Strength);
         public static Skill DumpOff => new Skill(StringIdentity.Create(nameof(DumpOff)), SkillType.Passing);
     }

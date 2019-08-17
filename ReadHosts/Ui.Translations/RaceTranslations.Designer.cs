@@ -226,6 +226,36 @@ namespace Ui.Translations {
             }
         }
         
+        public static string Skill_Frenzy {
+            get {
+                return ResourceManager.GetString("Skill_Frenzy", resourceCulture);
+            }
+        }
+        
+        public static string Skill_JumpUp {
+            get {
+                return ResourceManager.GetString("Skill_JumpUp", resourceCulture);
+            }
+        }
+        
+        public static string Skill_DumpOff {
+            get {
+                return ResourceManager.GetString("Skill_DumpOff", resourceCulture);
+            }
+        }
+        
+        public static string Skill_Shadowing {
+            get {
+                return ResourceManager.GetString("Skill_Shadowing", resourceCulture);
+            }
+        }
+        
+        public static string Skill_Stab {
+            get {
+                return ResourceManager.GetString("Skill_Stab", resourceCulture);
+            }
+        }
+        
         public static string Skill_MightyBlow {
             get {
                 return ResourceManager.GetString("Skill_MightyBlow", resourceCulture);

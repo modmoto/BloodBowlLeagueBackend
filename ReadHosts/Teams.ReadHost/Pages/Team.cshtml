@@ -27,11 +27,15 @@
                                 asp-page-handler="RemovePlayer"
                                 asp-route-playerId="@player.PlayerId.Guid"
                                 class="float-right">
-                              <button class="btn btn-outline-error my-2 my-sm-0" type="submit">Remove Player</button>
+                              <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Remove Player</button>
                           </form>
                       }
                   }
-                 @player.Name SSP: @player.StarPlayerPoints
+                 @player.Name @RaceTranslations.ResourceManager.GetString(player.PlayerTypeId.Id)
+                 @if (Model.Team.IsFinished)
+                 {
+                     <e>SSP: @player.StarPlayerPoints</e>
+                 }
                  @if(player.Skills.Any())
                  {
                      string.Join(", ", player.Skills.Select(s => s.Id));

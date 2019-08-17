@@ -207,6 +207,21 @@
   <data name="Skill_Dodge" xml:space="preserve">
     <value>Dodge</value>
   </data>
+  <data name="Skill_Frenzy" xml:space="preserve">
+    <value>Frenzy</value>
+  </data>
+  <data name="Skill_JumpUp" xml:space="preserve">
+    <value>Jump Up</value>
+  </data>
+  <data name="Skill_DumpOff" xml:space="preserve">
+    <value>Dump Off</value>
+  </data>
+  <data name="Skill_Shadowing" xml:space="preserve">
+    <value>Shadowing</value>
+  </data>
+  <data name="Skill_Stab" xml:space="preserve">
+    <value>Stab</value>
+  </data>
   <data name="Skill_MightyBlow" xml:space="preserve">
     <value>Mighty Blow</value>
   </data>
