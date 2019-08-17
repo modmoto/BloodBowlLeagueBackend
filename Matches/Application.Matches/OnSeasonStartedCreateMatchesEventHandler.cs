@@ -8,12 +8,12 @@ using Microwave.Queries;
 
 namespace Application.Matches
 {
-    public class SeasonCreatedEventHandler : IHandleAsync<SeasonStarted>
+    public class OnSeasonStartedCreateMatchesEventHandler : IHandleAsync<SeasonStarted>
     {
         private readonly IEventStore _eventStore;
         private readonly IReadModelRepository _readModelRepository;
 
-        public SeasonCreatedEventHandler(IEventStore eventStore, IReadModelRepository readModelRepository)
+        public OnSeasonStartedCreateMatchesEventHandler(IEventStore eventStore, IReadModelRepository readModelRepository)
         {
             _eventStore = eventStore;
             _readModelRepository = readModelRepository;

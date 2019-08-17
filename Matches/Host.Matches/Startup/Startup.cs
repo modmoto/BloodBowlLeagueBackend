@@ -29,7 +29,7 @@ namespace Host.Matches.Startup
                 c.WithEventSeeds(EventSeeds.Seeds);
             });
 
-            services.AddTransient<SeasonCreatedEventHandler>();
+            services.AddTransient<OnSeasonStartedCreateMatchesEventHandler>();
             services.AddTransient<MatchCommandHandler>();
         }
 
