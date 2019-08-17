@@ -13,8 +13,6 @@ namespace Domain.Matches
         public GuidIdentity TeamId { get; private set; }
         public IEnumerable<GuidIdentity> Players { get; private set; } = new List<GuidIdentity>();
 
-        public bool IsFinished { get; private set; }
-
         public void Handle(PlayerBought domainEvent)
         {
             Players = Players.Append(domainEvent.PlayerId);

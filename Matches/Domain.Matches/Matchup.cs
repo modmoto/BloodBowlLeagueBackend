@@ -30,7 +30,6 @@ namespace Domain.Matches
             TeamReadModel teamAtHome,
             TeamReadModel teamAsGuest)
         {
-            if (!teamAtHome.IsFinished || !teamAsGuest.IsFinished) return DomainResult.Error(new TeamsHaveToBeFinishedToUseForAMatch());
             if (teamAtHome.TeamId == teamAsGuest.TeamId) return DomainResult.Error(new TeamsCanNotBeTheSame(teamAtHome.TeamId, teamAsGuest.TeamId));
 
             return DomainResult.Ok(new MatchCreated(matchId, teamAtHome.TeamId, teamAsGuest.TeamId));
@@ -40,7 +39,6 @@ namespace Domain.Matches
             TeamReadModel teamAtHome,
             TeamReadModel teamAsGuest)
         {
-            if (!teamAtHome.IsFinished || !teamAsGuest.IsFinished) return DomainResult.Error(new TeamsHaveToBeFinishedToUseForAMatch());
             if (teamAtHome.TeamId == teamAsGuest.TeamId) return DomainResult.Error(new TeamsCanNotBeTheSame(teamAtHome.TeamId, teamAsGuest.TeamId));
 
             return Create(GuidIdentity.Create(), teamAtHome, teamAsGuest);
