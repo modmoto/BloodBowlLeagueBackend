@@ -15,7 +15,7 @@ namespace Teams.ReadHost.Pages
         private readonly IReadModelRepository _readModelRepository;
         private readonly MessageMitigator _mitigator;
 
-        public IEnumerable<TeamOverviewReadModel> AllTeams { get; set; }
+        public IEnumerable<TeamReadModel> AllTeams { get; set; }
         public IEnumerable<RaceReadModel> AllRaces { get; set; }
 
         public IndexModel(
@@ -28,7 +28,7 @@ namespace Teams.ReadHost.Pages
 
         public async Task OnGetAsync()
         {
-            var teams = await _readModelRepository.LoadAllAsync<TeamOverviewReadModel>();
+            var teams = await _readModelRepository.LoadAllAsync<TeamReadModel>();
             var races = await _readModelRepository.LoadAllAsync<RaceReadModel>();
             AllTeams = teams.Value;
             AllRaces = races.Value;

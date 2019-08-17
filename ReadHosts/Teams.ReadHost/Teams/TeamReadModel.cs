@@ -6,11 +6,11 @@ using Teams.ReadHost.Teams.Events;
 
 namespace Teams.ReadHost.Teams
 {
-    public class TeamReadModel : ReadModel<TeamCreated>,
-        IHandle<TeamCreated>,
+    public class TeamReadModel : ReadModel<TeamDraftCreated>,
+        IHandle<TeamDraftCreated>,
         IHandle<PlayerBought>,
-        IHandle<PlayerRemoved>,
-        IHandle<TeamFinished>
+        IHandle<PlayerRemovedFromDraft>,
+        IHandle<TeamCreated>
     {
         public IEnumerable<PlayerDto> PlayerList { get; set; } = new List<PlayerDto>();
         public StringIdentity RaceId { get; set; }
@@ -21,7 +21,7 @@ namespace Teams.ReadHost.Teams
         public GoldCoins TeamChest { get; set; }
         public bool IsFinished { get; set; }
 
-        public void Handle(TeamCreated domainEvent)
+        public void Handle(TeamDraftCreated domainEvent)
         {
             TeamId = domainEvent.TeamId;
             RaceId = domainEvent.RaceId;
@@ -38,16 +38,22 @@ namespace Teams.ReadHost.Teams
             PlayerList = PlayerList.Append(playerDto);
         }
 
-        public void Handle(PlayerRemoved domainEvent)
+        public void Handle(PlayerRemovedFromDraft domainEvent)
         {
             var playerDtos = PlayerList.Where(p => p.PlayerId != domainEvent.PlayerId);
             PlayerList = playerDtos;
             TeamChest = domainEvent.NewTeamChestBalance;
         }
 
-        public void Handle(TeamFinished domainEvent)
+        public void Handle(TeamCreated domainEvent)
         {
             IsFinished = true;
+            TeamId = domainEvent.TeamId;
+            RaceId = domainEvent.RaceId;
+            TeamName = domainEvent.TeamName;
+            TrainerName = domainEvent.TrainerName;
+            TeamChest = domainEvent.StartingMoney;
+            AllowedPlayers = domainEvent.AllowedPlayers;
         }
     }
 }

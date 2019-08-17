@@ -8,9 +8,7 @@ namespace Domain.Matches
 {
     public class TeamReadModel : ReadModel<TeamCreated>,
         IHandle<PlayerBought>,
-        IHandle<TeamCreated>,
-        IHandle<PlayerRemoved>,
-        IHandle<TeamFinished>
+        IHandle<TeamCreated>
     {
         public GuidIdentity TeamId { get; private set; }
         public IEnumerable<GuidIdentity> Players { get; private set; } = new List<GuidIdentity>();
@@ -27,14 +25,5 @@ namespace Domain.Matches
             TeamId = domainEvent.TeamId;
         }
 
-        public void Handle(PlayerRemoved domainEvent)
-        {
-            Players = Players.Where(p => p != domainEvent.PlayerId);
-        }
-
-        public void Handle(TeamFinished domainEvent)
-        {
-            IsFinished = true;
-        }
     }
 }

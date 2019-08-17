@@ -23,7 +23,7 @@ namespace Application.Teams
         {
             var readModelResult = await _readModelRepository.LoadAsync<RaceReadModel>(createTeamCommand.RaceId);
             var race = readModelResult.Value;
-            var domainResult = Team.Create(
+            var domainResult = Team.Draft(
                 race.RaceConfigId,
                 createTeamCommand.TeamName,
                 createTeamCommand.TrainerName, race.AllowedPlayers);
@@ -44,7 +44,7 @@ namespace Application.Teams
         {
             var teamResult = await _eventStore.LoadAsync<Team>(command.TeamId);
             var team = teamResult.Value;
-            var finishTeam = team.Finish();
+            var finishTeam = team.CommitDraft();
             (await _eventStore.AppendAsync(finishTeam.DomainEvents, command.TeamVersion)).Check();
         }
 

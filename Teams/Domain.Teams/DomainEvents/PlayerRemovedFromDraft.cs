@@ -1,9 +1,9 @@
+using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Identities;
-using Microwave.Queries;
 
-namespace Teams.ReadHost.Teams.Events
+namespace Domain.Teams.DomainEvents
 {
-    public class PlayerRemoved : ISubscribedDomainEvent
+    public class PlayerRemovedFromDraft : IDomainEvent
     {
         public GuidIdentity TeamId { get; }
 
@@ -11,7 +11,7 @@ namespace Teams.ReadHost.Teams.Events
         public GuidIdentity PlayerId { get; }
         public GoldCoins NewTeamChestBalance { get; }
 
-        public PlayerRemoved(GuidIdentity teamId, GuidIdentity playerId, GoldCoins newTeamChestBalance)
+        public PlayerRemovedFromDraft(GuidIdentity teamId, GuidIdentity playerId, GoldCoins newTeamChestBalance)
         {
             TeamId = teamId;
             PlayerId = playerId;

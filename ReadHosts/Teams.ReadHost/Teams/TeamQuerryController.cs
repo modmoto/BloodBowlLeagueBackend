@@ -21,12 +21,5 @@ namespace Teams.ReadHost.Teams
             var teamQuerry = await _queryRepository.LoadAsync<TeamReadModel>(teamId);
             return Ok(teamQuerry.Value);
         }
-
-        [HttpGet]
-        public async Task<ActionResult> GetTeams()
-        {
-            var teamQuerry = await _queryRepository.LoadAllAsync<TeamOverviewReadModel>();
-            return Ok(teamQuerry.Value);
-        }
     }
 }

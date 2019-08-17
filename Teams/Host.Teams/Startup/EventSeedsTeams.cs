@@ -15,7 +15,7 @@ namespace Teams.WriteHost.Startup
             {
                 var events = new List<IDomainEvent>
                 {
-                    new TeamCreated(
+                    new TeamDraftCreated(
                         GuidIdentity.Create(new Guid("772F7E84-4237-4634-AF85-5C0D72FF8DBD")),
                         StringIdentity.Create("Humans"),
                         "Karlsruher Könige",
@@ -23,10 +23,31 @@ namespace Teams.WriteHost.Startup
                         HumanPlayers,
                         new GoldCoins(1000000)),
                     new TeamCreated(
+                        GuidIdentity.Create(new Guid("772F7E84-4237-4634-AF85-5C0D72FF8DBD")),
+                        StringIdentity.Create("Humans"),
+                        "Karlsruher Könige",
+                        "Walter",
+                        HumanPlayers,
+                        new GoldCoins(1000000)),
+                    new TeamDraftCreated(
                         GuidIdentity.Create(new Guid("38C41447-21F6-4941-BD7E-AC97EF866197")),
                         StringIdentity.Create("Dwarfs"),
                         "Berghausen Brüglerz",
                         "Rahel",
+                        DwarfPlayers,
+                        new GoldCoins(1000000)),
+                    new TeamCreated(
+                        GuidIdentity.Create(new Guid("38C41447-21F6-4941-BD7E-AC97EF866197")),
+                        StringIdentity.Create("Dwarfs"),
+                        "Berghausen Brüglerz",
+                        "Rahel",
+                        DwarfPlayers,
+                        new GoldCoins(1000000)),
+                    new TeamDraftCreated(
+                        GuidIdentity.Create(new Guid("13552A55-D612-40D5-88F9-5106A05CCBAC")),
+                        StringIdentity.Create("Dwarfs"),
+                        "Rat Bullz",
+                        "Silas",
                         DwarfPlayers,
                         new GoldCoins(1000000)),
                     new TeamCreated(
@@ -36,17 +57,67 @@ namespace Teams.WriteHost.Startup
                         "Silas",
                         DwarfPlayers,
                         new GoldCoins(1000000)),
-                    new TeamCreated(
+                    new TeamDraftCreated(
                         GuidIdentity.Create(new Guid("D5BB0FDA-BBE5-4271-8311-460AE5AD3DDA")),
                         StringIdentity.Create("DarkElves"),
                         "Spikey Bits",
                         "Merlin",
                         DarkElvPlayers,
                         new GoldCoins(1000000)),
+                    new TeamCreated(
+                        GuidIdentity.Create(new Guid("D5BB0FDA-BBE5-4271-8311-460AE5AD3DDA")),
+                        StringIdentity.Create("DarkElves"),
+                        "Spikey Bits",
+                        "Merlin",
+                        DarkElvPlayers,
+                        new GoldCoins(1000000))
                 };
 
                 events.AddRange(NightElveTeamWithPlayers);
+                events.AddRange(TeamInDraftMode);
                 events.AddRange(HumanTeamWithPlayers);
+
+                return events;
+            }
+        }
+
+        public static IEnumerable<IDomainEvent> TeamInDraftMode
+        {
+            get
+            {
+                var team1 = GuidIdentity.Create(new Guid("2798435C-9C72-4ECE-BD7D-00BECBACCED7"));
+
+                var events = new List<IDomainEvent>
+                {
+                    new TeamDraftCreated(
+                        team1,
+                        StringIdentity.Create("DarkElves"),
+                        "Team in DraftMode",
+                        "Mark",
+                        DarkElvPlayers,
+                        new GoldCoins(1000000)),
+                    new PlayerBought(
+                        team1,
+                        StringIdentity.Create("DE_LineMan"),
+                        GuidIdentity.Create(new Guid("1BF57260-77E5-4E19-99C3-3B6D7205B8BE")),
+                        new GoldCoins(930000)),
+                    new PlayerBought(
+                        team1,
+                        StringIdentity.Create("DE_LineMan"),
+                        GuidIdentity.Create(new Guid("5543633B-78B6-40EC-A84D-0F637A3F05EE")),
+                        new GoldCoins(860000)),
+                    new PlayerBought(
+                        team1,
+                        StringIdentity.Create("DE_LineMan"),
+                        GuidIdentity.Create(new Guid("F9C331B7-AC52-46FF-B565-CFD6E690106B")),
+                        new GoldCoins(790000)),
+                    new TeamCreated(team1,
+                        StringIdentity.Create("DarkElves"),
+                        "Team in DraftMode",
+                        "Mark",
+                        DarkElvPlayers,
+                        new GoldCoins(790000))
+                };
 
                 return events;
             }
@@ -60,7 +131,7 @@ namespace Teams.WriteHost.Startup
 
                 var events = new List<IDomainEvent>
                 {
-                    new TeamCreated(
+                    new TeamDraftCreated(
                         team1,
                         StringIdentity.Create("DarkElves"),
                         "3er Team",
@@ -82,7 +153,12 @@ namespace Teams.WriteHost.Startup
                         StringIdentity.Create("DE_LineMan"),
                         GuidIdentity.Create(new Guid("E86E63E2-8C3C-4CFF-8719-68BD844CD7F7")),
                         new GoldCoins(790000)),
-                    new TeamFinished(team1)
+                    new TeamCreated(team1,
+                        StringIdentity.Create("DarkElves"),
+                        "3er Team",
+                        "Der Simon",
+                        DarkElvPlayers,
+                        new GoldCoins(790000))
                 };
 
                 return events;
@@ -97,7 +173,7 @@ namespace Teams.WriteHost.Startup
 
                 var events = new List<IDomainEvent>
                 {
-                    new TeamCreated(
+                    new TeamDraftCreated(
                         team2,
                         StringIdentity.Create("Humans"),
                         "2er Team",
@@ -114,7 +190,13 @@ namespace Teams.WriteHost.Startup
                         StringIdentity.Create("HU_LineMan"),
                         GuidIdentity.Create(new Guid("1796B724-B55F-47A3-A498-153379C516EA")),
                         new GoldCoins(900000)),
-                    new TeamFinished(team2)
+                    new TeamCreated(
+                        team2,
+                        StringIdentity.Create("Humans"),
+                        "2er Team",
+                        "Der Simon Poppinga",
+                        HumanPlayers,
+                        new GoldCoins(900000))
                 };
 
                 return events;

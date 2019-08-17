@@ -13,7 +13,7 @@ namespace Domain.Teams.UnitTests
         public void BuyPlayer()
         {
             var playerTypeId = StringIdentity.Create("de_Nelf");
-            var domainResult = Team.Create(
+            var domainResult = Team.Draft(
                 StringIdentity.Create("Elves"),
                 "King Kingz",
                 "Simon",
