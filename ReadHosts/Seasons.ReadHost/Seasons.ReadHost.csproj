@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
+        <DebugType>full</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
@@ -21,42 +22,6 @@
       <ProjectReference Include="..\..\ServiceConfig\ServiceConfig.csproj" />
       <ProjectReference Include="..\ReadHosts.Common\ReadHosts.Common.csproj" />
       <ProjectReference Include="..\Ui.Translations\Ui.Translations.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_ResolveComReferenceCache Remove="obj\Debug\netcoreapp2.2\Seasons.ReadHost.csproj.ResolveComReference.cache" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <IntermediateAssembly Remove="obj\Debug\netcoreapp2.2\Seasons.ReadHost.dll" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_DebugSymbolsIntermediatePath Remove="obj\Debug\netcoreapp2.2\Seasons.ReadHost.pdb" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_DeploymentManifestEntryPoint Remove="obj\Debug\netcoreapp2.2\Seasons.ReadHost.dll" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ApplicationManifest Remove="obj\Debug\netcoreapp2.2\Seasons.ReadHost.dll.manifest" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <DeployManifest Remove="obj\Debug\netcoreapp2.2\Seasons.ReadHost.application" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <RazorIntermediateAssembly Remove="obj\Debug\netcoreapp2.2\Seasons.ReadHost.Razor.dll" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_RazorDebugSymbolsIntermediatePath Remove="obj\Debug\netcoreapp2.2\Seasons.ReadHost.Razor.pdb" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <UpToDateCheckBuilt Remove="obj\Debug\netcoreapp2.2\Seasons.ReadHost.Razor.dll" />
     </ItemGroup>
 
 </Project>
