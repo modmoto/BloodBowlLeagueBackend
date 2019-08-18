@@ -26,4 +26,4 @@ RUN dotnet publish "./Players/Host.Players/Host.Players.csproj" -c Release -o ".
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 WORKDIR /app
 COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "Players.Host.dll"]
+ENTRYPOINT ["dotnet", "Host.Players.dll"]
