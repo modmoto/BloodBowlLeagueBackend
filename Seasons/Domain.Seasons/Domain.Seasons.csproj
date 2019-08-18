@@ -10,7 +10,7 @@
         <Version>0.14.4</Version>
       </PackageReference>
       <PackageReference Include="Microwave.Queries">
-        <Version>0.14.2.1015-beta</Version>
+        <Version>0.14.4</Version>
       </PackageReference>
     </ItemGroup>
 </Project>
