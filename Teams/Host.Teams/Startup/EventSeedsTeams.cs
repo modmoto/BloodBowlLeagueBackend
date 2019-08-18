@@ -85,7 +85,7 @@ namespace Teams.WriteHost.Startup
         {
             get
             {
-                var team1 = GuidIdentity.Create(new Guid("2798435C-9C72-4ECE-BD7D-00BECBACCED7"));
+                var team1 = GuidIdentity.Create(new Guid("FFD92960-33DE-4B63-8EFD-AF0A75E4F017"));
 
                 var events = new List<IDomainEvent>
                 {
@@ -96,17 +96,17 @@ namespace Teams.WriteHost.Startup
                         "Mark",
                         DarkElvPlayers,
                         new GoldCoins(1000000)),
-                    new PlayerBought(
+                    new PlayerAddedToDraft(
                         team1,
                         StringIdentity.Create("DE_LineMan"),
                         GuidIdentity.Create(new Guid("1BF57260-77E5-4E19-99C3-3B6D7205B8BE")),
                         new GoldCoins(930000)),
-                    new PlayerBought(
+                    new PlayerAddedToDraft(
                         team1,
                         StringIdentity.Create("DE_LineMan"),
                         GuidIdentity.Create(new Guid("5543633B-78B6-40EC-A84D-0F637A3F05EE")),
                         new GoldCoins(860000)),
-                    new PlayerBought(
+                    new PlayerAddedToDraft(
                         team1,
                         StringIdentity.Create("DE_LineMan"),
                         GuidIdentity.Create(new Guid("F9C331B7-AC52-46FF-B565-CFD6E690106B")),

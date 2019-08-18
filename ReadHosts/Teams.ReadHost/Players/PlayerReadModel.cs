@@ -3,11 +3,13 @@ using System.Linq;
 using Microwave.Domain.Identities;
 using Microwave.Queries;
 using Teams.ReadHost.Players.Events;
+using Teams.ReadHost.Teams.Events;
 
 namespace Teams.ReadHost.Players
 {
-    public class PlayerReadModel : ReadModel<PlayerCreated>,
+    public class PlayerReadModel : ReadModel<PlayerAddedToDraft>,
         IHandle<PlayerCreated>,
+        IHandle<PlayerAddedToDraft>,
         IHandle<SkillChosen>,
         IHandle<PlayerLeveledUp>,
         IHandle<PlayerPassed>,
@@ -70,6 +72,13 @@ namespace Teams.ReadHost.Players
         public void Handle(PlayerWasNominatedMostValuablePlayer domainEvent)
         {
             StarPlayerPoints = domainEvent.NewStarPlayerPoints;
+        }
+
+        public void Handle(PlayerAddedToDraft domainEvent)
+        {
+            PlayerId = domainEvent.PlayerId;
+            TeamId = domainEvent.TeamId;
+            PlayerTypeId = domainEvent.PlayerTypeId;
         }
     }
 }

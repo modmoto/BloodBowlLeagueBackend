@@ -1,4 +1,5 @@
 @page "{teamId:Guid?}"
+@using System.Diagnostics.Tracing
 @using Ui.Translations
 @model Pages.TeamModel
 
@@ -6,44 +7,50 @@
     <h3 class="pb-3">Team: @Model.Team.TeamName (@Model.Team.TrainerName) @RaceTranslations.ResourceManager.GetString(@Model.Team.RaceId.Id), G: @Model.Team.TeamChest.Value</h3>
     <h3>Players:</h3>
     <ul class="list-group pb-3 mb-1 pl-3">
-    @foreach (var player in Model.Players)
-    {
-         <a href="http://localhost:5000/Player/@player.PlayerId" class="list-group-item list-group-item-action">
-             <div>
-                 @{
-                     if (player.HasFreeSkill)
-                     {
-                         <em class="fas fa-angle-double-up fa-lg pt-1 pr-3 float-right"
-                             data-toggle="tooltip"
-                             data-placement="right"
-                             title="Player has a free Skill!">
-                         </em>
-                     }
-                 }
-                 @{
-                      if (!Model.Team.IsFinished)
-                      {
-                          <form method="post"
-                                asp-page-handler="RemovePlayer"
-                                asp-route-playerId="@player.PlayerId.Guid"
-                                class="float-right">
-                              <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Remove Player</button>
-                          </form>
-                      }
-                  }
-                 @player.Name @RaceTranslations.ResourceManager.GetString(player.PlayerTypeId.Id)
-                 @if (Model.Team.IsFinished)
-                 {
-                     <e>SSP: @player.StarPlayerPoints</e>
-                 }
-                 @if(player.Skills.Any())
-                 {
-                     string.Join(", ", player.Skills.Select(s => s.Id));
-                 }
-             </div>
-          </a>
-     }
-     </ul>
+        @if (Model.Team.IsFinished)
+        {
+            @foreach (var player in Model.FullPlayers)
+            {
+                <a href="http://localhost:5000/Player/@player.PlayerId" class="list-group-item list-group-item-action">
+                    <div>
+                        @{
+                            if (player.HasFreeSkill)
+                            {
+                                <em class="fas fa-angle-double-up fa-lg pt-1 pr-3 float-right"
+                                    data-toggle="tooltip"
+                                    data-placement="right"
+                                    title="Player has a free Skill!">
+                                </em>
+                            }
+                        }
+                        @player.Name @RaceTranslations.ResourceManager.GetString(player.PlayerTypeId.Id) <e>SSP: @player.StarPlayerPoints</e>
+                        @if (player.Skills.Any())
+                        {
+                            string.Join(", ", player.Skills.Select(s => s.Id));
+                        }
+                    </div>
+                </a>
+            }
+        }
+        else
+        {
+            var counter = 1;
+            @foreach (var player in Model.Players)
+            {
+                <a href="http://localhost:5000/Player/@player.PlayerId" class="list-group-item list-group-item-action">
+                    <div class="float-left">
+                        @(counter++). @RaceTranslations.ResourceManager.GetString(player.PlayerTypeId.Id)
+                    </div>
+                    <form method="post"
+                        asp-page-handler="RemovePlayer"
+                        asp-route-playerId="@player.PlayerId.Guid"
+                        class="float-right">
+                        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Remove Player</button>
+                    </form>
+                </a>
+            }
+        }
+    </ul>
      <form method="post" asp-page-handler="AddPlayer">
          <div class="form-group">
              <label for="playerTypeSelectBox">Buy a player</label>

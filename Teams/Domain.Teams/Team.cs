@@ -88,6 +88,7 @@ namespace Domain.Teams
         public void Apply(TeamCreated domainEvent)
         {
             TeamMoney = domainEvent.StartingMoney;
+            Players = new List<PlayerReadModel>();
             _teamState = new FinalTeamState();
         }
 

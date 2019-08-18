@@ -9,6 +9,7 @@ namespace Teams.ReadHost.Teams
     public class TeamReadModel : ReadModel<TeamDraftCreated>,
         IHandle<TeamDraftCreated>,
         IHandle<PlayerBought>,
+        IHandle<PlayerAddedToDraft>,
         IHandle<PlayerRemovedFromDraft>,
         IHandle<TeamCreated>
     {
@@ -54,6 +55,12 @@ namespace Teams.ReadHost.Teams
             TrainerName = domainEvent.TrainerName;
             TeamChest = domainEvent.StartingMoney;
             AllowedPlayers = domainEvent.AllowedPlayers;
+        }
+
+        public void Handle(PlayerAddedToDraft domainEvent)
+        {
+            TeamChest = domainEvent.NewTeamChestBalance;
+            PlayerList = PlayerList.Append(new PlayerDto(domainEvent.PlayerId, domainEvent.PlayerTypeId));
         }
     }
 }

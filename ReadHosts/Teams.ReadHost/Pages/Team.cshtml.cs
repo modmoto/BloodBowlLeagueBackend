@@ -18,7 +18,8 @@ namespace Teams.ReadHost.Pages
         private readonly MessageMitigator _mitigator;
 
         public TeamReadModel Team { get; set; }
-        public IEnumerable<PlayerReadModel> Players { get; set; }
+        public IEnumerable<PlayerDto> Players => Team.PlayerList;
+        public IEnumerable<PlayerReadModel> FullPlayers { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public Guid TeamId { get; set; }
@@ -41,7 +42,7 @@ namespace Teams.ReadHost.Pages
             var playersValue = players.Value;
             var playerReadModels = playersValue.Where(p =>
                 team.PlayerList.Any(a => a.PlayerId == p.PlayerId));
-            Players = playerReadModels;
+            FullPlayers = playerReadModels;
             Team = team;
         }
 
