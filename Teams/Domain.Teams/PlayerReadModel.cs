@@ -11,6 +11,7 @@ namespace Domain.Teams
             PlayerTypeId = playerTypeId;
             PlayerId = playerId;
         }
+
         public StringIdentity PlayerTypeId { get; }
         public GuidIdentity PlayerId { get; }
     }
