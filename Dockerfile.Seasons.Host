@@ -1,0 +1,29 @@
+# Build image
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
+WORKDIR /app
+COPY ./BloodBowlLeagueBackend.sln ./
+
+# Copy all the csproj files and restore to cache the layer for faster builds
+# The dotnet_build.sh script does this anyway, so superfluous, but docker can
+# cache the intermediate images so _much_ faster
+COPY ./Seasons/Host.Seasons/Host.Seasons.csproj ./Seasons/Host.Seasons/Host.Seasons.csproj
+COPY ./Seasons/Application.Seasons/Application.Seasons.csproj ./Seasons/Application.Seasons/Application.Seasons.csproj
+COPY ./Seasons/Domain.Seasons/Domain.Seasons.csproj ./Seasons/Domain.Seasons/Domain.Seasons.csproj
+COPY ./ServiceConfig/ServiceConfig.csproj ./ServiceConfig/ServiceConfig.csproj
+
+RUN dotnet restore ./Seasons/Host.Seasons/Host.Seasons.csproj
+RUN dotnet restore ./Seasons/Application.Seasons/Application.Seasons.csproj
+RUN dotnet restore ./Seasons/Domain.Seasons/Domain.Seasons.csproj
+RUN dotnet restore ./ServiceConfig/ServiceConfig.csproj
+
+COPY ./Seasons ./Seasons
+COPY ./ServiceConfig ./ServiceConfig
+RUN dotnet build ./Seasons/Host.Seasons/Host.Seasons.csproj -c Release
+
+RUN dotnet publish "./Seasons/Host.Seasons/Host.Seasons.csproj" -c Release -o "../../out"
+
+#App image
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "Seasons.Host.dll"]
