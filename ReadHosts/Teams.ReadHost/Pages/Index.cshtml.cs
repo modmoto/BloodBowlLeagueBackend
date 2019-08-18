@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microwave.Queries;
 using ReadHosts.Common;
+using ServiceConfig;
 using Teams.ReadHost.Races;
 using Teams.ReadHost.Teams;
 
@@ -40,9 +41,9 @@ namespace Teams.ReadHost.Pages
             var trainerName = Request.Form["trainerNameTextInput"].ToString();
             var raceId = Request.Form["raceIdDropDownInput"].ToString();
             await _mitigator.PostAsync(
-                new Uri("http://localhost:5001/Api/Teams/create"),
+                new Uri($"{ServiceConfiguration.TeamHost}Api/Teams/create"),
                 new { teamName, trainerName, raceId });
-            return Redirect("http://localhost:5000");
+            return Redirect(ServiceConfiguration.TeamReadHost.ToString());
         }
     }
 }

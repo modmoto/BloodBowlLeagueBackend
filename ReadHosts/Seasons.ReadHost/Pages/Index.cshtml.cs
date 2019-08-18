@@ -6,6 +6,7 @@ using Microwave.Domain.Results;
 using Microwave.Queries;
 using ReadHosts.Common;
 using Seasons.ReadHost.Seasons;
+using ServiceConfig;
 
 namespace Seasons.ReadHost.Pages
 {
@@ -34,8 +35,8 @@ namespace Seasons.ReadHost.Pages
         {
             var seasonName = Request.Form["seasonNameTextInput"].ToString();
             var ob = new { seasonName };
-            await _mitigator.PostAsync(new Uri("http://localhost:5004/Api/Seasons/create"), ob);
-            return Redirect("http://localhost:5006");
+            await _mitigator.PostAsync(new Uri($"{ServiceConfiguration.SeasonHost}Api/Seasons/create"), ob);
+            return Redirect($"{ServiceConfiguration.SeasonReadHost}");
         }
     }
 }

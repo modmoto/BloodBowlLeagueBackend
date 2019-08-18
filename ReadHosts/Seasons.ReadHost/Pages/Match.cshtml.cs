@@ -10,6 +10,7 @@ using ReadHosts.Common;
 using Seasons.ReadHost.Matches;
 using Seasons.ReadHost.Players;
 using Seasons.ReadHost.Teams;
+using ServiceConfig;
 
 namespace Seasons.ReadHost.Pages
 {
@@ -60,7 +61,7 @@ namespace Seasons.ReadHost.Pages
             var progressionEventRaw = Request.Form["progressionEvent"].ToString();
             Enum.TryParse<ProgressionEvent>(progressionEventRaw, out var progressionEvent);
             await _mitigator.PostAsync(
-                new Uri($"http://localhost:5003/Api/Matches/{MatchId}/progress"),
+                new Uri($"{ServiceConfiguration.MatchHost}Api/Matches/{MatchId}/progress"),
                 new { PlayerProgression = new PlayerProgression(
                         GuidIdentity.Create(new Guid(playerId)),
                         progressionEvent)});
@@ -70,7 +71,7 @@ namespace Seasons.ReadHost.Pages
         public async Task<IActionResult> OnPostStartMatch(GuidIdentity matchId)
         {
             await _mitigator.PostAsync(
-                new Uri($"http://localhost:5003/Api/Matches/{MatchId}/start"),
+                new Uri($"{ServiceConfiguration.MatchHost}Api/Matches/{MatchId}/start"),
                 new { });
             return Redirect(MatchId.ToString());
         }
@@ -78,7 +79,7 @@ namespace Seasons.ReadHost.Pages
         public async Task<IActionResult> OnPostFinishMatch(GuidIdentity matchId)
         {
             await _mitigator.PostAsync(
-                new Uri($"http://localhost:5003/Api/Matches/{MatchId}/finish"),
+                new Uri($"{ServiceConfiguration.MatchHost}Api/Matches/{MatchId}/finish"),
                 new { });
             return Redirect(MatchId.ToString());
         }

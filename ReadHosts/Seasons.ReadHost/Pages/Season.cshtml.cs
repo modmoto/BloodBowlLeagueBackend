@@ -11,6 +11,7 @@ using ReadHosts.Common;
 using Seasons.ReadHost.Matches;
 using Seasons.ReadHost.Seasons;
 using Seasons.ReadHost.Teams;
+using ServiceConfig;
 
 namespace Seasons.ReadHost.Pages
 {
@@ -50,7 +51,7 @@ namespace Seasons.ReadHost.Pages
         public async Task<IActionResult> OnPostAddTeam(string teamId)
         {
             await _mitigator.PostAsync(
-                new Uri($"http://localhost:5004/Api/Seasons/{SeasonId}/add-team"),
+                new Uri($"{ServiceConfiguration.SeasonHost}Api/Seasons/{SeasonId}/add-team"),
                 new { teamId });
             return Redirect(SeasonId.ToString());
         }
@@ -58,7 +59,7 @@ namespace Seasons.ReadHost.Pages
         public async Task<IActionResult> OnPostStartSeason()
         {
             await _mitigator.PostAsync(
-                new Uri($"http://localhost:5004/Api/Seasons/{SeasonId}/start"),
+                new Uri($"{ServiceConfiguration.SeasonHost}Api/Seasons/{SeasonId}/start"),
                 new { });
             return Redirect(SeasonId.ToString());
         }

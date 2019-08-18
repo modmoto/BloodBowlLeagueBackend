@@ -1,5 +1,5 @@
 @page "{teamId:Guid?}"
-@using System.Diagnostics.Tracing
+@using ServiceConfig
 @using Ui.Translations
 @model Pages.TeamModel
 
@@ -11,7 +11,7 @@
         {
             @foreach (var player in Model.FullPlayers)
             {
-                <a href="http://localhost:5000/Player/@player.PlayerId" class="list-group-item list-group-item-action">
+                <a href="@(ServiceConfiguration.TeamReadHost)Player/@player.PlayerId" class="list-group-item list-group-item-action">
                     <div>
                         @{
                             if (player.HasFreeSkill)
@@ -37,7 +37,7 @@
             var counter = 1;
             @foreach (var player in Model.Players)
             {
-                <a href="http://localhost:5000/Player/@player.PlayerId" class="list-group-item list-group-item-action">
+                <a href="@(ServiceConfiguration.TeamReadHost)Player/@player.PlayerId" class="list-group-item list-group-item-action">
                     <div class="float-left">
                         @(counter++). @RaceTranslations.ResourceManager.GetString(player.PlayerTypeId.Id)
                     </div>

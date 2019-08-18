@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microwave.Domain.Identities;
 using Microwave.Queries;
 using ReadHosts.Common;
+using ServiceConfig;
 using Teams.ReadHost.Players;
 using Teams.ReadHost.Teams;
 
@@ -52,7 +53,7 @@ namespace Teams.ReadHost.Pages
             var result = await _readModelRepository.LoadAsync<TeamReadModel>(GuidIdentity.Create(TeamId));
 
             await _mitigator.PostAsync(
-                new Uri($"http://localhost:5001/Api/Teams/{TeamId}/buy-player"),
+                new Uri($"{ServiceConfiguration.TeamHost}Api/Teams/{TeamId}/buy-player"),
                 new { playerTypeId , TeamVersion = result.Value.Version });
             return Redirect(TeamId.ToString());
         }
@@ -62,7 +63,7 @@ namespace Teams.ReadHost.Pages
             var result = await _readModelRepository.LoadAsync<TeamReadModel>(GuidIdentity.Create(TeamId));
 
             await _mitigator.PostAsync(
-                new Uri($"http://localhost:5001/Api/Teams/{TeamId}/remove-player"),
+                new Uri($"{ServiceConfiguration.TeamHost}Api/Teams/{TeamId}/remove-player"),
                 new { playerId , TeamVersion = result.Value.Version });
             return Redirect(TeamId.ToString());
         }
@@ -72,7 +73,7 @@ namespace Teams.ReadHost.Pages
             var result = await _readModelRepository.LoadAsync<TeamReadModel>(GuidIdentity.Create(TeamId));
 
             await _mitigator.PostAsync(
-                new Uri($"http://localhost:5001/Api/Teams/{TeamId}/finish"),
+                new Uri($"{ServiceConfiguration.TeamHost}Api/Teams/{TeamId}/finish"),
                 new { TeamId , TeamVersion = result.Value.Version });
             return Redirect(TeamId.ToString());
         }

@@ -1,4 +1,5 @@
 @page
+@using ServiceConfig
 @model Pages.PlayerListModel
 
 <div class="my-2 my-lg-0 p-3 ml-auto">
@@ -6,7 +7,7 @@
     <div class="list-group">
     @foreach (var player in Model.PlayerList)
     {
-         <a href="http://localhost:5000/Player/@player.PlayerId" class="list-group-item list-group-item-action">
+         <a href="@(ServiceConfiguration.TeamReadHost)Player/@player.PlayerId" class="list-group-item list-group-item-action">
              <h5 class="mb-1">
                  @{
                      if (player.HasFreeSkill)

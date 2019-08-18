@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microwave.Domain.Identities;
 using Microwave.Queries;
 using ReadHosts.Common;
+using ServiceConfig;
 using Teams.ReadHost.Players;
 using Teams.ReadHost.Players.Events;
 using Teams.ReadHost.Races;
@@ -81,7 +82,7 @@ namespace Teams.ReadHost.Pages
             var skillId = Request.Form["skillId"].ToString();
 
             await _mitigator.PostAsync(
-                new Uri($"http://localhost:5002/Api/Players/{PlayerId}/level-up"),
+                new Uri($"{ServiceConfiguration.PlayerHost}Api/Players/{PlayerId}/level-up"),
                 new { skillId });
             return Redirect(PlayerId.ToString());
         }

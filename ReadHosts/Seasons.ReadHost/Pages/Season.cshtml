@@ -1,4 +1,5 @@
 @page "{seasonId:Guid?}"
+@using ServiceConfig
 @using Ui.Translations
 @model Pages.Seasons
 
@@ -16,7 +17,8 @@
                      @foreach (var matchup in gameDay.Matchups)
                      {
                          var m = Model.FullMatch(matchup.MatchId);
-                         <a href="http://localhost:5006/Match/@m.MatchId" class="list-group-item list-group-item-action">
+                         <a href="(@ServiceConfiguration.SeasonReadHost)Match/@m.MatchId" class="list-group-item
+                         list-group-item-action">
                              <div class="float-left">@(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)</div>
                              <div class="float-right">
                              @if (!m.IsFinished && m.IsStarted)
@@ -46,7 +48,7 @@
              <h5 class="card-title">Allready added Teams:</h5>
              @foreach (var team in Model.AddedTeams)
              {
-                 <a href="http://localhost:5000/Team/@team.TeamId" class="list-group-item list-group-item-action">
+                 <a href="@(ServiceConfiguration.TeamReadHost)Team/@team.TeamId" class="list-group-item list-group-item-action">
                      <div class="d-flex w-100 justify-content-between">
                          <h5 class="mb-1">@team.TeamName (@(team.TrainerName), @RaceTranslations.ResourceManager.GetString(team.RaceId.Id))</h5>
                      </div>

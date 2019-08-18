@@ -1,4 +1,5 @@
-﻿<!doctype html>
+﻿@using ServiceConfig
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -14,16 +15,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="http://localhost:5006">Seasons</a>
+                        <a class="nav-link" href="@ServiceConfiguration.SeasonReadHost">Seasons</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="http://localhost:5006/Matches">Matches</a>
+                        <a class="nav-link" href="@ServiceConfiguration.SeasonReadHost/Matches">Matches</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="http://localhost:5000">Teams</a>
+                        <a class="nav-link" href="@ServiceConfiguration.TeamReadHost">Teams</a>
                     </li>
                      <li class="nav-item active">
-                        <a class="nav-link" href="http://localhost:5000/Players">Players</a>
+                        <a class="nav-link" href="@ServiceConfiguration.TeamReadHost/Players">Players</a>
                     </li>
                 </ul>
             </div>

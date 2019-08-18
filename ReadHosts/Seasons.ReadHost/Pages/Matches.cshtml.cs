@@ -9,6 +9,7 @@ using Microwave.Queries;
 using ReadHosts.Common;
 using Seasons.ReadHost.Matches;
 using Seasons.ReadHost.Teams;
+using ServiceConfig;
 
 namespace Seasons.ReadHost.Pages
 {
@@ -40,9 +41,9 @@ namespace Seasons.ReadHost.Pages
             var homeTeam = Request.Form["homeTeam"].ToString();
             var guestTeam = Request.Form["guestTeam"].ToString();
             await _mitigator.PostAsync(
-                new Uri($"http://localhost:5003/Api/Matches/create"),
+                new Uri($"{ServiceConfiguration.MatchHost}Api/Matches/create"),
                 new { homeTeam, guestTeam });
-            return Redirect("http://localhost:5006/Matches");
+            return Redirect($"{ServiceConfiguration.SeasonReadHost}Matches");
         }
 
         public TeamReadModel FullTeam(GuidIdentity teamId)

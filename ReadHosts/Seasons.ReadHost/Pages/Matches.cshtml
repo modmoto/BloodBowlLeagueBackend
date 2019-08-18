@@ -1,4 +1,5 @@
 @page
+@using ServiceConfig
 @model Pages.Matches
 
 <div class="my-2 my-lg-0 p-3 ml-auto">
@@ -6,7 +7,7 @@
     <ul class="list-group pb-3 mb-1 pl-3">
         @foreach (var m in Model.MatchList)
         {
-        <a href="http://localhost:5006/Match/@m.MatchId" class="list-group-item list-group-item-action">
+        <a href="@(ServiceConfiguration.SeasonReadHost)Match/@m.MatchId" class="list-group-item list-group-item-action">
             <div class="float-left">@(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)</div>
              <div class="float-right">
              @if (!m.IsFinished && m.IsStarted)
