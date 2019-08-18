@@ -17,7 +17,7 @@
                      @foreach (var matchup in gameDay.Matchups)
                      {
                          var m = Model.FullMatch(matchup.MatchId);
-                         <a href="(@ServiceConfiguration.SeasonReadHost)Match/@m.MatchId" class="list-group-item
+                         <a href="@(ServiceConfiguration.SeasonReadHost)Match/@m.MatchId" class="list-group-item
                          list-group-item-action">
                              <div class="float-left">@(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)</div>
                              <div class="float-right">
