@@ -20,7 +20,7 @@ namespace ServiceConfig
         public static Uri SeasonHost { get; } = new Uri("https://seasonshost.azurewebsites.net");
         public static Uri RaceHost { get; } = new Uri("https://raceshost.azurewebsites.net");
 
-        public static Uri SeasonReadHost { get; } = new Uri("https://seasonsredhost.azurewebsites.net");
+        public static Uri SeasonReadHost { get; } = new Uri("https://seasonsreadhost.azurewebsites.net");
         public static Uri TeamReadHost { get; } = new Uri("https://teamsreadhost.azurewebsites.net");
 
 
