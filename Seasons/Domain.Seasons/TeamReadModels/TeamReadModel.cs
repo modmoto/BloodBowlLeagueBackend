@@ -7,7 +7,6 @@ namespace Domain.Seasons.TeamReadModels
         IHandle<TeamCreated>
     {
         public GuidIdentity TeamId { get; set; }
-        public bool IsFinished { get; set; }
 
         public void Handle(TeamCreated domainEvent)
         {

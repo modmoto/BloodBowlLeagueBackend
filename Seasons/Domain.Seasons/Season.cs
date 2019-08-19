@@ -25,7 +25,6 @@ namespace Domain.Seasons
         public DomainResult AddTeam(TeamReadModel teamId)
         {
             if (SeasonIsStarted) return DomainResult.Error(new SeasonAllreadyStarted());
-            if (!teamId.IsFinished) return DomainResult.Error(new TeamHasToBeFinishedToAddToSeason());
             if (Teams.Any(t => t == teamId.TeamId)) return DomainResult.Error(new CanNotAddTeamTwice(teamId.TeamId));
             return DomainResult.Ok(new TeamAddedToSeason(SeasonId, teamId.TeamId));
         }
