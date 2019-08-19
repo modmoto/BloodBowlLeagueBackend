@@ -25,7 +25,7 @@ namespace Teams.WriteHost.Startup
                     new TeamCreated(
                         GuidIdentity.Create(new Guid("772F7E84-4237-4634-AF85-5C0D72FF8DBD")),
                         StringIdentity.Create("Humans"),
-                        "Karlsruher Könige NEU",
+                        "Karlsruher Könige",
                         "Walter",
                         HumanPlayers,
                         new GoldCoins(1000000)),
@@ -136,11 +136,6 @@ namespace Teams.WriteHost.Startup
                         team1,
                         StringIdentity.Create("DE_LineMan"),
                         GuidIdentity.Create(new Guid("EC48B7FF-B76D-471F-99B0-761EC43C4101")),
-                        new GoldCoins(930000)),
-                    new PlayerBought(
-                        team1,
-                        StringIdentity.Create("DE_LineMan"),
-                        GuidIdentity.Create(new Guid("B5972D0F-899F-4C1F-8F95-F49B68E5DD76")),
                         new GoldCoins(930000)),
                     new PlayerBought(
                         team1,
