@@ -111,6 +111,7 @@ namespace Domain.Teams
 
         public void Apply(PlayerAddedToDraft domainEvent)
         {
+            TeamMoney = domainEvent.NewTeamChestBalance;
             Players = Players.Append(new PlayerReadModel(domainEvent.PlayerId, domainEvent.PlayerTypeId));
         }
     }
