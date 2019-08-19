@@ -34,7 +34,7 @@ namespace Host.Races.Startup
             }
         }
 
-        public static IDomainEvent DwarfTeam => new RaceCreated(StringIdentity.Create("Dwarfs"),
+        public static IDomainEvent DwarfTeam => new RaceCreated(StringIdentity.Create("DwarfsNeu"),
             new List<AllowedPlayer>
             {
                 AllowedPlayer.DwarfBlitzer,
