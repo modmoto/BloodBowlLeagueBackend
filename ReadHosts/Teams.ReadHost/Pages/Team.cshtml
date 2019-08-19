@@ -37,7 +37,7 @@
             var counter = 1;
             @foreach (var player in Model.Players)
             {
-                <a href="@(ServiceConfiguration.TeamReadHost)Player/@player.PlayerId" class="list-group-item list-group-item-action">
+                <li class="list-group-item">
                     <div class="float-left">
                         @(counter++). @RaceTranslations.ResourceManager.GetString(player.PlayerTypeId.Id)
                     </div>
@@ -47,7 +47,7 @@
                         class="float-right">
                         <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Remove Player</button>
                     </form>
-                </a>
+                </li>
             }
         }
     </ul>
