@@ -12,6 +12,12 @@
                  <a href="Team/@team.TeamId" class="list-group-item list-group-item-action">
                      <div class="d-flex w-100 justify-content-between">
                          <h5 class="mb-1">@team.TeamName (@team.TrainerName, @RaceTranslations.ResourceManager.GetString(team.RaceId.Id))</h5>
+                         @if (!team.IsFinished)
+                          {
+                              <div class="float-right">
+                                  <h5 class="mb-1">(Draft)</h5>
+                              </div>
+                          }
                      </div>
                  </a>
              }

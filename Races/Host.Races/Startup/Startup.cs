@@ -22,7 +22,7 @@ namespace Host.Races.Startup
                 c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
             });
 
-            var domainEvents = EventSeeds.Seeds;
+            var domainEvents = RaceEventSeeds.Seeds;
 
             services.AddMicrowavePersistenceLayerInMemory(c =>
             {

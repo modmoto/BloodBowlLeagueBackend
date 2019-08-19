@@ -65,7 +65,7 @@ namespace Domain.Races.Races
                 new [] { Skill.Dodge, Skill.JumpUp, Skill.Frenzy },
                 new [] { SkillType.General },
                 new [] { SkillType.General });
-        public static AllowedPlayer DarkElveRuner =>
+        public static AllowedPlayer DarkElveRunner =>
             new AllowedPlayer(
                 StringIdentity.Create("DE_Runner"),
                 2,

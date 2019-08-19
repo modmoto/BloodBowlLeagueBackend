@@ -76,6 +76,12 @@ namespace Ui.Translations {
             }
         }
         
+        public static string DE_Runner {
+            get {
+                return ResourceManager.GetString("DE_Runner", resourceCulture);
+            }
+        }
+        
         public static string Dwarfs {
             get {
                 return ResourceManager.GetString("Dwarfs", resourceCulture);

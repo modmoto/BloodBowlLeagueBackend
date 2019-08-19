@@ -132,6 +132,9 @@
   <data name="DE_WitchElve" xml:space="preserve">
     <value>Witchelve</value>
   </data>
+  <data name="DE_Runner" xml:space="preserve">
+    <value>Runner</value>
+  </data>
   <data name="Dwarfs" xml:space="preserve">
     <value>Dwarfs</value>
   </data>

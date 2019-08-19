@@ -8,7 +8,7 @@ using Microwave.Domain.Identities;
 
 namespace Host.Races.Startup
 {
-    public class EventSeeds
+    public class RaceEventSeeds
     {
         public static IEnumerable<IDomainEvent> Seeds
         {
@@ -61,7 +61,7 @@ namespace Host.Races.Startup
                 AllowedPlayer.DarkElveBlitzer,
                 AllowedPlayer.DarkElveLineMan,
                 AllowedPlayer.DarkElveWitchElve,
-                AllowedPlayer.DarkElveRuner
+                AllowedPlayer.DarkElveRunner
             });
     }
 }

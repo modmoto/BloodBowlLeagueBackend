@@ -92,7 +92,7 @@ namespace Teams.WriteHost.Startup
                     new TeamDraftCreated(
                         team1,
                         StringIdentity.Create("DarkElves"),
-                        "Team in DraftMode neu",
+                        "Team in DraftModes",
                         "Mark",
                         DarkElvPlayers,
                         new GoldCoins(1000000)),
