@@ -1,0 +1,66 @@
+@page "{matchId:Guid?}"
+@using global::Seasons.ReadHost.Matches
+@using Ui.Translations
+@model Pages.Match
+
+    <div class="my-2 my-lg-0 p-3 ml-auto">
+        <h3 class="pb-3">@Model.HomeTeam.TeamName vs @Model.GuestTeam.TeamName</h3>
+        <h3 class="pb-3">@Model.SingleMatch.GameResult.HomeTeam.TouchDowns : @Model.SingleMatch.GameResult.GuestTeam.TouchDowns </h3>
+        @if (Model.SingleMatch.IsStarted)
+        {
+            <h5>Notable events:</h5>
+            <ul class="list-group pb-3 mb-1 pl-3">
+                @foreach (var progression in Model.SingleMatch.PlayerProgressions)
+                {
+                    <li class="list-group-item">
+                        @Model.FullPlayer(progression.PlayerId).Name : @RaceTranslations.ResourceManager.GetString(progression.ProgressionEvent.ToString())
+                    </li>
+                }
+            </ul>
+            if (!Model.SingleMatch.IsFinished)
+            {
+                <form method="post" asp-page-handler="AddProgress">
+                    <div class="form-group">
+                        <label for="playerSelectBox">Player</label>
+                        <select class="form-control" id="playerSelectBox" name="playerId">
+                            @foreach (var playerId in Model.AllPlayers)
+                            {
+                                <option value="@playerId">
+                                    @Model.FullPlayer(playerId).Name (@RaceTranslations.ResourceManager.GetString(Model.FullPlayer(playerId).PlayerConfig.PlayerTypeId.Id))
+                                </option>
+                            }
+                        </select>
+                        <label for="progressionelectBox">Progress</label>
+                        <select class="form-control" id="progressionelectBox" name="progressionEvent">
+                            @foreach (var progressionEvent in Enum.GetValues(typeof(ProgressionEvent)))
+                            {
+                                <option value="@progressionEvent.ToString()">
+                                    @RaceTranslations.ResourceManager.GetString(progressionEvent.ToString())
+                                </option>
+                            }
+                        </select>
+                    </div>
+                    <button class="btn btn-success my-2 my-sm-0" type="submit">Record Progression</button>
+                </form>
+                <hr />
+                <form method="post" 
+                      asp-page-handler="FinishMatch" 
+                      asp-route-matchId="@Model.SingleMatch.MatchId"
+                      class="pt-3">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Finish Match</button>
+                </form>
+            }
+            else
+            {
+                <div>Match finished!</div>
+            }
+        }
+        else
+        {
+            <form method="post"
+                  asp-page-handler="StartMatch"
+                  asp-route-matchId="@Model.SingleMatch.MatchId">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Start Match!</button>
+            </form>
+        }
+    </div>
