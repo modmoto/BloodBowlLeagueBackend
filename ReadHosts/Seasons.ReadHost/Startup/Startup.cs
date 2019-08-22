@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Persistence.InMemory;
-using Microwave.UI;
 using ReadHosts.Common;
 using ServiceConfig;
 
@@ -15,7 +14,6 @@ namespace Seasons.ReadHost.Startup
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddMicrowaveUi();
 
             services.AddMicrowave(c =>
             {
@@ -39,7 +37,6 @@ namespace Seasons.ReadHost.Startup
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.RunMicrowaveQueries();
-            app.UseMicrowaveUi();
             app.UseCors("MyPolicy");
             app.UseMvc();
         }

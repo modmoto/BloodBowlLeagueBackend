@@ -13,15 +13,22 @@
         <PackageReference Include="Microwave.Persistence.InMemory">
             <Version>0.14.4</Version>
         </PackageReference>
-        <PackageReference Include="Microwave.UI">
-            <Version>0.14.4</Version>
-        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\ServiceConfig\ServiceConfig.csproj" />
       <ProjectReference Include="..\ReadHosts.Common\ReadHosts.Common.csproj" />
       <ProjectReference Include="..\Ui.Translations\Ui.Translations.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Match.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Matches.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Season.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
     </ItemGroup>
 
 </Project>
