@@ -16,12 +16,12 @@ namespace ServiceConfig
 
         public static Uri MatchHost { get; } = new Uri("https://matcheshost.azurewebsites.net");
         public static Uri TeamHost { get; } = new Uri("https://teamshost.azurewebsites.net");
-        public static Uri PlayerHost { get; }  = new Uri("https://playershost.azurewebsites.net");
-        public static Uri SeasonHost { get; } = new Uri("https://seasonshost.azurewebsites.net");
-        public static Uri RaceHost { get; } = new Uri("https://raceshost.azurewebsites.net");
+        public static Uri PlayerHost { get; }  = new Uri("https://players-host.herokuapp.com/");
+        public static Uri SeasonHost { get; } = new Uri("https://seasons-host.herokuapp.com/");
+        public static Uri RaceHost { get; } = new Uri("https://races-host.herokuapp.com/");
 
-        public static Uri SeasonReadHost { get; } = new Uri("https://seasonsreadhost.azurewebsites.net");
-        public static Uri TeamReadHost { get; } = new Uri("https://teamsreadhost.azurewebsites.net");
+        public static Uri SeasonReadHost { get; } = new Uri("https://seasons-readhost.herokuapp.com/");
+        public static Uri TeamReadHost { get; } = new Uri("https://teams-readhost.herokuapp.com/");
 
 
 //        public static ServiceBaseAddressCollection ServiceAdresses => new ServiceBaseAddressCollection
