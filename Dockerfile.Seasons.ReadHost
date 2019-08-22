@@ -26,4 +26,4 @@ RUN dotnet publish "./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj" -c Rel
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 WORKDIR /app
 COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "Seasons.ReadHost.dll"]
+CMD ["dotnet", "Seasons.ReadHost.dll"]
