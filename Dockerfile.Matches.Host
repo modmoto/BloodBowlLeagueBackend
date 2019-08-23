@@ -26,4 +26,4 @@ RUN dotnet publish "./Matches/Host.Matches/Host.Matches.csproj" -c Release -o ".
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 WORKDIR /app
 COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "Host.Matches.dll"]
+CMD ["dotnet", "Host.Matches.dll"]
