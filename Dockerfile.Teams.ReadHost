@@ -26,4 +26,4 @@ RUN dotnet publish "./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj" -c Release
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 WORKDIR /app
 COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "Teams.ReadHost.dll"]
+CMD ["dotnet", "Teams.ReadHost.dll"]
