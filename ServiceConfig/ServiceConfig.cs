@@ -14,8 +14,8 @@ namespace ServiceConfig
             RaceHost
         };
 
-        public static Uri MatchHost { get; } = new Uri("https://matcheshost.azurewebsites.net");
-        public static Uri TeamHost { get; } = new Uri("https://teamshost.azurewebsites.net");
+        public static Uri MatchHost { get; } = new Uri("https://matches-host.herokuapp.com/");
+        public static Uri TeamHost { get; } = new Uri("https://teams-host.herokuapp.com/");
         public static Uri PlayerHost { get; }  = new Uri("https://players-host.herokuapp.com/");
         public static Uri SeasonHost { get; } = new Uri("https://seasons-host.herokuapp.com/");
         public static Uri RaceHost { get; } = new Uri("https://races-host.herokuapp.com/");
