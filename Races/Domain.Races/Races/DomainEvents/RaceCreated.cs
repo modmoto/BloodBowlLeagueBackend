@@ -13,7 +13,6 @@ namespace Domain.Races.Races.DomainEvents
         }
 
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; }
-
         public Identity EntityId => RaceId;
         public StringIdentity RaceId { get; }
     }
