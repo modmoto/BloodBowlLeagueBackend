@@ -61,7 +61,7 @@ namespace Application.Players.UnitTests
             _eventStore.Setup(es => es.LoadAsync<Player>(idFound))
                 .ReturnsAsync(EventStoreResult<Player>.Ok(new Player(), 0));
             _eventStore.Setup(es => es.LoadAsync<Player>(idNotFound))
-                .ReturnsAsync(EventStoreResult<Player>.NotFound(Guid.NewGuid()));
+                .ReturnsAsync(EventStoreResult<Player>.NotFound(Guid.NewGuid().ToString()));
 
             var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(_eventStore.Object);
 
