@@ -4,7 +4,6 @@ using System.Linq;
 using Domain.Seasons;
 using Domain.Seasons.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microwave.Domain.Identities;
 
 namespace Domain.Matches.UnitTests
 {
@@ -41,8 +40,8 @@ namespace Domain.Matches.UnitTests
         [TestMethod]
         public void AssertMethodTest_switched()
         {
-            var team1 = GuidIdentity.Create();
-            var team2 = GuidIdentity.Create();
+            var team1 = Guid.Create();
+            var team2 = Guid.Create();
             var match = CreateDefaultMatchup(team1, team2);
             var matchSwitched = CreateDefaultMatchup(team1, team2);
 
@@ -69,7 +68,7 @@ namespace Domain.Matches.UnitTests
         [TestMethod]
         public void MakePairings_GameDaysOk()
         {
-            var season = CreateSeasonWithTeams(GuidIdentity.Create(), GuidIdentity.Create(), GuidIdentity.Create(), GuidIdentity.Create());
+            var season = CreateSeasonWithTeams(Guid.Create(), Guid.Create(), Guid.Create(), Guid.Create());
 
             var domainResult = season.StartSeason();
 
@@ -80,8 +79,8 @@ namespace Domain.Matches.UnitTests
         [TestMethod]
         public void MakePairings_PairingsOk_TwoPlayers()
         {
-            var team1 = GuidIdentity.Create();
-            var team2 = GuidIdentity.Create();
+            var team1 = Guid.Create();
+            var team2 = Guid.Create();
             var season = CreateSeasonWithTeams(team1, team2);
 
             var domainResult = season.StartSeason();
@@ -94,7 +93,7 @@ namespace Domain.Matches.UnitTests
         [TestMethod]
         public void MakePairings_PairingsOk_ThreePlayers()
         {
-            var season = CreateSeasonWithTeams(GuidIdentity.Create(), GuidIdentity.Create(), GuidIdentity.Create());
+            var season = CreateSeasonWithTeams(Guid.Create(), Guid.Create(), Guid.Create());
 
             var domainResult = season.StartSeason();
 
@@ -104,10 +103,10 @@ namespace Domain.Matches.UnitTests
         [TestMethod]
         public void MakePairings_PairingsOk_fourPlayers()
         {
-            var team1 = GuidIdentity.Create();
-            var team2 = GuidIdentity.Create();
-            var team3 = GuidIdentity.Create();
-            var team4 = GuidIdentity.Create();
+            var team1 = Guid.Create();
+            var team2 = Guid.Create();
+            var team3 = Guid.Create();
+            var team4 = Guid.Create();
             var season = CreateSeasonWithTeams(team1, team2, team3, team4);
 
             var domainResult = season.StartSeason();
@@ -121,12 +120,12 @@ namespace Domain.Matches.UnitTests
         [TestMethod]
         public void MakePairings_PairingsOk_sixPlayers()
         {
-            var team1 = GuidIdentity.Create();
-            var team2 = GuidIdentity.Create();
-            var team3 = GuidIdentity.Create();
-            var team4 = GuidIdentity.Create();
-            var team5 = GuidIdentity.Create();
-            var team6 = GuidIdentity.Create();
+            var team1 = Guid.Create();
+            var team2 = Guid.Create();
+            var team3 = Guid.Create();
+            var team4 = Guid.Create();
+            var team5 = Guid.Create();
+            var team6 = Guid.Create();
             var season = CreateSeasonWithTeams(team1, team2, team3, team4, team5, team6);
 
             var domainResult = season.StartSeason();
@@ -140,14 +139,14 @@ namespace Domain.Matches.UnitTests
         [TestMethod]
         public void MakePairings_PairingsOk_eightPlayers()
         {
-            var team1 = GuidIdentity.Create();
-            var team2 = GuidIdentity.Create();
-            var team3 = GuidIdentity.Create();
-            var team4 = GuidIdentity.Create();
-            var team5 = GuidIdentity.Create();
-            var team6 = GuidIdentity.Create();
-            var team7 = GuidIdentity.Create();
-            var team8 = GuidIdentity.Create();
+            var team1 = Guid.Create();
+            var team2 = Guid.Create();
+            var team3 = Guid.Create();
+            var team4 = Guid.Create();
+            var team5 = Guid.Create();
+            var team6 = Guid.Create();
+            var team7 = Guid.Create();
+            var team8 = Guid.Create();
             var season = CreateSeasonWithTeams(team1, team2, team3, team4, team5, team6, team7, team8);
 
             var domainResult = season.StartSeason();
@@ -159,9 +158,9 @@ namespace Domain.Matches.UnitTests
         }
 
 
-        private static Matchup CreateDefaultMatchup(GuidIdentity team1 = null, GuidIdentity team2 = null)
+        private static Matchup CreateDefaultMatchup(Guid team1 = null, Guid team2 = null)
         {
-            var matchup = Matchup.Create(team1 ?? GuidIdentity.Create(), team2 ?? GuidIdentity.Create());
+            var matchup = Matchup.Create(team1 ?? Guid.Create(), team2 ?? Guid.Create());
             return matchup;
         }
 
@@ -178,10 +177,10 @@ namespace Domain.Matches.UnitTests
             return true;
         }
 
-        private static Season CreateSeasonWithTeams(params GuidIdentity[] identities)
+        private static Season CreateSeasonWithTeams(params Guid[] identities)
         {
             var season = new Season();
-            var seasonId = GuidIdentity.Create();
+            var seasonId = Guid.Create();
             season.Apply(new SeasonCreated(seasonId, "DummyName", DateTimeOffset.UtcNow));
             foreach (var guidIdentity in identities)
             {

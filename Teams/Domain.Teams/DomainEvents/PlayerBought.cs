@@ -1,14 +1,14 @@
-﻿using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
+﻿using System;
+using Microwave.Domain.EventSourcing;
 
 namespace Domain.Teams.DomainEvents
 {
     public class PlayerBought : IDomainEvent
     {
         public PlayerBought(
-            GuidIdentity teamId,
-            StringIdentity playerTypeId,
-            GuidIdentity playerId,
+            Guid teamId,
+            string playerTypeId,
+            Guid playerId,
             GoldCoins newTeamChestBalance)
         {
             TeamId = teamId;
@@ -17,10 +17,10 @@ namespace Domain.Teams.DomainEvents
             PlayerId = playerId;
         }
 
-        public Identity EntityId => TeamId;
-        public GuidIdentity TeamId { get; }
+        public string EntityId => TeamId.ToString();
+        public Guid TeamId { get; }
         public GoldCoins NewTeamChestBalance { get; }
-        public StringIdentity PlayerTypeId { get; }
-        public GuidIdentity PlayerId { get; }
+        public string PlayerTypeId { get; }
+        public Guid PlayerId { get; }
     }
 }

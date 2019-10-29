@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using Microwave.Domain.Identities;
 
 namespace Domain.Players
 {
     public class PlayerConfig
     {
         public PlayerConfig(
-            StringIdentity playerTypeId,
+            string playerTypeId,
             IEnumerable<SkillReadModel> startingSkills,
             IEnumerable<SkillType> skillsOnDefault,
             IEnumerable<SkillType> skillsOnDouble)
@@ -17,7 +16,7 @@ namespace Domain.Players
             PlayerTypeId = playerTypeId;
         }
 
-        public StringIdentity PlayerTypeId { get; }
+        public string PlayerTypeId { get; }
         public IEnumerable<SkillReadModel> StartingSkills { get; }
         public IEnumerable<SkillType> SkillsOnDefault { get; }
         public IEnumerable<SkillType> SkillsOnDouble { get; }

@@ -1,17 +1,17 @@
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
+using System;
+using Microwave.Domain;
 
 namespace Domain.Matches.Events
 {
     public class MatchProgressed : IDomainEvent
     {
-        public Identity EntityId => MatchId;
-        public GuidIdentity MatchId { get; }
+        public string EntityId => MatchId;
+        public Guid MatchId { get; }
         public PlayerProgression PlayerProgression { get; }
         public GameResult GameResult { get; }
 
         public MatchProgressed(
-            GuidIdentity matchId,
+            Guid matchId,
             PlayerProgression playerProgression,
             GameResult gameResult)
         {

@@ -1,22 +1,22 @@
+using System;
 using System.Collections.Generic;
 using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
 
 namespace Domain.Teams.DomainEvents
 {
     public class TeamDraftCreated : IDomainEvent
     {
-        public Identity EntityId => TeamId;
-        public GuidIdentity TeamId { get; }
-        public StringIdentity RaceId { get; }
+        public string EntityId => TeamId.ToString();
+        public Guid TeamId { get; }
+        public string RaceId { get; }
         public string TeamName { get; }
         public string TrainerName { get; }
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; }
         public GoldCoins StartingMoney { get; }
 
         public TeamDraftCreated(
-            GuidIdentity teamId,
-            StringIdentity raceId,
+            Guid teamId,
+            string raceId,
             string teamName,
             string trainerName,
             IEnumerable<AllowedPlayer> allowedPlayers,

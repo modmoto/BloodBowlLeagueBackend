@@ -1,8 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
-namespace Seasons.ReadHost.Startup
+﻿namespace Seasons.ReadHost.Startup
 {
     public class Program
     {

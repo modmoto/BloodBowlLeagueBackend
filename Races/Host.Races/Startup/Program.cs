@@ -1,8 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
-namespace Host.Races.Startup
+﻿namespace Host.Races.Startup
 {
     public class Program
     {

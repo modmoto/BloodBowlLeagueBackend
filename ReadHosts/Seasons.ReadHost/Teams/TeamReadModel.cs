@@ -1,15 +1,13 @@
-﻿using Microwave.Domain.Identities;
-using Microwave.Queries;
-using Seasons.ReadHost.Teams.Events;
+﻿using Seasons.ReadHost.Teams.Events;
 
 namespace Seasons.ReadHost.Teams
 {
     public class TeamReadModel : ReadModel<TeamCreated>, IHandle<TeamCreated>
     {
-        public StringIdentity RaceId { get; set; }
+        public string RaceId { get; set; }
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
-        public GuidIdentity TeamId { get; set; }
+        public Guid TeamId { get; set; }
 
         public void Handle(TeamCreated domainEvent)
         {

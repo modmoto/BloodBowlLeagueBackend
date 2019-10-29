@@ -1,16 +1,14 @@
-using Microwave.Domain.Identities;
-
 namespace Seasons.ReadHost.Matches
 {
     public class PlayerProgression
     {
-        public PlayerProgression(GuidIdentity playerId, ProgressionEvent progressionEvent)
+        public PlayerProgression(Guid playerId, ProgressionEvent progressionEvent)
         {
             PlayerId = playerId;
             ProgressionEvent = progressionEvent;
         }
 
-        public GuidIdentity PlayerId { get; }
+        public Guid PlayerId { get; }
         public ProgressionEvent ProgressionEvent { get; }
     }
 

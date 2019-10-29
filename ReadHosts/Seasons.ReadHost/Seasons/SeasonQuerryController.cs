@@ -1,8 +1,3 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microwave.Domain.Identities;
-using Microwave.Queries;
-
 namespace Seasons.ReadHost.Seasons
 {
     [Route("api/seasons")]
@@ -16,7 +11,7 @@ namespace Seasons.ReadHost.Seasons
         }
 
         [HttpGet("{seasonId}")]
-        public async Task<ActionResult> GetSeason(GuidIdentity seasonId)
+        public async Task<ActionResult> GetSeason(Guid seasonId)
         {
             var teamQuerry = await _queryRepository.LoadAsync<SeasonReadModel>(seasonId);
             return Ok(teamQuerry.Value);

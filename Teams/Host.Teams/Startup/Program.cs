@@ -1,8 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
-namespace Teams.WriteHost.Startup
+﻿namespace Teams.WriteHost.Startup
 {
     public class Program
     {

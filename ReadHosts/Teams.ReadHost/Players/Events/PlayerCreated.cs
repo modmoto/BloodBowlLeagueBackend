@@ -1,14 +1,11 @@
-using Microwave.Domain.Identities;
-using Microwave.Queries;
-
 namespace Teams.ReadHost.Players.Events
 {
     public class PlayerCreated : ISubscribedDomainEvent
     {
         public PlayerCreated(
-            GuidIdentity playerId,
+            Guid playerId,
             PlayerConfig playerConfig,
-            GuidIdentity teamId,
+            Guid teamId,
             string name)
         {
             PlayerId = playerId;
@@ -17,11 +14,11 @@ namespace Teams.ReadHost.Players.Events
             Name = name;
         }
 
-        public GuidIdentity PlayerId { get; }
+        public Guid PlayerId { get; }
         public PlayerConfig PlayerConfig { get; }
-        public StringIdentity PlayerTypeId => PlayerConfig.PlayerTypeId;
-        public GuidIdentity TeamId { get; }
-        public Identity EntityId => PlayerId;
+        public string PlayerTypeId => PlayerConfig.PlayerTypeId;
+        public Guid TeamId { get; }
+        public string EntityId => PlayerId;
         public string Name { get;  }
     }
 }

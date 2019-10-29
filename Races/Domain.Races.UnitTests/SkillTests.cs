@@ -1,6 +1,5 @@
 using Domain.Races.Skills;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microwave.Domain.Identities;
 
 namespace Domain.Races.UnitTests
 {
@@ -10,14 +9,14 @@ namespace Domain.Races.UnitTests
         [TestMethod]
         public void SkillFromString()
         {
-            var skill = Skill.Create(StringIdentity.Create("Dodge"));
+            var skill = Skill.Create(string.Create("Dodge"));
             Assert.AreEqual(Skill.Dodge, skill);
         }
 
         [TestMethod]
         public void UnknownSkill()
         {
-            var skill = Skill.Create(StringIdentity.Create("WirdsNieGeben"));
+            var skill = Skill.Create(string.Create("WirdsNieGeben"));
             Assert.AreEqual(Skill.NullSkill, skill);
         }
     }

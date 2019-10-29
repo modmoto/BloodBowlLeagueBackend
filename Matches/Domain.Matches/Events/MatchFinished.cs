@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
+﻿using System;
+using System.Collections.Generic;
+using Microwave.Domain;
 
 namespace Domain.Matches.Events
 {
     public class MatchFinished : IDomainEvent
     {
         public MatchFinished(
-            GuidIdentity matchId,
+            Guid matchId,
             IEnumerable<PlayerProgression> playerProgressions,
             GameResult gameResult)
         {
@@ -16,21 +16,21 @@ namespace Domain.Matches.Events
             GameResult = gameResult;
         }
 
-        public GuidIdentity MatchId { get; }
-        public Identity EntityId => MatchId;
+        public Guid MatchId { get; }
+        public string EntityId => MatchId;
         public IEnumerable<PlayerProgression> PlayerProgressions { get; }
         public GameResult GameResult { get; }
     }
 
     public class PlayerProgression
     {
-        public PlayerProgression(GuidIdentity playerId, ProgressionEvent progressionEvent)
+        public PlayerProgression(Guid playerId, ProgressionEvent progressionEvent)
         {
             PlayerId = playerId;
             ProgressionEvent = progressionEvent;
         }
 
-        public GuidIdentity PlayerId { get; }
+        public Guid PlayerId { get; }
         public ProgressionEvent ProgressionEvent { get; }
     }
 

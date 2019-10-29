@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using Application.Teams;
-using Microsoft.AspNetCore.Mvc;
-using Microwave.Domain.Identities;
+﻿using Application.Teams;
 
 namespace Teams.WriteHost
 {
@@ -23,7 +20,7 @@ namespace Teams.WriteHost
         }
 
         [HttpPost("{teamId}/buy-player")]
-        public async Task<ActionResult> BuyPlayer(GuidIdentity teamId, [FromBody] BuyPlayerCommand buyPlayerCommand)
+        public async Task<ActionResult> BuyPlayer(Guid teamId, [FromBody] BuyPlayerCommand buyPlayerCommand)
         {
             buyPlayerCommand.TeamId = teamId;
             var playerId = await _commandHandler.BuyPlayer(buyPlayerCommand);
@@ -31,7 +28,7 @@ namespace Teams.WriteHost
         }
 
         [HttpPost("{teamId}/remove-player")]
-        public async Task<ActionResult> RemovePlayer(GuidIdentity teamId, [FromBody] RemovePlayerCommand buyPlayerCommand)
+        public async Task<ActionResult> RemovePlayer(Guid teamId, [FromBody] RemovePlayerCommand buyPlayerCommand)
         {
             buyPlayerCommand.TeamId = teamId;
             await _commandHandler.RemovePlayer(buyPlayerCommand);

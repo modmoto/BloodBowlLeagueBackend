@@ -1,9 +1,9 @@
+using System;
 using System.Linq;
 using Domain.Matches.Errors;
 using Domain.Matches.Events;
 using Domain.Matches.ForeignEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microwave.Domain.Identities;
 
 namespace Domain.Matches.UnitTests
 {
@@ -15,15 +15,15 @@ namespace Domain.Matches.UnitTests
         {
             var match = new Matchup();
 
-            var player1Id = GuidIdentity.Create();
-            var player2Id = GuidIdentity.Create();
-            var player3Id = GuidIdentity.Create();
-            var player4Id = GuidIdentity.Create();
-            var player5Id = GuidIdentity.Create();
+            var player1Id = Guid.Create();
+            var player2Id = Guid.Create();
+            var player3Id = Guid.Create();
+            var player4Id = Guid.Create();
+            var player5Id = Guid.Create();
             var teamReadModel = TeamReadModel(player1Id, player2Id);
             var teamReadModel2 = TeamReadModel(player3Id, player4Id, player5Id);
 
-            var matchId = GuidIdentity.Create();
+            var matchId = Guid.Create();
             match.Apply(new MatchCreated(matchId, teamReadModel.TeamId, teamReadModel2.TeamId));
             match.Apply(new MatchStarted(matchId, teamReadModel.Players, teamReadModel2.Players));
 
@@ -51,13 +51,13 @@ namespace Domain.Matches.UnitTests
         {
             var match = new Matchup();
 
-            var player1Id = GuidIdentity.Create();
-            var player2Id = GuidIdentity.Create();
-            var player3Id = GuidIdentity.Create();
+            var player1Id = Guid.Create();
+            var player2Id = Guid.Create();
+            var player3Id = Guid.Create();
             var teamReadModel = TeamReadModel(player1Id);
             var teamReadModel2 = TeamReadModel(player3Id);
 
-            match.Apply(new MatchStarted(GuidIdentity.Create(), teamReadModel.Players, teamReadModel2.Players));
+            match.Apply(new MatchStarted(Guid.Create(), teamReadModel.Players, teamReadModel2.Players));
 
             var playerProgression1 = PlayerProgressionTouchdown(player2Id);
             var progressMatch = match.ProgressMatch(playerProgression1);
@@ -65,24 +65,24 @@ namespace Domain.Matches.UnitTests
             Assert.IsTrue(progressMatch.DomainErrors.Single().GetType() == typeof(PlayerWasNotPartOfTheTeamWhenStartingTheMatch));
         }
 
-        private static PlayerProgression PlayerProgressionTouchdown(GuidIdentity playerId)
+        private static PlayerProgression PlayerProgressionTouchdown(Guid playerId)
         {
-            playerId = playerId ?? GuidIdentity.Create();
+            playerId = playerId ?? Guid.Create();
             var playerProgression = new PlayerProgression(playerId, ProgressionEvent.PlayerMadeTouchdown);
             return playerProgression;
         }
 
-        private static PlayerProgression PlayerProgressionNormal(GuidIdentity playerId)
+        private static PlayerProgression PlayerProgressionNormal(Guid playerId)
         {
-            playerId = playerId ?? GuidIdentity.Create();
+            playerId = playerId ?? Guid.Create();
             var playerProgression = new PlayerProgression(playerId, ProgressionEvent.PlayerPassed);
             return playerProgression;
         }
 
-        private static TeamReadModel TeamReadModel(params GuidIdentity[] playerIds)
+        private static TeamReadModel TeamReadModel(params Guid[] playerIds)
         {
             var teamReadModel = new TeamReadModel();
-            var trainerAsGuest = GuidIdentity.Create();
+            var trainerAsGuest = Guid.Create();
             teamReadModel.Handle(new TeamCreated(trainerAsGuest));
             foreach (var playerId in playerIds)
             {

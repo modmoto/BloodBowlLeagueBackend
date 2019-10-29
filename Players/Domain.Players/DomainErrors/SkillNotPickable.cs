@@ -1,4 +1,4 @@
-using Microwave.Domain.Validation;
+using Microwave.Domain;
 
 namespace Domain.Players.DomainErrors
 {

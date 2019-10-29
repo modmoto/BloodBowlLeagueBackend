@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Teams.DomainEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microwave.Domain.Identities;
 
 namespace Domain.Teams.UnitTests
 {
@@ -12,9 +11,9 @@ namespace Domain.Teams.UnitTests
         [TestMethod]
         public void BuyPlayer()
         {
-            var playerTypeId = StringIdentity.Create("de_Nelf");
+            var playerTypeId = "de_Nelf";
             var domainResult = Team.Draft(
-                StringIdentity.Create("Elves"),
+                "Elves",
                 "King Kingz",
                 "Simon",
                 new List<AllowedPlayer>

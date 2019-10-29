@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microwave.Domain.Identities;
-using Microwave.Queries;
-using Seasons.ReadHost.Matches.Events;
+﻿using Seasons.ReadHost.Matches.Events;
 
 namespace Seasons.ReadHost.Matches
 {
@@ -12,12 +8,12 @@ namespace Seasons.ReadHost.Matches
         IHandle<MatchStarted>,
         IHandle<MatchProgressed>
     {
-        public GuidIdentity MatchId { get; private set; }
-        public IEnumerable<GuidIdentity> HomeTeamPlayers { get; private set; }
-        public IEnumerable<GuidIdentity> GuestTeamPlayers { get; private set; }
+        public Guid MatchId { get; private set; }
+        public IEnumerable<Guid> HomeTeamPlayers { get; private set; }
+        public IEnumerable<Guid> GuestTeamPlayers { get; private set; }
         public IEnumerable<PlayerProgression> PlayerProgressions { get; private set; } = new List<PlayerProgression>();
-        public GuidIdentity TeamAsGuest { get; private set; }
-        public GuidIdentity TeamAtHome { get; private set; }
+        public Guid TeamAsGuest { get; private set; }
+        public Guid TeamAtHome { get; private set; }
         public bool IsFinished { get; private set; }
         public bool IsStarted { get; private set; }
         public GameResult GameResult { get; set; }

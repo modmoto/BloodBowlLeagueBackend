@@ -1,11 +1,10 @@
-﻿using Microwave.Domain.Identities;
-using Microwave.Domain.Validation;
+﻿using Microwave.Domain.Validation;
 
 namespace Domain.Teams.DomainErrors
 {
     public class CanNotUsePlayerInThisRaceError : DomainError
     {
-        public CanNotUsePlayerInThisRaceError(Identity playerTypeId) : base($"Can not use playertyp: {playerTypeId.Id} in this team.")
+        public CanNotUsePlayerInThisRaceError(string playerTypeId) : base($"Can not use playertyp: {playerTypeId} in this team.")
         {
         }
     }

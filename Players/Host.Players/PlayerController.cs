@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using Application.Players;
-using Microsoft.AspNetCore.Mvc;
-using Microwave.Domain.Identities;
+﻿using Application.Players;
 
 namespace Host.Players
 {
@@ -17,7 +14,7 @@ namespace Host.Players
 
         [HttpPost("{playerId}/level-up")]
         public async Task<ActionResult> LevelUpPlayer(
-            GuidIdentity playerId,
+            Guid playerId,
             [FromBody] LevelUpPlayerComand levelUpCommand)
         {
             await _commandHandler.LevelUp(playerId, levelUpCommand);

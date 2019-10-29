@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Domain.Matches.Errors;
 using Domain.Matches.Events;
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
-using Microwave.Domain.Validation;
+using Microwave.Domain;
 
 namespace Domain.Matches
 {
@@ -14,19 +13,19 @@ namespace Domain.Matches
         IApply<MatchCreated>,
         IApply<MatchProgressed>
     {
-        public GuidIdentity MatchId { get; private set; }
-        public IEnumerable<GuidIdentity> HomeTeamPlayers { get; private set; }
-        public IEnumerable<GuidIdentity> GuestTeamPlayers { get; private set; }
-        public GuidIdentity TeamAsGuest { get; private set; }
+        public Guid MatchId { get; private set; }
+        public IEnumerable<Guid> HomeTeamPlayers { get; private set; }
+        public IEnumerable<Guid> GuestTeamPlayers { get; private set; }
+        public Guid TeamAsGuest { get; private set; }
         public IEnumerable<PlayerProgression> PlayerProgressions { get; private set; } = new List<PlayerProgression>();
 
-        public GuidIdentity TeamAtHome { get; private set; }
+        public Guid TeamAtHome { get; private set; }
         private bool _isFinished;
         private bool _isStarted;
 
 
         public static DomainResult Create(
-            GuidIdentity matchId,
+            Guid matchId,
             TeamReadModel teamAtHome,
             TeamReadModel teamAsGuest)
         {
@@ -41,7 +40,7 @@ namespace Domain.Matches
         {
             if (teamAtHome.TeamId == teamAsGuest.TeamId) return DomainResult.Error(new TeamsCanNotBeTheSame(teamAtHome.TeamId, teamAsGuest.TeamId));
 
-            return Create(GuidIdentity.Create(), teamAtHome, teamAsGuest);
+            return Create(Guid.Create(), teamAtHome, teamAsGuest);
         }
 
         public DomainResult Start(TeamReadModel teamAtHome, TeamReadModel teamAsGuest)

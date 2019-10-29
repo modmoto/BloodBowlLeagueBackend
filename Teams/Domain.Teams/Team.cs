@@ -4,7 +4,6 @@ using System.Linq;
 using Domain.Teams.DomainErrors;
 using Domain.Teams.DomainEvents;
 using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
 using Microwave.Domain.Validation;
 
 namespace Domain.Teams
@@ -16,23 +15,23 @@ namespace Domain.Teams
         IApply<PlayerRemovedFromDraft>,
         IApply<PlayerAddedToDraft>
     {
-        public GuidIdentity TeamId { get; private set; }
+        public Guid TeamId { get; private set; }
         public GoldCoins TeamMoney { get; private set; }
         public IEnumerable<PlayerReadModel> Players { get; private set; } = new List<PlayerReadModel>();
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; private set; } = new List<AllowedPlayer>();
         public string TrainerName { get; private set; }
         public string TeamName { get; private set; }
-        public StringIdentity RaceId { get; private set; }
+        public string RaceId { get; private set; }
         private TeamState _teamState = new TeamDraftState();
 
         public static DomainResult Draft(
-            StringIdentity raceId,
+            string raceId,
             string teamName,
             string trainerName,
             IEnumerable<AllowedPlayer> allowedPlayers)
         {
             return DomainResult.Ok(new TeamDraftCreated(
-                GuidIdentity.Create(Guid.NewGuid()),
+                Guid.NewGuid(),
                 raceId, 
                 teamName,
                 trainerName, 
@@ -40,7 +39,7 @@ namespace Domain.Teams
                 new GoldCoins(1000000)));
         }
 
-        public DomainResult BuyPlayer(StringIdentity playerTypeId)
+        public DomainResult BuyPlayer(string playerTypeId)
         {
             var playerBuyConfig = AllowedPlayers.FirstOrDefault(ap => ap.PlayerTypeId.Equals(playerTypeId));
             if (playerBuyConfig == null) return DomainResult.Error(new CanNotUsePlayerInThisRaceError(playerTypeId));
@@ -52,7 +51,7 @@ namespace Domain.Teams
                 return DomainResult.Error(new FewMoneyInTeamChestError(playerBuyConfig.Cost.Value, TeamMoney.Value));
 
             var newTeamMoney = TeamMoney.Minus(playerBuyConfig.Cost);
-            var playerBought = _teamState.BoughtEvent(TeamId, playerTypeId, GuidIdentity.Create(), newTeamMoney);
+            var playerBought = _teamState.BoughtEvent(TeamId, playerTypeId, Guid.NewGuid(), newTeamMoney);
             return DomainResult.Ok(playerBought);
         }
 
@@ -71,7 +70,7 @@ namespace Domain.Teams
             return DomainResult.Ok(domainEvents);
         }
 
-        public DomainResult RemovePlayer(GuidIdentity playerId)
+        public DomainResult RemovePlayer(Guid playerId)
         {
             if (!_teamState.AllowsRemovingPlayers) return DomainResult.Error(new CanNotRemovePlayerFromTeam());
             var playerReadModel = Players.Single(p => p.PlayerId == playerId);
@@ -119,9 +118,9 @@ namespace Domain.Teams
     internal class FinalTeamState : TeamState
     {
         public override IDomainEvent BoughtEvent(
-            GuidIdentity teamId,
-            StringIdentity playerTypeId,
-            GuidIdentity playerId,
+            Guid teamId,
+            string playerTypeId,
+            Guid playerId,
             GoldCoins newTeamMoney)
         {
             return new PlayerBought(teamId, playerTypeId, playerId, newTeamMoney);
@@ -133,9 +132,9 @@ namespace Domain.Teams
     internal class TeamDraftState : TeamState
     {
         public override IDomainEvent BoughtEvent(
-            GuidIdentity teamId,
-            StringIdentity playerTypeId,
-            GuidIdentity playerId,
+            Guid teamId,
+            string playerTypeId,
+            Guid playerId,
             GoldCoins newTeamMoney)
         {
             return new PlayerAddedToDraft(teamId, playerTypeId, playerId, newTeamMoney);
@@ -147,9 +146,9 @@ namespace Domain.Teams
     internal abstract class TeamState
     {
         abstract public IDomainEvent BoughtEvent(
-            GuidIdentity teamId,
-            StringIdentity playerTypeId,
-            GuidIdentity playerId,
+            Guid teamId,
+            string playerTypeId,
+            Guid playerId,
             GoldCoins newTeamMoney);
 
         public abstract bool AllowsRemovingPlayers { get; }

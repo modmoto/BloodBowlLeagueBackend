@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using Application.Matches;
-using Microsoft.AspNetCore.Mvc;
-using Microwave.Domain.Identities;
+﻿using Application.Matches;
 
 namespace Host.Matches
 {
@@ -23,7 +20,7 @@ namespace Host.Matches
         }
 
         [HttpPost("{matchId}/finish")]
-        public async Task<ActionResult> FinishMatch(GuidIdentity matchId, [FromBody] FinishMatchCommand finishMatchCommand)
+        public async Task<ActionResult> FinishMatch(Guid matchId, [FromBody] FinishMatchCommand finishMatchCommand)
         {
             finishMatchCommand.MatchId = matchId;
             await _commandHandler.FinishMatch(finishMatchCommand);
@@ -31,7 +28,7 @@ namespace Host.Matches
         }
 
         [HttpPost("{matchId}/progress")]
-        public async Task<ActionResult> FinishMatch(GuidIdentity matchId, [FromBody] ProgressMatchCommand progressMatchCommand)
+        public async Task<ActionResult> FinishMatch(Guid matchId, [FromBody] ProgressMatchCommand progressMatchCommand)
         {
             progressMatchCommand.MatchId = matchId;
             await _commandHandler.ProgressMatch(progressMatchCommand);
@@ -39,7 +36,7 @@ namespace Host.Matches
         }
 
         [HttpPost("{matchId}/start")]
-        public async Task<ActionResult> StartMatch(GuidIdentity matchId)
+        public async Task<ActionResult> StartMatch(Guid matchId)
         {
             var startMatchCommand = new StartMatchCommand(matchId);
             await _commandHandler.StartMatch(startMatchCommand);

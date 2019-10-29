@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 using Domain.Players;
 using Domain.Players.Events.ForeignEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Exceptions;
-using Microwave.Domain.Identities;
-using Microwave.Domain.Results;
-using Microwave.EventStores;
+using Microwave.Application.Exceptions;
+using Microwave.Domain;
+using Microwave.EventStores.Ports;
 using Moq;
 
 namespace Application.Players.UnitTests
@@ -30,7 +28,7 @@ namespace Application.Players.UnitTests
         [TestMethod]
         public async Task UploadNewStatEvent_HappyPath()
         {
-            var identity = GuidIdentity.Create(Guid.NewGuid());
+            var identity = Guid.Create(Guid.NewGuid());
             _eventStore.Setup(es => es.LoadAsync<Player>(identity))
                 .ReturnsAsync(EventStoreResult<Player>.Ok(new Player(), 0));
 
@@ -44,11 +42,11 @@ namespace Application.Players.UnitTests
         [TestMethod]
         public async Task UploadNewStatEvent_PlayerNotFound()
         {
-            _eventStore.Setup(es => es.LoadAsync<Player>(It.IsAny<GuidIdentity>()))
-                .ReturnsAsync(EventStoreResult<Player>.NotFound(GuidIdentity.Create()));
+            _eventStore.Setup(es => es.LoadAsync<Player>(It.IsAny<Guid>()))
+                .ReturnsAsync(EventStoreResult<Player>.NotFound(Guid.Create()));
 
             var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(_eventStore.Object);
-            var matchResultUploaded = MatchResultUploaded(GuidIdentity.Create(Guid.NewGuid()));
+            var matchResultUploaded = MatchResultUploaded(Guid.Create(Guid.NewGuid()));
 
             await Assert.ThrowsExceptionAsync<NotFoundException>(
                 async () => await onMatchUploadedUpdatePlayerProgress.HandleAsync(matchResultUploaded));
@@ -57,12 +55,12 @@ namespace Application.Players.UnitTests
         [TestMethod]
         public async Task UploadNewStatEvent_SecondPlayerNotFound()
         {
-            var idNotFound = GuidIdentity.Create();
-            var idFound = GuidIdentity.Create();
+            var idNotFound = Guid.Create();
+            var idFound = Guid.Create();
             _eventStore.Setup(es => es.LoadAsync<Player>(idFound))
                 .ReturnsAsync(EventStoreResult<Player>.Ok(new Player(), 0));
             _eventStore.Setup(es => es.LoadAsync<Player>(idNotFound))
-                .ReturnsAsync(EventStoreResult<Player>.NotFound(GuidIdentity.Create()));
+                .ReturnsAsync(EventStoreResult<Player>.NotFound(Guid.Create()));
 
             var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(_eventStore.Object);
 
@@ -72,7 +70,7 @@ namespace Application.Players.UnitTests
                 async () => await onMatchUploadedUpdatePlayerProgress.HandleAsync(matchResultUploaded));
         }
 
-        private static MatchFinished MatchResultUploaded(params GuidIdentity[] identity)
+        private static MatchFinished MatchResultUploaded(params Guid[] identity)
         {
             var progressions1 = identity.Select(guidIdentity => new PlayerProgression(
                 guidIdentity,
@@ -81,7 +79,7 @@ namespace Application.Players.UnitTests
                 guidIdentity,
                 ProgressionEvent.PlayerMadeTouchdown));
             progressions1.AddRange(progressions2);
-            return new MatchFinished(GuidIdentity.Create(), progressions1);
+            return new MatchFinished(Guid.Create(), progressions1);
         }
     }
 }

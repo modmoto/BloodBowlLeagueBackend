@@ -1,18 +1,18 @@
+using System;
 using System.Collections.Generic;
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
+using Microwave.Domain;
 
 namespace Domain.Matches.Events
 {
     public class MatchStarted : IDomainEvent
     {
-        public IEnumerable<GuidIdentity>  HomeTeam { get; }
-        public IEnumerable<GuidIdentity>  GuestTeam { get; }
+        public IEnumerable<Guid>  HomeTeam { get; }
+        public IEnumerable<Guid>  GuestTeam { get; }
 
-        public Identity EntityId => MatchId;
-        public GuidIdentity MatchId { get; }
+        public string EntityId => MatchId;
+        public Guid MatchId { get; }
 
-        public MatchStarted(GuidIdentity matchId, IEnumerable<GuidIdentity> homeTeam, IEnumerable<GuidIdentity>
+        public MatchStarted(Guid matchId, IEnumerable<Guid> homeTeam, IEnumerable<Guid>
         guestTeam)
         {
             MatchId = matchId;

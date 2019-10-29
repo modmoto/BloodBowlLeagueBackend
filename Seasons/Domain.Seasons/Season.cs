@@ -4,22 +4,20 @@ using System.Linq;
 using Domain.Seasons.Errors;
 using Domain.Seasons.Events;
 using Domain.Seasons.TeamReadModels;
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
-using Microwave.Domain.Validation;
+using Microwave.Domain;
 
 namespace Domain.Seasons
 {
     public class Season : Entity, IApply<TeamAddedToSeason>, IApply<SeasonCreated>, IApply<SeasonStarted>
     {
-        public GuidIdentity SeasonId { get; private set; }
-        public IEnumerable<GuidIdentity> Teams { get; private set; } = new List<GuidIdentity>();
+        public Guid SeasonId { get; private set; }
+        public IEnumerable<Guid> Teams { get; private set; } = new List<Guid>();
         public IEnumerable<GameDay> GameDays { get; private set; } = new List<GameDay>();
         public bool SeasonIsStarted { get; private set; }
 
         public static DomainResult Create(string seasonName)
         {
-            return DomainResult.Ok(new SeasonCreated(GuidIdentity.Create(), seasonName, DateTimeOffset.UtcNow));
+            return DomainResult.Ok(new SeasonCreated(Guid.Create(), seasonName, DateTimeOffset.UtcNow));
         }
 
         public DomainResult AddTeam(TeamReadModel teamId)
@@ -81,7 +79,7 @@ namespace Domain.Seasons
 
     public class CanNotAddTeamTwice : DomainError
     {
-        public CanNotAddTeamTwice(GuidIdentity teamId) : base($"Can not add the team {teamId} twice")
+        public CanNotAddTeamTwice(Guid teamId) : base($"Can not add the team {teamId} twice")
         {
         }
     }

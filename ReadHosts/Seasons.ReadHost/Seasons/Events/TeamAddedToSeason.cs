@@ -1,18 +1,15 @@
-﻿using Microwave.Domain.Identities;
-using Microwave.Queries;
-
-namespace Seasons.ReadHost.Seasons.Events
+﻿namespace Seasons.ReadHost.Seasons.Events
 {
     public class TeamAddedToSeason : ISubscribedDomainEvent
     {
-        public TeamAddedToSeason(GuidIdentity seasonId, GuidIdentity teamId)
+        public TeamAddedToSeason(Guid seasonId, Guid teamId)
         {
             SeasonId = seasonId;
             TeamId = teamId;
         }
 
-        public Identity EntityId => SeasonId;
-        public GuidIdentity SeasonId { get; }
-        public GuidIdentity TeamId { get; }
+        public string EntityId => SeasonId;
+        public Guid SeasonId { get; }
+        public Guid TeamId { get; }
     }
 }

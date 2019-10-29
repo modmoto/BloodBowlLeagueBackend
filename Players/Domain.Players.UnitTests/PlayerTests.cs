@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domain.Players.Events.Players;
-using Microwave.Domain.Identities;
 
 namespace Domain.Players.UnitTests
 {
@@ -81,7 +81,7 @@ namespace Domain.Players.UnitTests
         {
             return new SkillReadModel
             {
-                SkillId = StringIdentity.Create("Block"),
+                SkillId = string.Create("Block"),
                 SkillType = SkillType.General
             };
         }
@@ -90,7 +90,7 @@ namespace Domain.Players.UnitTests
         {
             return new SkillReadModel
             {
-                SkillId = StringIdentity.Create("PlusOneStrength"),
+                SkillId = string.Create("PlusOneStrength"),
                 SkillType = SkillType.PlusOneStrength
             };
         }
@@ -99,7 +99,7 @@ namespace Domain.Players.UnitTests
         {
             return new SkillReadModel
             {
-                SkillId = StringIdentity.Create("Pass"),
+                SkillId = string.Create("Pass"),
                 SkillType = SkillType.Passing
             };
         }
@@ -199,12 +199,12 @@ namespace Domain.Players.UnitTests
 
         private static PlayerLeveledUp PlayerLeveledUp(IEnumerable<FreeSkillPoint> freeSkillPoints = null)
         {
-            return new PlayerLeveledUp(GuidIdentity.Create(), freeSkillPoints ?? new []{ FreeSkillPoint.PlusOneStrength }, 2);
+            return new PlayerLeveledUp(Guid.Create(), freeSkillPoints ?? new []{ FreeSkillPoint.PlusOneStrength }, 2);
         }
 
         private static SkillChosen SkillPicked(SkillReadModel skill)
         {
-            return new SkillChosen(GuidIdentity.Create(), skill, new List<FreeSkillPoint>());
+            return new SkillChosen(Guid.Create(), skill, new List<FreeSkillPoint>());
         }
 
         private static PlayerConfig PlayerConfig(
@@ -212,7 +212,7 @@ namespace Domain.Players.UnitTests
             IEnumerable<SkillType> doubleSkills = null)
         {
             var playerConfig = new PlayerConfig(
-                StringIdentity.Create("whatever"),
+                string.Create("whatever"),
                 new List<SkillReadModel>(),
                 defaultSkills ?? new[] {SkillType.General},
                 doubleSkills ?? new[] {SkillType.Passing});
@@ -224,7 +224,7 @@ namespace Domain.Players.UnitTests
             IEnumerable<SkillType> doubleSkills = null)
         {
             var playerConfig = PlayerConfig(defaultSkills, doubleSkills);
-            return new PlayerCreated(GuidIdentity.Create(), GuidIdentity.Create(), playerConfig, "Peter Wolf");
+            return new PlayerCreated(Guid.Create(), Guid.Create(), playerConfig, "Peter Wolf");
         }
     }
 }

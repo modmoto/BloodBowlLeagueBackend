@@ -1,4 +1,4 @@
-using Microwave.Domain.Identities;
+using Microwave.Domain;
 
 namespace Domain.Matches
 {
@@ -7,16 +7,16 @@ namespace Domain.Matches
         public bool IsDraw { get; }
         public PointsOfTeam HomeTeam { get; }
         public PointsOfTeam GuestTeam { get; }
-        public Identity Winner => GetTeamWithMoreTouchDowns();
-        public Identity Looser => GetTeamWithLessTouchDowns();
+        public string Winner => GetTeamWithMoreTouchDowns();
+        public string Looser => GetTeamWithLessTouchDowns();
 
-        private Identity GetTeamWithMoreTouchDowns()
+        private string GetTeamWithMoreTouchDowns()
         {
             if (IsDraw) return null;
             return HomeTeam.TouchDowns > GuestTeam.TouchDowns ? HomeTeam.TeamId : GuestTeam.TeamId;
         }
 
-        private Identity GetTeamWithLessTouchDowns()
+        private string GetTeamWithLessTouchDowns()
         {
             if (IsDraw) return null;
             return HomeTeam.TouchDowns < GuestTeam.TouchDowns ? HomeTeam.TeamId : GuestTeam.TeamId;
@@ -54,7 +54,7 @@ namespace Domain.Matches
 
     public class PointsOfTeam
     {
-        public Identity TeamId { get; }
+        public string TeamId { get; }
         public long TouchDowns { get; }
 
         public PointsOfTeam(Identity teamId, long touchDowns)

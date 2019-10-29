@@ -1,11 +1,4 @@
 ﻿using Application.Matches;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microwave;
-using Microwave.Persistence.InMemory;
-using Microwave.UI;
 using ServiceConfig;
 
 namespace Host.Matches.Startup

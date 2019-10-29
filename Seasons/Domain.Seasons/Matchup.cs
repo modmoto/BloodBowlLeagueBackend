@@ -1,23 +1,23 @@
-﻿using Microwave.Domain.Identities;
+﻿using System;
 
 namespace Domain.Seasons
 {
     public class Matchup
     {
-        public GuidIdentity MatchId { get; }
-        public GuidIdentity TeamAtHome { get; }
-        public GuidIdentity TeamAsGuest { get; }
+        public Guid MatchId { get; }
+        public Guid TeamAtHome { get; }
+        public Guid TeamAsGuest { get; }
 
-        public Matchup(GuidIdentity matchId, GuidIdentity teamAtHome, GuidIdentity teamAsGuest)
+        public Matchup(Guid matchId, Guid teamAtHome, Guid teamAsGuest)
         {
             MatchId = matchId;
             TeamAtHome = teamAtHome;
             TeamAsGuest = teamAsGuest;
         }
 
-        public static Matchup Create(GuidIdentity teamAtHome, GuidIdentity teamAsGuest)
+        public static Matchup Create(Guid teamAtHome, Guid teamAsGuest)
         {
-            return new Matchup(GuidIdentity.Create(), teamAtHome, teamAsGuest);
+            return new Matchup(Guid.Create(), teamAtHome, teamAsGuest);
         }
     }
 }

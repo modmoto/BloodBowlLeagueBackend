@@ -1,9 +1,8 @@
-﻿using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
 using Domain.Teams;
 using Domain.Teams.DomainEvents;
-using Microwave.Domain.Identities;
-using Microwave.EventStores;
+using Microwave.EventStores.Ports;
 using Microwave.Queries;
 
 namespace Application.Teams
@@ -19,7 +18,7 @@ namespace Application.Teams
             _readModelRepository = readModelRepository;
         }
 
-        public async Task<Identity> CreateTeam(CreateTeamCommand createTeamCommand)
+        public async Task<string> CreateTeam(CreateTeamCommand createTeamCommand)
         {
             var readModelResult = await _readModelRepository.LoadAsync<RaceReadModel>(createTeamCommand.RaceId);
             var race = readModelResult.Value;
@@ -31,7 +30,7 @@ namespace Application.Teams
             return domainResult.DomainEvents.First().EntityId;
         }
 
-        public async Task<Identity> BuyPlayer(BuyPlayerCommand buyPlayerCommand)
+        public async Task<string> BuyPlayer(BuyPlayerCommand buyPlayerCommand)
         {
             var teamResult = await _eventStore.LoadAsync<Team>(buyPlayerCommand.TeamId);
             var team = teamResult.Value;
@@ -59,21 +58,21 @@ namespace Application.Teams
 
     public class BuyPlayerCommand
     {
-        public GuidIdentity TeamId { get; set; }
-        public StringIdentity PlayerTypeId { get; set; }
+        public Guid TeamId { get; set; }
+        public string PlayerTypeId { get; set; }
         public long TeamVersion { get; set; }
     }
 
     public class RemovePlayerCommand
     {
-        public GuidIdentity TeamId { get; set; }
-        public GuidIdentity PlayerId { get; set; }
+        public Guid TeamId { get; set; }
+        public Guid PlayerId { get; set; }
         public long TeamVersion { get; set; }
     }
 
     public class FinishTeamCommand
     {
-        public GuidIdentity TeamId { get; set; }
+        public Guid TeamId { get; set; }
         public long TeamVersion { get; set; }
     }
 
@@ -81,6 +80,6 @@ namespace Application.Teams
     {
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
-        public StringIdentity RaceId { get; set; }
+        public string RaceId { get; set; }
     }
 }

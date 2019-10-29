@@ -1,8 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
-namespace Host.Players.Startup
+﻿namespace Host.Players.Startup
 {
     public class Program
     {

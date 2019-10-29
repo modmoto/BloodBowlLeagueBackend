@@ -1,15 +1,14 @@
-﻿using Microwave.Domain.Identities;
-using Microwave.Queries;
+﻿using System;
 
 namespace Domain.Seasons.TeamReadModels
 {
     public class TeamCreated : ISubscribedDomainEvent
     {
-        public TeamCreated(GuidIdentity teamId)
+        public TeamCreated(Guid teamId)
         {
             TeamId = teamId;
         }
-        public GuidIdentity TeamId { get; }
-        public Identity EntityId => TeamId;
+        public Guid TeamId { get; }
+        public string EntityId => TeamId;
     }
 }

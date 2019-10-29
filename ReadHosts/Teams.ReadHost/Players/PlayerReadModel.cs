@@ -1,9 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using Microwave.Domain.Identities;
-using Microwave.Queries;
 using Teams.ReadHost.Players.Events;
-using Teams.ReadHost.Teams.Events;
 
 namespace Teams.ReadHost.Players
 {
@@ -16,11 +11,11 @@ namespace Teams.ReadHost.Players
         IHandle<PlayerMadeTouchdown>,
         IHandle<PlayerWasNominatedMostValuablePlayer>
     {
-        public GuidIdentity PlayerId { get; private set; }
-        public GuidIdentity TeamId { get; private set; }
-        public StringIdentity PlayerTypeId { get; private set; }
+        public Guid PlayerId { get; private set; }
+        public Guid TeamId { get; private set; }
+        public string PlayerTypeId { get; private set; }
         public PlayerConfig PlayerConfig { get; private set; }
-        public IEnumerable<StringIdentity> Skills { get; private set; } = new List<StringIdentity>();
+        public IEnumerable<string> Skills { get; private set; } = new List<string>();
 
         public long StarPlayerPoints { get; set; }
         public int Level { get; set; } = 1;

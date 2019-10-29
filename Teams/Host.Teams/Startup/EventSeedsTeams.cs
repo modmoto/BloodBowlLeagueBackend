@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using Domain.Teams;
-using Domain.Teams.DomainEvents;
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
-
 namespace Teams.WriteHost.Startup
 {
     public static class EventSeedsTeams
@@ -16,57 +9,57 @@ namespace Teams.WriteHost.Startup
                 var events = new List<IDomainEvent>
                 {
                     new TeamDraftCreated(
-                        GuidIdentity.Create(new Guid("772F7E84-4237-4634-AF85-5C0D72FF8DBD")),
-                        StringIdentity.Create("Humans"),
+                        Guid.Create(new Guid("772F7E84-4237-4634-AF85-5C0D72FF8DBD")),
+                        string.Create("Humans"),
                         "Karlsruher Könige",
                         "Walter",
                         HumanPlayers,
                         new GoldCoins(1000000)),
                     new TeamCreated(
-                        GuidIdentity.Create(new Guid("772F7E84-4237-4634-AF85-5C0D72FF8DBD")),
-                        StringIdentity.Create("Humans"),
+                        Guid.Create(new Guid("772F7E84-4237-4634-AF85-5C0D72FF8DBD")),
+                        string.Create("Humans"),
                         "Karlsruher Könige",
                         "Walter",
                         HumanPlayers,
                         new GoldCoins(1000000)),
                     new TeamDraftCreated(
-                        GuidIdentity.Create(new Guid("38C41447-21F6-4941-BD7E-AC97EF866197")),
-                        StringIdentity.Create("Dwarfs"),
+                        Guid.Create(new Guid("38C41447-21F6-4941-BD7E-AC97EF866197")),
+                        string.Create("Dwarfs"),
                         "Berghausen Brüglerz",
                         "Rahel",
                         DwarfPlayers,
                         new GoldCoins(1000000)),
                     new TeamCreated(
-                        GuidIdentity.Create(new Guid("38C41447-21F6-4941-BD7E-AC97EF866197")),
-                        StringIdentity.Create("Dwarfs"),
+                        Guid.Create(new Guid("38C41447-21F6-4941-BD7E-AC97EF866197")),
+                        string.Create("Dwarfs"),
                         "Berghausen Brüglerz",
                         "Rahel",
                         DwarfPlayers,
                         new GoldCoins(1000000)),
                     new TeamDraftCreated(
-                        GuidIdentity.Create(new Guid("13552A55-D612-40D5-88F9-5106A05CCBAC")),
-                        StringIdentity.Create("Dwarfs"),
+                        Guid.Create(new Guid("13552A55-D612-40D5-88F9-5106A05CCBAC")),
+                        string.Create("Dwarfs"),
                         "Rat Bullz",
                         "Silas",
                         DwarfPlayers,
                         new GoldCoins(1000000)),
                     new TeamCreated(
-                        GuidIdentity.Create(new Guid("13552A55-D612-40D5-88F9-5106A05CCBAC")),
-                        StringIdentity.Create("Dwarfs"),
+                        Guid.Create(new Guid("13552A55-D612-40D5-88F9-5106A05CCBAC")),
+                        string.Create("Dwarfs"),
                         "Rat Bullz",
                         "Silas",
                         DwarfPlayers,
                         new GoldCoins(1000000)),
                     new TeamDraftCreated(
-                        GuidIdentity.Create(new Guid("D5BB0FDA-BBE5-4271-8311-460AE5AD3DDA")),
-                        StringIdentity.Create("DarkElves"),
+                        Guid.Create(new Guid("D5BB0FDA-BBE5-4271-8311-460AE5AD3DDA")),
+                        string.Create("DarkElves"),
                         "Spikey Bits",
                         "Merlin",
                         DarkElvPlayers,
                         new GoldCoins(1000000)),
                     new TeamCreated(
-                        GuidIdentity.Create(new Guid("D5BB0FDA-BBE5-4271-8311-460AE5AD3DDA")),
-                        StringIdentity.Create("DarkElves"),
+                        Guid.Create(new Guid("D5BB0FDA-BBE5-4271-8311-460AE5AD3DDA")),
+                        string.Create("DarkElves"),
                         "Spikey Bits",
                         "Merlin",
                         DarkElvPlayers,
@@ -85,31 +78,31 @@ namespace Teams.WriteHost.Startup
         {
             get
             {
-                var team1 = GuidIdentity.Create(new Guid("FFD92960-33DE-4B63-8EFD-AF0A75E4F017"));
+                var team1 = Guid.Create(new Guid("FFD92960-33DE-4B63-8EFD-AF0A75E4F017"));
 
                 var events = new List<IDomainEvent>
                 {
                     new TeamDraftCreated(
                         team1,
-                        StringIdentity.Create("DarkElves"),
+                        string.Create("DarkElves"),
                         "Team in DraftModes",
                         "Mark",
                         DarkElvPlayers,
                         new GoldCoins(1000000)),
                     new PlayerAddedToDraft(
                         team1,
-                        StringIdentity.Create("DE_LineMan"),
-                        GuidIdentity.Create(new Guid("1BF57260-77E5-4E19-99C3-3B6D7205B8BE")),
+                        string.Create("DE_LineMan"),
+                        Guid.Create(new Guid("1BF57260-77E5-4E19-99C3-3B6D7205B8BE")),
                         new GoldCoins(930000)),
                     new PlayerAddedToDraft(
                         team1,
-                        StringIdentity.Create("DE_LineMan"),
-                        GuidIdentity.Create(new Guid("5543633B-78B6-40EC-A84D-0F637A3F05EE")),
+                        string.Create("DE_LineMan"),
+                        Guid.Create(new Guid("5543633B-78B6-40EC-A84D-0F637A3F05EE")),
                         new GoldCoins(860000)),
                     new PlayerAddedToDraft(
                         team1,
-                        StringIdentity.Create("DE_LineMan"),
-                        GuidIdentity.Create(new Guid("F9C331B7-AC52-46FF-B565-CFD6E690106B")),
+                        string.Create("DE_LineMan"),
+                        Guid.Create(new Guid("F9C331B7-AC52-46FF-B565-CFD6E690106B")),
                         new GoldCoins(790000))
                 };
 
@@ -121,34 +114,34 @@ namespace Teams.WriteHost.Startup
         {
             get
             {
-                var team1 = GuidIdentity.Create(new Guid("2798435C-9C72-4ECE-BD7D-00BECBACCED7"));
+                var team1 = Guid.Create(new Guid("2798435C-9C72-4ECE-BD7D-00BECBACCED7"));
 
                 var events = new List<IDomainEvent>
                 {
                     new TeamDraftCreated(
                         team1,
-                        StringIdentity.Create("DarkElves"),
+                        string.Create("DarkElves"),
                         "3er Team",
                         "Der Simon",
                         DarkElvPlayers,
                         new GoldCoins(1000000)),
                     new PlayerBought(
                         team1,
-                        StringIdentity.Create("DE_LineMan"),
-                        GuidIdentity.Create(new Guid("EC48B7FF-B76D-471F-99B0-761EC43C4101")),
+                        string.Create("DE_LineMan"),
+                        Guid.Create(new Guid("EC48B7FF-B76D-471F-99B0-761EC43C4101")),
                         new GoldCoins(930000)),
                     new PlayerBought(
                         team1,
-                        StringIdentity.Create("DE_LineMan"),
-                        GuidIdentity.Create(new Guid("C2DEDB29-C59D-4D8F-B854-6B44D04E6C7A")),
+                        string.Create("DE_LineMan"),
+                        Guid.Create(new Guid("C2DEDB29-C59D-4D8F-B854-6B44D04E6C7A")),
                         new GoldCoins(860000)),
                     new PlayerBought(
                         team1,
-                        StringIdentity.Create("DE_LineMan"),
-                        GuidIdentity.Create(new Guid("E86E63E2-8C3C-4CFF-8719-68BD844CD7F7")),
+                        string.Create("DE_LineMan"),
+                        Guid.Create(new Guid("E86E63E2-8C3C-4CFF-8719-68BD844CD7F7")),
                         new GoldCoins(790000)),
                     new TeamCreated(team1,
-                        StringIdentity.Create("DarkElves"),
+                        string.Create("DarkElves"),
                         "3er Team",
                         "Der Simon",
                         DarkElvPlayers,
@@ -163,30 +156,30 @@ namespace Teams.WriteHost.Startup
         {
             get
             {
-                var team2 = GuidIdentity.Create(new Guid("406D35EE-421A-4D45-9F34-1834D5ACD215"));
+                var team2 = Guid.Create(new Guid("406D35EE-421A-4D45-9F34-1834D5ACD215"));
 
                 var events = new List<IDomainEvent>
                 {
                     new TeamDraftCreated(
                         team2,
-                        StringIdentity.Create("Humans"),
+                        string.Create("Humans"),
                         "2er Team",
                         "Der Simon Poppinga",
                         HumanPlayers,
                         new GoldCoins(1000000)),
                     new PlayerBought(
                         team2,
-                        StringIdentity.Create("HU_Blitzer"),
-                        GuidIdentity.Create(new Guid("9CF84B11-5852-4D09-BB08-5357E6DA04C8")),
+                        string.Create("HU_Blitzer"),
+                        Guid.Create(new Guid("9CF84B11-5852-4D09-BB08-5357E6DA04C8")),
                         new GoldCoins(950000)),
                     new PlayerBought(
                         team2,
-                        StringIdentity.Create("HU_LineMan"),
-                        GuidIdentity.Create(new Guid("1796B724-B55F-47A3-A498-153379C516EA")),
+                        string.Create("HU_LineMan"),
+                        Guid.Create(new Guid("1796B724-B55F-47A3-A498-153379C516EA")),
                         new GoldCoins(900000)),
                     new TeamCreated(
                         team2,
-                        StringIdentity.Create("Humans"),
+                        string.Create("Humans"),
                         "2er Team",
                         "Der Simon Poppinga",
                         HumanPlayers,
@@ -200,31 +193,31 @@ namespace Teams.WriteHost.Startup
         public static IEnumerable<AllowedPlayer> DarkElvPlayers =>
             new List<AllowedPlayer>
             {
-                new AllowedPlayer(StringIdentity.Create("DE_LineMan"), 16, new GoldCoins(70000)),
-                new AllowedPlayer(StringIdentity.Create("DE_Assassine"), 2, new GoldCoins(90000)),
-                new AllowedPlayer(StringIdentity.Create("DE_Blitzer"), 4, new GoldCoins(100000)),
-                new AllowedPlayer(StringIdentity.Create("DE_WitchElve"), 2, new GoldCoins(110000)),
-                new AllowedPlayer(StringIdentity.Create("DE_Runner"), 2, new GoldCoins(80000))
+                new AllowedPlayer(string.Create("DE_LineMan"), 16, new GoldCoins(70000)),
+                new AllowedPlayer(string.Create("DE_Assassine"), 2, new GoldCoins(90000)),
+                new AllowedPlayer(string.Create("DE_Blitzer"), 4, new GoldCoins(100000)),
+                new AllowedPlayer(string.Create("DE_WitchElve"), 2, new GoldCoins(110000)),
+                new AllowedPlayer(string.Create("DE_Runner"), 2, new GoldCoins(80000))
             };
 
         public static IEnumerable<AllowedPlayer> HumanPlayers =>
             new List<AllowedPlayer>
             {
-                new AllowedPlayer(StringIdentity.Create("HU_LineMan"), 16, new GoldCoins(50000)),
-                new AllowedPlayer(StringIdentity.Create("HU_Blitzer"), 4, new GoldCoins(90000)),
-                new AllowedPlayer(StringIdentity.Create("HU_Catcher"), 4, new GoldCoins(70000)),
-                new AllowedPlayer(StringIdentity.Create("HU_Thrower"), 2, new GoldCoins(70000)),
-                new AllowedPlayer(StringIdentity.Create("HU_Ogre"), 1, new GoldCoins(150000))
+                new AllowedPlayer(string.Create("HU_LineMan"), 16, new GoldCoins(50000)),
+                new AllowedPlayer(string.Create("HU_Blitzer"), 4, new GoldCoins(90000)),
+                new AllowedPlayer(string.Create("HU_Catcher"), 4, new GoldCoins(70000)),
+                new AllowedPlayer(string.Create("HU_Thrower"), 2, new GoldCoins(70000)),
+                new AllowedPlayer(string.Create("HU_Ogre"), 1, new GoldCoins(150000))
             };
 
         public static IEnumerable<AllowedPlayer> DwarfPlayers =>
             new List<AllowedPlayer>
             {
-                new AllowedPlayer(StringIdentity.Create("DW_Blocker"), 16, new GoldCoins(70000)),
-                new AllowedPlayer(StringIdentity.Create("DW_Runner"), 2, new GoldCoins(80000)),
-                new AllowedPlayer(StringIdentity.Create("DW_Blitzer"), 2, new GoldCoins(80000)),
-                new AllowedPlayer(StringIdentity.Create("DW_TrollSlayer"), 2, new GoldCoins(90000)),
-                new AllowedPlayer(StringIdentity.Create("DW_DeathRoller"), 1, new GoldCoins(160000))
+                new AllowedPlayer(string.Create("DW_Blocker"), 16, new GoldCoins(70000)),
+                new AllowedPlayer(string.Create("DW_Runner"), 2, new GoldCoins(80000)),
+                new AllowedPlayer(string.Create("DW_Blitzer"), 2, new GoldCoins(80000)),
+                new AllowedPlayer(string.Create("DW_TrollSlayer"), 2, new GoldCoins(90000)),
+                new AllowedPlayer(string.Create("DW_DeathRoller"), 1, new GoldCoins(160000))
             };
     }
 }

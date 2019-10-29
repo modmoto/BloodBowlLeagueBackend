@@ -1,9 +1,8 @@
-using System.Linq;
+using System;
 using System.Threading.Tasks;
 using Domain.Seasons;
 using Domain.Seasons.TeamReadModels;
-using Microwave.Domain.Identities;
-using Microwave.EventStores;
+using Microwave.EventStores.Ports;
 using Microwave.Queries;
 
 namespace Application.Matches
@@ -38,7 +37,7 @@ namespace Application.Matches
             (await _eventStore.AppendAsync(domainResult.DomainEvents, seasonResult.Version)).Check();
         }
 
-        public async Task<Identity> CreateSeason(CreateSeasonCommand command)
+        public async Task<string> CreateSeason(CreateSeasonCommand command)
         {
             var domainResult = Season.Create(command.SeasonName);
             await _eventStore.AppendAsync(domainResult.DomainEvents, 0);
@@ -60,9 +59,9 @@ namespace Application.Matches
 
     public class GetSeasonCommand
     {
-        public GuidIdentity SeasonId { get; }
+        public Guid SeasonId { get; }
 
-        public GetSeasonCommand(GuidIdentity seasonId)
+        public GetSeasonCommand(Guid seasonId)
         {
             SeasonId = seasonId;
         }
@@ -70,17 +69,17 @@ namespace Application.Matches
 
     public class AddTeamToSeasonCommand
     {
-        public GuidIdentity SeasonId { get; set; }
-        public GuidIdentity TeamId { get; set; }
+        public Guid SeasonId { get; set; }
+        public Guid TeamId { get; set; }
     }
 
     public class StartSeasonCommand
     {
-        public StartSeasonCommand(GuidIdentity seasonId)
+        public StartSeasonCommand(Guid seasonId)
         {
             SeasonId = seasonId;
         }
 
-        public GuidIdentity SeasonId { get; }
+        public Guid SeasonId { get; }
     }
 }

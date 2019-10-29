@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Domain.Players;
-using Microwave.Domain.Identities;
-using Microwave.EventStores;
+using Microwave.EventStores.Ports;
 using Microwave.Queries;
 
 namespace Application.Players
@@ -17,7 +17,7 @@ namespace Application.Players
             _readModelRepository = readModelRepository;
         }
 
-        public async Task LevelUp(GuidIdentity playerId, LevelUpPlayerComand levelUpCommand)
+        public async Task LevelUp(Guid playerId, LevelUpPlayerComand levelUpCommand)
         {
             var player = (await _eventStore.LoadAsync<Player>(playerId)).Value;
             var skillResult = await _readModelRepository.LoadAsync<SkillReadModel>(levelUpCommand.SkillId);
@@ -29,11 +29,11 @@ namespace Application.Players
 
     public class LevelUpPlayerComand
     {
-        public LevelUpPlayerComand(StringIdentity skillId)
+        public LevelUpPlayerComand(string skillId)
         {
             SkillId = skillId;
         }
 
-        public StringIdentity SkillId { get; }
+        public string SkillId { get; }
     }
 }

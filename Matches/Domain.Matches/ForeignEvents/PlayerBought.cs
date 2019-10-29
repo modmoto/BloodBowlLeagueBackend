@@ -1,18 +1,17 @@
-﻿using Microwave.Domain.Identities;
-using Microwave.Queries;
+﻿using System;
 
 namespace Domain.Matches.ForeignEvents
 {
     public class PlayerBought : ISubscribedDomainEvent
     {
-        public PlayerBought(GuidIdentity teamId, GuidIdentity playerId)
+        public PlayerBought(Guid teamId, Guid playerId)
         {
             TeamId = teamId;
             PlayerId = playerId;
         }
 
-        public GuidIdentity TeamId { get; }
-        public GuidIdentity PlayerId { get; }
-        public Identity EntityId => TeamId;
+        public Guid TeamId { get; }
+        public Guid PlayerId { get; }
+        public string EntityId => TeamId;
     }
 }

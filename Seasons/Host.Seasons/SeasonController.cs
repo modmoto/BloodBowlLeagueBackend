@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using Application.Matches;
-using Microsoft.AspNetCore.Mvc;
-using Microwave.Domain.Identities;
+﻿using Application.Matches;
 
 namespace Host.Matches
 {
@@ -16,7 +13,7 @@ namespace Host.Matches
         }
 
         [HttpPost("{seasonId}/start")]
-        public async Task<ActionResult> StartSeason(GuidIdentity seasonId)
+        public async Task<ActionResult> StartSeason(Guid seasonId)
         {
             var command = new StartSeasonCommand(seasonId);
             await _commandHandler.StartSeason(command);
@@ -31,7 +28,7 @@ namespace Host.Matches
         }
 
         [HttpPost("{seasonId}/add-team")]
-        public async Task<ActionResult> AddTeam(GuidIdentity seasonId, [FromBody] AddTeamToSeasonCommand command)
+        public async Task<ActionResult> AddTeam(Guid seasonId, [FromBody] AddTeamToSeasonCommand command)
         {
             command.SeasonId = seasonId;
             await _commandHandler.AddTeamToSeason(command);

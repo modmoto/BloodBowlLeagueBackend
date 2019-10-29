@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Microwave.Domain.Identities;
 
 namespace Domain.Seasons
 {
     public class MatchPairingService
     {
-        public IEnumerable<GameDay> ComputePairings(IEnumerable<GuidIdentity> listTeam)
+        public IEnumerable<GameDay> ComputePairings(IEnumerable<Guid> listTeam)
         {
             var teams = listTeam.ToList();
             var numberOfRounds = teams.Count - 1;
             var numberOfMatchesInARound = teams.Count / 2;
 
-            var teamsTemp = new List<GuidIdentity>();
+            var teamsTemp = new List<Guid>();
 
             teamsTemp.AddRange(teams.Skip(numberOfMatchesInARound).Take(numberOfMatchesInARound));
             teamsTemp.AddRange(teams.Skip(1).Take(numberOfMatchesInARound - 1).Reverse());

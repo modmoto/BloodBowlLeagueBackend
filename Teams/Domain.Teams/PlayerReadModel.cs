@@ -1,18 +1,18 @@
-using Microwave.Domain.Identities;
+using System;
 
 namespace Domain.Teams
 {
     public class PlayerReadModel
     {
         public PlayerReadModel(
-            GuidIdentity playerId,
-            StringIdentity playerTypeId)
+            Guid playerId,
+            string playerTypeId)
         {
             PlayerTypeId = playerTypeId;
             PlayerId = playerId;
         }
 
-        public StringIdentity PlayerTypeId { get; }
-        public GuidIdentity PlayerId { get; }
+        public string PlayerTypeId { get; }
+        public Guid PlayerId { get; }
     }
 }

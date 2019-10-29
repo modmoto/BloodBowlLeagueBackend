@@ -1,13 +1,13 @@
+using System;
 using System.Collections.Generic;
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
+using Microwave.Domain;
 
 namespace Domain.Players.Events.Players
 {
     public class PlayerLeveledUp : IDomainEvent
     {
         public PlayerLeveledUp(
-            GuidIdentity playerId,
+            Guid playerId,
             IEnumerable<FreeSkillPoint> newFreeSkillPoints,
             int newLevel)
         {
@@ -16,8 +16,8 @@ namespace Domain.Players.Events.Players
             NewLevel = newLevel;
         }
 
-        public Identity EntityId => PlayerId;
-        public GuidIdentity PlayerId { get; }
+        public string EntityId => PlayerId;
+        public Guid PlayerId { get; }
         public IEnumerable<FreeSkillPoint> NewFreeSkillPoints { get; }
         public int NewLevel { get; }
     }

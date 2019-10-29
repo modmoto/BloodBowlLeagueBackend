@@ -3,8 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Players;
 using Domain.Players.Events.ForeignEvents;
-using Microwave.Domain.Validation;
-using Microwave.EventStores;
+using Microwave.Domain;
+using Microwave.EventStores.Ports;
 using Microwave.Queries;
 
 namespace Application.Players

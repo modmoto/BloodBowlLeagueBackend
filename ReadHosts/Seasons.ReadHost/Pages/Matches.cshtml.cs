@@ -1,11 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microwave.Domain.Identities;
-using Microwave.Queries;
 using ReadHosts.Common;
 using Seasons.ReadHost.Matches;
 using Seasons.ReadHost.Teams;
@@ -46,7 +38,7 @@ namespace Seasons.ReadHost.Pages
             return Redirect($"{ServiceConfiguration.SeasonReadHost}Matches");
         }
 
-        public TeamReadModel FullTeam(GuidIdentity teamId)
+        public TeamReadModel FullTeam(Guid teamId)
         {
             return Teams.Single(t => t.TeamId == teamId);
         }

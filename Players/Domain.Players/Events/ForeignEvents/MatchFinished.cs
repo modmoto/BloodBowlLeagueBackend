@@ -1,31 +1,30 @@
-﻿using System.Collections.Generic;
-using Microwave.Domain.Identities;
-using Microwave.Queries;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Domain.Players.Events.ForeignEvents
 {
     public class MatchFinished : ISubscribedDomainEvent
     {
-        public MatchFinished(GuidIdentity matchId, IEnumerable<PlayerProgression> playerProgressions)
+        public MatchFinished(Guid matchId, IEnumerable<PlayerProgression> playerProgressions)
         {
             MatchId = matchId;
             PlayerProgressions = playerProgressions;
         }
 
-        public GuidIdentity MatchId { get; }
-        public Identity EntityId => MatchId;
+        public Guid MatchId { get; }
+        public string EntityId => MatchId;
         public IEnumerable<PlayerProgression> PlayerProgressions { get; }
     }
 
     public class PlayerProgression
     {
-        public PlayerProgression(GuidIdentity playerId, ProgressionEvent progressionEvent)
+        public PlayerProgression(Guid playerId, ProgressionEvent progressionEvent)
         {
             PlayerId = playerId;
             ProgressionEvent = progressionEvent;
         }
 
-        public GuidIdentity PlayerId { get; }
+        public Guid PlayerId { get; }
         public ProgressionEvent ProgressionEvent { get; }
     }
 

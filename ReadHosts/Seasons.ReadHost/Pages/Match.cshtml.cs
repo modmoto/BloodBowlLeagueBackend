@@ -1,11 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microwave.Domain.Identities;
-using Microwave.Queries;
 using ReadHosts.Common;
 using Seasons.ReadHost.Matches;
 using Seasons.ReadHost.Players;
@@ -26,11 +18,11 @@ namespace Seasons.ReadHost.Pages
         public IEnumerable<PlayerReadModel> Players { get; set; }
         public TeamReadModel GuestTeam => FullTeam(SingleMatch.TeamAsGuest);
         public TeamReadModel HomeTeam => FullTeam(SingleMatch.TeamAtHome);
-        public IEnumerable<GuidIdentity> AllPlayers
+        public IEnumerable<Guid> AllPlayers
         {
             get
             {
-                var guidIdentities = new List<GuidIdentity>();
+                var guidIdentities = new List<Guid>();
                 guidIdentities.AddRange(SingleMatch.GuestTeamPlayers);
                 guidIdentities.AddRange(SingleMatch.HomeTeamPlayers);
                 return guidIdentities;
@@ -47,7 +39,7 @@ namespace Seasons.ReadHost.Pages
 
         public async Task OnGet()
         {
-            var result = await _readModelRepository.LoadAsync<MatchupReadModel>(GuidIdentity.Create(MatchId));
+            var result = await _readModelRepository.LoadAsync<MatchupReadModel>(Guid.Create(MatchId));
             var teamResult = await _readModelRepository.LoadAllAsync<TeamReadModel>();
             var playerResult = await _readModelRepository.LoadAllAsync<PlayerReadModel>();
             SingleMatch = result.Value;
@@ -63,12 +55,12 @@ namespace Seasons.ReadHost.Pages
             await _mitigator.PostAsync(
                 new Uri($"{ServiceConfiguration.MatchHost}Api/Matches/{MatchId}/progress"),
                 new { PlayerProgression = new PlayerProgression(
-                        GuidIdentity.Create(new Guid(playerId)),
+                        Guid.Create(new Guid(playerId)),
                         progressionEvent)});
             return Redirect(MatchId.ToString());
         }
 
-        public async Task<IActionResult> OnPostStartMatch(GuidIdentity matchId)
+        public async Task<IActionResult> OnPostStartMatch(Guid matchId)
         {
             await _mitigator.PostAsync(
                 new Uri($"{ServiceConfiguration.MatchHost}Api/Matches/{MatchId}/start"),
@@ -76,7 +68,7 @@ namespace Seasons.ReadHost.Pages
             return Redirect(MatchId.ToString());
         }
         
-        public async Task<IActionResult> OnPostFinishMatch(GuidIdentity matchId)
+        public async Task<IActionResult> OnPostFinishMatch(Guid matchId)
         {
             await _mitigator.PostAsync(
                 new Uri($"{ServiceConfiguration.MatchHost}Api/Matches/{MatchId}/finish"),
@@ -84,12 +76,12 @@ namespace Seasons.ReadHost.Pages
             return Redirect(MatchId.ToString());
         }
 
-        public TeamReadModel FullTeam(GuidIdentity teamId)
+        public TeamReadModel FullTeam(Guid teamId)
         {
             return Teams.Single(t => t.TeamId == teamId);
         }
 
-        public PlayerReadModel FullPlayer(GuidIdentity playerId)
+        public PlayerReadModel FullPlayer(Guid playerId)
         {
             return Players.Single(t => t.PlayerId == playerId);
         }

@@ -1,9 +1,8 @@
-﻿using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
 using Domain.Matches;
 using Domain.Matches.Events;
-using Microwave.Domain.Identities;
-using Microwave.EventStores;
+using Microwave.EventStores.Ports;
 using Microwave.Queries;
 
 namespace Application.Matches
@@ -41,7 +40,7 @@ namespace Application.Matches
             storeResult.Check();
         }
 
-        public async Task<Identity> CreateMatch(CreateMatchCommand command)
+        public async Task<string> CreateMatch(CreateMatchCommand command)
         {
             var homeTeam = (await _readModelRepository.LoadAsync<TeamReadModel>(command.HomeTeam)).Value;
             var guestTeam = (await _readModelRepository.LoadAsync<TeamReadModel>(command.GuestTeam)).Value;
@@ -64,34 +63,34 @@ namespace Application.Matches
 
     public class StartMatchCommand
     {
-        public StartMatchCommand(GuidIdentity matchId)
+        public StartMatchCommand(Guid matchId)
         {
             MatchId = matchId;
         }
 
-        public GuidIdentity MatchId { get; }
+        public Guid MatchId { get; }
     }
 
     public class CreateMatchCommand
     {
-        public CreateMatchCommand(GuidIdentity homeTeam, GuidIdentity guestTeam)
+        public CreateMatchCommand(Guid homeTeam, Guid guestTeam)
         {
             HomeTeam = homeTeam;
             GuestTeam = guestTeam;
         }
 
-        public GuidIdentity HomeTeam { get; }
-        public GuidIdentity GuestTeam { get; }
+        public Guid HomeTeam { get; }
+        public Guid GuestTeam { get; }
     }
 
     public class FinishMatchCommand
     {
-        public GuidIdentity MatchId { get; set; }
+        public Guid MatchId { get; set; }
     }
 
     public class ProgressMatchCommand
     {
-        public GuidIdentity MatchId { get; set; }
+        public Guid MatchId { get; set; }
 
         public PlayerProgression PlayerProgression { get; set; }
     }

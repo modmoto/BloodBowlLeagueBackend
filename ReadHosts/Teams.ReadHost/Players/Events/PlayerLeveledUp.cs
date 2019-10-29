@@ -1,13 +1,9 @@
-using System.Collections.Generic;
-using Microwave.Domain.Identities;
-using Microwave.Queries;
-
 namespace Teams.ReadHost.Players.Events
 {
     public class PlayerLeveledUp : ISubscribedDomainEvent
     {
         public PlayerLeveledUp(
-            GuidIdentity playerId,
+            Guid playerId,
             IEnumerable<FreeSkillPoint> newFreeSkillPoints,
             int newLevel)
         {
@@ -16,8 +12,8 @@ namespace Teams.ReadHost.Players.Events
             NewLevel = newLevel;
         }
 
-        public Identity EntityId => PlayerId;
-        public GuidIdentity PlayerId { get; }
+        public string EntityId => PlayerId;
+        public Guid PlayerId { get; }
         public IEnumerable<FreeSkillPoint> NewFreeSkillPoints { get; }
         public int NewLevel { get; }
     }

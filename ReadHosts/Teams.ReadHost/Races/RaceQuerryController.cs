@@ -1,8 +1,3 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microwave.Domain.Identities;
-using Microwave.Queries;
-
 namespace Teams.ReadHost.Races
 {
     [Route("api/races")]
@@ -16,7 +11,7 @@ namespace Teams.ReadHost.Races
         }
 
         [HttpGet("{raceId}")]
-        public async Task<ActionResult> GetTeam(StringIdentity raceId)
+        public async Task<ActionResult> GetTeam(string raceId)
         {
             var teamQuerry = await _queryRepository.LoadAsync<RaceReadModel>(raceId);
             return Ok(teamQuerry.Value);

@@ -1,7 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Matches.ForeignEvents;
-using Microwave.Domain.Identities;
 using Microwave.Queries;
 
 namespace Domain.Matches
@@ -10,8 +10,8 @@ namespace Domain.Matches
         IHandle<PlayerBought>,
         IHandle<TeamCreated>
     {
-        public GuidIdentity TeamId { get; private set; }
-        public IEnumerable<GuidIdentity> Players { get; private set; } = new List<GuidIdentity>();
+        public Guid TeamId { get; private set; }
+        public IEnumerable<Guid> Players { get; private set; } = new List<Guid>();
 
         public void Handle(PlayerBought domainEvent)
         {

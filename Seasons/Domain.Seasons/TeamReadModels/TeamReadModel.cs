@@ -1,4 +1,4 @@
-using Microwave.Domain.Identities;
+using System;
 using Microwave.Queries;
 
 namespace Domain.Seasons.TeamReadModels
@@ -6,7 +6,7 @@ namespace Domain.Seasons.TeamReadModels
     public class TeamReadModel : ReadModel<TeamCreated>,
         IHandle<TeamCreated>
     {
-        public GuidIdentity TeamId { get; set; }
+        public Guid TeamId { get; set; }
 
         public void Handle(TeamCreated domainEvent)
         {

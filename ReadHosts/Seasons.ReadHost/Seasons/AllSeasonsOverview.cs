@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microwave.Domain.Identities;
-using Microwave.Queries;
 using Seasons.ReadHost.Seasons.Events;
 
 namespace Seasons.ReadHost.Seasons
@@ -34,7 +29,7 @@ namespace Seasons.ReadHost.Seasons
 
     public class SeasonOverviewDto
     {
-        public GuidIdentity SeasonId { get; set; }
+        public Guid SeasonId { get; set; }
         public string SeasonName { get; set; }
         public DateTimeOffset CreationDate { get; set; }
         public DateTimeOffset StartDate { get; set; }

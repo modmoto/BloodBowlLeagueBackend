@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Microwave.Domain.Identities;
 using Teams.ReadHost.Races;
 
 namespace Teams.ReadHost.Players
@@ -7,7 +5,7 @@ namespace Teams.ReadHost.Players
     public class PlayerConfig
     {
         public PlayerConfig(
-            StringIdentity playerTypeId,
+            string playerTypeId,
             IEnumerable<SkillReadModel> startingSkills,
             IEnumerable<SkillType> skillsOnDefault,
             IEnumerable<SkillType> skillsOnDouble)
@@ -18,7 +16,7 @@ namespace Teams.ReadHost.Players
             PlayerTypeId = playerTypeId;
         }
 
-        public StringIdentity PlayerTypeId { get; }
+        public string PlayerTypeId { get; }
         public IEnumerable<SkillReadModel> StartingSkills { get; }
         public IEnumerable<SkillType> SkillsOnDefault { get; }
         public IEnumerable<SkillType> SkillsOnDouble { get; }

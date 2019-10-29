@@ -1,13 +1,13 @@
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
+using System;
+using Microwave.Domain;
 
 namespace Domain.Players.Events.Players
 {
     public class PlayerCreated : IDomainEvent
     {
         public PlayerCreated(
-            GuidIdentity playerId,
-            GuidIdentity teamId,
+            Guid playerId,
+            Guid teamId,
             PlayerConfig playerConfig,
             string name)
         {
@@ -18,9 +18,9 @@ namespace Domain.Players.Events.Players
         }
 
         public string Name { get; }
-        public Identity EntityId => PlayerId;
-        public GuidIdentity TeamId { get; }
+        public string EntityId => PlayerId;
+        public Guid TeamId { get; }
         public PlayerConfig PlayerConfig { get; }
-        public GuidIdentity PlayerId { get; }
+        public Guid PlayerId { get; }
     }
 }

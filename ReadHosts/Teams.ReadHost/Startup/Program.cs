@@ -1,8 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
-namespace Teams.ReadHost.Startup
+﻿namespace Teams.ReadHost.Startup
 {
     public class Program
     {

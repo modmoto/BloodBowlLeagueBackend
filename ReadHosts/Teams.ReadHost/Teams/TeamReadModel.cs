@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microwave.Domain.Identities;
-using Microwave.Queries;
-using Teams.ReadHost.Teams.Events;
+﻿using Teams.ReadHost.Teams.Events;
 
 namespace Teams.ReadHost.Teams
 {
@@ -14,11 +10,11 @@ namespace Teams.ReadHost.Teams
         IHandle<TeamCreated>
     {
         public IEnumerable<PlayerDto> PlayerList { get; set; } = new List<PlayerDto>();
-        public StringIdentity RaceId { get; set; }
+        public string RaceId { get; set; }
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; private set; } = new List<AllowedPlayer>();
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
-        public Identity TeamId { get; set; }
+        public string TeamId { get; set; }
         public GoldCoins TeamChest { get; set; }
         public bool IsFinished { get; set; }
 

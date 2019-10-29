@@ -1,11 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microwave.Domain.Identities;
-using Microwave.Queries;
 using ReadHosts.Common;
 using ServiceConfig;
 using Teams.ReadHost.Players;
@@ -40,18 +32,18 @@ namespace Teams.ReadHost.Pages
 
                     if (freeSkillPoint >= FreeSkillPoint.PlusOneArmorOrMovement)
                     {
-                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == StringIdentity.Create("PlusOneArmor")));
-                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == StringIdentity.Create("PlusOneMovement")));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == string.Create("PlusOneArmor")));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == string.Create("PlusOneMovement")));
                     }
 
                     if (freeSkillPoint >= FreeSkillPoint.PlusOneAgility)
                     {
-                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == StringIdentity.Create("PlusOneAgility")));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == string.Create("PlusOneAgility")));
                     }
 
                     if (freeSkillPoint == FreeSkillPoint.PlusOneStrength)
                     {
-                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == StringIdentity.Create("PlusOneStrength")));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == string.Create("PlusOneStrength")));
                     }
                 }
 
@@ -71,7 +63,7 @@ namespace Teams.ReadHost.Pages
 
         public async Task OnGet()
         {
-            var resultPlayer = await _readModelRepository.LoadAsync<PlayerReadModel>(GuidIdentity.Create(PlayerId));
+            var resultPlayer = await _readModelRepository.LoadAsync<PlayerReadModel>(Guid.Create(PlayerId));
             var resultSkills = await _readModelRepository.LoadAllAsync<SkillReadModel>();
             Player = resultPlayer.Value;
             _skills = resultSkills.Value;

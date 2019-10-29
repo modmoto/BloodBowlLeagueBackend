@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using Domain.Races.Skills;
-using Microwave.Domain.Identities;
 
 namespace Domain.Races.Races
 {
     public class AllowedPlayer
     {
         private AllowedPlayer(
-            StringIdentity playerTypeId,
+            string playerTypeId,
             int maximumPlayers,
             GoldCoins cost,
             IEnumerable<Skill> startingSkills,
@@ -22,7 +21,7 @@ namespace Domain.Races.Races
             SkillsOnDouble = skillsOnDouble;
         }
 
-        public StringIdentity PlayerTypeId { get; }
+        public string PlayerTypeId { get; }
         public int MaximumPlayers { get; }
         public GoldCoins Cost { get; }
         public IEnumerable<Skill> StartingSkills { get; }
@@ -32,7 +31,7 @@ namespace Domain.Races.Races
         // DarkElves
         public static AllowedPlayer DarkElveLineMan =>
             new AllowedPlayer(
-                StringIdentity.Create("DE_LineMan"),
+                string.Create("DE_LineMan"),
                 16,
                 new GoldCoins(70000),
                 new List<Skill>(),
@@ -41,7 +40,7 @@ namespace Domain.Races.Races
 
         public static AllowedPlayer DarkElveAssasine =>
             new AllowedPlayer(
-                StringIdentity.Create("DE_Assassine"),
+                string.Create("DE_Assassine"),
                 2,
                 new GoldCoins(90000),
                 new [] { Skill.Shadowing, Skill.Stab },
@@ -50,7 +49,7 @@ namespace Domain.Races.Races
 
         public static AllowedPlayer DarkElveBlitzer =>
             new AllowedPlayer(
-                StringIdentity.Create("DE_Blitzer"),
+                string.Create("DE_Blitzer"),
                 4,
                 new GoldCoins(100000),
                 new [] { Skill.Block },
@@ -59,7 +58,7 @@ namespace Domain.Races.Races
 
         public static AllowedPlayer DarkElveWitchElve =>
             new AllowedPlayer(
-                StringIdentity.Create("DE_WitchElve"),
+                string.Create("DE_WitchElve"),
                 2,
                 new GoldCoins(110000),
                 new [] { Skill.Dodge, Skill.JumpUp, Skill.Frenzy },
@@ -67,7 +66,7 @@ namespace Domain.Races.Races
                 new [] { SkillType.General });
         public static AllowedPlayer DarkElveRunner =>
             new AllowedPlayer(
-                StringIdentity.Create("DE_Runner"),
+                string.Create("DE_Runner"),
                 2,
                 new GoldCoins(80000),
                 new [] { Skill.DumpOff },
@@ -77,7 +76,7 @@ namespace Domain.Races.Races
         // Humans
         public static AllowedPlayer HumanLineMan =>
             new AllowedPlayer(
-                StringIdentity.Create("HU_LineMan"),
+                string.Create("HU_LineMan"),
                 16,
                 new GoldCoins(50000),
                 new List<Skill>(),
@@ -86,7 +85,7 @@ namespace Domain.Races.Races
 
         public static AllowedPlayer HumanBlitzer =>
             new AllowedPlayer(
-                StringIdentity.Create("HU_Blitzer"),
+                string.Create("HU_Blitzer"),
                 4,
                 new GoldCoins(90000),
                 new [] { Skill.Block },
@@ -95,7 +94,7 @@ namespace Domain.Races.Races
 
         public static AllowedPlayer HumanCatcher =>
             new AllowedPlayer(
-                StringIdentity.Create("HU_Catcher"),
+                string.Create("HU_Catcher"),
                 4,
                 new GoldCoins(70000),
                 new [] { Skill.Catch, Skill.Dodge },
@@ -104,7 +103,7 @@ namespace Domain.Races.Races
 
         public static AllowedPlayer HumanThrower =>
             new AllowedPlayer(
-                StringIdentity.Create("HU_Thrower"),
+                string.Create("HU_Thrower"),
                 2,
                 new GoldCoins(70000),
                 new [] { Skill.SureHands, Skill.Pass },
@@ -113,7 +112,7 @@ namespace Domain.Races.Races
 
         public static AllowedPlayer HumanOgre =>
             new AllowedPlayer(
-                StringIdentity.Create("HU_Ogre"),
+                string.Create("HU_Ogre"),
                 1,
                 new GoldCoins(140000),
                 new [] { Skill.MightyBlow },
@@ -123,7 +122,7 @@ namespace Domain.Races.Races
         // Dwarfs
         public static AllowedPlayer DwarfBlocker =>
             new AllowedPlayer(
-                StringIdentity.Create("DW_Blocker"),
+                string.Create("DW_Blocker"),
                 16,
                 new GoldCoins(70000),
                 new List<Skill>(),
@@ -132,7 +131,7 @@ namespace Domain.Races.Races
 
         public static AllowedPlayer DwarfRunner =>
             new AllowedPlayer(
-                StringIdentity.Create("DW_Runner"),
+                string.Create("DW_Runner"),
                 2,
                 new GoldCoins(80000),
                 new [] { Skill.Block },
@@ -141,7 +140,7 @@ namespace Domain.Races.Races
 
         public static AllowedPlayer DwarfBlitzer =>
             new AllowedPlayer(
-                StringIdentity.Create("DW_Blitzer"),
+                string.Create("DW_Blitzer"),
                 2,
                 new GoldCoins(80000),
                 new [] { Skill.Block },
@@ -150,7 +149,7 @@ namespace Domain.Races.Races
 
         public static AllowedPlayer DwarfTrollSlayer =>
             new AllowedPlayer(
-                StringIdentity.Create("DW_TrollSlayer"),
+                string.Create("DW_TrollSlayer"),
                 2,
                 new GoldCoins(90000),
                 new [] { Skill.Dodge },
@@ -159,7 +158,7 @@ namespace Domain.Races.Races
 
         public static AllowedPlayer DwarfDeathRoller =>
             new AllowedPlayer(
-                StringIdentity.Create("DW_DeathRoller"),
+                string.Create("DW_DeathRoller"),
                 1,
                 new GoldCoins(160000),
                 new [] { Skill.Dodge },

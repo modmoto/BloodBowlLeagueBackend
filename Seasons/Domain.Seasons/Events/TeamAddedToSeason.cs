@@ -1,18 +1,18 @@
-﻿using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
+﻿using System;
+using Microwave.Domain;
 
 namespace Domain.Seasons.Events
 {
     public class TeamAddedToSeason : IDomainEvent
     {
-        public TeamAddedToSeason(GuidIdentity seasonId, GuidIdentity teamId)
+        public TeamAddedToSeason(Guid seasonId, Guid teamId)
         {
             SeasonId = seasonId;
             TeamId = teamId;
         }
 
-        public Identity EntityId => SeasonId;
-        public GuidIdentity SeasonId { get; }
-        public GuidIdentity TeamId { get; }
+        public string EntityId => SeasonId;
+        public Guid SeasonId { get; }
+        public Guid TeamId { get; }
     }
 }

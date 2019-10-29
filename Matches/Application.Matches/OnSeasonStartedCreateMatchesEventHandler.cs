@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Domain.Matches;
-using Microwave.Domain.EventSourcing;
-using Microwave.EventStores;
+using Microwave.Domain;
+using Microwave.EventStores.Ports;
 using Microwave.Queries;
 
 namespace Application.Matches

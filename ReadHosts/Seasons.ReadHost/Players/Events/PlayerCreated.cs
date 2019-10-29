@@ -1,14 +1,11 @@
-using Microwave.Domain.Identities;
-using Microwave.Queries;
-
 namespace Seasons.ReadHost.Players.Events
 {
     public class PlayerCreated : ISubscribedDomainEvent
     {
         public PlayerCreated(
-            GuidIdentity playerId,
+            Guid playerId,
             PlayerConfig playerConfig,
-            GuidIdentity teamId,
+            Guid teamId,
             string name)
         {
             PlayerId = playerId;
@@ -18,20 +15,20 @@ namespace Seasons.ReadHost.Players.Events
         }
 
         public string Name { get; }
-        public GuidIdentity PlayerId { get; }
+        public Guid PlayerId { get; }
         public PlayerConfig PlayerConfig { get; }
-        public GuidIdentity TeamId { get; }
-        public Identity EntityId => PlayerId;
+        public Guid TeamId { get; }
+        public string EntityId => PlayerId;
     }
 
     public class PlayerConfig
     {
         public PlayerConfig(
-            StringIdentity playerTypeId)
+            string playerTypeId)
         {
             PlayerTypeId = playerTypeId;
         }
 
-        public StringIdentity PlayerTypeId { get; }
+        public string PlayerTypeId { get; }
     }
 }

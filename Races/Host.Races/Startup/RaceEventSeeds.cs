@@ -1,10 +1,7 @@
-using System.Collections.Generic;
 using Domain.Races.Races;
 using Domain.Races.Races.DomainEvents;
 using Domain.Races.Skills;
 using Domain.Races.Skills.DomainEvents;
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
 
 namespace Host.Races.Startup
 {

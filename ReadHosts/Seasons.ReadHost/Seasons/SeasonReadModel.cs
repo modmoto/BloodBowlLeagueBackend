@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using Microwave.Domain.Identities;
-using Microwave.Queries;
 using Seasons.ReadHost.Seasons.Events;
 
 namespace Seasons.ReadHost.Seasons
@@ -10,9 +7,9 @@ namespace Seasons.ReadHost.Seasons
         IHandle<SeasonStarted>,
         IHandle<TeamAddedToSeason>
     {
-        public GuidIdentity SeasonId { get; set; }
+        public Guid SeasonId { get; set; }
         public IEnumerable<GameDayDto> GameDays { get; set; }
-        public IList<GuidIdentity> Teams { get; } = new List<GuidIdentity>();
+        public IList<Guid> Teams { get; } = new List<Guid>();
 
         public string SeasonName { get; set; }
 

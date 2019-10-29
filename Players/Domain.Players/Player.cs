@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Domain.Players.DomainErrors;
 using Domain.Players.Events.Players;
-using Microwave.Domain.EventSourcing;
-using Microwave.Domain.Identities;
-using Microwave.Domain.Validation;
+using Microwave.Domain;
 
 namespace Domain.Players
 {
@@ -17,7 +16,7 @@ namespace Domain.Players
         IApply<PlayerMadeTouchdown>,
         IApply<PlayerMadeCasualty>
     {
-        public GuidIdentity PlayerId { get; private set; }
+        public Guid PlayerId { get; private set; }
         public PlayerConfig PlayerConfig { get; private set; }
         public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
         public IEnumerable<SkillReadModel> CurrentSkills { get; private set; } = new List<SkillReadModel>();
@@ -28,8 +27,8 @@ namespace Domain.Players
         private readonly IEnumerable<int> _levelUpPoints = new[] { 6, 16, 31, 51, 76, 176 };
 
         public static DomainResult Create(
-            GuidIdentity playerId,
-            GuidIdentity teamId,
+            Guid playerId,
+            Guid teamId,
             AllowedPlayer allowedPlayer,
             string name)
         {
