@@ -4,7 +4,7 @@
 @model Pages.TeamModel
 
 <div class="my-2 my-lg-0 p-3 ml-auto">
-    <h3 class="pb-3">Team: @Model.Team.TeamName (@Model.Team.TrainerName) @RaceTranslations.ResourceManager.GetString(@Model.Team.RaceId.Id), G: @Model.Team.TeamChest.Value</h3>
+    <h3 class="pb-3">Team: @Model.Team.TeamName (@Model.Team.TrainerName) @RaceTranslations.ResourceManager.GetString(@Model.Team.RaceId), G: @Model.Team.TeamChest.Value</h3>
     <h3>Players:</h3>
     <ul class="list-group pb-3 mb-1 pl-3">
         @if (Model.Team.IsFinished)
@@ -23,10 +23,10 @@
                                 </em>
                             }
                         }
-                        @player.Name @RaceTranslations.ResourceManager.GetString(player.PlayerTypeId.Id) <e>SSP: @player.StarPlayerPoints</e>
+                        @player.Name @RaceTranslations.ResourceManager.GetString(player.PlayerTypeId) <e>SSP: @player.StarPlayerPoints</e>
                         @if (player.Skills.Any())
                         {
-                            string.Join(", ", player.Skills.Select(s => s.Id));
+                            string.Join(", ", player.Skills.Select(s => s));
                         }
                     </div>
                 </a>
@@ -39,11 +39,11 @@
             {
                 <li class="list-group-item">
                     <div class="float-left">
-                        @(counter++). @RaceTranslations.ResourceManager.GetString(player.PlayerTypeId.Id)
+                        @(counter++). @RaceTranslations.ResourceManager.GetString(player.PlayerTypeId)
                     </div>
                     <form method="post"
                         asp-page-handler="RemovePlayer"
-                        asp-route-playerId="@player.PlayerId.Guid"
+                        asp-route-playerId="@player.PlayerId"
                         class="float-right">
                         <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Remove Player</button>
                     </form>
@@ -57,8 +57,8 @@
              <select class="form-control" id="playerTypeSelectBox" name="playerType">
                  @foreach (var playerOption in Model.Team.AllowedPlayers)
                  {
-                     <option value="@playerOption.PlayerTypeId.Id">
-                         @RaceTranslations.ResourceManager.GetString(playerOption.PlayerTypeId.Id) (@(playerOption.Cost.Value.ToString("N0")) G)
+                     <option value="@playerOption.PlayerTypeId">
+                         @RaceTranslations.ResourceManager.GetString(playerOption.PlayerTypeId) (@(playerOption.Cost.Value.ToString("N0")) G)
                      </option>
                  }
              </select>

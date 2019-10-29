@@ -11,7 +11,7 @@
              {
                  <a href="Team/@team.TeamId" class="list-group-item list-group-item-action">
                      <div class="d-flex w-100 justify-content-between">
-                         <h5 class="mb-1">@team.TeamName (@team.TrainerName, @RaceTranslations.ResourceManager.GetString(team.RaceId.Id))</h5>
+                         <h5 class="mb-1">@team.TeamName (@team.TrainerName, @RaceTranslations.ResourceManager.GetString(team.RaceId))</h5>
                          @if (!team.IsFinished)
                           {
                               <div class="float-right">
@@ -36,8 +36,8 @@
                 <select class="form-control" id="teamSelectBox" name="raceIdDropDownInput">
                     @foreach (var team in Model.AllRaces)
                     {
-                    <option value="@team.RaceConfigId.Id">
-                        @RaceTranslations.ResourceManager.GetString(team.RaceConfigId.Id)
+                    <option value="@team.RaceConfigId">
+                        @RaceTranslations.ResourceManager.GetString(team.RaceConfigId)
                     </option>
                     }
                 </select>

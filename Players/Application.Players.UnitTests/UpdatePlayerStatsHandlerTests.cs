@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 using Domain.Players;
 using Domain.Players.Events.ForeignEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microwave.Application.Exceptions;
-using Microwave.Domain;
 using Microwave.Domain.EventSourcing;
 using Microwave.Domain.Exceptions;
+using Microwave.Domain.Results;
 using Microwave.EventStores;
-using Microwave.EventStores.Ports;
 using Moq;
 
 namespace Application.Players.UnitTests
@@ -31,7 +29,7 @@ namespace Application.Players.UnitTests
         [TestMethod]
         public async Task UploadNewStatEvent_HappyPath()
         {
-            var identity = Guid.Create(Guid.NewGuid());
+            var identity = Guid.NewGuid();
             _eventStore.Setup(es => es.LoadAsync<Player>(identity))
                 .ReturnsAsync(EventStoreResult<Player>.Ok(new Player(), 0));
 
@@ -46,10 +44,10 @@ namespace Application.Players.UnitTests
         public async Task UploadNewStatEvent_PlayerNotFound()
         {
             _eventStore.Setup(es => es.LoadAsync<Player>(It.IsAny<Guid>()))
-                .ReturnsAsync(EventStoreResult<Player>.NotFound(Guid.NewGuid()));
+                .ReturnsAsync(EventStoreResult<Player>.NotFound(Guid.NewGuid().ToString()));
 
             var onMatchUploadedUpdatePlayerProgress = new OnMatchFinishedUpdatePlayerProgress(_eventStore.Object);
-            var matchResultUploaded = MatchResultUploaded(Guid.Create(Guid.NewGuid()));
+            var matchResultUploaded = MatchResultUploaded(Guid.NewGuid());
 
             await Assert.ThrowsExceptionAsync<NotFoundException>(
                 async () => await onMatchUploadedUpdatePlayerProgress.HandleAsync(matchResultUploaded));

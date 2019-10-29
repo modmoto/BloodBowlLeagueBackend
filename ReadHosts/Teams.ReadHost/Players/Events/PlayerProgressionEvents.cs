@@ -1,3 +1,6 @@
+using System;
+using Microwave.Queries;
+
 namespace Teams.ReadHost.Players.Events
 {
     public class PlayerPassed : ISubscribedDomainEvent
@@ -10,7 +13,7 @@ namespace Teams.ReadHost.Players.Events
 
         public Guid PlayerId { get; }
         public long NewStarPlayerPoints { get; }
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
     }
 
     public class PlayerWasNominatedMostValuablePlayer : ISubscribedDomainEvent
@@ -23,7 +26,7 @@ namespace Teams.ReadHost.Players.Events
 
         public Guid PlayerId { get; }
         public long NewStarPlayerPoints { get; }
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
     }
 
     public class PlayerMadeTouchdown : ISubscribedDomainEvent
@@ -36,7 +39,7 @@ namespace Teams.ReadHost.Players.Events
 
         public Guid PlayerId { get; }
         public long NewStarPlayerPoints { get; }
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
     }
 
     public class PlayerMadeCasualty : ISubscribedDomainEvent
@@ -49,6 +52,6 @@ namespace Teams.ReadHost.Players.Events
 
         public Guid PlayerId { get; }
         public long NewStarPlayerPoints { get; }
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
     }
 }

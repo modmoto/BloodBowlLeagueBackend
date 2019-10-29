@@ -12,7 +12,7 @@ namespace Domain.Races.Races.DomainEvents
         }
 
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; }
-        public string EntityId => RaceId.ToString();
+        public string EntityId => RaceId;
         public string RaceId { get; }
     }
 }

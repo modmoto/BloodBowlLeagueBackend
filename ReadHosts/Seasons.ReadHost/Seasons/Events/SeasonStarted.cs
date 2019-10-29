@@ -13,7 +13,7 @@ namespace Seasons.ReadHost.Seasons.Events
             StartDate = startDate;
         }
 
-        public string EntityId => SeasonId;
+        public string EntityId => SeasonId.ToString();
         public Guid SeasonId { get; }
         public IEnumerable<GameDayDto> GameDays { get; }
         public DateTimeOffset StartDate { get; }

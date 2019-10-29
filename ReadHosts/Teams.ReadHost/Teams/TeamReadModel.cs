@@ -1,4 +1,8 @@
-﻿using Teams.ReadHost.Teams.Events;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microwave.Queries;
+using Teams.ReadHost.Teams.Events;
 
 namespace Teams.ReadHost.Teams
 {
@@ -14,7 +18,7 @@ namespace Teams.ReadHost.Teams
         public IEnumerable<AllowedPlayer> AllowedPlayers { get; private set; } = new List<AllowedPlayer>();
         public string TrainerName { get; set; }
         public string TeamName { get; set; }
-        public string TeamId { get; set; }
+        public Guid TeamId { get; set; }
         public GoldCoins TeamChest { get; set; }
         public bool IsFinished { get; set; }
 

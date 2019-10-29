@@ -10,6 +10,6 @@ namespace Domain.Matches.ForeignEvents
             TeamId = teamId;
         }
         public Guid TeamId { get; }
-        public string EntityId => TeamId;
+        public string EntityId => TeamId.ToString();
     }
 }

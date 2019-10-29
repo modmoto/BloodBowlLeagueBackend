@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microwave.Domain.Results;
 using Microwave.Queries;
 using ReadHosts.Common;
 using Seasons.ReadHost.Matches;
@@ -35,7 +36,7 @@ namespace Seasons.ReadHost.Pages
 
         public async Task OnGet()
         {
-            var season = await _readModelRepository.LoadAsync<SeasonReadModel>(Guid.Create(SeasonId));
+            var season = await _readModelRepository.LoadAsync<SeasonReadModel>(SeasonId);
             var teams = await _readModelRepository.LoadAllAsync<TeamReadModel>();
             var matches = await _readModelRepository.LoadAllAsync<MatchupReadModel>();
             if (season.Is<Ok>())

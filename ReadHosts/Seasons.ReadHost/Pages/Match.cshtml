@@ -26,7 +26,7 @@
                             @foreach (var playerId in Model.AllPlayers)
                             {
                                 <option value="@playerId">
-                                    @Model.FullPlayer(playerId).Name (@RaceTranslations.ResourceManager.GetString(Model.FullPlayer(playerId).PlayerConfig.PlayerTypeId.Id))
+                                    @Model.FullPlayer(playerId).Name (@RaceTranslations.ResourceManager.GetString(Model.FullPlayer(playerId).PlayerConfig.PlayerTypeId))
                                 </option>
                             }
                         </select>

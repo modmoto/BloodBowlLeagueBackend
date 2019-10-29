@@ -1,10 +1,13 @@
+using System;
+using System.Collections.Generic;
+using Microwave.Queries;
 using Teams.ReadHost.Races;
 
 namespace Teams.ReadHost.Players.Events
 {
     public class SkillChosen : ISubscribedDomainEvent
     {
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
         public Guid PlayerId { get; }
         public SkillReadModel NewSkill { get; }
         public IEnumerable<FreeSkillPoint> NewFreeSkillPoints { get; }

@@ -1,3 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microwave.Queries;
 using ReadHosts.Common;
 using ServiceConfig;
 using Teams.ReadHost.Players;
@@ -32,18 +39,18 @@ namespace Teams.ReadHost.Pages
 
                     if (freeSkillPoint >= FreeSkillPoint.PlusOneArmorOrMovement)
                     {
-                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == "PlusOneArmor")));
-                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == "PlusOneMovement")));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == "PlusOneArmor"));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == "PlusOneMovement"));
                     }
 
                     if (freeSkillPoint >= FreeSkillPoint.PlusOneAgility)
                     {
-                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == "PlusOneAgility")));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == "PlusOneAgility"));
                     }
 
                     if (freeSkillPoint == FreeSkillPoint.PlusOneStrength)
                     {
-                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == "PlusOneStrength")));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == "PlusOneStrength"));
                     }
                 }
 
@@ -63,7 +70,7 @@ namespace Teams.ReadHost.Pages
 
         public async Task OnGet()
         {
-            var resultPlayer = await _readModelRepository.LoadAsync<PlayerReadModel>(Guid.Create(PlayerId));
+            var resultPlayer = await _readModelRepository.LoadAsync<PlayerReadModel>(PlayerId);
             var resultSkills = await _readModelRepository.LoadAllAsync<SkillReadModel>();
             Player = resultPlayer.Value;
             _skills = resultSkills.Value;

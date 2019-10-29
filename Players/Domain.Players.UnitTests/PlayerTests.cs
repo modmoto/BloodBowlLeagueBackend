@@ -81,7 +81,7 @@ namespace Domain.Players.UnitTests
         {
             return new SkillReadModel
             {
-                SkillId = "Block"),
+                SkillId = "Block",
                 SkillType = SkillType.General
             };
         }
@@ -90,7 +90,7 @@ namespace Domain.Players.UnitTests
         {
             return new SkillReadModel
             {
-                SkillId = "PlusOneStrength"),
+                SkillId = "PlusOneStrength",
                 SkillType = SkillType.PlusOneStrength
             };
         }
@@ -99,7 +99,7 @@ namespace Domain.Players.UnitTests
         {
             return new SkillReadModel
             {
-                SkillId = "Pass"),
+                SkillId = "Pass",
                 SkillType = SkillType.Passing
             };
         }
@@ -212,7 +212,7 @@ namespace Domain.Players.UnitTests
             IEnumerable<SkillType> doubleSkills = null)
         {
             var playerConfig = new PlayerConfig(
-                "whatever"),
+                "whatever",
                 new List<SkillReadModel>(),
                 defaultSkills ?? new[] {SkillType.General},
                 doubleSkills ?? new[] {SkillType.Passing});

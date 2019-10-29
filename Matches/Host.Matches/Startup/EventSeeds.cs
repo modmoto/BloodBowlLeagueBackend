@@ -12,33 +12,33 @@ namespace Host.Matches.Startup
         {
             get
             {
-                var teamAtHome = Guid.Create(new Guid("2798435C-9C72-4ECE-BD7D-00BECBACCED7"));
-                var teamAsGuest = Guid.Create(new Guid("406D35EE-421A-4D45-9F34-1834D5ACD215"));
+                var teamAtHome = new Guid("2798435C-9C72-4ECE-BD7D-00BECBACCED7");
+                var teamAsGuest = new Guid("406D35EE-421A-4D45-9F34-1834D5ACD215");
                 var matchCreated = new MatchCreated(
-                    Guid.Create(new Guid("8A8CF5CC-1027-44BF-A9B7-B294856396B0")),
+                    new Guid("8A8CF5CC-1027-44BF-A9B7-B294856396B0"),
                     teamAtHome,
                     teamAsGuest
                 );
 
-                var playerHome = Guid.Create(new Guid("EC48B7FF-B76D-471F-99B0-761EC43C4101"));
-                var playerGuest = Guid.Create(new Guid("9CF84B11-5852-4D09-BB08-5357E6DA04C8"));
+                var playerHome = new Guid("EC48B7FF-B76D-471F-99B0-761EC43C4101");
+                var playerGuest = new Guid("9CF84B11-5852-4D09-BB08-5357E6DA04C8");
                 var matchStarted = new MatchStarted(
                     matchCreated.MatchId,
                     new List<Guid>
                     {
 
                         playerHome,
-                        Guid.Create(new Guid("C2DEDB29-C59D-4D8F-B854-6B44D04E6C7A")),
-                        Guid.Create(new Guid("E86E63E2-8C3C-4CFF-8719-68BD844CD7F7")),
+                        new Guid("C2DEDB29-C59D-4D8F-B854-6B44D04E6C7A"),
+                        new Guid("E86E63E2-8C3C-4CFF-8719-68BD844CD7F7"),
                     },
                     new List<Guid>
                     {
                         playerGuest,
-                        Guid.Create(new Guid("1796B724-B55F-47A3-A498-153379C516EA")),
+                        new Guid("1796B724-B55F-47A3-A498-153379C516EA"),
                     });
 
                 var matchCreated2 = new MatchCreated(
-                    Guid.Create(new Guid("D1660304-1AAF-45C9-A980-1B519E9CAF9C")),
+                    new Guid("D1660304-1AAF-45C9-A980-1B519E9CAF9C"),
                     teamAtHome,
                     teamAsGuest
                 );
@@ -49,13 +49,13 @@ namespace Host.Matches.Startup
                     {
 
                         playerHome,
-                        Guid.Create(new Guid("C2DEDB29-C59D-4D8F-B854-6B44D04E6C7A")),
-                        Guid.Create(new Guid("E86E63E2-8C3C-4CFF-8719-68BD844CD7F7")),
+                        new Guid("C2DEDB29-C59D-4D8F-B854-6B44D04E6C7A"),
+                        new Guid("E86E63E2-8C3C-4CFF-8719-68BD844CD7F7"),
                     },
                     new List<Guid>
                     {
                         playerGuest,
-                        Guid.Create(new Guid("1796B724-B55F-47A3-A498-153379C516EA")),
+                        new Guid("1796B724-B55F-47A3-A498-153379C516EA"),
                     });
 
                 var matchProgressed = new MatchProgressed(

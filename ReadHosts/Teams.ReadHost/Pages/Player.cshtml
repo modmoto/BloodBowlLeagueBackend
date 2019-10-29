@@ -5,7 +5,7 @@
 <div class="my-2 my-lg-0 p-3 ml-auto">
     <h3>@Model.Player.Name (Lvl: @Model.Player.Level)</h3>
     <h3>SSP: @Model.Player.StarPlayerPoints</h3>
-    <h3>Skills: @string.Join(',', Model.Player.Skills.Select(s => RaceTranslations.ResourceManager.GetString($"Skill_{s.Id}")))</h3>
+    <h3>Skills: @string.Join(',', Model.Player.Skills.Select(s => RaceTranslations.ResourceManager.GetString($"Skill_{s}")))</h3>
     @if (Model.Player.HasFreeSkill)
     {
         <h5>Player has a free skill point of: @string.Join(',', Model.Player.FreeSkillPoints.Select(s => RaceTranslations.ResourceManager.GetString($"FreeSkillPoint_{s.ToString()}")))</h5>
@@ -15,7 +15,7 @@
                     @foreach (var skill in Model.RelevantSkills)
                     {
                         <option value="@skill.SkillId">
-                            @RaceTranslations.ResourceManager.GetString($"Skill_{skill.SkillId.Id}")
+                            @RaceTranslations.ResourceManager.GetString($"Skill_{skill.SkillId}")
                             @{
                                 var value = RaceTranslations.ResourceManager.GetString($"SkillType_{skill.SkillType.ToString()}");
                                 if (value != null)

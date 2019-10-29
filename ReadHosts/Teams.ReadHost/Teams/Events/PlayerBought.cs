@@ -1,4 +1,7 @@
-﻿namespace Teams.ReadHost.Teams.Events
+﻿using System;
+using Microwave.Queries;
+
+namespace Teams.ReadHost.Teams.Events
 {
     public class PlayerBought : ISubscribedDomainEvent
     {
@@ -18,6 +21,6 @@
         public GoldCoins NewTeamChestBalance { get; }
         public string PlayerTypeId { get; }
         public Guid PlayerId { get; }
-        public string EntityId => TeamId;
+        public string EntityId => TeamId.ToString();
     }
 }

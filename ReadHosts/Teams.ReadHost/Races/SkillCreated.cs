@@ -1,3 +1,5 @@
+using Microwave.Queries;
+
 namespace Teams.ReadHost.Races
 {
     public class SkillCreated : ISubscribedDomainEvent

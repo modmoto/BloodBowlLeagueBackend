@@ -65,17 +65,17 @@ namespace Domain.Matches.UnitTests
             Assert.IsTrue(progressMatch.DomainErrors.Single().GetType() == typeof(PlayerWasNotPartOfTheTeamWhenStartingTheMatch));
         }
 
-        private static PlayerProgression PlayerProgressionTouchdown(Guid playerId)
+        private static PlayerProgression PlayerProgressionTouchdown(Guid? playerId)
         {
             playerId = playerId ?? Guid.NewGuid();
-            var playerProgression = new PlayerProgression(playerId, ProgressionEvent.PlayerMadeTouchdown);
+            var playerProgression = new PlayerProgression(playerId.Value, ProgressionEvent.PlayerMadeTouchdown);
             return playerProgression;
         }
 
-        private static PlayerProgression PlayerProgressionNormal(Guid playerId)
+        private static PlayerProgression PlayerProgressionNormal(Guid? playerId)
         {
             playerId = playerId ?? Guid.NewGuid();
-            var playerProgression = new PlayerProgression(playerId, ProgressionEvent.PlayerPassed);
+            var playerProgression = new PlayerProgression(playerId.Value, ProgressionEvent.PlayerPassed);
             return playerProgression;
         }
 

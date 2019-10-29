@@ -21,7 +21,7 @@ namespace Seasons.ReadHost.Players.Events
         public Guid PlayerId { get; }
         public PlayerConfig PlayerConfig { get; }
         public Guid TeamId { get; }
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
     }
 
     public class PlayerConfig

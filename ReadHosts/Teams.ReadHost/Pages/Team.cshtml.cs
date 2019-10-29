@@ -1,3 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microwave.Queries;
 using ReadHosts.Common;
 using ServiceConfig;
 using Teams.ReadHost.Players;
@@ -28,7 +35,7 @@ namespace Teams.ReadHost.Pages
 
         public async Task OnGet()
         {
-            var result = await _readModelRepository.LoadAsync<TeamReadModel>(Guid.Create(TeamId));
+            var result = await _readModelRepository.LoadAsync<TeamReadModel>(TeamId);
             var players = await _readModelRepository.LoadAllAsync<PlayerReadModel>();
 
             var team = result.Value;
@@ -42,7 +49,7 @@ namespace Teams.ReadHost.Pages
         public async Task<IActionResult> OnPostAddPlayer()
         {
             var playerTypeId = Request.Form["playerType"].ToString();
-            var result = await _readModelRepository.LoadAsync<TeamReadModel>(Guid.Create(TeamId));
+            var result = await _readModelRepository.LoadAsync<TeamReadModel>(TeamId);
 
             await _mitigator.PostAsync(
                 new Uri($"{ServiceConfiguration.TeamHost}Api/Teams/{TeamId}/buy-player"),
@@ -52,7 +59,7 @@ namespace Teams.ReadHost.Pages
 
         public async Task<IActionResult> OnPostRemovePlayer(Guid playerId)
         {
-            var result = await _readModelRepository.LoadAsync<TeamReadModel>(Guid.Create(TeamId));
+            var result = await _readModelRepository.LoadAsync<TeamReadModel>(TeamId);
 
             await _mitigator.PostAsync(
                 new Uri($"{ServiceConfiguration.TeamHost}Api/Teams/{TeamId}/remove-player"),
@@ -62,7 +69,7 @@ namespace Teams.ReadHost.Pages
 
         public async Task<IActionResult> OnPostFinishTeam()
         {
-            var result = await _readModelRepository.LoadAsync<TeamReadModel>(Guid.Create(TeamId));
+            var result = await _readModelRepository.LoadAsync<TeamReadModel>(TeamId);
 
             await _mitigator.PostAsync(
                 new Uri($"{ServiceConfiguration.TeamHost}Api/Teams/{TeamId}/finish"),

@@ -6,7 +6,7 @@ namespace Domain.Races.Races.DomainEvents
 {
     public class PlayerConfigCreated : IDomainEvent
     {
-        public string EntityId => PlayerConfigId.ToString();
+        public string EntityId => PlayerConfigId;
         public string PlayerConfigId { get; }
         public IEnumerable<Skill> StartingSkills { get; }
         public IEnumerable<SkillType> SkillsOnDefault { get; }

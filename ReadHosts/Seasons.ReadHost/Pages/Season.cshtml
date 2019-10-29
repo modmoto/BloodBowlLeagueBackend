@@ -50,7 +50,7 @@
              {
                  <a href="@(ServiceConfiguration.TeamReadHost)Team/@team.TeamId" class="list-group-item list-group-item-action">
                      <div class="d-flex w-100 justify-content-between">
-                         <h5 class="mb-1">@team.TeamName (@(team.TrainerName), @RaceTranslations.ResourceManager.GetString(team.RaceId.Id))</h5>
+                         <h5 class="mb-1">@team.TeamName (@(team.TrainerName), @RaceTranslations.ResourceManager.GetString(team.RaceId))</h5>
                      </div>
                  </a>
              }
@@ -62,7 +62,7 @@
                         @foreach (var team in Model.Teams)
                         {
                             <option value="@team.TeamId.ToString()">
-                                @(team.TeamName) (@(team.TrainerName), @RaceTranslations.ResourceManager.GetString(team.RaceId.Id))
+                                @(team.TeamName) (@(team.TrainerName), @RaceTranslations.ResourceManager.GetString(team.RaceId))
                             </option>
                         }
                     </select>

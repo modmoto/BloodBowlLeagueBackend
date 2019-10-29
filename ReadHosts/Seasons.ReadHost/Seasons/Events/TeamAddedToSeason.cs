@@ -11,7 +11,7 @@ namespace Seasons.ReadHost.Seasons.Events
             TeamId = teamId;
         }
 
-        public string EntityId => SeasonId;
+        public string EntityId => SeasonId.ToString();
         public Guid SeasonId { get; }
         public Guid TeamId { get; }
     }

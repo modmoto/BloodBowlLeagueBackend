@@ -14,7 +14,7 @@ namespace Application.Matches
 
         public Guid SeasonId { get; }
         public IEnumerable<GameDayDto> GameDays { get; }
-        public string EntityId => SeasonId;
+        public string EntityId => SeasonId.ToString();
     }
 
     public class GameDayDto

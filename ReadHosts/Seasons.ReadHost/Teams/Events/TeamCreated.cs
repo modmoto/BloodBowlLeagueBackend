@@ -17,7 +17,7 @@ namespace Seasons.ReadHost.Teams.Events
             TrainerName = trainerName;
         }
 
-        public string EntityId => TeamId;
+        public string EntityId => TeamId.ToString();
         public string RaceId { get; }
         public string TeamName { get; }
         public string TrainerName { get; }

@@ -6,7 +6,7 @@ namespace Domain.Matches.Events
 {
     public class MatchProgressed : IDomainEvent
     {
-        public string EntityId => MatchId;
+        public string EntityId => MatchId.ToString();
         public Guid MatchId { get; }
         public PlayerProgression PlayerProgression { get; }
         public GameResult GameResult { get; }

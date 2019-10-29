@@ -10,7 +10,7 @@ namespace Domain.Matches.Events
         public IEnumerable<Guid>  HomeTeam { get; }
         public IEnumerable<Guid>  GuestTeam { get; }
 
-        public string EntityId => MatchId;
+        public string EntityId => MatchId.ToString();
         public Guid MatchId { get; }
 
         public MatchStarted(Guid matchId, IEnumerable<Guid> homeTeam, IEnumerable<Guid>

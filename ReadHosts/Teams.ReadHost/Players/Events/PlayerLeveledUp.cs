@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using Microwave.Queries;
+
 namespace Teams.ReadHost.Players.Events
 {
     public class PlayerLeveledUp : ISubscribedDomainEvent
@@ -12,7 +16,7 @@ namespace Teams.ReadHost.Players.Events
             NewLevel = newLevel;
         }
 
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
         public Guid PlayerId { get; }
         public IEnumerable<FreeSkillPoint> NewFreeSkillPoints { get; }
         public int NewLevel { get; }

@@ -1,4 +1,8 @@
-﻿namespace Teams.ReadHost.Teams.Events
+﻿using System;
+using System.Collections.Generic;
+using Microwave.Queries;
+
+namespace Teams.ReadHost.Teams.Events
 {
     public class TeamDraftCreated : ISubscribedDomainEvent
     {
@@ -18,7 +22,7 @@
             StartingMoney = startingMoney;
         }
 
-        public string EntityId => TeamId;
+        public string EntityId => TeamId.ToString();
         public string RaceId { get; }
         public string TeamName { get; }
         public string TrainerName { get; }

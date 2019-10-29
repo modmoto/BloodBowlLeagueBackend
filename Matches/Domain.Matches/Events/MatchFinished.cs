@@ -18,7 +18,7 @@ namespace Domain.Matches.Events
         }
 
         public Guid MatchId { get; }
-        public string EntityId => MatchId;
+        public string EntityId => MatchId.ToString();
         public IEnumerable<PlayerProgression> PlayerProgressions { get; }
         public GameResult GameResult { get; }
     }

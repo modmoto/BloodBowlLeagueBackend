@@ -46,7 +46,7 @@ namespace Seasons.ReadHost.Pages
 
         public async Task OnGet()
         {
-            var result = await _readModelRepository.LoadAsync<MatchupReadModel>(Guid.Create(MatchId));
+            var result = await _readModelRepository.LoadAsync<MatchupReadModel>(MatchId);
             var teamResult = await _readModelRepository.LoadAllAsync<TeamReadModel>();
             var playerResult = await _readModelRepository.LoadAllAsync<PlayerReadModel>();
             SingleMatch = result.Value;
@@ -62,7 +62,7 @@ namespace Seasons.ReadHost.Pages
             await _mitigator.PostAsync(
                 new Uri($"{ServiceConfiguration.MatchHost}Api/Matches/{MatchId}/progress"),
                 new { PlayerProgression = new PlayerProgression(
-                        Guid.Create(new Guid(playerId)),
+                        new Guid(playerId),
                         progressionEvent)});
             return Redirect(MatchId.ToString());
         }

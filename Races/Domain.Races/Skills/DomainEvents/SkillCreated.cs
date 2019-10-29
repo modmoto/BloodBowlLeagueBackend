@@ -12,6 +12,6 @@ namespace Domain.Races.Skills.DomainEvents
         
         public string SkillId { get; }
         public SkillType SkillType { get; }
-        public string EntityId => SkillId.ToString();
+        public string EntityId => SkillId;
     }
 }

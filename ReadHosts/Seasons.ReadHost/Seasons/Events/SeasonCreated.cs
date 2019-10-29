@@ -5,7 +5,7 @@ namespace Seasons.ReadHost.Seasons.Events
 {
     public class SeasonCreated : ISubscribedDomainEvent
     {
-        public string EntityId => SeasonId;
+        public string EntityId => SeasonId.ToString();
         public Guid SeasonId { get; }
         public string SeasonName { get; }
         public DateTimeOffset CreationDate { get; }

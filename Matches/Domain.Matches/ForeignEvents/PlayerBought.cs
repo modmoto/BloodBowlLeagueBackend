@@ -13,6 +13,6 @@ namespace Domain.Matches.ForeignEvents
 
         public Guid TeamId { get; }
         public Guid PlayerId { get; }
-        public string EntityId => TeamId;
+        public string EntityId => TeamId.ToString();
     }
 }

@@ -9,7 +9,7 @@ namespace Seasons.ReadHost.Matches.Events
         public IEnumerable<Guid>  HomeTeam { get; set; }
         public IEnumerable<Guid>  GuestTeam { get; set; }
 
-        public string EntityId => MatchId;
+        public string EntityId => MatchId.ToString();
         public Guid MatchId { get; set; }
     }
 }

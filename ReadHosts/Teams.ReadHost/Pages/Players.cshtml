@@ -22,7 +22,7 @@
                  @player.Name SSP: @player.StarPlayerPoints
                  @if(player.Skills.Any())
                  {
-                     string.Join(", ", player.Skills.Select(s => s.Id));
+                     string.Join(", ", player.Skills.Select(s => s));
                  }
              </h5>
          </a>

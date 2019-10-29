@@ -6,7 +6,7 @@ namespace Domain.Matches.Events
 {
     public class MatchCreated : IDomainEvent
     {
-        public string EntityId => MatchId;
+        public string EntityId => MatchId.ToString();
         public Guid TeamAtHome { get; }
         public Guid TeamAsGuest { get; }
         public Guid MatchId { get; }

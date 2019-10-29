@@ -1,3 +1,6 @@
+using System;
+using Microwave.Queries;
+
 namespace Teams.ReadHost.Players.Events
 {
     public class PlayerCreated : ISubscribedDomainEvent
@@ -18,7 +21,7 @@ namespace Teams.ReadHost.Players.Events
         public PlayerConfig PlayerConfig { get; }
         public string PlayerTypeId => PlayerConfig.PlayerTypeId;
         public Guid TeamId { get; }
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
         public string Name { get;  }
     }
 }
