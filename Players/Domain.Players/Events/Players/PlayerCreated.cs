@@ -1,5 +1,6 @@
 using System;
 using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
 
 namespace Domain.Players.Events.Players
 {
@@ -18,7 +19,7 @@ namespace Domain.Players.Events.Players
         }
 
         public string Name { get; }
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
         public Guid TeamId { get; }
         public PlayerConfig PlayerConfig { get; }
         public Guid PlayerId { get; }

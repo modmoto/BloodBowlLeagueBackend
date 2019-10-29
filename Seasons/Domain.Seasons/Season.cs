@@ -5,6 +5,8 @@ using Domain.Seasons.Errors;
 using Domain.Seasons.Events;
 using Domain.Seasons.TeamReadModels;
 using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Validation;
 
 namespace Domain.Seasons
 {
@@ -17,7 +19,7 @@ namespace Domain.Seasons
 
         public static DomainResult Create(string seasonName)
         {
-            return DomainResult.Ok(new SeasonCreated(Guid.Create(), seasonName, DateTimeOffset.UtcNow));
+            return DomainResult.Ok(new SeasonCreated(Guid.NewGuid(), seasonName, DateTimeOffset.UtcNow));
         }
 
         public DomainResult AddTeam(TeamReadModel teamId)

@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Domain.Seasons;
 using Domain.Seasons.TeamReadModels;
+using Microwave.EventStores;
 using Microwave.EventStores.Ports;
 using Microwave.Queries;
 

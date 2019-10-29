@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microwave.Queries;
 
 namespace Domain.Players.Events.ForeignEvents
 {

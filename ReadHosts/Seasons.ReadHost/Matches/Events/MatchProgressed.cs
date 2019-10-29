@@ -1,3 +1,6 @@
+using System;
+using Microwave.Queries;
+
 namespace Seasons.ReadHost.Matches.Events
 {
     public class MatchProgressed : ISubscribedDomainEvent

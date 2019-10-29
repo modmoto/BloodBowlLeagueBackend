@@ -1,4 +1,7 @@
-﻿using Application.Matches;
+﻿using System;
+using System.Threading.Tasks;
+using Application.Matches;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Host.Matches
 {
@@ -24,7 +27,7 @@ namespace Host.Matches
         public async Task<ActionResult> CreateSeason([FromBody] CreateSeasonCommand command)
         {
             var result = await _commandHandler.CreateSeason(command);
-            return Created($"{Request.Scheme}{Request.Path}/seasons/{result.Id}", null);
+            return Created($"{Request.Scheme}{Request.Path}/seasons/{result}", null);
         }
 
         [HttpPost("{seasonId}/add-team")]

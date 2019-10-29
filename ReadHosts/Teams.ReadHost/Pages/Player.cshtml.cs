@@ -32,18 +32,18 @@ namespace Teams.ReadHost.Pages
 
                     if (freeSkillPoint >= FreeSkillPoint.PlusOneArmorOrMovement)
                     {
-                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == string.Create("PlusOneArmor")));
-                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == string.Create("PlusOneMovement")));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == "PlusOneArmor")));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == "PlusOneMovement")));
                     }
 
                     if (freeSkillPoint >= FreeSkillPoint.PlusOneAgility)
                     {
-                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == string.Create("PlusOneAgility")));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == "PlusOneAgility")));
                     }
 
                     if (freeSkillPoint == FreeSkillPoint.PlusOneStrength)
                     {
-                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == string.Create("PlusOneStrength")));
+                        skillReadModels.AddRange(_skills.Where(s => s.SkillId == "PlusOneStrength")));
                     }
                 }
 

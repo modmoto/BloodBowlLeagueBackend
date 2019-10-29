@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using Microwave.Queries;
+
 namespace Seasons.ReadHost.Matches.Events
 {
     public class MatchStarted : ISubscribedDomainEvent

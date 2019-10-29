@@ -1,3 +1,5 @@
+using Microwave.Queries;
+
 namespace Domain.Players
 {
     public class SkillCreated : ISubscribedDomainEvent

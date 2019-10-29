@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
 
 namespace Domain.Seasons.Events
 {
@@ -13,7 +14,7 @@ namespace Domain.Seasons.Events
             StartDate = startDate;
         }
 
-        public string EntityId => SeasonId;
+        public string EntityId => SeasonId.ToString();
         public Guid SeasonId { get; }
         public IEnumerable<GameDay> GameDays { get; }
         public DateTimeOffset StartDate { get; }

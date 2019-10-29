@@ -1,4 +1,6 @@
-﻿using Seasons.ReadHost.Teams.Events;
+﻿using System;
+using Microwave.Queries;
+using Seasons.ReadHost.Teams.Events;
 
 namespace Seasons.ReadHost.Teams
 {

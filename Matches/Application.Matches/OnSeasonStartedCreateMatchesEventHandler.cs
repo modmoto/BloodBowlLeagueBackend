@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Matches;
 using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.EventStores;
 using Microwave.EventStores.Ports;
 using Microwave.Queries;
 

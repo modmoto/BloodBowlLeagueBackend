@@ -1,4 +1,7 @@
-﻿namespace Seasons.ReadHost.Teams.Events
+﻿using System;
+using Microwave.Queries;
+
+namespace Seasons.ReadHost.Teams.Events
 {
     public class TeamCreated : ISubscribedDomainEvent
     {

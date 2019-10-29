@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Domain.Matches;
 using Domain.Matches.Events;
+using Microwave.Domain.EventSourcing;
 
 namespace Host.Matches.Startup
 {

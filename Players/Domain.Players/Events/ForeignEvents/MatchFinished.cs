@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microwave.Queries;
 
 namespace Domain.Players.Events.ForeignEvents
 {
@@ -12,7 +13,7 @@ namespace Domain.Players.Events.ForeignEvents
         }
 
         public Guid MatchId { get; }
-        public string EntityId => MatchId;
+        public string EntityId => MatchId.ToString();
         public IEnumerable<PlayerProgression> PlayerProgressions { get; }
     }
 

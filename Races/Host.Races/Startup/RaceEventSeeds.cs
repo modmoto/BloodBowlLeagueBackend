@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using Domain.Races.Races;
 using Domain.Races.Races.DomainEvents;
 using Domain.Races.Skills;
 using Domain.Races.Skills.DomainEvents;
+using Microwave.Domain.EventSourcing;
 
 namespace Host.Races.Startup
 {
@@ -31,7 +33,7 @@ namespace Host.Races.Startup
             }
         }
 
-        public static IDomainEvent DwarfTeam => new RaceCreated(StringIdentity.Create("Dwarfs"),
+        public static IDomainEvent DwarfTeam => new RaceCreated("Dwarfs",
             new List<AllowedPlayer>
             {
                 AllowedPlayer.DwarfBlitzer,
@@ -41,7 +43,7 @@ namespace Host.Races.Startup
                 AllowedPlayer.DwarfDeathRoller,
             });
 
-        public static IDomainEvent HumanTeam => new RaceCreated(StringIdentity.Create("Humans"),
+        public static IDomainEvent HumanTeam => new RaceCreated("Humans",
             new List<AllowedPlayer>
             {
                 AllowedPlayer.HumanBlitzer,
@@ -51,7 +53,7 @@ namespace Host.Races.Startup
                 AllowedPlayer.HumanLineMan
             });
 
-        public static IDomainEvent DarkElfTeam => new RaceCreated(StringIdentity.Create("DarkElves"),
+        public static IDomainEvent DarkElfTeam => new RaceCreated("DarkElves",
             new List<AllowedPlayer>
             {
                 AllowedPlayer.DarkElveAssasine,

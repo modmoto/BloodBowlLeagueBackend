@@ -1,4 +1,8 @@
-﻿namespace Seasons.ReadHost.Seasons.Events
+﻿using System;
+using System.Collections.Generic;
+using Microwave.Queries;
+
+namespace Seasons.ReadHost.Seasons.Events
 {
     public class SeasonStarted : ISubscribedDomainEvent
     {

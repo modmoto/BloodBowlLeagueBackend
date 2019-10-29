@@ -16,7 +16,7 @@ namespace Domain.Seasons
 
         public static GameDay Create(IEnumerable<Matchup> matchups)
         {
-            return new GameDay(Guid.Create(), matchups);
+            return new GameDay(Guid.NewGuid(), matchups);
         }
     }
 }

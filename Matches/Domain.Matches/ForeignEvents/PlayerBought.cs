@@ -1,4 +1,5 @@
 ﻿using System;
+using Microwave.Queries;
 
 namespace Domain.Matches.ForeignEvents
 {

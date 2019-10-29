@@ -15,15 +15,15 @@ namespace Domain.Matches.UnitTests
         {
             var match = new Matchup();
 
-            var player1Id = Guid.Create();
-            var player2Id = Guid.Create();
-            var player3Id = Guid.Create();
-            var player4Id = Guid.Create();
-            var player5Id = Guid.Create();
+            var player1Id = Guid.NewGuid();
+            var player2Id = Guid.NewGuid();
+            var player3Id = Guid.NewGuid();
+            var player4Id = Guid.NewGuid();
+            var player5Id = Guid.NewGuid();
             var teamReadModel = TeamReadModel(player1Id, player2Id);
             var teamReadModel2 = TeamReadModel(player3Id, player4Id, player5Id);
 
-            var matchId = Guid.Create();
+            var matchId = Guid.NewGuid();
             match.Apply(new MatchCreated(matchId, teamReadModel.TeamId, teamReadModel2.TeamId));
             match.Apply(new MatchStarted(matchId, teamReadModel.Players, teamReadModel2.Players));
 
@@ -51,13 +51,13 @@ namespace Domain.Matches.UnitTests
         {
             var match = new Matchup();
 
-            var player1Id = Guid.Create();
-            var player2Id = Guid.Create();
-            var player3Id = Guid.Create();
+            var player1Id = Guid.NewGuid();
+            var player2Id = Guid.NewGuid();
+            var player3Id = Guid.NewGuid();
             var teamReadModel = TeamReadModel(player1Id);
             var teamReadModel2 = TeamReadModel(player3Id);
 
-            match.Apply(new MatchStarted(Guid.Create(), teamReadModel.Players, teamReadModel2.Players));
+            match.Apply(new MatchStarted(Guid.NewGuid(), teamReadModel.Players, teamReadModel2.Players));
 
             var playerProgression1 = PlayerProgressionTouchdown(player2Id);
             var progressMatch = match.ProgressMatch(playerProgression1);
@@ -67,14 +67,14 @@ namespace Domain.Matches.UnitTests
 
         private static PlayerProgression PlayerProgressionTouchdown(Guid playerId)
         {
-            playerId = playerId ?? Guid.Create();
+            playerId = playerId ?? Guid.NewGuid();
             var playerProgression = new PlayerProgression(playerId, ProgressionEvent.PlayerMadeTouchdown);
             return playerProgression;
         }
 
         private static PlayerProgression PlayerProgressionNormal(Guid playerId)
         {
-            playerId = playerId ?? Guid.Create();
+            playerId = playerId ?? Guid.NewGuid();
             var playerProgression = new PlayerProgression(playerId, ProgressionEvent.PlayerPassed);
             return playerProgression;
         }
@@ -82,7 +82,7 @@ namespace Domain.Matches.UnitTests
         private static TeamReadModel TeamReadModel(params Guid[] playerIds)
         {
             var teamReadModel = new TeamReadModel();
-            var trainerAsGuest = Guid.Create();
+            var trainerAsGuest = Guid.NewGuid();
             teamReadModel.Handle(new TeamCreated(trainerAsGuest));
             foreach (var playerId in playerIds)
             {

@@ -17,7 +17,7 @@ namespace Domain.Seasons
 
         public static Matchup Create(Guid teamAtHome, Guid teamAsGuest)
         {
-            return new Matchup(Guid.Create(), teamAtHome, teamAsGuest);
+            return new Matchup(Guid.NewGuid(), teamAtHome, teamAsGuest);
         }
     }
 }

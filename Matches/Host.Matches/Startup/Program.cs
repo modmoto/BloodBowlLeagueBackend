@@ -1,4 +1,8 @@
-﻿namespace Host.Matches.Startup
+﻿using System;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+
+namespace Host.Matches.Startup
 {
     public class Program
     {

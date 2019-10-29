@@ -1,4 +1,5 @@
 ﻿using System;
+using Microwave.Queries;
 
 namespace Domain.Seasons.TeamReadModels
 {
@@ -9,6 +10,6 @@ namespace Domain.Seasons.TeamReadModels
             TeamId = teamId;
         }
         public Guid TeamId { get; }
-        public string EntityId => TeamId;
+        public string EntityId => TeamId.ToString();
     }
 }

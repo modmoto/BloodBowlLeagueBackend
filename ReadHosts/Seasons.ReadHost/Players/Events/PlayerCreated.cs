@@ -1,3 +1,6 @@
+using System;
+using Microwave.Queries;
+
 namespace Seasons.ReadHost.Players.Events
 {
     public class PlayerCreated : ISubscribedDomainEvent

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
 
 namespace Domain.Seasons.Events
 {
@@ -11,7 +12,7 @@ namespace Domain.Seasons.Events
             TeamId = teamId;
         }
 
-        public string EntityId => SeasonId;
+        public string EntityId => SeasonId.ToString();
         public Guid SeasonId { get; }
         public Guid TeamId { get; }
     }

@@ -1,6 +1,8 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Domain.Players;
 using Domain.Players.Events.ForeignEvents;
+using Microwave.EventStores;
 using Microwave.EventStores.Ports;
 using Microwave.Queries;
 

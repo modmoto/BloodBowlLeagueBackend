@@ -4,6 +4,8 @@ using System.Linq;
 using Domain.Players.DomainErrors;
 using Domain.Players.Events.Players;
 using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Validation;
 
 namespace Domain.Players
 {

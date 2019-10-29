@@ -1,4 +1,5 @@
 ﻿using System;
+using Microwave.Queries;
 
 namespace Domain.Players.Events.ForeignEvents
 {
@@ -17,6 +18,6 @@ namespace Domain.Players.Events.ForeignEvents
         public string PlayerTypeId { get; }
         public Guid PlayerId { get; }
         public Guid TeamId { get; }
-        public string EntityId => TeamId;
+        public string EntityId => TeamId.ToString();
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace ServiceConfig
+﻿using System;
+using Microwave;
+
+namespace ServiceConfig
 {
     public class ServiceConfiguration
     {

@@ -4,6 +4,8 @@ using System.Linq;
 using Domain.Matches.Errors;
 using Domain.Matches.Events;
 using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
+using Microwave.Domain.Validation;
 
 namespace Domain.Matches
 {
@@ -40,7 +42,7 @@ namespace Domain.Matches
         {
             if (teamAtHome.TeamId == teamAsGuest.TeamId) return DomainResult.Error(new TeamsCanNotBeTheSame(teamAtHome.TeamId, teamAsGuest.TeamId));
 
-            return Create(Guid.Create(), teamAtHome, teamAsGuest);
+            return Create(Guid.NewGuid(), teamAtHome, teamAsGuest);
         }
 
         public DomainResult Start(TeamReadModel teamAtHome, TeamReadModel teamAsGuest)

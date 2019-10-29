@@ -1,5 +1,6 @@
 using System;
 using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
 
 namespace Domain.Players.Events.Players
 {
@@ -13,7 +14,7 @@ namespace Domain.Players.Events.Players
 
         public Guid PlayerId { get; }
         public long NewStarPlayerPoints { get; }
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
     }
 
     public class PlayerWasNominatedMostValuablePlayer : IDomainEvent
@@ -26,7 +27,7 @@ namespace Domain.Players.Events.Players
 
         public Guid PlayerId { get; }
         public long NewStarPlayerPoints { get; }
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
     }
 
     public class PlayerMadeTouchdown : IDomainEvent
@@ -39,7 +40,7 @@ namespace Domain.Players.Events.Players
 
         public Guid PlayerId { get; }
         public long NewStarPlayerPoints { get; }
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
     }
 
     public class PlayerMadeCasualty : IDomainEvent
@@ -52,6 +53,6 @@ namespace Domain.Players.Events.Players
 
         public Guid PlayerId { get; }
         public long NewStarPlayerPoints { get; }
-        public string EntityId => PlayerId;
+        public string EntityId => PlayerId.ToString();
     }
 }

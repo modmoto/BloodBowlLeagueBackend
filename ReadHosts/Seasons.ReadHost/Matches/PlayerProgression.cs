@@ -1,3 +1,5 @@
+using System;
+
 namespace Seasons.ReadHost.Matches
 {
     public class PlayerProgression

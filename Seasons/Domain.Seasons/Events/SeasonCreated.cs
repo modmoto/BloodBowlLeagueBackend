@@ -1,11 +1,12 @@
 ﻿using System;
 using Microwave.Domain;
+using Microwave.Domain.EventSourcing;
 
 namespace Domain.Seasons.Events
 {
     public class SeasonCreated : IDomainEvent
     {
-        public string EntityId => SeasonId;
+        public string EntityId => SeasonId.ToString();
         public Guid SeasonId { get; }
         public string SeasonName { get; }
         public DateTimeOffset CreationDate { get; }

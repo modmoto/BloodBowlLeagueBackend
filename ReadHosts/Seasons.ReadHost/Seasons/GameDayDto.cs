@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Seasons.ReadHost.Seasons
 {
     public class GameDayDto
