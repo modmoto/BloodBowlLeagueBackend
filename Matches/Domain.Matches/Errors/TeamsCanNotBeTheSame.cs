@@ -1,5 +1,4 @@
 using System;
-using Microwave.Domain;
 using Microwave.Domain.Validation;
 
 namespace Domain.Matches.Errors

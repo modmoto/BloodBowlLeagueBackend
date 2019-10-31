@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Microwave.Domain;
 using Microwave.Domain.Validation;
 
 namespace Domain.Players

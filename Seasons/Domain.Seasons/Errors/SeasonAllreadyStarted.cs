@@ -1,5 +1,4 @@
-﻿using Microwave.Domain;
-using Microwave.Domain.Validation;
+﻿using Microwave.Domain.Validation;
 
 namespace Domain.Seasons.Errors
 {

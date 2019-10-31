@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microwave.Domain;
 using Microwave.Domain.EventSourcing;
 
 namespace Domain.Seasons.Events
