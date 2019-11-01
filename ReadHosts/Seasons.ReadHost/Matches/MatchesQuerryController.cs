@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microwave.Queries;
@@ -27,13 +28,31 @@ namespace Seasons.ReadHost.Matches
         public async Task<ActionResult> GetMatches()
         {
             var teamQuerry = await _queryRepository.LoadAllAsync<MatchupReadModel>();
-            foreach (var team in teamQuerry.Value)
+            var matches = teamQuerry.Value.ToList();
+            foreach (var team in matches)
             {
                 var guestTeam = await _queryRepository.LoadAsync<TeamReadModel>(team.TeamAsGuest);
                 var homeTeam = await _queryRepository.LoadAsync<TeamReadModel>(team.TeamAtHome);
                 team.SetFullTeams(guestTeam.Value, homeTeam.Value);
             }
-            return Ok(teamQuerry.Value);
+
+            var minimalMatches = matches.Select(m =>
+                new MinimalMatchHto(m.MatchId, m.GuestTeamName, m.HomeTeamName));
+            return Ok(minimalMatches);
+        }
+    }
+
+    public class MinimalMatchHto
+    {
+        public Guid MatchId { get; }
+        public string GuestTeamName { get; }
+        public string HomeTeamName { get; }
+
+        public MinimalMatchHto(Guid matchId, string guestTeamName, string homeTeamName)
+        {
+            MatchId = matchId;
+            GuestTeamName = guestTeamName;
+            HomeTeamName = homeTeamName;
         }
     }
 }
