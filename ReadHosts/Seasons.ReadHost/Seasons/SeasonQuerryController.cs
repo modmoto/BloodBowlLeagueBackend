@@ -43,8 +43,10 @@ namespace Seasons.ReadHost.Seasons
                     var matchupReadModel = match.Value;
                     var homeTeam = await _queryRepository.LoadAsync<TeamReadModel>(matchupReadModel.TeamAtHome);
                     var guestTeam = await _queryRepository.LoadAsync<TeamReadModel>(matchupReadModel.TeamAsGuest);
+
                     var readModel = new MinimalMatchHto(
                         matchupReadModel.MatchId,
+                        matchupReadModel.GameResult,
                         homeTeam.Value.TeamName,
                         guestTeam.Value.TeamName);
                     matchupReadModels.Add(readModel);

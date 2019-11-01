@@ -1,3 +1,5 @@
+using System;
+
 namespace Seasons.ReadHost.Matches
 {
     public class GameResult
@@ -5,13 +7,13 @@ namespace Seasons.ReadHost.Matches
         public bool IsDraw { get; set; }
         public PointsOfTeam HomeTeam { get; set; }
         public PointsOfTeam GuestTeam { get; set; }
-        public string Winner { get; set; }
-        public string Looser { get; set; }
+        public Guid Winner { get; set; }
+        public Guid Looser { get; set; }
     }
 
     public class PointsOfTeam
     {
-        public string TeamId { get; set; }
+        public Guid TeamId { get; set; }
         public long TouchDowns { get; set; }
     }
 }

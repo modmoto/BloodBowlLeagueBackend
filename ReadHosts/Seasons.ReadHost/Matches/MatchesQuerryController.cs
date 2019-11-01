@@ -32,11 +32,15 @@ namespace Seasons.ReadHost.Matches
             var matches = teamQuerry.Value.ToList();
 
             var minimalMatches = new List<MinimalMatchHto>();
-            foreach (var team in matches)
+            foreach (var match in matches)
             {
-                var guestTeam = await _queryRepository.LoadAsync<TeamReadModel>(team.TeamAsGuest);
-                var homeTeam = await _queryRepository.LoadAsync<TeamReadModel>(team.TeamAtHome);
-                minimalMatches.Add(new MinimalMatchHto(team.MatchId, guestTeam.Value.TeamName, homeTeam.Value.TeamName));
+                var guestTeam = await _queryRepository.LoadAsync<TeamReadModel>(match.TeamAsGuest);
+                var homeTeam = await _queryRepository.LoadAsync<TeamReadModel>(match.TeamAtHome);
+                minimalMatches.Add(new MinimalMatchHto(
+                    match.MatchId,
+                    match.GameResult,
+                    guestTeam.Value.TeamName,
+                    homeTeam.Value.TeamName));
             }
 
             return Ok(minimalMatches);
