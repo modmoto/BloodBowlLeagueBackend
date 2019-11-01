@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -29,30 +30,16 @@ namespace Seasons.ReadHost.Matches
         {
             var teamQuerry = await _queryRepository.LoadAllAsync<MatchupReadModel>();
             var matches = teamQuerry.Value.ToList();
+
+            var minimalMatches = new List<MinimalMatchHto>();
             foreach (var team in matches)
             {
                 var guestTeam = await _queryRepository.LoadAsync<TeamReadModel>(team.TeamAsGuest);
                 var homeTeam = await _queryRepository.LoadAsync<TeamReadModel>(team.TeamAtHome);
-                team.SetFullTeams(guestTeam.Value, homeTeam.Value);
+                minimalMatches.Add(new MinimalMatchHto(team.MatchId, guestTeam.Value.TeamName, homeTeam.Value.TeamName));
             }
 
-            var minimalMatches = matches.Select(m =>
-                new MinimalMatchHto(m.MatchId, m.GuestTeamName, m.HomeTeamName));
             return Ok(minimalMatches);
-        }
-    }
-
-    public class MinimalMatchHto
-    {
-        public Guid MatchId { get; }
-        public string GuestTeamName { get; }
-        public string HomeTeamName { get; }
-
-        public MinimalMatchHto(Guid matchId, string guestTeamName, string homeTeamName)
-        {
-            MatchId = matchId;
-            GuestTeamName = guestTeamName;
-            HomeTeamName = homeTeamName;
         }
     }
 }

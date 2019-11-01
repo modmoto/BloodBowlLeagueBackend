@@ -23,8 +23,6 @@ namespace Seasons.ReadHost.Matches
         public bool IsFinished { get; private set; }
         public bool IsStarted { get; private set; }
         public GameResult GameResult { get; private set; }
-        public string HomeTeamName { get; private set; }
-        public string GuestTeamName { get; private set; }
 
         public void Handle(MatchFinished domainEvent)
         {
@@ -55,12 +53,6 @@ namespace Seasons.ReadHost.Matches
         {
             GameResult = domainEvent.GameResult;
             PlayerProgressions = PlayerProgressions.Append(domainEvent.PlayerProgression);
-        }
-
-        public void SetFullTeams(TeamReadModel guestTeam, TeamReadModel homeTeam)
-        {
-            GuestTeamName = guestTeam.TeamName;
-            HomeTeamName = homeTeam.TeamName;
         }
     }
 }
