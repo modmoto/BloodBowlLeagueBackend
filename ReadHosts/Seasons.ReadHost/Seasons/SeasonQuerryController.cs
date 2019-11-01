@@ -36,9 +36,9 @@ namespace Seasons.ReadHost.Seasons
             foreach (var gameDay in gameDays)
             {
                 var matchupReadModels = new List<MinimalMatchHto>();
-                foreach (var matches in gameDay.Matchups)
+                foreach (var matchUp in gameDay.Matchups)
                 {
-                    var match = await _queryRepository.LoadAsync<MatchupReadModel>(matches.MatchId);
+                    var match = await _queryRepository.LoadAsync<MatchupReadModel>(matchUp.MatchId);
 
                     var matchupReadModel = match.Value;
                     var homeTeam = await _queryRepository.LoadAsync<TeamReadModel>(matchupReadModel.TeamAtHome);
@@ -47,8 +47,7 @@ namespace Seasons.ReadHost.Seasons
                     var readModel = new MinimalMatchHto(
                         matchupReadModel.MatchId,
                         matchupReadModel.GameResult,
-                        homeTeam.Value.TeamName,
-                        guestTeam.Value.TeamName);
+                        matchupReadModel.IsStarted, homeTeam.Value.TeamName, guestTeam.Value.TeamName);
                     matchupReadModels.Add(readModel);
                 }
 
