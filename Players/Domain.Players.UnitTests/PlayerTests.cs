@@ -31,41 +31,50 @@ namespace Domain.Players.UnitTests
 
             Assert.AreEqual(2, ((PlayerLeveledUp) result.DomainEvents.Last()).NewLevel);
             Assert.AreEqual(2, player.Level);
-            Assert.AreEqual(1, ((PlayerLeveledUp) result.DomainEvents.Last()).NewFreeSkillPoints.Count());
-        }
-
-        [TestMethod]
-        public void PlayerLeveledUpTwice()
-        {
-            var player = PlayerWith15SSP();
-            var events = player.NominateForMostValuablePlayer();
-            player.Apply(events.DomainEvents);
-
-            Assert.AreEqual(2, ((PlayerLeveledUp) events.DomainEvents.Last()).NewFreeSkillPoints.Count());
         }
 
         [TestMethod]
         public void PlayerLeveledUpTwice_LevelUpOnce()
         {
             var player = PlayerWith15SSP();
-            var events = player.NominateForMostValuablePlayer();
-            player.Apply(events.DomainEvents);
+            player.NominateForMostValuablePlayer();
+            player.RegisterLevelUpSkillPointRoll(FreeSkillPoint.PlusOneStrength);
+            player.RegisterLevelUpSkillPointRoll(FreeSkillPoint.PlusOneStrength);
 
             var domainResult = player.ChooseSkill(Block());
 
             Assert.AreEqual(1, ((SkillChosen) domainResult.DomainEvents.Last()).NewFreeSkillPoints.Count());
+        }
+        
+        [TestMethod]
+        public void PlayerLeveledUpOnceChooseSkillPoints()
+        {
+            var player = LeveledUpdPlayer();
+            player.RegisterLevelUpSkillPointRoll(FreeSkillPoint.PlusOneStrength);
+
+            player.ChooseSkill(Block());
+
+            Assert.AreEqual(0, player.FreeSkillPoints.Count());
+            Assert.AreEqual(2, player.Level);
+            Assert.AreEqual(Block().SkillId, player.CurrentSkills.Single().SkillId);
+        }
+
+        private Player LeveledUpdPlayer()
+        {
+            var defaultPlayer = DefaultPlayer();
+            defaultPlayer.NominateForMostValuablePlayer();
+            defaultPlayer.NominateForMostValuablePlayer();
+            return defaultPlayer;
         }
 
         private static Player PlayerWith15SSP()
         {
             var player = DefaultPlayer();
 
-            var nominateForMostValuablePlayer1 = player.NominateForMostValuablePlayer();
-            player.Apply(nominateForMostValuablePlayer1.DomainEvents);
-            var nominateForMostValuablePlayer2 = player.NominateForMostValuablePlayer();
-            player.Apply(nominateForMostValuablePlayer2.DomainEvents);
-            var nominateForMostValuablePlayer3 = player.NominateForMostValuablePlayer();
-            player.Apply(nominateForMostValuablePlayer3.DomainEvents);
+            player.NominateForMostValuablePlayer();
+            player.NominateForMostValuablePlayer();
+            player.NominateForMostValuablePlayer();
+            player.RegisterLevelUpSkillPointRoll(FreeSkillPoint.PlusOneStrength);
             return player;
         }
 
@@ -108,7 +117,7 @@ namespace Domain.Players.UnitTests
         public void LevelUp_StrengthSkillAvailable()
         {
             var player = DefaultPlayer();
-            player.Apply(PlayerLeveledUp(new [] { FreeSkillPoint.PlusOneStrength }));
+            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.PlusOneStrength));
             var skillLevelUp = PlusOneStrength();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
@@ -121,7 +130,7 @@ namespace Domain.Players.UnitTests
         public void LevelUp_StrengtSkillAvailable_SkillOfLowerPower()
         {
             var player = DefaultPlayer();
-            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.PlusOneStrength }));
+            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.PlusOneStrength));
             var skillLevelUp = Pass();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
@@ -134,7 +143,7 @@ namespace Domain.Players.UnitTests
         public void LevelUp_StrengthWanted_ButOnlyArmorPossible()
         {
             var player = DefaultPlayer();
-            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.PlusOneArmorOrMovement }));
+            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.PlusOneArmorOrMovement));
             var skillLevelUp = PlusOneStrength();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
@@ -147,7 +156,7 @@ namespace Domain.Players.UnitTests
         {
             var player = new Player();
             player.Apply(PlayerCreated());
-            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Double }));
+            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.Double));
             var skillLevelUp = Block();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
@@ -160,7 +169,7 @@ namespace Domain.Players.UnitTests
         {
             var player = new Player();
             player.Apply(PlayerCreated());
-            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Double }));
+            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.Double));
             var skillLevelUp = Pass();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
@@ -173,7 +182,7 @@ namespace Domain.Players.UnitTests
         {
             var player = new Player();
             player.Apply(PlayerCreated());
-            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Normal }));
+            player.Apply(PlayerChoseLevelUp());
             var skillLevelUp = Pass();
 
             var domainResult = player.ChooseSkill(skillLevelUp);
@@ -186,8 +195,8 @@ namespace Domain.Players.UnitTests
         {
             var player = new Player();
             player.Apply(PlayerCreated());
-            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Normal }));
-            player.Apply(PlayerLeveledUp(new []{ FreeSkillPoint.Normal }));
+            player.Apply(PlayerChoseLevelUp());
+            player.Apply(PlayerChoseLevelUp());
             player.Apply(SkillPicked(Block()));
 
             var skillLevelUp = Block();
@@ -197,9 +206,9 @@ namespace Domain.Players.UnitTests
             Assert.IsFalse(domainResult2.IsOk);
         }
 
-        private static PlayerLeveledUp PlayerLeveledUp(IEnumerable<FreeSkillPoint> freeSkillPoints = null)
+        private static PlayerLevelUpPossibilitiesChosen PlayerChoseLevelUp(FreeSkillPoint freeSkillPoint = default(FreeSkillPoint))
         {
-            return new PlayerLeveledUp(Guid.NewGuid(), freeSkillPoints ?? new []{ FreeSkillPoint.PlusOneStrength }, 2);
+            return new PlayerLevelUpPossibilitiesChosen(Guid.NewGuid(), freeSkillPoint);
         }
 
         private static SkillChosen SkillPicked(SkillReadModel skill)

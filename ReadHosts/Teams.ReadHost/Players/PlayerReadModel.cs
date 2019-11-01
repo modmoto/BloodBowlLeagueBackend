@@ -49,7 +49,6 @@ namespace Teams.ReadHost.Players
         public void Handle(PlayerLeveledUp domainEvent)
         {
             Level = domainEvent.NewLevel;
-            FreeSkillPoints = domainEvent.NewFreeSkillPoints;
         }
 
         public void Handle(PlayerPassed domainEvent)

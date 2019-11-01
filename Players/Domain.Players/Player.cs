@@ -12,6 +12,7 @@ namespace Domain.Players
         IApply<PlayerCreated>,
         IApply<PlayerLeveledUp>,
         IApply<SkillChosen>,
+        IApply<PlayerLevelUpPossibilitiesChosen>,
         IApply<PlayerPassed>,
         IApply<PlayerWasNominatedMostValuablePlayer>,
         IApply<PlayerMadeTouchdown>,
@@ -22,6 +23,7 @@ namespace Domain.Players
         public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
         public IEnumerable<SkillReadModel> CurrentSkills { get; private set; } = new List<SkillReadModel>();
         public long StarPlayerPoints { get; private set; }
+        public int ChoosableSkillPoints { get; private set; }
 
         public int Level { get; private set; } = 1;
 
@@ -58,7 +60,9 @@ namespace Domain.Players
 
             var newFreeSkills = GetMinimalSkillToRemove(FreeSkillPoints, newSkill);
 
-            return DomainResult.Ok(new SkillChosen(PlayerId, newSkill, newFreeSkills));
+            var domainEvent = new SkillChosen(PlayerId, newSkill, newFreeSkills);
+            Apply(domainEvent);
+            return DomainResult.Ok(domainEvent);
         }
 
         private IEnumerable<FreeSkillPoint> GetMinimalSkillToRemove(
@@ -149,6 +153,7 @@ namespace Domain.Players
         {
             var newStarPlayerPoints = StarPlayerPoints + 1;
             var domainEvents = CreateLevelUpEvents(new PlayerPassed(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
+            Apply(domainEvents);
             return DomainResult.Ok(domainEvents);
         }
 
@@ -156,6 +161,7 @@ namespace Domain.Players
         {
             var newStarPlayerPoints = StarPlayerPoints + 2;
             var domainEvents = CreateLevelUpEvents(new PlayerMadeCasualty(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
+            Apply(domainEvents);
             return DomainResult.Ok(domainEvents);
         }
 
@@ -163,6 +169,7 @@ namespace Domain.Players
         {
             var newStarPlayerPoints = StarPlayerPoints + 3;
             var domainEvents = CreateLevelUpEvents(new PlayerMadeTouchdown(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
+            Apply(domainEvents);
             return DomainResult.Ok(domainEvents);
         }
 
@@ -170,22 +177,18 @@ namespace Domain.Players
         {
             var newStarPlayerPoints = StarPlayerPoints + 5;
             var domainEvents = CreateLevelUpEvents(new PlayerWasNominatedMostValuablePlayer(PlayerId, newStarPlayerPoints), newStarPlayerPoints);
+            Apply(domainEvents);
             return DomainResult.Ok(domainEvents);
         }
 
-        private IEnumerable<IDomainEvent> CreateLevelUpEvents(IDomainEvent defaultEvent, long newPoints)
+        private List<IDomainEvent> CreateLevelUpEvents(IDomainEvent defaultEvent, long newPoints)
         {
             var domainEvents = new List<IDomainEvent>();
             domainEvents.Add(defaultEvent);
 
             if (NextLevelIsDue(newPoints))
             {
-                var freeSkillPointFactory = new FreeSkillPointFactory();
-                var freeSkillPoint = freeSkillPointFactory.Create();
-                var freeSkillPoints = new List<FreeSkillPoint>();
-                freeSkillPoints.AddRange(FreeSkillPoints);
-                freeSkillPoints.Add(freeSkillPoint);
-                domainEvents.Add(new PlayerLeveledUp(PlayerId, freeSkillPoints, Level + 1));
+                domainEvents.Add(new PlayerLeveledUp(PlayerId, Level + 1));
             }
 
             return domainEvents;
@@ -231,8 +234,24 @@ namespace Domain.Players
 
         public void Apply(PlayerLeveledUp leveledUp)
         {
-            FreeSkillPoints = leveledUp.NewFreeSkillPoints;
             Level = leveledUp.NewLevel;
+            ChoosableSkillPoints += 1;
+        }
+
+        public void Apply(PlayerLevelUpPossibilitiesChosen domainEvent)
+        {
+            var freeSkillPoints = FreeSkillPoints.Append(domainEvent.NewFreeSkillPoint);
+            FreeSkillPoints = freeSkillPoints;
+            ChoosableSkillPoints -= 1;
+        }
+
+        public DomainResult RegisterLevelUpSkillPointRoll(FreeSkillPoint freeSkillPoint)
+        {
+            if (ChoosableSkillPoints < 1) return DomainResult.Error(new PlayerIsNotLeveledUpAndHasNoFreeSkillPoints());
+
+            var playerLevelUpPossibilitiesChosen = new PlayerLevelUpPossibilitiesChosen(PlayerId, freeSkillPoint);
+            Apply(playerLevelUpPossibilitiesChosen);
+            return DomainResult.Ok(playerLevelUpPossibilitiesChosen);
         }
     }
 }

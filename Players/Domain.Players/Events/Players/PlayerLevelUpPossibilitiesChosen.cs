@@ -4,18 +4,18 @@ using Microwave.Domain.EventSourcing;
 
 namespace Domain.Players.Events.Players
 {
-    public class PlayerLeveledUp : IDomainEvent
+    public class PlayerLevelUpPossibilitiesChosen : IDomainEvent
     {
-        public PlayerLeveledUp(
+        public PlayerLevelUpPossibilitiesChosen(
             Guid playerId,
-            int newLevel)
+        FreeSkillPoint newFreeSkillPoint)
         {
+            NewFreeSkillPoint = newFreeSkillPoint;
             PlayerId = playerId;
-            NewLevel = newLevel;
         }
 
         public string EntityId => PlayerId.ToString();
+        public FreeSkillPoint NewFreeSkillPoint { get; }
         public Guid PlayerId { get; }
-        public int NewLevel { get; }
     }
 }

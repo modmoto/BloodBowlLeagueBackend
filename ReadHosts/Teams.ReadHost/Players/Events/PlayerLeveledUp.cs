@@ -8,17 +8,14 @@ namespace Teams.ReadHost.Players.Events
     {
         public PlayerLeveledUp(
             Guid playerId,
-            IEnumerable<FreeSkillPoint> newFreeSkillPoints,
             int newLevel)
         {
             PlayerId = playerId;
-            NewFreeSkillPoints = newFreeSkillPoints;
             NewLevel = newLevel;
         }
 
         public string EntityId => PlayerId.ToString();
         public Guid PlayerId { get; }
-        public IEnumerable<FreeSkillPoint> NewFreeSkillPoints { get; }
         public int NewLevel { get; }
     }
 
