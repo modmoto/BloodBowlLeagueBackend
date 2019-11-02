@@ -39,7 +39,10 @@ namespace Seasons.ReadHost.Matches
                 minimalMatches.Add(new MinimalMatchHto(
                     match.MatchId,
                     match.GameResult,
-                    match.IsStarted, guestTeam.Value.TeamName, homeTeam.Value.TeamName));
+                    match.IsStarted,
+                    match.IsFinished,
+                    guestTeam.Value.TeamName,
+                    homeTeam.Value.TeamName));
             }
 
             return Ok(minimalMatches);

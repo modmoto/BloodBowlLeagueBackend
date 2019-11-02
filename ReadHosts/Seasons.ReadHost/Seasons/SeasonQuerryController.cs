@@ -47,7 +47,10 @@ namespace Seasons.ReadHost.Seasons
                     var readModel = new MinimalMatchHto(
                         matchupReadModel.MatchId,
                         matchupReadModel.GameResult,
-                        matchupReadModel.IsStarted, homeTeam.Value.TeamName, guestTeam.Value.TeamName);
+                        matchupReadModel.IsStarted,
+                        matchupReadModel.IsFinished,
+                        homeTeam.Value.TeamName,
+                        guestTeam.Value.TeamName);
                     matchupReadModels.Add(readModel);
                 }
 
