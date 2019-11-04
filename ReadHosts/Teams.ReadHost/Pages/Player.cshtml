@@ -9,7 +9,7 @@
     @if (Model.Player.HasFreeSkill)
     {
         <h5>Player has a free skill point of: @string.Join(',', Model.Player.FreeSkillPoints.Select(s => RaceTranslations.ResourceManager.GetString($"FreeSkillPoint_{s.ToString()}")))</h5>
-        <form method="post">
+        <form method="post" asp-page-handler="ChooseSkill">
             <div class="form-group">
                 <select class="form-control" id="skillSelectBox" name="skillId">
                     @foreach (var skill in Model.RelevantSkills)
@@ -31,4 +31,22 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Level up Player!</button>
         </form>
     }
+
+    @if (Model.Player.CanRegisterLevelUpSkillPointRoll)
+        {
+            <h5>Player can register a free skill point</h5>
+            <form method="post" asp-page-handler="RegisterLevelUpSkillPointRoll">
+                <div class="form-group">
+                    <select class="form-control" id="skillSelectBox" name="freeSkillType">
+                        @foreach (var skill in Model.ChoosableSkills)
+                        {
+                            <option value="@skill">
+                                @RaceTranslations.ResourceManager.GetString($"FreeSkillPoint_{skill}")
+                            </option>
+                        }
+                    </select>
+                </div>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Level up Player!</button>
+            </form>
+        }
  </div>

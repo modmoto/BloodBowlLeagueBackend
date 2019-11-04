@@ -15,12 +15,21 @@ namespace Host.Players
             _commandHandler = commandHandler;
         }
 
-        [HttpPost("{playerId}/level-up")]
+        [HttpPost("{playerId}/choose-skill")]
         public async Task<ActionResult> LevelUpPlayer(
             Guid playerId,
             [FromBody] LevelUpPlayerComand levelUpCommand)
         {
-            await _commandHandler.LevelUp(playerId, levelUpCommand);
+            await _commandHandler.ChooseSkill(playerId, levelUpCommand);
+            return Ok();
+        }
+
+        [HttpPost("{playerId}/register-skill")]
+        public async Task<ActionResult> RegisterFreeSkillPoint(
+            Guid playerId,
+            [FromBody] RegisterLevelUpSkillPointRollCommand command)
+        {
+            await _commandHandler.RegisterLevelUpSkillPointRoll(playerId, command);
             return Ok();
         }
     }

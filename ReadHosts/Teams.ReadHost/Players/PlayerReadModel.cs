@@ -10,6 +10,7 @@ namespace Teams.ReadHost.Players
         IHandle<PlayerCreated>,
         IHandle<SkillChosen>,
         IHandle<PlayerLeveledUp>,
+        IHandle<PlayerLevelUpPossibilitiesChosen>,
         IHandle<PlayerPassed>,
         IHandle<PlayerMadeCasualty>,
         IHandle<PlayerMadeTouchdown>,
@@ -25,8 +26,11 @@ namespace Teams.ReadHost.Players
         public int Level { get; set; } = 1;
         public string Name { get; private set; }
 
+        public int ChoosableSkills { get; set; }
+
         public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
         public bool HasFreeSkill => FreeSkillPoints.Any();
+        public bool CanRegisterLevelUpSkillPointRoll => ChoosableSkills > 0;
 
         public void Handle(PlayerCreated domainEvent)
         {
@@ -49,6 +53,7 @@ namespace Teams.ReadHost.Players
         public void Handle(PlayerLeveledUp domainEvent)
         {
             Level = domainEvent.NewLevel;
+            ChoosableSkills += 1;
         }
 
         public void Handle(PlayerPassed domainEvent)
@@ -69,6 +74,11 @@ namespace Teams.ReadHost.Players
         public void Handle(PlayerWasNominatedMostValuablePlayer domainEvent)
         {
             StarPlayerPoints = domainEvent.NewStarPlayerPoints;
+        }
+
+        public void Handle(PlayerLevelUpPossibilitiesChosen domainEvent)
+        {
+            FreeSkillPoints = FreeSkillPoints.Append(domainEvent.NewFreeSkillPoint);
         }
     }
 }

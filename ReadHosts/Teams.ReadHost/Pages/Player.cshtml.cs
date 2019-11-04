@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -61,6 +62,15 @@ namespace Teams.ReadHost.Pages
         [BindProperty(SupportsGet = true)]
         public Guid PlayerId { get; set; }
 
+        public IEnumerable<FreeSkillPoint> ChoosableSkills => new List<FreeSkillPoint>
+        {
+            FreeSkillPoint.Normal,
+            FreeSkillPoint.Double,
+            FreeSkillPoint.PlusOneArmorOrMovement,
+            FreeSkillPoint.PlusOneAgility,
+            FreeSkillPoint.PlusOneStrength,
+        };
+
 
         public PlayerModel(IReadModelRepository readModelRepository, MessageMitigator mitigator)
         {
@@ -76,13 +86,23 @@ namespace Teams.ReadHost.Pages
             _skills = resultSkills.Value;
         }
 
-         public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostChooseSkill()
         {
             var skillId = Request.Form["skillId"].ToString();
 
             await _mitigator.PostAsync(
-                new Uri($"{ServiceConfiguration.PlayerHost}Api/Players/{PlayerId}/level-up"),
+                new Uri($"{ServiceConfiguration.PlayerHost}Api/Players/{PlayerId}/choose-skill"),
                 new { skillId });
+            return Redirect(PlayerId.ToString());
+        }
+
+        public async Task<IActionResult> OnPostRegisterLevelUpSkillPointRoll()
+        {
+            var freeSkillPoint = Request.Form["freeSkillType"].ToString();
+
+            await _mitigator.PostAsync(
+                new Uri($"{ServiceConfiguration.PlayerHost}Api/Players/{PlayerId}/register-skill"),
+                new { freeSkillPoint });
             return Redirect(PlayerId.ToString());
         }
     }
