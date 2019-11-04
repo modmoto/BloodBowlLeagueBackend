@@ -79,6 +79,7 @@ namespace Teams.ReadHost.Players
         public void Handle(PlayerLevelUpPossibilitiesChosen domainEvent)
         {
             FreeSkillPoints = FreeSkillPoints.Append(domainEvent.NewFreeSkillPoint);
+            ChoosableSkills -= 1;
         }
     }
 }
