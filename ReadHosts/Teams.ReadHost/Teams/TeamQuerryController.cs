@@ -50,17 +50,17 @@ namespace Teams.ReadHost.Teams
 
     public class TeamWithPlayersHto
     {
-        public string TeamTeamName { get; }
-        public Guid TeamTeamId { get; }
+        public string TeamName { get; }
+        public Guid TeamId { get; }
         public IEnumerable<PlayerReadModel> PlayerList { get; }
-        public string TeamTrainerName { get; }
+        public string TrainerName { get; }
         public string RaceId { get; }
 
         public TeamWithPlayersHto(TeamReadModel team, IEnumerable<PlayerReadModel> playerReadModels)
         {
-            TeamTeamName = team.TeamName;
-            TeamTeamId = team.TeamId;
-            TeamTrainerName = team.TrainerName;
+            TeamName = team.TeamName;
+            TeamId = team.TeamId;
+            TrainerName = team.TrainerName;
             RaceId = team.RaceId;
             PlayerList = playerReadModels;
         }
