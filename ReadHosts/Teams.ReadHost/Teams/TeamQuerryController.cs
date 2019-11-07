@@ -51,6 +51,7 @@ namespace Teams.ReadHost.Teams
     public class TeamWithPlayersHto
     {
         public string TeamName { get; }
+        public long TeamVersion { get; }
         public Guid TeamId { get; }
         public IEnumerable<PlayerReadModel> PlayerList { get; }
         public string TrainerName { get; }
@@ -58,6 +59,7 @@ namespace Teams.ReadHost.Teams
 
         public TeamWithPlayersHto(TeamReadModel team, IEnumerable<PlayerReadModel> playerReadModels)
         {
+            TeamVersion = team.Version;
             TeamName = team.TeamName;
             TeamId = team.TeamId;
             TrainerName = team.TrainerName;
