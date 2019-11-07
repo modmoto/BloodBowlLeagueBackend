@@ -19,7 +19,6 @@ namespace Teams.WriteHost.Startup
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<TeamCommandHandler>();
             services.AddMicrowaveUi();
-            services.AddCors();
 
             services.AddMicrowave(c =>
             {
@@ -39,9 +38,6 @@ namespace Teams.WriteHost.Startup
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseMicrowaveUi();
-            app.UseCors(options =>
-                options.WithOrigins("http://localhost:3000")
-                       .WithOrigins("https://ka-bbl.herokuapp.com/"));
             app.RunMicrowaveQueries();
             app.UseMvc();
         }
