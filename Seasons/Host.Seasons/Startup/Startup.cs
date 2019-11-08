@@ -49,6 +49,7 @@ namespace Host.Matches.Startup
         {
             app.UseMvc();
             app.RunMicrowaveQueries();
+            app.UseCors("MyPolicy");
             app.UseMicrowaveUi();
         }
     }

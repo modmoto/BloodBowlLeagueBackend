@@ -41,6 +41,7 @@ namespace Host.Players.Startup
         {
             app.RunMicrowaveQueries();
             app.UseMicrowaveUi();
+            app.UseCors("MyPolicy");
             app.UseMvc();
         }
     }

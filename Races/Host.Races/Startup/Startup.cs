@@ -40,6 +40,7 @@ namespace Host.Races.Startup
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseMicrowaveUi();
+            app.UseCors("MyPolicy");
             app.UseMvc();
         }
     }

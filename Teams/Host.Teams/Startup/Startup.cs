@@ -46,6 +46,7 @@ namespace Teams.WriteHost.Startup
         {
             app.UseMicrowaveUi();
             app.RunMicrowaveQueries();
+            app.UseCors("MyPolicy");
             app.UseMvc();
         }
     }

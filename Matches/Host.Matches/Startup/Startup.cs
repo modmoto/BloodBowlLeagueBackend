@@ -43,6 +43,7 @@ namespace Host.Matches.Startup
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseMvc();
+            app.UseCors("MyPolicy");
             app.UseMicrowaveUi();
             app.RunMicrowaveQueries();
         }
