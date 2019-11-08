@@ -20,6 +20,13 @@ namespace Teams.WriteHost.Startup
             services.AddTransient<TeamCommandHandler>();
             services.AddMicrowaveUi();
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+
             services.AddMicrowave(c =>
             {
                 c.WithServiceName("TeamService");
