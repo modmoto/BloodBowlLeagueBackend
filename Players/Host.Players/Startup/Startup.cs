@@ -18,7 +18,7 @@ namespace Host.Players.Startup
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                builder.WithOrigins("https://ka-bbl.herokuapp.com/", "http://localhost:3000/")
+                builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
