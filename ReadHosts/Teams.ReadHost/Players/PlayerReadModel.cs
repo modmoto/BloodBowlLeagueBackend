@@ -24,7 +24,6 @@ namespace Teams.ReadHost.Players
 
         public long StarPlayerPoints { get; set; }
         public int Level { get; set; } = 1;
-        public string Name { get; private set; }
 
         public int ChoosableSkills { get; set; }
 

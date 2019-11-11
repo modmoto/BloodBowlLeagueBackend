@@ -23,7 +23,7 @@
                                 </em>
                             }
                         }
-                        @player.Name @RaceTranslations.ResourceManager.GetString(player.PlayerTypeId) <e>SSP: @player.StarPlayerPoints</e>
+                        @@RaceTranslations.ResourceManager.GetString(player.PlayerTypeId) <e>SSP: @player.StarPlayerPoints</e>
                         @if (player.Skills.Any())
                         {
                             string.Join(", ", player.Skills.Select(s => s));
