@@ -16,6 +16,7 @@ namespace Teams.ReadHost.Players
         IHandle<PlayerMadeTouchdown>,
         IHandle<PlayerWasNominatedMostValuablePlayer>
     {
+        private PlayerStats PlayerStats;
         public Guid PlayerId { get; private set; }
         public Guid TeamId { get; private set; }
         public string PlayerTypeId { get; private set; }
@@ -38,6 +39,7 @@ namespace Teams.ReadHost.Players
             TeamId = domainEvent.TeamId;
             PlayerTypeId = domainEvent.PlayerTypeId;
             PlayerConfig = domainEvent.PlayerConfig;
+            PlayerStats = domainEvent.PlayerConfig.PlayerStats;
             var startingSkills = Skills.ToList();
             startingSkills.AddRange(domainEvent.PlayerConfig.StartingSkills.Select(s => s.SkillId));
             Skills = startingSkills;

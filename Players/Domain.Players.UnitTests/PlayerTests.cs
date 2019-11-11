@@ -222,6 +222,7 @@ namespace Domain.Players.UnitTests
         {
             var playerConfig = new PlayerConfig(
                 "whatever",
+                new PlayerStats(8,3,3,8),
                 new List<SkillReadModel>(),
                 defaultSkills ?? new[] {SkillType.General},
                 doubleSkills ?? new[] {SkillType.Passing});
