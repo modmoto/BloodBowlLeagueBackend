@@ -34,7 +34,6 @@ namespace Host.Players.Startup
             services.AddMicrowaveUi();
 
             services.AddTransient<PlayerCommandHandler>();
-            services.AddTransient<NameService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -32,15 +32,14 @@ namespace Domain.Players
         public static DomainResult Create(
             Guid playerId,
             Guid teamId,
-            AllowedPlayer allowedPlayer,
-            string name)
+            AllowedPlayer allowedPlayer)
         {
             var playerConfig = new PlayerConfig(
                 allowedPlayer.PlayerTypeId,
                 allowedPlayer.StartingSkills,
                 allowedPlayer.SkillsOnDefault,
                 allowedPlayer.SkillsOnDouble);
-            var playerCreated = new PlayerCreated(playerId, teamId, playerConfig, name);
+            var playerCreated = new PlayerCreated(playerId, teamId, playerConfig);
             return DomainResult.Ok(playerCreated);
         }
 

@@ -233,7 +233,7 @@ namespace Domain.Players.UnitTests
             IEnumerable<SkillType> doubleSkills = null)
         {
             var playerConfig = PlayerConfig(defaultSkills, doubleSkills);
-            return new PlayerCreated(Guid.NewGuid(), Guid.NewGuid(), playerConfig, "Peter Wolf");
+            return new PlayerCreated(Guid.NewGuid(), Guid.NewGuid(), playerConfig);
         }
     }
 }
