@@ -9,7 +9,6 @@ namespace Domain.Races.Races
             string playerTypeId,
             int maximumPlayers,
             GoldCoins cost,
-            PlayerStats playerStats,
             IEnumerable<Skill> startingSkills,
             IEnumerable<SkillType> skillsOnDefault,
             IEnumerable<SkillType> skillsOnDouble)
@@ -17,7 +16,6 @@ namespace Domain.Races.Races
             PlayerTypeId = playerTypeId;
             MaximumPlayers = maximumPlayers;
             Cost = cost;
-            PlayerStats = playerStats;
             StartingSkills = startingSkills;
             SkillsOnDefault = skillsOnDefault;
             SkillsOnDouble = skillsOnDouble;
@@ -26,7 +24,6 @@ namespace Domain.Races.Races
         public string PlayerTypeId { get; }
         public int MaximumPlayers { get; }
         public GoldCoins Cost { get; }
-        public PlayerStats PlayerStats { get; }
         public IEnumerable<Skill> StartingSkills { get; }
         public IEnumerable<SkillType> SkillsOnDefault { get; }
         public IEnumerable<SkillType> SkillsOnDouble { get; }
@@ -37,7 +34,6 @@ namespace Domain.Races.Races
                 "DE_LineMan",
                 16,
                 new GoldCoins(70000),
-                new PlayerStats(6, 3, 4, 8),
                 new List<Skill>(),
                 new [] { SkillType.General, SkillType.Agility },
                 new [] { SkillType.Strength, SkillType.Passing });
@@ -47,7 +43,6 @@ namespace Domain.Races.Races
                 "DE_Assassine",
                 2,
                 new GoldCoins(90000),
-                new PlayerStats(7, 3, 4, 8),
                 new [] { Skill.Shadowing, Skill.Stab },
                 new [] { SkillType.General, SkillType.Agility },
                 new [] { SkillType.Strength, SkillType.Passing });
@@ -57,7 +52,6 @@ namespace Domain.Races.Races
                 "DE_Blitzer",
                 4,
                 new GoldCoins(100000),
-                new PlayerStats(7, 3, 4, 8),
                 new [] { Skill.Block },
                 new [] { SkillType.General, SkillType.Agility },
                 new [] { SkillType.Passing, SkillType.Strength });
@@ -67,7 +61,6 @@ namespace Domain.Races.Races
                 "DE_WitchElve",
                 2,
                 new GoldCoins(110000),
-                new PlayerStats(7, 3, 4, 7),
                 new [] { Skill.Dodge, Skill.JumpUp, Skill.Frenzy },
                 new [] { SkillType.General },
                 new [] { SkillType.General });
@@ -76,7 +69,6 @@ namespace Domain.Races.Races
                 "DE_Runner",
                 2,
                 new GoldCoins(80000),
-                new PlayerStats(7, 3, 4, 7),
                 new [] { Skill.DumpOff },
                 new [] { SkillType.General, SkillType.Agility, SkillType.Passing },
                 new [] { SkillType.Strength });
@@ -87,7 +79,6 @@ namespace Domain.Races.Races
                 "HU_LineMan",
                 16,
                 new GoldCoins(50000),
-                new PlayerStats(6, 3, 3, 8),
                 new List<Skill>(),
                 new [] { SkillType.General },
                 new [] { SkillType.Agility, SkillType.Strength, SkillType.Passing });
@@ -97,7 +88,6 @@ namespace Domain.Races.Races
                 "HU_Blitzer",
                 4,
                 new GoldCoins(90000),
-                new PlayerStats(7, 3, 3, 8),
                 new [] { Skill.Block },
                 new [] { SkillType.General, SkillType.Strength },
                 new [] { SkillType.Passing, SkillType.Agility });
@@ -107,7 +97,6 @@ namespace Domain.Races.Races
                 "HU_Catcher",
                 4,
                 new GoldCoins(70000),
-                new PlayerStats(7, 3, 3, 7),
                 new [] { Skill.Catch, Skill.Dodge },
                 new [] { SkillType.Agility, SkillType.General },
                 new [] { SkillType.Strength, SkillType.Passing });
@@ -117,7 +106,6 @@ namespace Domain.Races.Races
                 "HU_Thrower",
                 2,
                 new GoldCoins(70000),
-                new PlayerStats(6, 3, 3, 8),
                 new [] { Skill.SureHands, Skill.Pass },
                 new [] { SkillType.Passing, SkillType.General },
                 new [] { SkillType.Agility, SkillType.Strength });
@@ -127,7 +115,6 @@ namespace Domain.Races.Races
                 "HU_Ogre",
                 1,
                 new GoldCoins(140000),
-                new PlayerStats(6, 5, 2, 9),
                 new [] { Skill.MightyBlow },
                 new [] { SkillType.Strength },
                 new [] { SkillType.General, SkillType.Agility, SkillType.Passing });
@@ -138,7 +125,6 @@ namespace Domain.Races.Races
                 "DW_Blocker",
                 16,
                 new GoldCoins(70000),
-                new PlayerStats(4, 3, 3, 9),
                 new List<Skill>(),
                 new [] { SkillType.General },
                 new [] { SkillType.General });
@@ -148,7 +134,6 @@ namespace Domain.Races.Races
                 "DW_Runner",
                 2,
                 new GoldCoins(80000),
-                new PlayerStats(5, 3, 3, 8),
                 new [] { Skill.Block },
                 new [] { SkillType.General },
                 new [] { SkillType.General });
@@ -158,7 +143,6 @@ namespace Domain.Races.Races
                 "DW_Blitzer",
                 2,
                 new GoldCoins(80000),
-                new PlayerStats(5, 3, 3, 9),
                 new [] { Skill.Block },
                 new [] { SkillType.General },
                 new [] { SkillType.General });
@@ -168,7 +152,6 @@ namespace Domain.Races.Races
                 "DW_TrollSlayer",
                 2,
                 new GoldCoins(90000),
-                new PlayerStats(4, 3, 3, 9),
                 new [] { Skill.Dodge },
                 new [] { SkillType.General },
                 new [] { SkillType.General });
@@ -178,7 +161,6 @@ namespace Domain.Races.Races
                 "DW_DeathRoller",
                 1,
                 new GoldCoins(160000),
-                new PlayerStats(4, 6, 3, 10),
                 new [] { Skill.Dodge },
                 new [] { SkillType.General },
                 new [] { SkillType.General });
