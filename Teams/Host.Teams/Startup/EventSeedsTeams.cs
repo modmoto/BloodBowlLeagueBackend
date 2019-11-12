@@ -134,6 +134,30 @@ namespace Teams.WriteHost.Startup
                         "Der Simon",
                         DarkElvPlayers,
                         new GoldCoins(1000000)),
+                    new PlayerAddedToDraft(
+                        team1,
+                        "DE_LineMan",
+                        1,
+                        new Guid("EC48B7FF-B76D-471F-99B0-761EC43C4101"),
+                        new GoldCoins(930000)),
+                    new PlayerAddedToDraft(
+                        team1,
+                        "DE_LineMan",
+                        2,
+                        new Guid("C2DEDB29-C59D-4D8F-B854-6B44D04E6C7A"),
+                        new GoldCoins(860000)),
+                    new PlayerAddedToDraft(
+                        team1,
+                        "DE_LineMan",
+                        3,
+                        new Guid("E86E63E2-8C3C-4CFF-8719-68BD844CD7F7"),
+                        new GoldCoins(790000)),
+                    new TeamCreated(team1,
+                        "DarkElves",
+                        "3er Team",
+                        "Der Simon",
+                        DarkElvPlayers,
+                        new GoldCoins(790000)),
                     new PlayerBought(
                         team1,
                         "DE_LineMan",
@@ -152,12 +176,6 @@ namespace Teams.WriteHost.Startup
                         3,
                         new Guid("E86E63E2-8C3C-4CFF-8719-68BD844CD7F7"),
                         new GoldCoins(790000)),
-                    new TeamCreated(team1,
-                        "DarkElves",
-                        "3er Team",
-                        "Der Simon",
-                        DarkElvPlayers,
-                        new GoldCoins(790000))
                 };
 
                 return events;
