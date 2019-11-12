@@ -98,16 +98,19 @@ namespace Teams.WriteHost.Startup
                     new PlayerAddedToDraft(
                         team1,
                         "DE_LineMan",
+                        1,
                         new Guid("1BF57260-77E5-4E19-99C3-3B6D7205B8BE"),
                         new GoldCoins(930000)),
                     new PlayerAddedToDraft(
                         team1,
                         "DE_LineMan",
+                        2,
                         new Guid("5543633B-78B6-40EC-A84D-0F637A3F05EE"),
                         new GoldCoins(860000)),
                     new PlayerAddedToDraft(
                         team1,
                         "DE_LineMan",
+                        3,
                         new Guid("F9C331B7-AC52-46FF-B565-CFD6E690106B"),
                         new GoldCoins(790000))
                 };
@@ -134,16 +137,19 @@ namespace Teams.WriteHost.Startup
                     new PlayerBought(
                         team1,
                         "DE_LineMan",
+                        1,
                         new Guid("EC48B7FF-B76D-471F-99B0-761EC43C4101"),
                         new GoldCoins(930000)),
                     new PlayerBought(
                         team1,
                         "DE_LineMan",
+                        2,
                         new Guid("C2DEDB29-C59D-4D8F-B854-6B44D04E6C7A"),
                         new GoldCoins(860000)),
                     new PlayerBought(
                         team1,
                         "DE_LineMan",
+                        3,
                         new Guid("E86E63E2-8C3C-4CFF-8719-68BD844CD7F7"),
                         new GoldCoins(790000)),
                     new TeamCreated(team1,
@@ -176,11 +182,13 @@ namespace Teams.WriteHost.Startup
                     new PlayerBought(
                         team2,
                         "HU_Blitzer",
+                        1,
                         new Guid("9CF84B11-5852-4D09-BB08-5357E6DA04C8"),
                         new GoldCoins(950000)),
                     new PlayerBought(
                         team2,
                         "HU_LineMan",
+                        2,
                         new Guid("1796B724-B55F-47A3-A498-153379C516EA"),
                         new GoldCoins(900000)),
                     new TeamCreated(

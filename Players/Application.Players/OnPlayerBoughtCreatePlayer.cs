@@ -30,6 +30,7 @@ namespace Application.Players
             var result = Player.Create(
                 domainEvent.PlayerId,
                 domainEvent.TeamId,
+                domainEvent.PlayerPositionNumber,
                 playerRule);
             var storeResult = await _eventStore.AppendAsync(result.DomainEvents, 0);
             storeResult.Check();

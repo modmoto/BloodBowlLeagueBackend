@@ -8,12 +8,14 @@ namespace Teams.ReadHost.Teams.Events
         public PlayerAddedToDraft(
             Guid teamId,
             string playerTypeId,
+            int playerPositionNumber,
             Guid playerId,
             GoldCoins newTeamChestBalance)
         {
             TeamId = teamId;
             NewTeamChestBalance = newTeamChestBalance;
             PlayerTypeId = playerTypeId;
+            PlayerPositionNumber = playerPositionNumber;
             PlayerId = playerId;
         }
 
@@ -21,6 +23,7 @@ namespace Teams.ReadHost.Teams.Events
         public Guid TeamId { get; }
         public GoldCoins NewTeamChestBalance { get; }
         public string PlayerTypeId { get; }
+        public int PlayerPositionNumber { get; }
         public Guid PlayerId { get; }
     }
 }

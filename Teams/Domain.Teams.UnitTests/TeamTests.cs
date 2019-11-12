@@ -32,6 +32,12 @@ namespace Domain.Teams.UnitTests
             var playerBought = (PlayerAddedToDraft) bought.DomainEvents.Single();
             Assert.AreEqual(playerTypeId, playerBought.PlayerTypeId);
             Assert.AreEqual(new GoldCoins(950000), playerBought.NewTeamChestBalance);
+            Assert.AreEqual(1, playerBought.PlayerPositionNumber);
+
+
+            var bought2 = team.BuyPlayer(playerTypeId);
+            var domainEvent = (PlayerAddedToDraft) bought2.DomainEvents.Single();
+            Assert.AreEqual(2, domainEvent.PlayerPositionNumber);
         }
     }
 }

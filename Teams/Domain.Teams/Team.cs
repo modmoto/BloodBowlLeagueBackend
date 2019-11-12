@@ -51,7 +51,8 @@ namespace Domain.Teams
                 return DomainResult.Error(new FewMoneyInTeamChestError(playerBuyConfig.Cost.Value, TeamMoney.Value));
 
             var newTeamMoney = TeamMoney.Minus(playerBuyConfig.Cost);
-            var playerBought = _teamState.BoughtEvent(TeamId, playerTypeId, Guid.NewGuid(), newTeamMoney);
+            var playerBought = _teamState.BoughtEvent(TeamId, playerTypeId, Players.Count() + 1, Guid.NewGuid(), newTeamMoney);
+            Apply(new List<IDomainEvent> {playerBought});
             return DomainResult.Ok(playerBought);
         }
 
@@ -61,11 +62,14 @@ namespace Domain.Teams
             
             var domainEvents = new List<IDomainEvent>();
             domainEvents.Add(new TeamCreated(TeamId, RaceId, TeamName, TrainerName, AllowedPlayers, TeamMoney));
-            domainEvents.AddRange(Players.Select(player => new PlayerBought(
+            domainEvents.AddRange(Players.Select((player, index) => new PlayerBought(
                     TeamId,
                     player.PlayerTypeId,
+                    index + 1,
                     player.PlayerId,
                     TeamMoney)));
+
+            Apply(domainEvents);
 
             return DomainResult.Ok(domainEvents);
         }
@@ -76,7 +80,10 @@ namespace Domain.Teams
             var playerReadModel = Players.Single(p => p.PlayerId == playerId);
             var playerBuyConfig = AllowedPlayers.Single(ap => ap.PlayerTypeId.Equals(playerReadModel.PlayerTypeId));
             var newTeamMoney = TeamMoney.Plus(playerBuyConfig.Cost);
-            return DomainResult.Ok(new PlayerRemovedFromDraft(TeamId, playerId, newTeamMoney));
+
+            var playerRemovedFromDraft = new PlayerRemovedFromDraft(TeamId, playerId, newTeamMoney);
+            Apply(playerRemovedFromDraft);
+            return DomainResult.Ok(playerRemovedFromDraft);
         }
 
         public void Apply(PlayerRemovedFromDraft domainEvent)
@@ -120,10 +127,11 @@ namespace Domain.Teams
         public override IDomainEvent BoughtEvent(
             Guid teamId,
             string playerTypeId,
+            int playerPositionNumber,
             Guid playerId,
             GoldCoins newTeamMoney)
         {
-            return new PlayerBought(teamId, playerTypeId, playerId, newTeamMoney);
+            return new PlayerBought(teamId, playerTypeId, playerPositionNumber, playerId, newTeamMoney);
         }
 
         public override bool AllowsRemovingPlayers => false;
@@ -134,10 +142,11 @@ namespace Domain.Teams
         public override IDomainEvent BoughtEvent(
             Guid teamId,
             string playerTypeId,
+            int playerPositionNumber,
             Guid playerId,
             GoldCoins newTeamMoney)
         {
-            return new PlayerAddedToDraft(teamId, playerTypeId, playerId, newTeamMoney);
+            return new PlayerAddedToDraft(teamId, playerTypeId, playerPositionNumber, playerId, newTeamMoney);
         }
 
         public override bool AllowsRemovingPlayers => true;
@@ -148,6 +157,7 @@ namespace Domain.Teams
         abstract public IDomainEvent BoughtEvent(
             Guid teamId,
             string playerTypeId,
+            int playerPositionNumber,
             Guid playerId,
             GoldCoins newTeamMoney);
 

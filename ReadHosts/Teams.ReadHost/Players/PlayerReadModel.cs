@@ -30,6 +30,7 @@ namespace Teams.ReadHost.Players
         public IEnumerable<FreeSkillPoint> FreeSkillPoints { get; private set; } = new List<FreeSkillPoint>();
         public bool HasFreeSkill => FreeSkillPoints.Any();
         public bool CanRegisterLevelUpSkillPointRoll => ChoosableSkills > 0;
+        public int PlayerPositionNumber { get; set; }
 
         public void Handle(PlayerCreated domainEvent)
         {
@@ -37,6 +38,7 @@ namespace Teams.ReadHost.Players
             TeamId = domainEvent.TeamId;
             PlayerTypeId = domainEvent.PlayerTypeId;
             PlayerConfig = domainEvent.PlayerConfig;
+            PlayerPositionNumber = domainEvent.PlayerPositionNumber;
             var startingSkills = Skills.ToList();
             startingSkills.AddRange(domainEvent.PlayerConfig.StartingSkills.Select(s => s.SkillId));
             Skills = startingSkills;

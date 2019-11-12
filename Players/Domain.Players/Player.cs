@@ -32,6 +32,7 @@ namespace Domain.Players
         public static DomainResult Create(
             Guid playerId,
             Guid teamId,
+            int playerPositionNumber,
             AllowedPlayer allowedPlayer)
         {
             var playerConfig = new PlayerConfig(
@@ -40,7 +41,7 @@ namespace Domain.Players
                 allowedPlayer.StartingSkills,
                 allowedPlayer.SkillsOnDefault,
                 allowedPlayer.SkillsOnDouble);
-            var playerCreated = new PlayerCreated(playerId, teamId, playerConfig);
+            var playerCreated = new PlayerCreated(playerId, teamId, playerPositionNumber, playerConfig);
             return DomainResult.Ok(playerCreated);
         }
 

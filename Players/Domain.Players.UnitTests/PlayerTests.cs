@@ -234,7 +234,7 @@ namespace Domain.Players.UnitTests
             IEnumerable<SkillType> doubleSkills = null)
         {
             var playerConfig = PlayerConfig(defaultSkills, doubleSkills);
-            return new PlayerCreated(Guid.NewGuid(), Guid.NewGuid(), playerConfig);
+            return new PlayerCreated(Guid.NewGuid(), Guid.NewGuid(), 1, playerConfig);
         }
     }
 }
