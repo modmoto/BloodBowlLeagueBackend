@@ -51,12 +51,22 @@ namespace Domain.Teams
                 return DomainResult.Error(new FewMoneyInTeamChestError(playerBuyConfig.Cost.Value, TeamMoney.Value));
 
             var newTeamMoney = TeamMoney.Minus(playerBuyConfig.Cost);
-            var nextFreeNumber = Players.Any() ? Players.Max(p => p.PlayerPositionNumber) + 1 : 1;
+            var orderedPositions = Players.Select(p => p.PlayerPositionNumber).OrderBy(p => p).ToList();
+            var travers = FindFirstFreeNumber(orderedPositions, 1);
 
-            var playerBought = _teamState.BoughtEvent(TeamId, playerTypeId, nextFreeNumber, Guid.NewGuid(),
+            var playerBought = _teamState.BoughtEvent(TeamId, playerTypeId, travers, Guid.NewGuid(),
             newTeamMoney);
             Apply(new List<IDomainEvent> {playerBought});
             return DomainResult.Ok(playerBought);
+        }
+
+        private int FindFirstFreeNumber(List<int> numbers, int current)
+        {
+            if (!numbers.Any()) return current;
+            var first = numbers.First();
+            if (first - 1 > current) return current + 1;
+
+            return FindFirstFreeNumber(numbers.Skip(1).ToList(), current + 1);
         }
 
         public DomainResult CommitDraft()
