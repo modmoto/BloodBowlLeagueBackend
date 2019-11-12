@@ -36,6 +36,7 @@ namespace Domain.Players
         {
             var playerConfig = new PlayerConfig(
                 allowedPlayer.PlayerTypeId,
+                allowedPlayer.PlayerStats,
                 allowedPlayer.StartingSkills,
                 allowedPlayer.SkillsOnDefault,
                 allowedPlayer.SkillsOnDouble);
