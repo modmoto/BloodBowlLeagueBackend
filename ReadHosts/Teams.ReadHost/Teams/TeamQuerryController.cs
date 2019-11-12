@@ -43,7 +43,7 @@ namespace Teams.ReadHost.Teams
             var team = result.Value;
             var playersValue = players.Value;
             var playerReadModels = playersValue.Where(p =>
-                team.PlayerList.Any(a => a.PlayerId == p.PlayerId));
+                team.PlayerList.Any(a => a.PlayerId == p.PlayerId)).OrderBy(p => p.PlayerPositionNumber);
             return Ok(new TeamWithPlayersHto(team, playerReadModels));
         }
     }

@@ -54,6 +54,7 @@ namespace Teams.ReadHost.Teams
             TeamName = domainEvent.TeamName;
             TrainerName = domainEvent.TrainerName;
             TeamChest = domainEvent.StartingMoney;
+            PlayerList = new List<PlayerDto>();
             AllowedPlayers = domainEvent.AllowedPlayers;
         }
 
