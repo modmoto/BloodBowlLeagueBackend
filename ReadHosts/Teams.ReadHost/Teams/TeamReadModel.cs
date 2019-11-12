@@ -36,7 +36,7 @@ namespace Teams.ReadHost.Teams
         {
             TeamChest = domainEvent.NewTeamChestBalance;
             var playerDto = new PlayerDto(domainEvent.PlayerId, domainEvent.PlayerTypeId, domainEvent.PlayerPositionNumber);
-            PlayerList = PlayerList.Append(playerDto);
+            PlayerList = PlayerList.Append(playerDto).OrderBy(p => p.PlayerPositionNumber);
         }
 
         public void Handle(PlayerRemovedFromDraft domainEvent)
@@ -60,7 +60,8 @@ namespace Teams.ReadHost.Teams
         public void Handle(PlayerAddedToDraft domainEvent)
         {
             TeamChest = domainEvent.NewTeamChestBalance;
-            PlayerList = PlayerList.Append(new PlayerDto(domainEvent.PlayerId, domainEvent.PlayerTypeId, domainEvent.PlayerPositionNumber));
+            var playerDto = new PlayerDto(domainEvent.PlayerId, domainEvent.PlayerTypeId, domainEvent.PlayerPositionNumber);
+            PlayerList = PlayerList.Append(playerDto).OrderBy(p => p.PlayerPositionNumber);
         }
     }
 }
