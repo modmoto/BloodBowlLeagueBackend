@@ -51,8 +51,7 @@ namespace Domain.Teams
                 return DomainResult.Error(new FewMoneyInTeamChestError(playerBuyConfig.Cost.Value, TeamMoney.Value));
 
             var newTeamMoney = TeamMoney.Minus(playerBuyConfig.Cost);
-            var playerNumbers = Players.Select(p => p.PlayerPositionNumber).OrderBy(nr => nr);
-            var nextFreeNumber = playerNumbers.LastOrDefault() + 1;
+            var nextFreeNumber = Players.Any() ? Players.Max(p => p.PlayerPositionNumber) + 1 : 1;
 
             var playerBought = _teamState.BoughtEvent(TeamId, playerTypeId, nextFreeNumber, Guid.NewGuid(),
             newTeamMoney);
@@ -66,7 +65,7 @@ namespace Domain.Teams
             
             var domainEvents = new List<IDomainEvent>();
             domainEvents.Add(new TeamCreated(TeamId, RaceId, TeamName, TrainerName, AllowedPlayers, TeamMoney));
-            domainEvents.AddRange(Players.Select((player) => new PlayerBought(
+            domainEvents.AddRange(Players.Select(player => new PlayerBought(
                     TeamId,
                     player.PlayerTypeId,
                     player.PlayerPositionNumber,
