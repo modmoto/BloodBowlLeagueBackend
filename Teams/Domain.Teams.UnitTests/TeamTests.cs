@@ -39,5 +39,45 @@ namespace Domain.Teams.UnitTests
             var domainEvent = (PlayerAddedToDraft) bought2.DomainEvents.Single();
             Assert.AreEqual(2, domainEvent.PlayerPositionNumber);
         }
+
+        [TestMethod]
+        public void CommitDraft()
+        {
+            var playerTypeId = "de_Nelf";
+            var domainResult = Team.Draft(
+                "Elves",
+                "King Kingz",
+                "Simon",
+                new List<AllowedPlayer>
+                {
+                    new AllowedPlayer(
+                        playerTypeId,
+                        15,
+                        new GoldCoins(50000))
+                });
+            var team = new Team();
+            team.Apply(domainResult.DomainEvents);
+
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+
+            var commitDraft = team.CommitDraft();
+
+            var commitDraftDomainEvents = commitDraft.DomainEvents.ToList();
+            Assert.AreEqual(12, commitDraftDomainEvents.Count);
+            Assert.IsInstanceOfType(commitDraftDomainEvents[0], typeof(TeamCreated));
+            Assert.AreEqual(1, ((PlayerBought) commitDraftDomainEvents[1]).PlayerPositionNumber);
+            Assert.AreEqual(2, ((PlayerBought) commitDraftDomainEvents[2]).PlayerPositionNumber);
+            Assert.AreEqual(11, ((PlayerBought) commitDraftDomainEvents[10]).PlayerPositionNumber);
+        }
     }
 }
