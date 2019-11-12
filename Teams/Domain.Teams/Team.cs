@@ -51,7 +51,11 @@ namespace Domain.Teams
                 return DomainResult.Error(new FewMoneyInTeamChestError(playerBuyConfig.Cost.Value, TeamMoney.Value));
 
             var newTeamMoney = TeamMoney.Minus(playerBuyConfig.Cost);
-            var playerBought = _teamState.BoughtEvent(TeamId, playerTypeId, Players.Count() + 1, Guid.NewGuid(), newTeamMoney);
+            var playerNumbers = Players.Select(p => p.PlayerPositionNumber).OrderBy(nr => nr);
+            var nextFreeNumber = playerNumbers.LastOrDefault() + 1;
+
+            var playerBought = _teamState.BoughtEvent(TeamId, playerTypeId, nextFreeNumber, Guid.NewGuid(),
+            newTeamMoney);
             Apply(new List<IDomainEvent> {playerBought});
             return DomainResult.Ok(playerBought);
         }
@@ -62,10 +66,10 @@ namespace Domain.Teams
             
             var domainEvents = new List<IDomainEvent>();
             domainEvents.Add(new TeamCreated(TeamId, RaceId, TeamName, TrainerName, AllowedPlayers, TeamMoney));
-            domainEvents.AddRange(Players.Select((player, index) => new PlayerBought(
+            domainEvents.AddRange(Players.Select((player) => new PlayerBought(
                     TeamId,
                     player.PlayerTypeId,
-                    index + 1,
+                    player.PlayerPositionNumber,
                     player.PlayerId,
                     TeamMoney)));
 
@@ -101,7 +105,7 @@ namespace Domain.Teams
         public void Apply(PlayerBought domainEvent)
         {
             TeamMoney = domainEvent.NewTeamChestBalance;
-            var playerReadModel = new PlayerReadModel(domainEvent.PlayerId, domainEvent.PlayerTypeId);
+            var playerReadModel = new PlayerReadModel(domainEvent.PlayerId, domainEvent.PlayerTypeId, domainEvent.PlayerPositionNumber);
             Players = Players.Append(playerReadModel);
         }
 
@@ -118,7 +122,8 @@ namespace Domain.Teams
         public void Apply(PlayerAddedToDraft domainEvent)
         {
             TeamMoney = domainEvent.NewTeamChestBalance;
-            Players = Players.Append(new PlayerReadModel(domainEvent.PlayerId, domainEvent.PlayerTypeId));
+            var playerReadModel = new PlayerReadModel(domainEvent.PlayerId, domainEvent.PlayerTypeId, domainEvent.PlayerPositionNumber);
+            Players = Players.Append(playerReadModel);
         }
     }
 
