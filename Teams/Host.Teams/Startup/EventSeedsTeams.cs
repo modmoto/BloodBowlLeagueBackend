@@ -179,13 +179,13 @@ namespace Teams.WriteHost.Startup
                         "Der Simon Poppinga",
                         HumanPlayers,
                         new GoldCoins(1000000)),
-                    new PlayerBought(
+                    new PlayerAddedToDraft(
                         team2,
                         "HU_Blitzer",
                         1,
                         new Guid("9CF84B11-5852-4D09-BB08-5357E6DA04C8"),
                         new GoldCoins(950000)),
-                    new PlayerBought(
+                    new PlayerAddedToDraft(
                         team2,
                         "HU_LineMan",
                         2,
@@ -197,6 +197,18 @@ namespace Teams.WriteHost.Startup
                         "2er Team",
                         "Der Simon Poppinga",
                         HumanPlayers,
+                        new GoldCoins(900000)),
+                    new PlayerBought(
+                        team2,
+                        "HU_Blitzer",
+                        1,
+                        new Guid("9CF84B11-5852-4D09-BB08-5357E6DA04C8"),
+                        new GoldCoins(950000)),
+                    new PlayerBought(
+                        team2,
+                        "HU_LineMan",
+                        2,
+                        new Guid("1796B724-B55F-47A3-A498-153379C516EA"),
                         new GoldCoins(900000))
                 };
 
