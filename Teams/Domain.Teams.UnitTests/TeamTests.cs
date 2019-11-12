@@ -77,7 +77,7 @@ namespace Domain.Teams.UnitTests
             Assert.IsInstanceOfType(commitDraftDomainEvents[0], typeof(TeamCreated));
             Assert.AreEqual(1, ((PlayerBought) commitDraftDomainEvents[1]).PlayerPositionNumber);
             Assert.AreEqual(2, ((PlayerBought) commitDraftDomainEvents[2]).PlayerPositionNumber);
-            Assert.AreEqual(11, ((PlayerBought) commitDraftDomainEvents[10]).PlayerPositionNumber);
+            Assert.AreEqual(10, ((PlayerBought) commitDraftDomainEvents[10]).PlayerPositionNumber);
         }
     }
 }
