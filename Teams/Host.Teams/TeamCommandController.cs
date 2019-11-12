@@ -27,7 +27,7 @@ namespace Teams.WriteHost
         {
             buyPlayerCommand.TeamId = teamId;
             var playerId = await _commandHandler.BuyPlayer(buyPlayerCommand);
-            return Ok(playerId);
+            return Ok(new { playerId });
         }
 
         [HttpPost("{teamId}/remove-player")]

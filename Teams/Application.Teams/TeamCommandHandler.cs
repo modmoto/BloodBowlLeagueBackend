@@ -37,7 +37,7 @@ namespace Application.Teams
             var team = teamResult.Value;
             var buyPlayer = team.BuyPlayer(buyPlayerCommand.PlayerTypeId);
             (await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion)).Check();
-            return ((PlayerBought) buyPlayer.DomainEvents.First()).PlayerId;
+            return ((PlayerBoughtBase) buyPlayer.DomainEvents.First()).PlayerId;
         }
 
         public async Task FinishTeam(FinishTeamCommand command)

@@ -3,7 +3,7 @@ using Microwave.Domain.EventSourcing;
 
 namespace Domain.Teams.DomainEvents
 {
-    public class PlayerBought : IDomainEvent
+    public class PlayerBought : PlayerBoughtBase
     {
         public PlayerBought(
             Guid teamId,
@@ -11,19 +11,13 @@ namespace Domain.Teams.DomainEvents
             int playerPositionNumber,
             Guid playerId,
             GoldCoins newTeamChestBalance)
+            : base(
+                teamId,
+                playerTypeId,
+                playerPositionNumber,
+                playerId,
+                newTeamChestBalance)
         {
-            TeamId = teamId;
-            NewTeamChestBalance = newTeamChestBalance;
-            PlayerTypeId = playerTypeId;
-            PlayerPositionNumber = playerPositionNumber;
-            PlayerId = playerId;
         }
-
-        public string EntityId => TeamId.ToString();
-        public Guid TeamId { get; }
-        public GoldCoins NewTeamChestBalance { get; }
-        public string PlayerTypeId { get; }
-        public int PlayerPositionNumber { get; }
-        public Guid PlayerId { get; }
     }
 }
