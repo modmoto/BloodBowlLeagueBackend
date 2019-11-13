@@ -31,13 +31,13 @@ namespace Application.Teams
             return domainResult.DomainEvents.First().EntityId;
         }
 
-        public async Task<Guid> BuyPlayer(BuyPlayerCommand buyPlayerCommand)
+        public async Task<Guid?> BuyPlayer(BuyPlayerCommand buyPlayerCommand)
         {
             var teamResult = await _eventStore.LoadAsync<Team>(buyPlayerCommand.TeamId);
             var team = teamResult.Value;
             var buyPlayer = team.BuyPlayer(buyPlayerCommand.PlayerTypeId);
             (await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion)).Check();
-            return ((PlayerBoughtBase) buyPlayer.DomainEvents.First()).PlayerId;
+            return (buyPlayer.DomainEvents.First() as PlayerBought)?.PlayerId;
         }
 
         public async Task FinishTeam(FinishTeamCommand command)
