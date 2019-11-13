@@ -12,7 +12,7 @@ namespace Domain.Teams
         IApply<TeamCreated>,
         IApply<TeamDraftCreated>,
         IApply<PlayerBought>,
-        IApply<PlayerRemovedFromDraft>,
+        IApply<PlayerRemoved>,
         IApply<PlayerAddedToDraft>
     {
         public Guid TeamId { get; private set; }
@@ -60,11 +60,11 @@ namespace Domain.Teams
             return DomainResult.Ok(playerBought);
         }
 
-        private int FindFirstFreeNumber(List<int> numbers, int current)
+        public int FindFirstFreeNumber(List<int> numbers, int current)
         {
             if (!numbers.Any()) return current;
             var first = numbers.First();
-            if (first - 1 > current) return current + 1;
+            if (first > current) return current;
 
             return FindFirstFreeNumber(numbers.Skip(1).ToList(), current + 1);
         }
@@ -89,19 +89,18 @@ namespace Domain.Teams
 
         public DomainResult RemovePlayer(Guid playerId)
         {
-            if (!_teamState.AllowsRemovingPlayers) return DomainResult.Error(new CanNotRemovePlayerFromTeam());
             var playerReadModel = Players.Single(p => p.PlayerId == playerId);
             var playerBuyConfig = AllowedPlayers.Single(ap => ap.PlayerTypeId.Equals(playerReadModel.PlayerTypeId));
             var newTeamMoney = TeamMoney.Plus(playerBuyConfig.Cost);
 
-            var playerRemovedFromDraft = new PlayerRemovedFromDraft(TeamId, playerId, newTeamMoney);
+            var playerRemovedFromDraft = new PlayerRemoved(TeamId, playerId, newTeamMoney);
             Apply(playerRemovedFromDraft);
             return DomainResult.Ok(playerRemovedFromDraft);
         }
 
-        public void Apply(PlayerRemovedFromDraft domainEvent)
+        public void Apply(PlayerRemoved domainEvent)
         {
-            Players = Players.Where(p => p.PlayerId != domainEvent.PlayerId);
+            Players = Players.Where(p => p.PlayerId != domainEvent.PlayerId).ToList();
             TeamMoney = domainEvent.NewTeamChestBalance;
         }
         public void Apply(TeamCreated domainEvent)
@@ -147,8 +146,6 @@ namespace Domain.Teams
         {
             return new PlayerBought(teamId, playerTypeId, playerPositionNumber, playerId, newTeamMoney);
         }
-
-        public override bool AllowsRemovingPlayers => false;
     }
 
     internal class TeamDraftState : TeamState
@@ -162,8 +159,6 @@ namespace Domain.Teams
         {
             return new PlayerAddedToDraft(teamId, playerTypeId, playerPositionNumber, playerId, newTeamMoney);
         }
-
-        public override bool AllowsRemovingPlayers => true;
     }
 
     internal abstract class TeamState
@@ -174,7 +169,5 @@ namespace Domain.Teams
             int playerPositionNumber,
             Guid playerId,
             GoldCoins newTeamMoney);
-
-        public abstract bool AllowsRemovingPlayers { get; }
     }
 }

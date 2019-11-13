@@ -10,7 +10,7 @@ namespace Teams.ReadHost.Teams
         IHandle<TeamDraftCreated>,
         IHandle<PlayerBought>,
         IHandle<PlayerAddedToDraft>,
-        IHandle<PlayerRemovedFromDraft>,
+        IHandle<PlayerRemoved>,
         IHandle<TeamCreated>
     {
         public IEnumerable<PlayerDto> PlayerList { get; set; } = new List<PlayerDto>();
@@ -39,7 +39,7 @@ namespace Teams.ReadHost.Teams
             PlayerList = PlayerList.Append(playerDto).OrderBy(p => p.PlayerPositionNumber).ToList();
         }
 
-        public void Handle(PlayerRemovedFromDraft domainEvent)
+        public void Handle(PlayerRemoved domainEvent)
         {
             var playerDtos = PlayerList.Where(p => p.PlayerId != domainEvent.PlayerId);
             PlayerList = playerDtos;
