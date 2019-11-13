@@ -52,8 +52,8 @@ namespace Domain.Teams.UnitTests
                 {
                     new AllowedPlayer(
                         playerTypeId,
-                        15,
-                        new GoldCoins(50000))
+                        30,
+                        new GoldCoins(10000))
                 });
             var team = new Team();
             team.Apply(domainResult.DomainEvents);
@@ -77,7 +77,18 @@ namespace Domain.Teams.UnitTests
             Assert.IsInstanceOfType(commitDraftDomainEvents[0], typeof(TeamCreated));
             Assert.AreEqual(1, ((PlayerBought) commitDraftDomainEvents[1]).PlayerPositionNumber);
             Assert.AreEqual(2, ((PlayerBought) commitDraftDomainEvents[2]).PlayerPositionNumber);
-            Assert.AreEqual(10, ((PlayerBought) commitDraftDomainEvents[10]).PlayerPositionNumber);
+            Assert.AreEqual(11, ((PlayerBought) commitDraftDomainEvents[11]).PlayerPositionNumber);
+
+
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            team.BuyPlayer(playerTypeId);
+            var events = team.BuyPlayer(playerTypeId);
+            var buyAfterEvents = events.DomainEvents.ToList();
+
+            Assert.AreEqual(17, ((PlayerBought)buyAfterEvents.Single()).PlayerPositionNumber);
         }
     }
 }
