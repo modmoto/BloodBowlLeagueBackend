@@ -132,52 +132,52 @@ namespace Domain.Teams.UnitTests
             Assert.AreEqual(4, ((PlayerBought)buyAfterEvents.Single()).PlayerPositionNumber);
         }
 
-        //[TestMethod]
-        //public void FindFirstFreeNumber()
-        //{
-        //    var team = new Team();
-        //    var firstFreeNumber = team.FindFirstFreeNumber(new List<int> { 1, 2 }, 1);
-        //    Assert.AreEqual(3, firstFreeNumber);
-        //}
+        [TestMethod]
+        public void FindFirstFreeNumber()
+        {
+            var team = new Team();
+            var firstFreeNumber = team.FindFirstFreeNumber(new List<int> { 1, 2 }, 1);
+            Assert.AreEqual(3, firstFreeNumber);
+        }
 
-        //[TestMethod]
-        //public void FindFirstFreeNumber2()
-        //{
-        //    var team = new Team();
-        //    var firstFreeNumber = team.FindFirstFreeNumber(new List<int> { 1, 3}, 1);
-        //    Assert.AreEqual(2, firstFreeNumber);
-        //}
+        [TestMethod]
+        public void FindFirstFreeNumber2()
+        {
+            var team = new Team();
+            var firstFreeNumber = team.FindFirstFreeNumber(new List<int> { 1, 3}, 1);
+            Assert.AreEqual(2, firstFreeNumber);
+        }
 
-        //[TestMethod]
-        //public void FindFirstFreeNumber3()
-        //{
-        //    var team = new Team();
-        //    var firstFreeNumber = team.FindFirstFreeNumber(new List<int> { 2, 3}, 1);
-        //    Assert.AreEqual(1, firstFreeNumber);
-        //}
+        [TestMethod]
+        public void FindFirstFreeNumber3()
+        {
+            var team = new Team();
+            var firstFreeNumber = team.FindFirstFreeNumber(new List<int> { 2, 3}, 1);
+            Assert.AreEqual(1, firstFreeNumber);
+        }
 
-        //[TestMethod]
-        //public void FindFirstFreeNumber4()
-        //{
-        //    var team = new Team();
-        //    var firstFreeNumber = team.FindFirstFreeNumber(new List<int> { 2 }, 1);
-        //    Assert.AreEqual(1, firstFreeNumber);
-        //}
+        [TestMethod]
+        public void FindFirstFreeNumber4()
+        {
+            var team = new Team();
+            var firstFreeNumber = team.FindFirstFreeNumber(new List<int> { 2 }, 1);
+            Assert.AreEqual(1, firstFreeNumber);
+        }
 
-        //[TestMethod]
-        //public void FindFirstFreeNumber5()
-        //{
-        //    var team = new Team();
-        //    var firstFreeNumber = team.FindFirstFreeNumber(new List<int> { 1 }, 1);
-        //    Assert.AreEqual(2, firstFreeNumber);
-        //}
+        [TestMethod]
+        public void FindFirstFreeNumber5()
+        {
+            var team = new Team();
+            var firstFreeNumber = team.FindFirstFreeNumber(new List<int> { 1 }, 1);
+            Assert.AreEqual(2, firstFreeNumber);
+        }
 
-        //[TestMethod]
-        //public void FindFirstFreeNumber6()
-        //{
-        //    var team = new Team();
-        //    var firstFreeNumber = team.FindFirstFreeNumber(new List<int>(), 1);
-        //    Assert.AreEqual(1, firstFreeNumber);
-        //}
+        [TestMethod]
+        public void FindFirstFreeNumber6()
+        {
+            var team = new Team();
+            var firstFreeNumber = team.FindFirstFreeNumber(new List<int>(), 1);
+            Assert.AreEqual(1, firstFreeNumber);
+        }
     }
 }
