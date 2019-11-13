@@ -114,7 +114,9 @@ namespace Domain.Teams
         {
             TeamMoney = domainEvent.NewTeamChestBalance;
             var playerReadModel = new PlayerReadModel(domainEvent.PlayerId, domainEvent.PlayerTypeId, domainEvent.PlayerPositionNumber);
-            Players = Players.Append(playerReadModel);
+            var playerReadModels = Players.ToList();
+            playerReadModels.Add(playerReadModel);
+            Players = playerReadModels;
         }
 
         public void Apply(TeamDraftCreated domainEvent)
@@ -131,7 +133,9 @@ namespace Domain.Teams
         {
             TeamMoney = domainEvent.NewTeamChestBalance;
             var playerReadModel = new PlayerReadModel(domainEvent.PlayerId, domainEvent.PlayerTypeId, domainEvent.PlayerPositionNumber);
-            Players = Players.Append(playerReadModel);
+            var playerReadModels = Players.ToList();
+            playerReadModels.Add(playerReadModel);
+            Players = playerReadModels;
         }
     }
 
