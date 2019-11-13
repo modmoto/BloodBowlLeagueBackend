@@ -62,6 +62,7 @@ namespace Domain.Teams
 
         public int FindFirstFreeNumber(List<int> numbers, int current)
         {
+            return numbers.Count + 1;
             if (!numbers.Any()) return current;
             var first = numbers.First();
             if (first > current) return current;
