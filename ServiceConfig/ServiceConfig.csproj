@@ -6,7 +6,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microwave">
-        <Version>0.15.0</Version>
+        <Version>0.15.1</Version>
       </PackageReference>
     </ItemGroup>
 
