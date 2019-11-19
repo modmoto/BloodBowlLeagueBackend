@@ -31,7 +31,6 @@ namespace Teams.WriteHost.Startup
             {
                 c.WithServiceName("TeamService");
                 c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
-                c.SnapShots.Add(new SnapShot<Team>(3));
             });
 
             var domainEvents = EventSeedsTeams.Seeds;
