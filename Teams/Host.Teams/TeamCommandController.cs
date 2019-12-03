@@ -26,8 +26,8 @@ namespace Teams.WriteHost
         public async Task<ActionResult> BuyPlayer(Guid teamId, [FromBody] BuyPlayerCommand buyPlayerCommand)
         {
             buyPlayerCommand.TeamId = teamId;
-            var playerId = await _commandHandler.BuyPlayer(buyPlayerCommand);
-            return Ok(new { playerId });
+            var result = await _commandHandler.BuyPlayer(buyPlayerCommand);
+            return Ok(result);
         }
 
         [HttpPost("{teamId}/remove-player")]
