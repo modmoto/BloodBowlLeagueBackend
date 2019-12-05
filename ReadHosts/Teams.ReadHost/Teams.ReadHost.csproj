@@ -26,4 +26,14 @@
       <ProjectReference Include="..\ReadHosts.Common\ReadHosts.Common.csproj" />
       <ProjectReference Include="..\Ui.Translations\Ui.Translations.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Player.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Players.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Team.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
+    </ItemGroup>
 </Project>
