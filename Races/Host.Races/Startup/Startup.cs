@@ -13,7 +13,7 @@ namespace Host.Races.Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMicrowaveUi();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
@@ -37,11 +37,14 @@ namespace Host.Races.Startup
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
             app.UseMicrowaveUi();
             app.UseCors("MyPolicy");
-            app.UseMvc();
         }
     }
 }

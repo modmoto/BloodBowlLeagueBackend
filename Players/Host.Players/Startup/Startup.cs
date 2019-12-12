@@ -14,7 +14,7 @@ namespace Host.Players.Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -36,12 +36,15 @@ namespace Host.Players.Startup
             services.AddTransient<PlayerCommandHandler>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            app.RunMicrowaveQueries();
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
             app.UseMicrowaveUi();
+            app.RunMicrowaveQueries();
             app.UseCors("MyPolicy");
-            app.UseMvc();
         }
     }
 }

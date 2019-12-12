@@ -14,7 +14,7 @@ namespace Host.Matches.Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddRazorPages().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -40,12 +40,15 @@ namespace Host.Matches.Startup
             services.AddTransient<MatchCommandHandler>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            app.UseMvc();
-            app.UseCors("MyPolicy");
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
             app.UseMicrowaveUi();
             app.RunMicrowaveQueries();
+            app.UseCors("MyPolicy");
         }
     }
 }

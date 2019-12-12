@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,8 +18,8 @@ namespace Seasons.ReadHost.Startup
             services
                 .AddMvc()
                 .AddJsonOptions(options =>
-                    options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter()))
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMicrowaveUi();
 
             services.AddMicrowave(c =>
@@ -40,12 +41,15 @@ namespace Seasons.ReadHost.Startup
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            app.RunMicrowaveQueries();
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
             app.UseMicrowaveUi();
+            app.RunMicrowaveQueries();
             app.UseCors("MyPolicy");
-            app.UseMvc();
         }
     }
 }
