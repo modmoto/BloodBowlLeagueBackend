@@ -61,6 +61,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Host.Races", "Races\Host.Ra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Races.UnitTests", "Races\Domain.Races.UnitTests\Domain.Races.UnitTests.csproj", "{B1438C09-F5FC-4026-BA83-7360B9DEDD6D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{31F39252-DA45-47DB-98F1-983451409E7B}"
+ProjectSection(SolutionItems) = preProject
+	.dockerignore = .dockerignore
+	.gitignore = .gitignore
+	Dockerfile.Matches.Host = Dockerfile.Matches.Host
+	Dockerfile.Players.Host = Dockerfile.Players.Host
+	Dockerfile.Races.Host = Dockerfile.Races.Host
+	Dockerfile.Seasons.Host = Dockerfile.Seasons.Host
+	Dockerfile.Seasons.ReadHost = Dockerfile.Seasons.ReadHost
+	Dockerfile.Teams.Host = Dockerfile.Teams.Host
+	Dockerfile.Teams.ReadHost = Dockerfile.Teams.ReadHost
+	NuGet.Config = NuGet.Config
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
