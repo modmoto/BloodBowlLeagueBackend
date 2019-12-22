@@ -2,7 +2,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
 WORKDIR /app
 COPY ./BloodBowlLeagueBackend.sln ./
-COPY NuGet.Config ./
 
 # Copy all the csproj files and restore to cache the layer for faster builds
 # The dotnet_build.sh script does this anyway, so superfluous, but docker can
@@ -12,10 +11,10 @@ COPY ./Seasons/Application.Seasons/Application.Seasons.csproj ./Seasons/Applicat
 COPY ./Seasons/Domain.Seasons/Domain.Seasons.csproj ./Seasons/Domain.Seasons/Domain.Seasons.csproj
 COPY ./ServiceConfig/ServiceConfig.csproj ./ServiceConfig/ServiceConfig.csproj
 
-RUN dotnet restore --configfile NuGet.Config ./Seasons/Host.Seasons/Host.Seasons.csproj
-RUN dotnet restore --configfile NuGet.Config ./Seasons/Application.Seasons/Application.Seasons.csproj
-RUN dotnet restore --configfile NuGet.Config ./Seasons/Domain.Seasons/Domain.Seasons.csproj
-RUN dotnet restore --configfile NuGet.Config ./ServiceConfig/ServiceConfig.csproj
+RUN dotnet restore ./Seasons/Host.Seasons/Host.Seasons.csproj
+RUN dotnet restore ./Seasons/Application.Seasons/Application.Seasons.csproj
+RUN dotnet restore ./Seasons/Domain.Seasons/Domain.Seasons.csproj
+RUN dotnet restore ./ServiceConfig/ServiceConfig.csproj
 
 COPY ./Seasons ./Seasons
 COPY ./ServiceConfig ./ServiceConfig

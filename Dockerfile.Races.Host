@@ -2,7 +2,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
 WORKDIR /app
 COPY ./BloodBowlLeagueBackend.sln ./
-COPY NuGet.Config ./
 
 # Copy all the csproj files and restore to cache the layer for faster builds
 # The dotnet_build.sh script does this anyway, so superfluous, but docker can
@@ -11,9 +10,9 @@ COPY ./Races/Host.Races/Host.Races.csproj ./Races/Host.Races/Host.Races.csproj
 COPY ./Races/Domain.Races/Domain.Races.csproj ./Races/Domain.Races/Domain.Races.csproj
 COPY ./ServiceConfig/ServiceConfig.csproj ./ServiceConfig/ServiceConfig.csproj
 
-RUN dotnet restore --configfile NuGet.Config ./Races/Host.Races/Host.Races.csproj
-RUN dotnet restore --configfile NuGet.Config ./Races/Domain.Races/Domain.Races.csproj
-RUN dotnet restore --configfile NuGet.Config ./ServiceConfig/ServiceConfig.csproj
+RUN dotnet restore ./Races/Host.Races/Host.Races.csproj
+RUN dotnet restore ./Races/Domain.Races/Domain.Races.csproj
+RUN dotnet restore ./ServiceConfig/ServiceConfig.csproj
 
 COPY ./Races ./Races
 COPY ./ServiceConfig ./ServiceConfig

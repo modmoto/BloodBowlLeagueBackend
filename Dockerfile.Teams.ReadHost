@@ -2,7 +2,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
 WORKDIR /app
 COPY ./BloodBowlLeagueBackend.sln ./
-COPY NuGet.Config ./
 
 # Copy all the csproj files and restore to cache the layer for faster builds
 # The dotnet_build.sh script does this anyway, so superfluous, but docker can
@@ -12,10 +11,10 @@ COPY ./ReadHosts/Ui.Translations/Ui.Translations.csproj ./ReadHosts/Ui.Translati
 COPY ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
 COPY ./ServiceConfig/ServiceConfig.csproj ./ServiceConfig/ServiceConfig.csproj
 
-RUN dotnet restore --configfile NuGet.Config ./ReadHosts/ReadHosts.Common/ReadHosts.Common.csproj
-RUN dotnet restore --configfile NuGet.Config ./ReadHosts/Ui.Translations/Ui.Translations.csproj
-RUN dotnet restore --configfile NuGet.Config ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
-RUN dotnet restore --configfile NuGet.Config ./ServiceConfig/ServiceConfig.csproj
+RUN dotnet restore ./ReadHosts/ReadHosts.Common/ReadHosts.Common.csproj
+RUN dotnet restore ./ReadHosts/Ui.Translations/Ui.Translations.csproj
+RUN dotnet restore ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
+RUN dotnet restore ./ServiceConfig/ServiceConfig.csproj
 
 COPY ./ReadHosts ./ReadHosts
 COPY ./ServiceConfig ./ServiceConfig

@@ -72,7 +72,6 @@ ProjectSection(SolutionItems) = preProject
 	Dockerfile.Seasons.ReadHost = Dockerfile.Seasons.ReadHost
 	Dockerfile.Teams.Host = Dockerfile.Teams.Host
 	Dockerfile.Teams.ReadHost = Dockerfile.Teams.ReadHost
-	NuGet.Config = NuGet.Config
 EndProjectSection
 EndProject
 Global
