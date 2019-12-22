@@ -12,10 +12,10 @@ COPY ./ReadHosts/Ui.Translations/Ui.Translations.csproj ./ReadHosts/Ui.Translati
 COPY ./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj ./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj
 COPY ./ServiceConfig/ServiceConfig.csproj ./ServiceConfig/ServiceConfig.csproj
 
-RUN dotnet restore ./ReadHosts/ReadHosts.Common/ReadHosts.Common.csproj
-RUN dotnet restore ./ReadHosts/Ui.Translations/Ui.Translations.csproj
-RUN dotnet restore ./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj
-RUN dotnet restore ./ServiceConfig/ServiceConfig.csproj
+RUN dotnet restore --configfile NuGet.Config ./ReadHosts/ReadHosts.Common/ReadHosts.Common.csproj
+RUN dotnet restore --configfile NuGet.Config ./ReadHosts/Ui.Translations/Ui.Translations.csproj
+RUN dotnet restore --configfile NuGet.Config ./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj
+RUN dotnet restore --configfile NuGet.Config ./ServiceConfig/ServiceConfig.csproj
 
 COPY ./ReadHosts ./ReadHosts
 COPY ./ServiceConfig ./ServiceConfig
