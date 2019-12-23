@@ -23,7 +23,7 @@ RUN dotnet build ./Seasons/Host.Seasons/Host.Seasons.csproj -c Release
 RUN dotnet publish "./Seasons/Host.Seasons/Host.Seasons.csproj" -c Release -o "../../out"
 
 #App image
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build-env /app/out .
 CMD ["dotnet", "Host.Seasons.dll"]
