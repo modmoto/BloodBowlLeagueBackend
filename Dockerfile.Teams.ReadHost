@@ -2,13 +2,9 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 WORKDIR /app
 COPY ./BloodBowlLeagueBackend.sln ./
 
-COPY ./ReadHosts/ReadHosts.Common/ReadHosts.Common.csproj ./ReadHosts/ReadHosts.Common/ReadHosts.Common.csproj
-COPY ./ReadHosts/Ui.Translations/Ui.Translations.csproj ./ReadHosts/Ui.Translations/Ui.Translations.csproj
 COPY ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
 COPY ./ServiceConfig/ServiceConfig.csproj ./ServiceConfig/ServiceConfig.csproj
 
-RUN dotnet restore ./ReadHosts/ReadHosts.Common/ReadHosts.Common.csproj
-RUN dotnet restore ./ReadHosts/Ui.Translations/Ui.Translations.csproj
 RUN dotnet restore ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
 RUN dotnet restore ./ServiceConfig/ServiceConfig.csproj
 
