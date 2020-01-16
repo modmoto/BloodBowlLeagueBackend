@@ -1,7 +1,7 @@
 ﻿using Application.Players;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Persistence.InMemory;
@@ -12,6 +12,13 @@ namespace Host.Players.Startup
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
@@ -23,10 +30,12 @@ namespace Host.Players.Startup
                     .AllowAnyHeader();
             }));
 
+            var baseAdress = _configuration.GetValue<string>("baseAdress") ?? "http://localhost";
+
             services.AddMicrowave(c =>
             {
                 c.WithServiceName("PlayerService");
-                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
+                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdressesFrom(baseAdress));
             });
 
             services.AddMicrowavePersistenceLayerInMemory();

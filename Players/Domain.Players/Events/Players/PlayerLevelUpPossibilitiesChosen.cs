@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Microwave.Domain.EventSourcing;
 
 namespace Domain.Players.Events.Players
@@ -8,7 +7,7 @@ namespace Domain.Players.Events.Players
     {
         public PlayerLevelUpPossibilitiesChosen(
             Guid playerId,
-        FreeSkillPoint newFreeSkillPoint)
+            FreeSkillPoint newFreeSkillPoint)
         {
             NewFreeSkillPoint = newFreeSkillPoint;
             PlayerId = playerId;
