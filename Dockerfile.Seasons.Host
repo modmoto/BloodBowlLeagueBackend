@@ -23,4 +23,4 @@ WORKDIR /app
 COPY --from=build-env /app/out .
 
 EXPOSE 80
-ENTRYPOINT ["dotnet", "Host.Seasons.dll"]
+ENTRYPOINT dotnet Host.Seasons.dll baseAdress=$BASE_ADRESS
