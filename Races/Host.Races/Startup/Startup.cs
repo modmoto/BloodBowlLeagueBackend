@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Persistence.InMemory;
 using Microwave.UI;
+using Microwave.WebApi;
+using Microwave.WebApi.Queries;
 using ServiceConfig;
 
 namespace Host.Races.Startup
@@ -34,7 +36,7 @@ namespace Host.Races.Startup
             var baseAdress = _configuration.GetValue<string>("baseAdress") ?? "http://localhost";
 
             Console.WriteLine(baseAdress);
-            services.AddMicrowave(c =>
+            services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("RaceService");
                 c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdressesFrom(baseAdress));

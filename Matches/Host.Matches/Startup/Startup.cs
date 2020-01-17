@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Persistence.InMemory;
 using Microwave.UI;
+using Microwave.WebApi;
+using Microwave.WebApi.Queries;
 using ServiceConfig;
 
 namespace Host.Matches.Startup
@@ -34,7 +36,12 @@ namespace Host.Matches.Startup
 
             var baseAdress = _configuration.GetValue<string>("baseAdress") ?? "http://localhost";
 
-            services.AddMicrowave(c =>
+            services.AddMicrowave(config =>
+            {
+                config.WithFeedType(typeof(EventFeed<>));
+            });
+
+            services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("MatchService");
                 c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdressesFrom(baseAdress));
