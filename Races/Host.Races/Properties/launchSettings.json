@@ -2,7 +2,7 @@
   "profiles": {
     "BloodBowlLeagueBackend": {
       "commandName": "Project",
-      "applicationUrl": "http://localhost:5007",
+      "applicationUrl": "http://localhost:6005",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

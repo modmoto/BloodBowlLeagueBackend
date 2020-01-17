@@ -3,7 +3,7 @@
     "Seasons.ReadHost": {
       "commandName": "Project",
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:5006",
+      "applicationUrl": "http://localhost:5001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

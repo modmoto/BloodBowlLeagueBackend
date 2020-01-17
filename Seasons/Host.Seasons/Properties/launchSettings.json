@@ -2,7 +2,7 @@
   "profiles": {
     "Host.Matches": {
       "commandName": "Project",
-      "applicationUrl": "http://localhost:5004",
+      "applicationUrl": "http://localhost:6004",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

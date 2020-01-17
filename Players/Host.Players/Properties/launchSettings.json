@@ -2,7 +2,7 @@
   "profiles": {
     "Players.WriteHost": {
       "commandName": "Project",
-      "applicationUrl": "http://localhost:5002",
+      "applicationUrl": "http://localhost:6002",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
