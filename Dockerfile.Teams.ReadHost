@@ -12,7 +12,7 @@ COPY ./ReadHosts ./ReadHosts
 COPY ./ServiceConfig ./ServiceConfig
 RUN dotnet build ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj -c Release
 
-RUN dotnet publish "./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj" -c Release -o "../../out"
+RUN dotnet publish "./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj" -c Release -o "../../app/out"
 
 FROM mcr.microsoft.com/dotnet/core/runtime:3.1
 WORKDIR /app

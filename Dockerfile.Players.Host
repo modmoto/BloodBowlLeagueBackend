@@ -16,7 +16,7 @@ COPY ./Players ./Players
 COPY ./ServiceConfig ./ServiceConfig
 RUN dotnet build ./Players/Host.Players/Host.Players.csproj -c Release
 
-RUN dotnet publish "./Players/Host.Players/Host.Players.csproj" -c Release -o "../../out"
+RUN dotnet publish "./Players/Host.Players/Host.Players.csproj" -c Release -o "../../app/out"
 
 FROM mcr.microsoft.com/dotnet/core/runtime:3.1
 WORKDIR /app

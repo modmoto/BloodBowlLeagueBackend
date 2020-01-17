@@ -14,7 +14,7 @@ COPY ./Races ./Races
 COPY ./ServiceConfig ./ServiceConfig
 RUN dotnet build ./Races/Host.Races/Host.Races.csproj -c Release
 
-RUN dotnet publish "./Races/Host.Races/Host.Races.csproj" -c Release -o "../../out"
+RUN dotnet publish "./Races/Host.Races/Host.Races.csproj" -c Release -o "../../app/out"
 
 FROM mcr.microsoft.com/dotnet/core/runtime:3.1
 WORKDIR /app

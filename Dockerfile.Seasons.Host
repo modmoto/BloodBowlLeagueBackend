@@ -16,7 +16,7 @@ COPY ./Seasons ./Seasons
 COPY ./ServiceConfig ./ServiceConfig
 RUN dotnet build ./Seasons/Host.Seasons/Host.Seasons.csproj -c Release
 
-RUN dotnet publish "./Seasons/Host.Seasons/Host.Seasons.csproj" -c Release -o "../../out"
+RUN dotnet publish "./Seasons/Host.Seasons/Host.Seasons.csproj" -c Release -o "../../app/out"
 
 FROM mcr.microsoft.com/dotnet/core/runtime:3.1
 WORKDIR /app
