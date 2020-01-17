@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +9,6 @@ using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using Microwave.WebApi;
 using Microwave.WebApi.Queries;
-using ReadHosts.Common;
 using ServiceConfig;
 
 namespace Teams.ReadHost.Startup
@@ -33,6 +33,7 @@ namespace Teams.ReadHost.Startup
 
             var baseAdress = _configuration.GetValue<string>("baseAdress") ?? "http://localhost";
 
+            Console.WriteLine("Adress: " + baseAdress);
             services.AddMicrowave(config =>
             {
                 config.WithFeedType(typeof(EventFeed<>));
@@ -52,8 +53,6 @@ namespace Teams.ReadHost.Startup
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
-
-            services.AddTransient<MessageMitigator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

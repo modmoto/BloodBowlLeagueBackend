@@ -22,8 +22,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\ServiceConfig\ServiceConfig.csproj" />
-      <ProjectReference Include="..\ReadHosts.Common\ReadHosts.Common.csproj" />
-      <ProjectReference Include="..\Ui.Translations\Ui.Translations.csproj" />
     </ItemGroup>
 
 </Project>
