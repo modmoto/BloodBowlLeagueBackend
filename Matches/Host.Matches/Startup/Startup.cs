@@ -64,6 +64,7 @@ namespace Host.Matches.Startup
             });
             app.UseMicrowaveUi();
             app.RunMicrowaveQueries();
+            app.RunMicrowaveServiceDiscovery();
             app.UseCors("MyPolicy");
         }
     }

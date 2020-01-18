@@ -33,7 +33,6 @@ namespace Teams.ReadHost.Startup
 
             var baseAdress = _configuration.GetValue<string>("baseAdress") ?? "http://localhost";
 
-            Console.WriteLine("Adress: " + baseAdress);
             services.AddMicrowave(config =>
             {
                 config.WithFeedType(typeof(EventFeed<>));
@@ -64,6 +63,7 @@ namespace Teams.ReadHost.Startup
             });
             app.UseMicrowaveUi();
             app.RunMicrowaveQueries();
+            app.RunMicrowaveServiceDiscovery();
             app.UseCors("MyPolicy");
         }
     }

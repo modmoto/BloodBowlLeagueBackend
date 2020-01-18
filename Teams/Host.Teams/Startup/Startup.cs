@@ -63,6 +63,7 @@ namespace Teams.WriteHost.Startup
             });
             app.UseMicrowaveUi();
             app.RunMicrowaveQueries();
+            app.RunMicrowaveServiceDiscovery();
             app.UseCors("MyPolicy");
         }
     }
