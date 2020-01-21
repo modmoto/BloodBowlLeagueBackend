@@ -70,8 +70,6 @@ ProjectSection(SolutionItems) = preProject
 	Dockerfile.Seasons.ReadHost = Dockerfile.Seasons.ReadHost
 	Dockerfile.Teams.Host = Dockerfile.Teams.Host
 	Dockerfile.Teams.ReadHost = Dockerfile.Teams.ReadHost
-	NuGet.config.token = NuGet.config.token
-	NuGet.config = NuGet.config
 EndProjectSection
 EndProject
 Global

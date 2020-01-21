@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 WORKDIR /app
 COPY ./BloodBowlLeagueBackend.sln ./
-COPY ./NuGet.config ./
 
 COPY ./Seasons/Host.Seasons/Host.Seasons.csproj ./Seasons/Host.Seasons/Host.Seasons.csproj
 COPY ./Seasons/Application.Seasons/Application.Seasons.csproj ./Seasons/Application.Seasons/Application.Seasons.csproj
