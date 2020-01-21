@@ -5,15 +5,11 @@ COPY ./BloodBowlLeagueBackend.sln ./
 COPY ./Matches/Host.Matches/Host.Matches.csproj ./Matches/Host.Matches/Host.Matches.csproj
 COPY ./Matches/Application.Matches/Application.Matches.csproj ./Matches/Application.Matches/Application.Matches.csproj
 COPY ./Matches/Domain.Matches/Domain.Matches.csproj ./Matches/Domain.Matches/Domain.Matches.csproj
-COPY ./ServiceConfig/ServiceConfig.csproj ./ServiceConfig/ServiceConfig.csproj
-
 RUN dotnet restore ./Matches/Host.Matches/Host.Matches.csproj
 RUN dotnet restore ./Matches/Application.Matches/Application.Matches.csproj
 RUN dotnet restore ./Matches/Domain.Matches/Domain.Matches.csproj
-RUN dotnet restore ./ServiceConfig/ServiceConfig.csproj
 
 COPY ./Matches ./Matches
-COPY ./ServiceConfig ./ServiceConfig
 RUN dotnet build ./Matches/Host.Matches/Host.Matches.csproj -c Release
 
 RUN dotnet publish "./Matches/Host.Matches/Host.Matches.csproj" -c Release -o "../../app/out"

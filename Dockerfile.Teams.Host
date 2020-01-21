@@ -5,15 +5,11 @@ COPY ./BloodBowlLeagueBackend.sln ./
 COPY ./Teams/Host.Teams/Host.Teams.csproj ./Teams/Host.Teams/Host.Teams.csproj
 COPY ./Teams/Application.Teams/Application.Teams.csproj ./Teams/Application.Teams/Application.Teams.csproj
 COPY ./Teams/Domain.Teams/Domain.Teams.csproj ./Teams/Domain.Teams/Domain.Teams.csproj
-COPY ./ServiceConfig/ServiceConfig.csproj ./ServiceConfig/ServiceConfig.csproj
-
 RUN dotnet restore ./Teams/Host.Teams/Host.Teams.csproj
 RUN dotnet restore ./Teams/Application.Teams/Application.Teams.csproj
 RUN dotnet restore ./Teams/Domain.Teams/Domain.Teams.csproj
-RUN dotnet restore ./ServiceConfig/ServiceConfig.csproj
 
 COPY ./Teams ./Teams
-COPY ./ServiceConfig ./ServiceConfig
 RUN dotnet build ./Teams/Host.Teams/Host.Teams.csproj -c Release
 
 RUN dotnet publish "./Teams/Host.Teams/Host.Teams.csproj" -c Release -o "../../app/out"

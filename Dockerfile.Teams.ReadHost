@@ -3,13 +3,9 @@ WORKDIR /app
 COPY ./BloodBowlLeagueBackend.sln ./
 
 COPY ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
-COPY ./ServiceConfig/ServiceConfig.csproj ./ServiceConfig/ServiceConfig.csproj
-
 RUN dotnet restore ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
-RUN dotnet restore ./ServiceConfig/ServiceConfig.csproj
 
 COPY ./ReadHosts ./ReadHosts
-COPY ./ServiceConfig ./ServiceConfig
 RUN dotnet build ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj -c Release
 
 RUN dotnet publish "./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj" -c Release -o "../../app/out"
