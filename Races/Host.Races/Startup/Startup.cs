@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -6,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using Microwave.WebApi;
-using ServiceConfig;
 
 namespace Host.Races.Startup
 {
@@ -31,13 +31,14 @@ namespace Host.Races.Startup
                     .AllowAnyHeader();
             }));
 
-            var baseAdress = _configuration.GetValue<string>("baseAdress") ?? "http://localhost";
+            var baseAdress = _configuration.GetValue<string>("baseAdresses");
+            var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
 
             Console.WriteLine(baseAdress);
             services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("RaceService");
-                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdressesFrom(baseAdress));
+                c.ServiceLocations.AddRange(serviceUrls);
             });
 
             var domainEvents = RaceEventSeeds.Seeds;

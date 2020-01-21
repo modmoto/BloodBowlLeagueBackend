@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Application.Matches;
 using Domain.Seasons;
 using Domain.Seasons.Events;
@@ -14,7 +15,6 @@ using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using Microwave.WebApi;
 using Microwave.WebApi.Queries;
-using ServiceConfig;
 
 namespace Host.Matches.Startup
 {
@@ -38,7 +38,8 @@ namespace Host.Matches.Startup
                     .AllowAnyHeader();
             }));
 
-            var baseAdress = _configuration.GetValue<string>("baseAdress") ?? "http://localhost";
+            var baseAdress = _configuration.GetValue<string>("baseAdresses");
+            var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
 
             services.AddMicrowave(config =>
             {
@@ -48,7 +49,7 @@ namespace Host.Matches.Startup
             services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("SeasonService");
-                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdressesFrom(baseAdress));
+                c.ServiceLocations.AddRange(serviceUrls);
             });
 
             services.AddMicrowavePersistenceLayerInMemory(c =>

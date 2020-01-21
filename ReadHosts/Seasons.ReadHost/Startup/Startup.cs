@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Linq;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +10,6 @@ using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using Microwave.WebApi;
 using Microwave.WebApi.Queries;
-using ServiceConfig;
 
 namespace Seasons.ReadHost.Startup
 {
@@ -30,7 +31,8 @@ namespace Seasons.ReadHost.Startup
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMicrowaveUi();
 
-            var baseAdress = _configuration.GetValue<string>("baseAdress") ?? "http://localhost";
+            var baseAdress = _configuration.GetValue<string>("baseAdresses");
+            var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
 
             services.AddMicrowave(config =>
             {
@@ -40,7 +42,7 @@ namespace Seasons.ReadHost.Startup
             services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("SeasonsQuerryService");
-                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdressesFrom(baseAdress));
+                c.ServiceLocations.AddRange(serviceUrls);
             });
 
             services.AddMicrowavePersistenceLayerInMemory();

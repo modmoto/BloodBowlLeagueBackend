@@ -1,4 +1,6 @@
-﻿using Application.Matches;
+﻿using System;
+using System.Linq;
+using Application.Matches;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +10,6 @@ using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using Microwave.WebApi;
 using Microwave.WebApi.Queries;
-using ServiceConfig;
 
 namespace Host.Matches.Startup
 {
@@ -34,7 +35,8 @@ namespace Host.Matches.Startup
 
             services.AddMicrowaveUi();
 
-            var baseAdress = _configuration.GetValue<string>("baseAdress") ?? "http://localhost";
+            var baseAdress = _configuration.GetValue<string>("baseAdresses");
+            var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
 
             services.AddMicrowave(config =>
             {
@@ -44,7 +46,7 @@ namespace Host.Matches.Startup
             services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("MatchService");
-                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdressesFrom(baseAdress));
+                c.ServiceLocations.AddRange(serviceUrls);
             });
 
             services.AddMicrowavePersistenceLayerInMemory(c =>

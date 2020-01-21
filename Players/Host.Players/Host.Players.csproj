@@ -19,7 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\ServiceConfig\ServiceConfig.csproj" />
       <ProjectReference Include="..\Application.Players\Application.Players.csproj" />
       <ProjectReference Include="..\Domain.Players\Domain.Players.csproj" />
     </ItemGroup>

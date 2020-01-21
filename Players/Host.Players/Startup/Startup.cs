@@ -1,4 +1,6 @@
-﻿using Application.Players;
+﻿using System;
+using System.Linq;
+using Application.Players;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +10,6 @@ using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using Microwave.WebApi;
 using Microwave.WebApi.Queries;
-using ServiceConfig;
 
 namespace Host.Players.Startup
 {
@@ -32,7 +33,8 @@ namespace Host.Players.Startup
                     .AllowAnyHeader();
             }));
 
-            var baseAdress = _configuration.GetValue<string>("baseAdress") ?? "http://localhost";
+            var baseAdress = _configuration.GetValue<string>("baseAdresses");
+            var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
 
             services.AddMicrowave(config =>
             {
@@ -42,7 +44,7 @@ namespace Host.Players.Startup
             services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("PlayerService");
-                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdressesFrom(baseAdress));
+                c.ServiceLocations.AddRange(serviceUrls);
             });
 
             services.AddMicrowavePersistenceLayerInMemory();

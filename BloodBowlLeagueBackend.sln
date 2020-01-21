@@ -37,8 +37,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teams.ReadHost", "ReadHosts
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Matches.UnitTests", "Matches\Domain.Matches.UnitTests\Domain.Matches.UnitTests.csproj", "{69C46D15-F190-4F8D-B86A-8669E3AC2143}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceConfig", "ServiceConfig\ServiceConfig.csproj", "{22D9C888-89A6-4211-ABCA-749103F2ACAD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Seasons", "Seasons", "{417B44B4-5911-4AA8-9B7E-33B7B9D93FF8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Seasons", "Seasons\Application.Seasons\Application.Seasons.csproj", "{C32EF092-E1BA-4F96-B19C-FC267B482463}"
@@ -132,10 +130,6 @@ Global
 		{69C46D15-F190-4F8D-B86A-8669E3AC2143}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69C46D15-F190-4F8D-B86A-8669E3AC2143}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69C46D15-F190-4F8D-B86A-8669E3AC2143}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22D9C888-89A6-4211-ABCA-749103F2ACAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22D9C888-89A6-4211-ABCA-749103F2ACAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22D9C888-89A6-4211-ABCA-749103F2ACAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22D9C888-89A6-4211-ABCA-749103F2ACAD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C32EF092-E1BA-4F96-B19C-FC267B482463}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C32EF092-E1BA-4F96-B19C-FC267B482463}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C32EF092-E1BA-4F96-B19C-FC267B482463}.Release|Any CPU.ActiveCfg = Release|Any CPU

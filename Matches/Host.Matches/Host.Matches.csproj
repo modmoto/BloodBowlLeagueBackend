@@ -19,7 +19,6 @@
     
 
     <ItemGroup>
-      <ProjectReference Include="..\..\ServiceConfig\ServiceConfig.csproj" />
       <ProjectReference Include="..\Application.Matches\Application.Matches.csproj" />
       <ProjectReference Include="..\Domain.Matches\Domain.Matches.csproj" />
     </ItemGroup>
