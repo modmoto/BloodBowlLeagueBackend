@@ -17,4 +17,4 @@ WORKDIR /app
 COPY --from=build-env /app/out .
 
 EXPOSE 80
-ENTRYPOINT dotnet Host.Races.dll baseAdress=$BASE_ADRESSES
+ENTRYPOINT dotnet Host.Races.dll baseAdresses=$BASE_ADRESSES
