@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
+using Microwave.Logging;
 using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using Microwave.WebApi;
@@ -38,7 +39,8 @@ namespace Host.Players.Startup
 
             services.AddMicrowave(config =>
             {
-                config.WithFeedType(typeof(EventFeed<>));
+                config.WithFeedType(typeof(EventFeed<>))
+                    .WithLogLevel(MicrowaveLogLevel.Info);
             });
 
             services.AddMicrowaveWebApi(c =>
