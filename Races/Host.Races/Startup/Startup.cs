@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microwave;
+using Microwave.Logging;
 using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using Microwave.WebApi;
+using Microwave.WebApi.Queries;
 
 namespace Host.Races.Startup
 {
@@ -35,6 +38,12 @@ namespace Host.Races.Startup
             var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
 
             Console.WriteLine(baseAdress);
+            services.AddMicrowave(config =>
+            {
+                config.WithFeedType(typeof(EventFeed<>))
+                    .WithLogLevel(MicrowaveLogLevel.Info);
+            });
+
             services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("RaceService");
