@@ -14,14 +14,14 @@ namespace ServiceConfig
             RaceHost
         };
 
-        public static Uri MatchHost { get; } = new Uri("https://matches-host.blood-bowl-league.com/");
-        public static Uri TeamHost { get; } = new Uri("https://teams-host.blood-bowl-league.com/");
-        public static Uri PlayerHost { get; }  = new Uri("https://players-host.blood-bowl-league.com/");
-        public static Uri SeasonHost { get; } = new Uri("https://seasons-host.blood-bowl-league.com/");
-        public static Uri RaceHost { get; } = new Uri("https://races-host.blood-bowl-league.com/");
+        public static Uri MatchHost { get; } = new Uri("http://matches-host.blood-bowl-league.com/");
+        public static Uri TeamHost { get; } = new Uri("http://teams-host.blood-bowl-league.com/");
+        public static Uri PlayerHost { get; }  = new Uri("http://players-host.blood-bowl-league.com/");
+        public static Uri SeasonHost { get; } = new Uri("http://seasons-host.blood-bowl-league.com/");
+        public static Uri RaceHost { get; } = new Uri("http://races-host.blood-bowl-league.com/");
 
-        public static Uri SeasonReadHost { get; } = new Uri("https://seasons-readhost.blood-bowl-league.com/");
-        public static Uri TeamReadHost { get; } = new Uri("https://teams-readhost.blood-bowl-league.com/");
+        public static Uri SeasonReadHost { get; } = new Uri("http://seasons-readhost.blood-bowl-league.com/");
+        public static Uri TeamReadHost { get; } = new Uri("http://teams-readhost.blood-bowl-league.com/");
 
 //        public static Uri MatchHost { get; } = new Uri("http://localhost:5003");
 //        public static Uri TeamHost { get; } = new Uri("http://localhost:5001");
