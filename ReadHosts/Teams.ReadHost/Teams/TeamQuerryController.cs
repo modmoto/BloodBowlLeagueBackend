@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microwave.Queries;
-using Teams.ReadHost.Pages;
 using Teams.ReadHost.Players;
 
 namespace Teams.ReadHost.Teams

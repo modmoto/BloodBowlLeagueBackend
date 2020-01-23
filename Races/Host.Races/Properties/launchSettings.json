@@ -2,9 +2,10 @@
   "profiles": {
     "BloodBowlLeagueBackend": {
       "commandName": "Project",
-      "applicationUrl": "http://localhost:5007",
+      "applicationUrl": "http://localhost:6005",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "baseAdresses": "http://matches-host.blood-bowl-league.com/;http://players-host.blood-bowl-league.com/;http://races-host.blood-bowl-league.com/;http://seasons-host.blood-bowl-league.com/;http://teams-host.blood-bowl-league.com/"
       }
     }
   }

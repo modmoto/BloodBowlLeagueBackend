@@ -19,15 +19,15 @@ namespace Teams.WriteHost
         public async Task<ActionResult> CreateTeam([FromBody] CreateTeamCommand createTeamCommand)
         {
             var teamId = await _commandHandler.CreateTeam(createTeamCommand);
-            return Created($"{Request.Scheme}://{Request.Host}/Api/Teams/{teamId}", teamId);
+            return Created($"{Request.Scheme}://{Request.Host}/Api/Teams/{teamId}", new { teamId });
         }
 
         [HttpPost("{teamId}/buy-player")]
         public async Task<ActionResult> BuyPlayer(Guid teamId, [FromBody] BuyPlayerCommand buyPlayerCommand)
         {
             buyPlayerCommand.TeamId = teamId;
-            var playerId = await _commandHandler.BuyPlayer(buyPlayerCommand);
-            return Ok(new { playerId });
+            var result = await _commandHandler.BuyPlayer(buyPlayerCommand);
+            return Ok(result);
         }
 
         [HttpPost("{teamId}/remove-player")]

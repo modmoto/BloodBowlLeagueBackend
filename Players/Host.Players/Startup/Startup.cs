@@ -1,20 +1,31 @@
-﻿using Application.Players;
+﻿using System;
+using System.Linq;
+using Application.Players;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
+using Microwave.Logging;
 using Microwave.Persistence.InMemory;
 using Microwave.UI;
-using ServiceConfig;
+using Microwave.WebApi;
+using Microwave.WebApi.Queries;
 
 namespace Host.Players.Startup
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -23,10 +34,19 @@ namespace Host.Players.Startup
                     .AllowAnyHeader();
             }));
 
-            services.AddMicrowave(c =>
+            var baseAdress = _configuration.GetValue<string>("baseAdresses");
+            var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
+
+            services.AddMicrowave(config =>
+            {
+                config.WithFeedType(typeof(EventFeed<>))
+                    .WithLogLevel(MicrowaveLogLevel.Info);
+            });
+
+            services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("PlayerService");
-                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
+                c.ServiceLocations.AddRange(serviceUrls);
             });
 
             services.AddMicrowavePersistenceLayerInMemory();
@@ -36,12 +56,16 @@ namespace Host.Players.Startup
             services.AddTransient<PlayerCommandHandler>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            app.RunMicrowaveQueries();
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
             app.UseMicrowaveUi();
+            app.RunMicrowaveQueries();
+            app.RunMicrowaveServiceDiscovery();
             app.UseCors("MyPolicy");
-            app.UseMvc();
         }
     }
 }

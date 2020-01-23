@@ -3,9 +3,10 @@
     "Seasons.ReadHost": {
       "commandName": "Project",
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:5006",
+      "applicationUrl": "http://localhost:5001",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "baseAdresses": "http://matches-host.blood-bowl-league.com/;http://players-host.blood-bowl-league.com/;http://races-host.blood-bowl-league.com/;http://seasons-host.blood-bowl-league.com/;http://teams-host.blood-bowl-league.com/"
       }
     }
   }

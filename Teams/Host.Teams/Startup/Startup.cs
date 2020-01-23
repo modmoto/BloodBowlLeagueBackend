@@ -1,22 +1,31 @@
-﻿using Application.Teams;
-using Domain.Teams;
+﻿using System;
+using System.Linq;
+using Application.Teams;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Microwave.EventStores.SnapShots;
+using Microwave.Logging;
 using Microwave.Persistence.InMemory;
 using Microwave.UI;
-using ServiceConfig;
+using Microwave.WebApi;
+using Microwave.WebApi.Queries;
 
 namespace Teams.WriteHost.Startup
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddTransient<TeamCommandHandler>();
             services.AddMicrowaveUi();
 
@@ -27,11 +36,19 @@ namespace Teams.WriteHost.Startup
                     .AllowAnyHeader();
             }));
 
-            services.AddMicrowave(c =>
+            var baseAdress = _configuration.GetValue<string>("baseAdresses");
+            var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
+
+            services.AddMicrowave(config =>
+            {
+                config.WithFeedType(typeof(EventFeed<>))
+                    .WithLogLevel(MicrowaveLogLevel.Info);
+            });
+
+            services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("TeamService");
-                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
-                c.SnapShots.Add(new SnapShot<Team>(3));
+                c.ServiceLocations.AddRange(serviceUrls);
             });
 
             var domainEvents = EventSeedsTeams.Seeds;
@@ -42,12 +59,16 @@ namespace Teams.WriteHost.Startup
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
             app.UseMicrowaveUi();
             app.RunMicrowaveQueries();
+            app.RunMicrowaveServiceDiscovery();
             app.UseCors("MyPolicy");
-            app.UseMvc();
         }
     }
 }
