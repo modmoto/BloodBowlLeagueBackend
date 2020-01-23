@@ -1,30 +1,19 @@
-﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
-using Microwave.Logging;
 using Microwave.Persistence.InMemory;
 using Microwave.UI;
-using Microwave.WebApi;
-using Microwave.WebApi.Queries;
+using ServiceConfig;
 
 namespace Host.Races.Startup
 {
     public class Startup
     {
-        private readonly IConfiguration _configuration;
-
-        public Startup(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMicrowaveUi();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
@@ -34,20 +23,10 @@ namespace Host.Races.Startup
                     .AllowAnyHeader();
             }));
 
-            var baseAdress = _configuration.GetValue<string>("baseAdresses");
-            var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
-
-            Console.WriteLine(baseAdress);
-            services.AddMicrowave(config =>
-            {
-                config.WithFeedType(typeof(EventFeed<>))
-                    .WithLogLevel(MicrowaveLogLevel.Info);
-            });
-
-            services.AddMicrowaveWebApi(c =>
+            services.AddMicrowave(c =>
             {
                 c.WithServiceName("RaceService");
-                c.ServiceLocations.AddRange(serviceUrls);
+                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
             });
 
             var domainEvents = RaceEventSeeds.Seeds;
@@ -58,14 +37,11 @@ namespace Host.Races.Startup
             });
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseRouting();
-            app.UseEndpoints(endpoints => {
-                endpoints.MapControllers();
-            });
             app.UseMicrowaveUi();
             app.UseCors("MyPolicy");
+            app.UseMvc();
         }
     }
 }

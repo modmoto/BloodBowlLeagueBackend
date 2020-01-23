@@ -1,0 +1,77 @@
+@page "{seasonId:Guid?}"
+@using ServiceConfig
+@using Ui.Translations
+@model Pages.Seasons
+
+<div class="my-2 my-lg-0 p-3 ml-auto">
+    <h3 class="pb-3">Season: @Model.Season.SeasonName</h3>
+    @if (Model.Season.IsStarted)
+        {
+            int i = 0;
+            @foreach (var gameDay in Model.Season.GameDays)
+             {
+                 i++;
+                 <div>
+                     <h5>Gameday @i:</h5>
+                     <ul class="list-group pb-3 mb-1 pl-3">
+                     @foreach (var matchup in gameDay.Matchups)
+                     {
+                         var m = Model.FullMatch(matchup.MatchId);
+                         <a href="@(ServiceConfiguration.SeasonReadHost)Match/@m.MatchId" class="list-group-item
+                         list-group-item-action">
+                             <div class="float-left">@(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)</div>
+                             <div class="float-right">
+                             @if (!m.IsFinished && m.IsStarted)
+                               {
+                                   <em class="fas fa-football-ball pt-1 pr-3 float-left"
+                                       data-toggle="tooltip"
+                                       data-placement="right"
+                                       title="Game is going on">
+                                   </em>
+                               }
+                             @if (m.IsStarted)
+                             {
+                                 <div class="float-right">
+                                     @(m.GameResult.HomeTeam.TouchDowns) : @(m.GameResult.GuestTeam.TouchDowns)
+                                 </div>
+                             }
+                             </div>
+                         </a>
+                     }
+                     </ul>
+                 </div>
+
+             }
+        }
+        else
+        {
+             <h5 class="card-title">Allready added Teams:</h5>
+             @foreach (var team in Model.AddedTeams)
+             {
+                 <a href="@(ServiceConfiguration.TeamReadHost)Team/@team.TeamId" class="list-group-item list-group-item-action">
+                     <div class="d-flex w-100 justify-content-between">
+                         <h5 class="mb-1">@team.TeamName (@(team.TrainerName), @RaceTranslations.ResourceManager.GetString(team.RaceId))</h5>
+                     </div>
+                 </a>
+             }
+
+            <form method="post" asp-page-handler="AddTeam" class="pt-3">
+                <div class="form-group">
+                    <label for="teamSelectBox">Select a team</label>
+                    <select class="form-control" id="teamSelectBox" name="teamId">
+                        @foreach (var team in Model.Teams)
+                        {
+                            <option value="@team.TeamId.ToString()">
+                                @(team.TeamName) (@(team.TrainerName), @RaceTranslations.ResourceManager.GetString(team.RaceId))
+                            </option>
+                        }
+                    </select>
+                </div>
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Add Team to Season</button>
+            </form>
+            <hr/>
+            <form method="post" asp-page-handler="StartSeason" class="pt-3">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Start Season</button>
+            </form>
+}
+</div>

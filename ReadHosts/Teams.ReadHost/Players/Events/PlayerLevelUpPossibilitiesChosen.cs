@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microwave.Queries;
 
 namespace Teams.ReadHost.Players.Events
@@ -7,7 +8,7 @@ namespace Teams.ReadHost.Players.Events
     {
         public PlayerLevelUpPossibilitiesChosen(
             Guid playerId,
-            FreeSkillPoint newFreeSkillPoint)
+        FreeSkillPoint newFreeSkillPoint)
         {
             NewFreeSkillPoint = newFreeSkillPoint;
             PlayerId = playerId;

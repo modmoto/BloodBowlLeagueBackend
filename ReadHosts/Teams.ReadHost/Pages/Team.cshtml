@@ -1,0 +1,77 @@
+@page "{teamId:Guid?}"
+@using ServiceConfig
+@using Ui.Translations
+@model Pages.TeamModel
+
+<div class="my-2 my-lg-0 p-3 ml-auto">
+    <h3 class="pb-3">Team: @Model.Team.TeamName (@Model.Team.TrainerName) @RaceTranslations.ResourceManager.GetString(@Model.Team.RaceId), G: @Model.Team.TeamChest.Value</h3>
+    <h3>Players:</h3>
+    <ul class="list-group pb-3 mb-1 pl-3">
+        @if (Model.Team.IsFinished)
+        {
+            @foreach (var player in Model.FullPlayers)
+            {
+                <a href="@(ServiceConfiguration.TeamReadHost)Player/@player.PlayerId" class="list-group-item list-group-item-action">
+                    <div>
+                        @{
+                            if (player.HasFreeSkill)
+                            {
+                                <em class="fas fa-angle-double-up fa-lg pt-1 pr-3 float-right"
+                                    data-toggle="tooltip"
+                                    data-placement="right"
+                                    title="Player has a free Skill!">
+                                </em>
+                            }
+                        }
+                        @@RaceTranslations.ResourceManager.GetString(player.PlayerTypeId) <e>SSP: @player.StarPlayerPoints</e>
+                        @if (player.Skills.Any())
+                        {
+                            string.Join(", ", player.Skills.Select(s => s));
+                        }
+                    </div>
+                </a>
+            }
+        }
+        else
+        {
+            var counter = 1;
+            @foreach (var player in Model.Players)
+            {
+                <li class="list-group-item">
+                    <div class="float-left">
+                        @(counter++). @RaceTranslations.ResourceManager.GetString(player.PlayerTypeId)
+                    </div>
+                    <form method="post"
+                        asp-page-handler="RemovePlayer"
+                        asp-route-playerId="@player.PlayerId"
+                        class="float-right">
+                        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Remove Player</button>
+                    </form>
+                </li>
+            }
+        }
+    </ul>
+     <form method="post" asp-page-handler="AddPlayer">
+         <div class="form-group">
+             <label for="playerTypeSelectBox">Buy a player</label>
+             <select class="form-control" id="playerTypeSelectBox" name="playerType">
+                 @foreach (var playerOption in Model.Team.AllowedPlayers)
+                 {
+                     <option value="@playerOption.PlayerTypeId">
+                         @RaceTranslations.ResourceManager.GetString(playerOption.PlayerTypeId) (@(playerOption.Cost.Value.ToString("N0")) G)
+                     </option>
+                 }
+             </select>
+           </div>
+         <button class="btn btn-success my-2 my-sm-0" type="submit">Buy Player</button>
+     </form>
+     @if (!Model.Team.IsFinished)
+     {
+         <hr/>
+         <form method="post"
+               asp-page-handler="FinishTeam"
+               class="pt-3">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Finish Team</button>
+        </form>
+     }
+</div>

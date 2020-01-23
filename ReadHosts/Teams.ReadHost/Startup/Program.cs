@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -13,8 +14,11 @@ namespace Teams.ReadHost.Startup
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
+            var port = Environment.GetEnvironmentVariable("PORT");
+
             return WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseUrls("http://*:"+port);
         }
     }
 }

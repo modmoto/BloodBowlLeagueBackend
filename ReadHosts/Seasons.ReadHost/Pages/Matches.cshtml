@@ -1,0 +1,54 @@
+@page
+@using ServiceConfig
+@model Pages.Matches
+
+<div class="my-2 my-lg-0 p-3 ml-auto">
+    <h3 class="pb-3">Matches:</h3>
+    <ul class="list-group pb-3 mb-1 pl-3">
+        @foreach (var m in Model.MatchList)
+        {
+        <a href="@(ServiceConfiguration.SeasonReadHost)Match/@m.MatchId" class="list-group-item list-group-item-action">
+            <div class="float-left">@(Model.FullTeam(m.TeamAtHome).TeamName) vs @(Model.FullTeam(m.TeamAsGuest).TeamName)</div>
+             <div class="float-right">
+             @if (!m.IsFinished && m.IsStarted)
+               {
+                   <em class="fas fa-football-ball pt-1 pr-3 float-left"
+                       data-toggle="tooltip"
+                       data-placement="right"
+                       title="Game is going on">
+                   </em>
+               }
+             @if (m.IsStarted)
+             {
+                 <div class="float-right">
+                     @(m.GameResult.HomeTeam.TouchDowns) : @(m.GameResult.GuestTeam.TouchDowns)
+                 </div>
+             }
+             </div>
+        </a>
+        }
+    </ul>
+    <form method="post">
+        <div class="form-group">
+            <label for="homeTeamSelectBox">Hometeam</label>
+            <select class="form-control" id="homeTeamSelectBox" name="homeTeam">
+                @foreach (var team in Model.Teams)
+                {
+                    <option value="@team.TeamId">
+                        @team.TeamName
+                    </option>
+                }
+            </select>
+            <label for="guestTeamSelectBox">Guestteam</label>
+            <select class="form-control" id="guestTeamSelectBox" name="guestTeam">
+                @foreach (var team in Model.Teams)
+                {
+                    <option value="@team.TeamId">
+                        @team.TeamName
+                    </option>
+                }
+            </select>
+        </div>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create Match</button>
+    </form>
+</div>

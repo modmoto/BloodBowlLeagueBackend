@@ -31,14 +31,13 @@ namespace Application.Teams
             return domainResult.DomainEvents.First().EntityId;
         }
 
-        public async Task<PlayerBuyResult> BuyPlayer(BuyPlayerCommand buyPlayerCommand)
+        public async Task<Guid?> BuyPlayer(BuyPlayerCommand buyPlayerCommand)
         {
             var teamResult = await _eventStore.LoadAsync<Team>(buyPlayerCommand.TeamId);
             var team = teamResult.Value;
             var buyPlayer = team.BuyPlayer(buyPlayerCommand.PlayerTypeId);
             (await _eventStore.AppendAsync(buyPlayer.DomainEvents, buyPlayerCommand.TeamVersion)).Check();
-            var playerBought = (PlayerBought) buyPlayer.DomainEvents.First();
-            return new PlayerBuyResult(playerBought.PlayerId, playerBought.PlayerPositionNumber);
+            return (buyPlayer.DomainEvents.First() as PlayerBought)?.PlayerId;
         }
 
         public async Task FinishTeam(FinishTeamCommand command)
@@ -56,18 +55,6 @@ namespace Application.Teams
             var removePlayer = team.RemovePlayer(removePlayerCommand.PlayerId);
             (await _eventStore.AppendAsync(removePlayer.DomainEvents, removePlayerCommand.TeamVersion)).Check();
         }
-    }
-
-    public class PlayerBuyResult
-    {
-        public PlayerBuyResult(Guid playerId, long playerPositionNumber)
-        {
-            PlayerId = playerId;
-            PlayerPositionNumber = playerPositionNumber;
-        }
-
-        public Guid PlayerId { get; }
-        public long PlayerPositionNumber { get; }
     }
 
     public class BuyPlayerCommand

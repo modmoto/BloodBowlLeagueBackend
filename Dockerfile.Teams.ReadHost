@@ -1,18 +1,29 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+# Build image
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
 WORKDIR /app
 COPY ./BloodBowlLeagueBackend.sln ./
 
+# Copy all the csproj files and restore to cache the layer for faster builds
+# The dotnet_build.sh script does this anyway, so superfluous, but docker can
+# cache the intermediate images so _much_ faster
+COPY ./ReadHosts/ReadHosts.Common/ReadHosts.Common.csproj ./ReadHosts/ReadHosts.Common/ReadHosts.Common.csproj
+COPY ./ReadHosts/Ui.Translations/Ui.Translations.csproj ./ReadHosts/Ui.Translations/Ui.Translations.csproj
 COPY ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
+COPY ./ServiceConfig/ServiceConfig.csproj ./ServiceConfig/ServiceConfig.csproj
+
+RUN dotnet restore ./ReadHosts/ReadHosts.Common/ReadHosts.Common.csproj
+RUN dotnet restore ./ReadHosts/Ui.Translations/Ui.Translations.csproj
 RUN dotnet restore ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
+RUN dotnet restore ./ServiceConfig/ServiceConfig.csproj
 
 COPY ./ReadHosts ./ReadHosts
-RUN dotnet build ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
+COPY ./ServiceConfig ./ServiceConfig
+RUN dotnet build ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj -c Release
 
-RUN dotnet publish "./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj" -o "../../app/out"
+RUN dotnet publish "./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj" -c Release -o "../../out"
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+#App image
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 WORKDIR /app
 COPY --from=build-env /app/out .
-
-EXPOSE 80
-ENTRYPOINT dotnet Teams.ReadHost.dll baseAdresses=$BASE_ADRESSES
+CMD ["dotnet", "Teams.ReadHost.dll"]

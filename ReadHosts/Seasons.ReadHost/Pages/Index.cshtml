@@ -1,0 +1,42 @@
+﻿@page
+@model Pages.IndexModel
+
+<div class="my-2 my-lg-0 p-3 ml-auto" >
+    <h3>Seasons:</h3>
+    <div class="list-group">
+        @if (Model.AllSeasons.AllSeasons.Any())
+        {
+            @foreach (var season in Model.AllSeasons.AllSeasons)
+             {
+                 <a href="Season/@season.SeasonId" class="list-group-item list-group-item-action">
+                     <div class="d-flex w-100 justify-content-between">
+                         <h5 class="mb-1">@season.SeasonName</h5>
+                         @if (!season.Started)
+                         {
+                             <small>Created: @season.CreationDate.ToString("D")</small>
+                         }
+                         else
+                         {
+                             <small>Started: @season.StartDate.ToString("D")</small>
+                         }
+
+                     </div>
+                 </a>
+             }
+        }
+        else
+        {
+            <h5 class="card-title">None</h5>
+        }
+    </div>
+    <div class="pt-4">
+        <form method="post">
+            <div class="form-group">
+                <label for="seasonNameTextInput">Create a new Season</label>
+                <input type="text" class="form-control" id="seasonNameTextInput" name="seasonNameTextInput" placeholder="Enter season name">
+            </div>
+
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create new Season</button>
+        </form>
+    </div>
+</div>

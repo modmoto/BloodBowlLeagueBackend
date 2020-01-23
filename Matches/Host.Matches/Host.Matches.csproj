@@ -1,24 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
         <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microwave">
-          <Version>0.17.2</Version>
+          <Version>0.15.1</Version>
         </PackageReference>
         <PackageReference Include="Microwave.Persistence.InMemory">
-          <Version>0.17.2</Version>
+          <Version>0.15.1</Version>
         </PackageReference>
         <PackageReference Include="Microwave.UI">
-            <Version>0.17.2</Version>
+            <Version>0.15.1</Version>
         </PackageReference>
     </ItemGroup>
     
 
     <ItemGroup>
+      <ProjectReference Include="..\..\ServiceConfig\ServiceConfig.csproj" />
       <ProjectReference Include="..\Application.Matches\Application.Matches.csproj" />
       <ProjectReference Include="..\Domain.Matches\Domain.Matches.csproj" />
     </ItemGroup>

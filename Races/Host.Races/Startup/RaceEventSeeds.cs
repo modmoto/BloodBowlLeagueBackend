@@ -7,7 +7,7 @@ using Microwave.Domain.EventSourcing;
 
 namespace Host.Races.Startup
 {
-    public static class RaceEventSeeds
+    public class RaceEventSeeds
     {
         public static IEnumerable<IDomainEvent> Seeds
         {

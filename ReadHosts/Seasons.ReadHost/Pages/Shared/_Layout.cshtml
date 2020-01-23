@@ -1,0 +1,40 @@
+﻿@using ServiceConfig
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/css/fontawesome.min.css">
+    <link rel="stylesheet" href="~/css/solid.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@ServiceConfiguration.SeasonReadHost">Seasons</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@(ServiceConfiguration.SeasonReadHost)Matches">Matches</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@ServiceConfiguration.TeamReadHost">Teams</a>
+                    </li>
+                     <li class="nav-item active">
+                        <a class="nav-link" href="@(ServiceConfiguration.TeamReadHost)Players">Players</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+</div>
+<script src="~/js/jquery-3.4.1.min.js"></script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

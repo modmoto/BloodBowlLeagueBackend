@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teams.ReadHost", "ReadHosts
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Matches.UnitTests", "Matches\Domain.Matches.UnitTests\Domain.Matches.UnitTests.csproj", "{69C46D15-F190-4F8D-B86A-8669E3AC2143}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceConfig", "ServiceConfig\ServiceConfig.csproj", "{22D9C888-89A6-4211-ABCA-749103F2ACAD}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Seasons", "Seasons", "{417B44B4-5911-4AA8-9B7E-33B7B9D93FF8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Seasons", "Seasons\Application.Seasons\Application.Seasons.csproj", "{C32EF092-E1BA-4F96-B19C-FC267B482463}"
@@ -49,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Host.Seasons", "Seasons\Hos
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seasons.ReadHost", "ReadHosts\Seasons.ReadHost\Seasons.ReadHost.csproj", "{1C4DEDA2-0B4B-429A-94D0-DC107CADD77B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadHosts.Common", "ReadHosts\ReadHosts.Common\ReadHosts.Common.csproj", "{391135E3-DE6A-44BB-BF0A-92875EBA1850}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Teams.UnitTests", "Teams\Domain.Teams.UnitTests\Domain.Teams.UnitTests.csproj", "{3B239DE4-CA08-44E8-83E1-6FDFCF1D0AC2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Races", "Races", "{D67ADD6B-1317-4308-BB42-37BFB34DE7CE}"
@@ -59,18 +63,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Host.Races", "Races\Host.Ra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Races.UnitTests", "Races\Domain.Races.UnitTests\Domain.Races.UnitTests.csproj", "{B1438C09-F5FC-4026-BA83-7360B9DEDD6D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{31F39252-DA45-47DB-98F1-983451409E7B}"
-ProjectSection(SolutionItems) = preProject
-	.dockerignore = .dockerignore
-	.gitignore = .gitignore
-	Dockerfile.Matches.Host = Dockerfile.Matches.Host
-	Dockerfile.Players.Host = Dockerfile.Players.Host
-	Dockerfile.Races.Host = Dockerfile.Races.Host
-	Dockerfile.Seasons.Host = Dockerfile.Seasons.Host
-	Dockerfile.Seasons.ReadHost = Dockerfile.Seasons.ReadHost
-	Dockerfile.Teams.Host = Dockerfile.Teams.Host
-	Dockerfile.Teams.ReadHost = Dockerfile.Teams.ReadHost
-EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ui.Translations", "ReadHosts\Ui.Translations\Ui.Translations.csproj", "{CB2CEC6B-9C15-4D20-BB5D-D519D80F47A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -130,6 +123,10 @@ Global
 		{69C46D15-F190-4F8D-B86A-8669E3AC2143}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69C46D15-F190-4F8D-B86A-8669E3AC2143}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69C46D15-F190-4F8D-B86A-8669E3AC2143}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22D9C888-89A6-4211-ABCA-749103F2ACAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22D9C888-89A6-4211-ABCA-749103F2ACAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22D9C888-89A6-4211-ABCA-749103F2ACAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22D9C888-89A6-4211-ABCA-749103F2ACAD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C32EF092-E1BA-4F96-B19C-FC267B482463}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C32EF092-E1BA-4F96-B19C-FC267B482463}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C32EF092-E1BA-4F96-B19C-FC267B482463}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -150,6 +147,10 @@ Global
 		{1C4DEDA2-0B4B-429A-94D0-DC107CADD77B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C4DEDA2-0B4B-429A-94D0-DC107CADD77B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C4DEDA2-0B4B-429A-94D0-DC107CADD77B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{391135E3-DE6A-44BB-BF0A-92875EBA1850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{391135E3-DE6A-44BB-BF0A-92875EBA1850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{391135E3-DE6A-44BB-BF0A-92875EBA1850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{391135E3-DE6A-44BB-BF0A-92875EBA1850}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B239DE4-CA08-44E8-83E1-6FDFCF1D0AC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B239DE4-CA08-44E8-83E1-6FDFCF1D0AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B239DE4-CA08-44E8-83E1-6FDFCF1D0AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -166,6 +167,10 @@ Global
 		{B1438C09-F5FC-4026-BA83-7360B9DEDD6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1438C09-F5FC-4026-BA83-7360B9DEDD6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1438C09-F5FC-4026-BA83-7360B9DEDD6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB2CEC6B-9C15-4D20-BB5D-D519D80F47A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB2CEC6B-9C15-4D20-BB5D-D519D80F47A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB2CEC6B-9C15-4D20-BB5D-D519D80F47A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB2CEC6B-9C15-4D20-BB5D-D519D80F47A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -189,10 +194,12 @@ Global
 		{53F6F1ED-5CC2-4614-8B5E-72BD056E60EC} = {417B44B4-5911-4AA8-9B7E-33B7B9D93FF8}
 		{2A989DE0-F13D-4B64-A592-7BDEDA91E065} = {417B44B4-5911-4AA8-9B7E-33B7B9D93FF8}
 		{1C4DEDA2-0B4B-429A-94D0-DC107CADD77B} = {64F06669-5C6B-4CCB-A5ED-D1E0FE9A8F83}
+		{391135E3-DE6A-44BB-BF0A-92875EBA1850} = {64F06669-5C6B-4CCB-A5ED-D1E0FE9A8F83}
 		{3B239DE4-CA08-44E8-83E1-6FDFCF1D0AC2} = {04090BE6-D0C2-43A6-8940-40E23AAFA2EF}
 		{BD579BB1-E9BB-4001-A5F1-A7508B990C2A} = {D67ADD6B-1317-4308-BB42-37BFB34DE7CE}
 		{C8A47A88-617A-456D-8ACE-FC6BB9307021} = {D67ADD6B-1317-4308-BB42-37BFB34DE7CE}
 		{B1438C09-F5FC-4026-BA83-7360B9DEDD6D} = {D67ADD6B-1317-4308-BB42-37BFB34DE7CE}
+		{CB2CEC6B-9C15-4D20-BB5D-D519D80F47A6} = {64F06669-5C6B-4CCB-A5ED-D1E0FE9A8F83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0C8F1104-0A69-4A44-8850-E95E4A4617C5}

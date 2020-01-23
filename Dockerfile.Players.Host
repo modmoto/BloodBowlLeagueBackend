@@ -1,22 +1,29 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+# Build image
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
 WORKDIR /app
 COPY ./BloodBowlLeagueBackend.sln ./
 
+# Copy all the csproj files and restore to cache the layer for faster builds
+# The dotnet_build.sh script does this anyway, so superfluous, but docker can
+# cache the intermediate images so _much_ faster
 COPY ./Players/Host.Players/Host.Players.csproj ./Players/Host.Players/Host.Players.csproj
 COPY ./Players/Application.Players/Application.Players.csproj ./Players/Application.Players/Application.Players.csproj
 COPY ./Players/Domain.Players/Domain.Players.csproj ./Players/Domain.Players/Domain.Players.csproj
+COPY ./ServiceConfig/ServiceConfig.csproj ./ServiceConfig/ServiceConfig.csproj
+
 RUN dotnet restore ./Players/Host.Players/Host.Players.csproj
 RUN dotnet restore ./Players/Application.Players/Application.Players.csproj
 RUN dotnet restore ./Players/Domain.Players/Domain.Players.csproj
+RUN dotnet restore ./ServiceConfig/ServiceConfig.csproj
 
 COPY ./Players ./Players
-RUN dotnet build ./Players/Host.Players/Host.Players.csproj
+COPY ./ServiceConfig ./ServiceConfig
+RUN dotnet build ./Players/Host.Players/Host.Players.csproj -c Release
 
-RUN dotnet publish "./Players/Host.Players/Host.Players.csproj" -o "../../app/out"
+RUN dotnet publish "./Players/Host.Players/Host.Players.csproj" -c Release -o "../../out"
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+#App image
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 WORKDIR /app
 COPY --from=build-env /app/out .
-
-EXPOSE 80
-ENTRYPOINT dotnet Host.Players.dll baseAdresses=$BASE_ADRESSES
+CMD ["dotnet", "Host.Players.dll"]

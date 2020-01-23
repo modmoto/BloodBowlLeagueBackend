@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DarkElves" xml:space="preserve">
+    <value>Dark Elves</value>
+  </data>
+  <data name="DE_Assassine" xml:space="preserve">
+    <value>Assasine</value>
+  </data>
+  <data name="DE_Blitzer" xml:space="preserve">
+    <value>Blitzer</value>
+  </data>
+  <data name="DE_LineMan" xml:space="preserve">
+    <value>Lineman</value>
+  </data>
+  <data name="DE_WitchElve" xml:space="preserve">
+    <value>Witchelve</value>
+  </data>
+  <data name="DE_Runner" xml:space="preserve">
+    <value>Runner</value>
+  </data>
+  <data name="Dwarfs" xml:space="preserve">
+    <value>Dwarfs</value>
+  </data>
+  <data name="DW_Blitzer" xml:space="preserve">
+    <value>Blitzer</value>
+  </data>
+  <data name="DW_Blocker" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="DW_DeathRoller" xml:space="preserve">
+    <value>Death Roller</value>
+  </data>
+  <data name="DW_Runner" xml:space="preserve">
+    <value>Runner</value>
+  </data>
+  <data name="DW_TrollSlayer" xml:space="preserve">
+    <value>Troll Slayer</value>
+  </data>
+  <data name="Humans" xml:space="preserve">
+    <value>Humans</value>
+  </data>
+  <data name="HU_Blitzer" xml:space="preserve">
+    <value>Blitzer</value>
+  </data>
+  <data name="HU_Catcher" xml:space="preserve">
+    <value>Catcher</value>
+  </data>
+  <data name="HU_LineMan" xml:space="preserve">
+    <value>Lineman</value>
+  </data>
+  <data name="HU_Ogre" xml:space="preserve">
+    <value>Ogre</value>
+  </data>
+  <data name="HU_Thrower" xml:space="preserve">
+    <value>Thrower</value>
+  </data>
+  <data name="NominatedMostValuablePlayer" xml:space="preserve">
+    <value>Was nominated MVP</value>
+  </data>
+  <data name="PlayerPassed" xml:space="preserve">
+    <value>Threw a pass</value>
+  </data>
+  <data name="PlayerMadeCasualty" xml:space="preserve">
+    <value>Made a casualty</value>
+  </data>
+  <data name="PlayerMadeTouchdown" xml:space="preserve">
+    <value>Touchdown!</value>
+  </data>
+  <data name="SkillType_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="SkillType_Extraordinary" xml:space="preserve">
+    <value>Extraordinary</value>
+  </data>
+  <data name="SkillType_Mutation" xml:space="preserve">
+    <value>Mutation</value>
+  </data>
+  <data name="SkillType_Passing" xml:space="preserve">
+    <value>Passing</value>
+  </data>
+  <data name="SkillType_Strength" xml:space="preserve">
+    <value>Strength</value>
+  </data>
+  <data name="SkillType_Agility" xml:space="preserve">
+    <value>Agility</value>
+  </data>
+  <data name="Skill_Block" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="Skill_Catch" xml:space="preserve">
+    <value>Catch</value>
+  </data>
+  <data name="Skill_Dodge" xml:space="preserve">
+    <value>Dodge</value>
+  </data>
+  <data name="Skill_Frenzy" xml:space="preserve">
+    <value>Frenzy</value>
+  </data>
+  <data name="Skill_JumpUp" xml:space="preserve">
+    <value>Jump Up</value>
+  </data>
+  <data name="Skill_DumpOff" xml:space="preserve">
+    <value>Dump Off</value>
+  </data>
+  <data name="Skill_Shadowing" xml:space="preserve">
+    <value>Shadowing</value>
+  </data>
+  <data name="Skill_Stab" xml:space="preserve">
+    <value>Stab</value>
+  </data>
+  <data name="Skill_MightyBlow" xml:space="preserve">
+    <value>Mighty Blow</value>
+  </data>
+  <data name="Skill_SureHands" xml:space="preserve">
+    <value>Sure Hands</value>
+  </data>
+  <data name="Skill_Pass" xml:space="preserve">
+    <value>Pass</value>
+  </data>
+  <data name="Skill_PlusOneAgility" xml:space="preserve">
+    <value>Plus one agility</value>
+  </data>
+  <data name="Skill_PlusOneArmor" xml:space="preserve">
+    <value>Plus one armor</value>
+  </data>
+  <data name="Skill_PlusOneMovement" xml:space="preserve">
+    <value>Plus one movement</value>
+  </data>
+  <data name="Skill_PlusOneStrength" xml:space="preserve">
+    <value>Plus one strength</value>
+  </data>
+  <data name="FreeSkillPoint_Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="FreeSkillPoint_Double" xml:space="preserve">
+    <value>Double</value>
+  </data>
+  <data name="FreeSkillPoint_PlusOneArmorOrMovement" xml:space="preserve">
+    <value>Plus one armor or movement</value>
+  </data>
+  <data name="FreeSkillPoint_PlusOneAgility" xml:space="preserve">
+    <value>Plus one agility</value>
+  </data>
+  <data name="FreeSkillPoint_PlusOneStrength" xml:space="preserve">
+    <value>Plus one strength</value>
+  </data>
+</root>
