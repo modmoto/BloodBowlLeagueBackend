@@ -10,9 +10,9 @@ RUN dotnet restore ./Teams/Application.Teams/Application.Teams.csproj
 RUN dotnet restore ./Teams/Domain.Teams/Domain.Teams.csproj
 
 COPY ./Teams ./Teams
-RUN dotnet build ./Teams/Host.Teams/Host.Teams.csproj -c Release
+RUN dotnet build ./Teams/Host.Teams/Host.Teams.csproj
 
-RUN dotnet publish "./Teams/Host.Teams/Host.Teams.csproj" -c Release -o "../../app/out"
+RUN dotnet publish "./Teams/Host.Teams/Host.Teams.csproj" -o "../../app/out"
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app

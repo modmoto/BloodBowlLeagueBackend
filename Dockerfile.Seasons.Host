@@ -10,9 +10,9 @@ RUN dotnet restore ./Seasons/Application.Seasons/Application.Seasons.csproj
 RUN dotnet restore ./Seasons/Domain.Seasons/Domain.Seasons.csproj
 
 COPY ./Seasons ./Seasons
-RUN dotnet build ./Seasons/Host.Seasons/Host.Seasons.csproj -c Release
+RUN dotnet build ./Seasons/Host.Seasons/Host.Seasons.csproj
 
-RUN dotnet publish "./Seasons/Host.Seasons/Host.Seasons.csproj" -c Release -o "../../app/out"
+RUN dotnet publish "./Seasons/Host.Seasons/Host.Seasons.csproj" -o "../../app/out"
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app

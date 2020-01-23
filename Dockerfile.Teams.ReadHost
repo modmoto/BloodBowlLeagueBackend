@@ -6,9 +6,9 @@ COPY ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj ./ReadHosts/Teams.ReadHost
 RUN dotnet restore ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
 
 COPY ./ReadHosts ./ReadHosts
-RUN dotnet build ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj -c Release
+RUN dotnet build ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
 
-RUN dotnet publish "./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj" -c Release -o "../../app/out"
+RUN dotnet publish "./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj" -o "../../app/out"
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app

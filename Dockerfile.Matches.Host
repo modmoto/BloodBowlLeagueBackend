@@ -10,9 +10,9 @@ RUN dotnet restore ./Matches/Application.Matches/Application.Matches.csproj
 RUN dotnet restore ./Matches/Domain.Matches/Domain.Matches.csproj
 
 COPY ./Matches ./Matches
-RUN dotnet build ./Matches/Host.Matches/Host.Matches.csproj -c Release
+RUN dotnet build ./Matches/Host.Matches/Host.Matches.csproj
 
-RUN dotnet publish "./Matches/Host.Matches/Host.Matches.csproj" -c Release -o "../../app/out"
+RUN dotnet publish "./Matches/Host.Matches/Host.Matches.csproj" -o "../../app/out"
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
