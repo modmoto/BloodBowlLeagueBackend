@@ -6,48 +6,48 @@ services:
     ports:
       - "6001:80"
     environment:
-      - BASE_ADRESSES=http://matches-host;http://players-host;http://races-host;http://seasons-host;http://teams-host
+      - BASE_ADRESSES=${BASE_ADRESSES}
   players-host:
     image: modmoto/players-host
     ports:
       - "6002:80"
     environment:
-      - BASE_ADRESSES=http://matches-host;http://players-host;http://races-host;http://seasons-host;http://teams-host
+      - BASE_ADRESSES=${BASE_ADRESSES}
   matches-host:
     image: modmoto/matches-host
     ports:
       - "6003:80"
     environment:
-      - BASE_ADRESSES=http://matches-host;http://players-host;http://races-host;http://seasons-host;http://teams-host
+      - BASE_ADRESSES=${BASE_ADRESSES}
   seasons-host:
     image: modmoto/seasons-host
     ports:
       - "6004:80"
     environment:
-      - BASE_ADRESSES=http://matches-host;http://players-host;http://races-host;http://seasons-host;http://teams-host
+      - BASE_ADRESSES=${BASE_ADRESSES}
   races-host:
     image: modmoto/races-host
     ports:
       - "6005:80"
     environment:
-      - BASE_ADRESSES=http://matches-host;http://players-host;http://races-host;http://seasons-host;http://teams-host
+      - BASE_ADRESSES=${BASE_ADRESSES}
 
   teams-readhost:
     image: modmoto/teams-readhost
     ports:
       - "5000:80"
     environment:
-      - BASE_ADRESSES=http://matches-host;http://players-host;http://races-host;http://seasons-host;http://teams-host
+      - BASE_ADRESSES=${BASE_ADRESSES}
   seasons-readhost:
     image: modmoto/seasons-readhost
     ports:
       - "5001:80"
     environment:
-      - BASE_ADRESSES=http://matches-host;http://players-host;http://races-host;http://seasons-host;http://teams-host
+      - BASE_ADRESSES=${BASE_ADRESSES}
 
   bbl-ui:
     image: modmoto/bbl-ui
     ports:
       - "3000:80"
     environment:
-      - BASE_ADRESSES=http://matches-host;http://players-host;http://races-host;http://seasons-host;http://teams-host
+      - BASE_ADRESSES=${BASE_ADRESSES}
