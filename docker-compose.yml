@@ -50,4 +50,6 @@ services:
     ports:
       - "3000:80"
     environment:
-      - BASE_ADRESSES=${BASE_ADRESSES}
+      - SEASONS_READHOST=http://seasons-readhost/api
+      - TEAMS_READHOST=http://teams-readhost/api
+      - TEAMS_HOST=http://teams-host/api
