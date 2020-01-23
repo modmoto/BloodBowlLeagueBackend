@@ -70,6 +70,7 @@ ProjectSection(SolutionItems) = preProject
 	Dockerfile.Seasons.ReadHost = Dockerfile.Seasons.ReadHost
 	Dockerfile.Teams.Host = Dockerfile.Teams.Host
 	Dockerfile.Teams.ReadHost = Dockerfile.Teams.ReadHost
+	docker-compose.yml = docker-compose.yml
 EndProjectSection
 EndProject
 Global
