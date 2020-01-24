@@ -34,8 +34,7 @@ namespace Teams.WriteHost.Startup
 
             services.AddMicrowave(config =>
             {
-                config.WithFeedType(typeof(EventFeed<>))
-                    .WithLogLevel(MicrowaveLogLevel.Info);
+                config.WithFeedType(typeof(EventFeed<>));
             });
 
             services.AddMicrowaveWebApi(c =>
