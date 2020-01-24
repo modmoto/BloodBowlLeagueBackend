@@ -63,7 +63,12 @@ namespace Host.Matches.Startup
         {
             app.UseRouting();
             app.UseCors(
-                options => options.WithOrigins("http://localhost:3000", "http://*.blood-bowl-league.com", "http://blood-bowl-league.com")
+                options => options
+                    .WithOrigins(
+                        "http://localhost:3000",
+                        "http://*.blood-bowl-league.com",
+                        "http://blood-bowl-league.com")
+                    .AllowAnyMethod()
             );
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
