@@ -56,11 +56,8 @@ namespace Host.Races.Startup
             app.UseRouting();
             app.UseCors(
                 options => options
-                    .WithOrigins(
-                        "http://localhost:3000",
-                        "http://localhost:80",
-                        "http://*.blood-bowl-league.com",
-                        "http://blood-bowl-league.com")
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
                     .AllowAnyMethod()
             );
             app.UseEndpoints(endpoints => {

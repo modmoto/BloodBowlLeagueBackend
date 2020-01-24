@@ -52,11 +52,8 @@ namespace Host.Players.Startup
         {
             app.UseCors(
                 options => options
-                    .WithOrigins(
-                        "http://localhost:3000",
-                        "http://localhost:80",
-                        "http://*.blood-bowl-league.com",
-                        "http://blood-bowl-league.com")
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
                     .AllowAnyMethod()
             );
             app.UseRouting();
