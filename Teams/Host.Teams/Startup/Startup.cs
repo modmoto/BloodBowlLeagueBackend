@@ -25,7 +25,7 @@ namespace Teams.WriteHost.Startup
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors().AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddCors().AddMvc();
             services.AddTransient<TeamCommandHandler>();
             services.AddMicrowaveUi();
 

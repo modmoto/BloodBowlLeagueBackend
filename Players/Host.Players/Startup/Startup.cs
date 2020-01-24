@@ -25,7 +25,7 @@ namespace Host.Players.Startup
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors().AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddCors().AddMvc();
 
             var baseAdress = _configuration.GetValue<string>("baseAdresses");
             var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));

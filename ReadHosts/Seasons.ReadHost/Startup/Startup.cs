@@ -30,7 +30,7 @@ namespace Seasons.ReadHost.Startup
                 .AddMvc()
                 .AddJsonOptions(options =>
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                ;
 
             var baseAdress = _configuration.GetValue<string>("baseAdresses");
             var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
