@@ -56,7 +56,7 @@ namespace Seasons.ReadHost.Startup
         {
             app.UseRouting();
             app.UseCors(
-                options => options.WithOrigins("http://localhost:3000", "http://blood-bowl-league.com").AllowAnyMethod()
+                options => options.WithOrigins("http://localhost:3000", "http://*.blood-bowl-league.com", "http://blood-bowl-league.com")
             );
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
