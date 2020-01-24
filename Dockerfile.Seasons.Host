@@ -6,7 +6,8 @@ COPY ./Seasons/Host.Seasons/Host.Seasons.csproj ./Seasons/Host.Seasons/Host.Seas
 COPY ./Seasons/Application.Seasons/Application.Seasons.csproj ./Seasons/Application.Seasons/Application.Seasons.csproj
 COPY ./Seasons/Domain.Seasons/Domain.Seasons.csproj ./Seasons/Domain.Seasons/Domain.Seasons.csproj
 COPY ./ServiceConfigNew/ServiceConfigNew.csproj ./ServiceConfigNew/ServiceConfigNew.csproj
-RUN dotnet restore ./ServiceConfigNew/ServiceConfigNew.csprojRUN dotnet restore ./Seasons/Host.Seasons/Host.Seasons.csproj
+RUN dotnet restore ./ServiceConfigNew/ServiceConfigNew.csproj
+RUN dotnet restore ./Seasons/Host.Seasons/Host.Seasons.csproj
 RUN dotnet restore ./Seasons/Application.Seasons/Application.Seasons.csproj
 RUN dotnet restore ./Seasons/Domain.Seasons/Domain.Seasons.csproj
 

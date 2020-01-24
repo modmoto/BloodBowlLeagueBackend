@@ -6,7 +6,8 @@ COPY ./Players/Host.Players/Host.Players.csproj ./Players/Host.Players/Host.Play
 COPY ./Players/Application.Players/Application.Players.csproj ./Players/Application.Players/Application.Players.csproj
 COPY ./Players/Domain.Players/Domain.Players.csproj ./Players/Domain.Players/Domain.Players.csproj
 COPY ./ServiceConfigNew/ServiceConfigNew.csproj ./ServiceConfigNew/ServiceConfigNew.csproj
-RUN dotnet restore ./ServiceConfigNew/ServiceConfigNew.csprojRUN dotnet restore ./Players/Host.Players/Host.Players.csproj
+RUN dotnet restore ./ServiceConfigNew/ServiceConfigNew.csproj
+RUN dotnet restore ./Players/Host.Players/Host.Players.csproj
 RUN dotnet restore ./Players/Application.Players/Application.Players.csproj
 RUN dotnet restore ./Players/Domain.Players/Domain.Players.csproj
 

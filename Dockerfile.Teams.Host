@@ -6,7 +6,8 @@ COPY ./Teams/Host.Teams/Host.Teams.csproj ./Teams/Host.Teams/Host.Teams.csproj
 COPY ./Teams/Application.Teams/Application.Teams.csproj ./Teams/Application.Teams/Application.Teams.csproj
 COPY ./Teams/Domain.Teams/Domain.Teams.csproj ./Teams/Domain.Teams/Domain.Teams.csproj
 COPY ./ServiceConfigNew/ServiceConfigNew.csproj ./ServiceConfigNew/ServiceConfigNew.csproj
-RUN dotnet restore ./ServiceConfigNew/ServiceConfigNew.csprojRUN dotnet restore ./Teams/Host.Teams/Host.Teams.csproj
+RUN dotnet restore ./ServiceConfigNew/ServiceConfigNew.csproj
+RUN dotnet restore ./Teams/Host.Teams/Host.Teams.csproj
 RUN dotnet restore ./Teams/Application.Teams/Application.Teams.csproj
 RUN dotnet restore ./Teams/Domain.Teams/Domain.Teams.csproj
 
