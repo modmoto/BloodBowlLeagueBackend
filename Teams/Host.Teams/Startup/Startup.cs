@@ -1,5 +1,9 @@
-﻿using Application.Teams;
+﻿using System;
+using System.Linq;
+using Application.Teams;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Logging;
@@ -7,17 +11,26 @@ using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using Microwave.WebApi;
 using Microwave.WebApi.Queries;
-using ServiceConfigNew;
 
 namespace Teams.WriteHost.Startup
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors().AddMvc();
             services.AddTransient<TeamCommandHandler>();
             services.AddMicrowaveUi();
+
+            var baseAdress = _configuration.GetValue<string>("baseAdresses");
+            var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
 
             services.AddMicrowave(config =>
             {
@@ -28,7 +41,7 @@ namespace Teams.WriteHost.Startup
             services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("TeamService");
-                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
+                c.ServiceLocations.AddRange(serviceUrls);
             });
 
             var domainEvents = EventSeedsTeams.Seeds;

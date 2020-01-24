@@ -1,5 +1,9 @@
-﻿using Application.Matches;
+﻿using System;
+using System.Linq;
+using Application.Matches;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Logging;
@@ -7,15 +11,24 @@ using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using Microwave.WebApi;
 using Microwave.WebApi.Queries;
-using ServiceConfigNew;
 
 namespace Host.Matches.Startup
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors().AddMvc();
+
+            var baseAdress = _configuration.GetValue<string>("baseAdresses");
+            var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
 
             services.AddMicrowave(config =>
             {
@@ -26,7 +39,7 @@ namespace Host.Matches.Startup
             services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("MatchService");
-                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
+                c.ServiceLocations.AddRange(serviceUrls);
             });
 
             services.AddMicrowavePersistenceLayerInMemory(c =>

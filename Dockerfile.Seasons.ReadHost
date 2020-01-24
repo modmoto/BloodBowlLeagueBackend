@@ -4,10 +4,8 @@ COPY ./BloodBowlLeagueBackend.sln ./
 
 COPY ./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj ./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj
 RUN dotnet restore ./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj
-COPY ./ServiceConfigNew/ServiceConfigNew.csproj ./ServiceConfigNew/ServiceConfigNew.csproj
-RUN dotnet restore ./ServiceConfigNew/ServiceConfigNew.csproj
+
 COPY ./ReadHosts ./ReadHosts
-COPY ./ServiceConfigNew ./ServiceConfigNew
 RUN dotnet build ./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj
 
 RUN dotnet publish "./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj" -o "../../app/out"
@@ -16,4 +14,4 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-ENTRYPOINT dotnet Seasons.ReadHost.dll
+ENTRYPOINT dotnet Seasons.ReadHost.dll baseAdresses=$BASE_ADRESSES

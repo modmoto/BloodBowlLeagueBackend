@@ -1,5 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Linq;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Logging;
@@ -7,12 +11,18 @@ using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using Microwave.WebApi;
 using Microwave.WebApi.Queries;
-using ServiceConfigNew;
 
 namespace Teams.ReadHost.Startup
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services
@@ -21,6 +31,9 @@ namespace Teams.ReadHost.Startup
                 .AddJsonOptions(options =>
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
                 ;
+
+            var baseAdress = _configuration.GetValue<string>("baseAdresses");
+            var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
 
             services.AddMicrowave(config =>
             {
@@ -31,7 +44,7 @@ namespace Teams.ReadHost.Startup
             services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("TeamsQuerryService");
-                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
+                c.ServiceLocations.AddRange(serviceUrls);
             });
 
             services.AddMicrowavePersistenceLayerInMemory();

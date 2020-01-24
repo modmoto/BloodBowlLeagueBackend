@@ -5,13 +5,10 @@ COPY ./BloodBowlLeagueBackend.sln ./
 COPY ./Players/Host.Players/Host.Players.csproj ./Players/Host.Players/Host.Players.csproj
 COPY ./Players/Application.Players/Application.Players.csproj ./Players/Application.Players/Application.Players.csproj
 COPY ./Players/Domain.Players/Domain.Players.csproj ./Players/Domain.Players/Domain.Players.csproj
-COPY ./ServiceConfigNew/ServiceConfigNew.csproj ./ServiceConfigNew/ServiceConfigNew.csproj
-RUN dotnet restore ./ServiceConfigNew/ServiceConfigNew.csproj
 RUN dotnet restore ./Players/Host.Players/Host.Players.csproj
 RUN dotnet restore ./Players/Application.Players/Application.Players.csproj
 RUN dotnet restore ./Players/Domain.Players/Domain.Players.csproj
 
-COPY ./ServiceConfigNew ./ServiceConfigNew
 COPY ./Players ./Players
 RUN dotnet build ./Players/Host.Players/Host.Players.csproj
 
@@ -21,4 +18,4 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-ENTRYPOINT dotnet Host.Players.dll
+ENTRYPOINT dotnet Host.Players.dll baseAdresses=$BASE_ADRESSES

@@ -21,7 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\ServiceConfigNew\ServiceConfigNew.csproj" />
-    </ItemGroup>
+      </ItemGroup>
 
 </Project>

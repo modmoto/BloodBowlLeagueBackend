@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Linq;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
 using Microwave.Logging;
@@ -6,16 +10,26 @@ using Microwave.Persistence.InMemory;
 using Microwave.UI;
 using Microwave.WebApi;
 using Microwave.WebApi.Queries;
-using ServiceConfigNew;
 
 namespace Host.Races.Startup
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors().AddMvc();
 
+            var baseAdress = _configuration.GetValue<string>("baseAdresses");
+            var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
+
+            Console.WriteLine(baseAdress);
             services.AddMicrowave(config =>
             {
                 config.WithFeedType(typeof(EventFeed<>))
@@ -25,7 +39,7 @@ namespace Host.Races.Startup
             services.AddMicrowaveWebApi(c =>
             {
                 c.WithServiceName("RaceService");
-                c.ServiceLocations.AddRange(ServiceConfiguration.ServiceAdresses);
+                c.ServiceLocations.AddRange(serviceUrls);
             });
 
             var domainEvents = RaceEventSeeds.Seeds;

@@ -5,12 +5,10 @@ COPY ./BloodBowlLeagueBackend.sln ./
 COPY ./Seasons/Host.Seasons/Host.Seasons.csproj ./Seasons/Host.Seasons/Host.Seasons.csproj
 COPY ./Seasons/Application.Seasons/Application.Seasons.csproj ./Seasons/Application.Seasons/Application.Seasons.csproj
 COPY ./Seasons/Domain.Seasons/Domain.Seasons.csproj ./Seasons/Domain.Seasons/Domain.Seasons.csproj
-COPY ./ServiceConfigNew/ServiceConfigNew.csproj ./ServiceConfigNew/ServiceConfigNew.csproj
-RUN dotnet restore ./ServiceConfigNew/ServiceConfigNew.csproj
 RUN dotnet restore ./Seasons/Host.Seasons/Host.Seasons.csproj
 RUN dotnet restore ./Seasons/Application.Seasons/Application.Seasons.csproj
 RUN dotnet restore ./Seasons/Domain.Seasons/Domain.Seasons.csproj
-COPY ./ServiceConfigNew ./ServiceConfigNew
+
 COPY ./Seasons ./Seasons
 RUN dotnet build ./Seasons/Host.Seasons/Host.Seasons.csproj
 
@@ -20,4 +18,4 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-ENTRYPOINT dotnet Host.Seasons.dll
+ENTRYPOINT dotnet Host.Seasons.dll baseAdresses=$BASE_ADRESSES
