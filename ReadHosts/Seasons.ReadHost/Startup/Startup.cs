@@ -58,6 +58,7 @@ namespace Seasons.ReadHost.Startup
                 options => options
                     .WithOrigins(
                         "http://localhost:3000",
+                        "http://localhost:80",
                         "http://*.blood-bowl-league.com",
                         "http://blood-bowl-league.com")
                     .AllowAnyMethod()
