@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\ServiceConfigNew\ServiceConfigNew.csproj" />
       <ProjectReference Include="..\Application.Teams\Application.Teams.csproj" />
     </ItemGroup>
 

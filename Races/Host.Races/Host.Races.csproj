@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\ServiceConfigNew\ServiceConfigNew.csproj" />
       <ProjectReference Include="..\Domain.Races\Domain.Races.csproj" />
     </ItemGroup>
 

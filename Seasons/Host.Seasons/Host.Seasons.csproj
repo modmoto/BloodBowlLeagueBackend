@@ -20,6 +20,7 @@
     
 
     <ItemGroup>
+      <ProjectReference Include="..\..\ServiceConfigNew\ServiceConfigNew.csproj" />
       <ProjectReference Include="..\Application.Seasons\Application.Seasons.csproj" />
     </ItemGroup>
 
