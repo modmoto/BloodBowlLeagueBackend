@@ -25,10 +25,7 @@ namespace Host.Matches.Startup
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-            services.AddRazorPages().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
-            services.AddMicrowaveUi();
+            services.AddCors().AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             var baseAdress = _configuration.GetValue<string>("baseAdresses");
             var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
@@ -49,6 +46,8 @@ namespace Host.Matches.Startup
             {
                 c.WithEventSeeds(EventSeeds.Seeds);
             });
+
+            services.AddMicrowaveUi();
 
             services.AddTransient<OnSeasonStartedCreateMatchesEventHandler>();
             services.AddTransient<MatchCommandHandler>();

@@ -31,7 +31,6 @@ namespace Teams.ReadHost.Startup
                 .AddJsonOptions(options =>
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            services.AddMicrowaveUi();
 
             var baseAdress = _configuration.GetValue<string>("baseAdresses");
             var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
@@ -49,6 +48,7 @@ namespace Teams.ReadHost.Startup
             });
 
             services.AddMicrowavePersistenceLayerInMemory();
+            services.AddMicrowaveUi();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,10 +57,8 @@ namespace Teams.ReadHost.Startup
             app.UseRouting();
             app.UseCors(
                 options => options
-                    .WithOrigins(
-                        "http://localhost:3000",
-                        "http://*.blood-bowl-league.com",
-                        "http://blood-bowl-league.com")
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
                     .AllowAnyMethod()
             );
             app.UseEndpoints(endpoints => {

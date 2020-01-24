@@ -24,9 +24,7 @@ namespace Host.Races.Startup
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            services.AddMicrowaveUi();
+            services.AddCors().AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             var baseAdress = _configuration.GetValue<string>("baseAdresses");
             var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
@@ -50,6 +48,8 @@ namespace Host.Races.Startup
             {
                 c.WithEventSeeds(domainEvents);
             });
+
+            services.AddMicrowaveUi();
         }
 
         public void Configure(IApplicationBuilder app)
