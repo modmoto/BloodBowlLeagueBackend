@@ -4,7 +4,8 @@ COPY ./BloodBowlLeagueBackend.sln ./
 
 COPY ./Races/Host.Races/Host.Races.csproj ./Races/Host.Races/Host.Races.csproj
 COPY ./Races/Domain.Races/Domain.Races.csproj ./Races/Domain.Races/Domain.Races.csproj
-RUN dotnet restore ./Races/Host.Races/Host.Races.csproj
+COPY ./ServiceConfigNew/ServiceConfigNew.csproj ./ServiceConfigNew/ServiceConfigNew.csproj
+RUN dotnet restore ./ServiceConfigNew/ServiceConfigNew.csprojRUN dotnet restore ./Races/Host.Races/Host.Races.csproj
 RUN dotnet restore ./Races/Domain.Races/Domain.Races.csproj
 
 COPY ./Races ./Races
