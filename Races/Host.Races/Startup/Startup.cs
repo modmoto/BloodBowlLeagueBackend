@@ -24,15 +24,9 @@ namespace Host.Races.Startup
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMicrowaveUi();
-
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            }));
 
             var baseAdress = _configuration.GetValue<string>("baseAdresses");
             var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
@@ -61,11 +55,13 @@ namespace Host.Races.Startup
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:3000").AllowAnyMethod()
+            );
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
             app.UseMicrowaveUi();
-            app.UseCors("MyPolicy");
         }
     }
 }

@@ -25,14 +25,8 @@ namespace Host.Players.Startup
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            }));
 
             var baseAdress = _configuration.GetValue<string>("baseAdresses");
             var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
@@ -58,6 +52,9 @@ namespace Host.Players.Startup
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:3000").AllowAnyMethod()
+            );
             app.UseRouting();
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();

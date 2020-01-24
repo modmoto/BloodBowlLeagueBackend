@@ -26,6 +26,7 @@ namespace Seasons.ReadHost.Startup
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddCors()
                 .AddMvc()
                 .AddJsonOptions(options =>
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
@@ -48,26 +49,21 @@ namespace Seasons.ReadHost.Startup
             });
 
             services.AddMicrowavePersistenceLayerInMemory();
-
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:3000").AllowAnyMethod()
+            );
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
             app.UseMicrowaveUi();
             app.RunMicrowaveQueries();
             app.RunMicrowaveServiceDiscovery();
-            app.UseCors("MyPolicy");
         }
     }
 }

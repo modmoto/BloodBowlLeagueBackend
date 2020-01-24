@@ -25,14 +25,8 @@ namespace Host.Matches.Startup
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddRazorPages().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            }));
 
             services.AddMicrowaveUi();
 
@@ -63,13 +57,15 @@ namespace Host.Matches.Startup
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:3000").AllowAnyMethod()
+            );
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
             app.UseMicrowaveUi();
             app.RunMicrowaveQueries();
             app.RunMicrowaveServiceDiscovery();
-            app.UseCors("MyPolicy");
         }
     }
 }
