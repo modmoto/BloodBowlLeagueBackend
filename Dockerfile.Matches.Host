@@ -12,6 +12,7 @@ RUN dotnet restore ./Matches/Application.Matches/Application.Matches.csproj
 RUN dotnet restore ./Matches/Domain.Matches/Domain.Matches.csproj
 
 
+COPY ./ServiceConfig ./ServiceConfig
 COPY ./Matches ./Matches
 RUN dotnet build ./Matches/Host.Matches/Host.Matches.csproj
 

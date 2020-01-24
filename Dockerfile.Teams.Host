@@ -11,6 +11,7 @@ RUN dotnet restore ./Teams/Host.Teams/Host.Teams.csproj
 RUN dotnet restore ./Teams/Application.Teams/Application.Teams.csproj
 RUN dotnet restore ./Teams/Domain.Teams/Domain.Teams.csproj
 
+COPY ./ServiceConfig ./ServiceConfig
 COPY ./Teams ./Teams
 RUN dotnet build ./Teams/Host.Teams/Host.Teams.csproj
 

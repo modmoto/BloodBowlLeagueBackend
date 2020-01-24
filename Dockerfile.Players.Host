@@ -11,6 +11,7 @@ RUN dotnet restore ./Players/Host.Players/Host.Players.csproj
 RUN dotnet restore ./Players/Application.Players/Application.Players.csproj
 RUN dotnet restore ./Players/Domain.Players/Domain.Players.csproj
 
+COPY ./ServiceConfig ./ServiceConfig
 COPY ./Players ./Players
 RUN dotnet build ./Players/Host.Players/Host.Players.csproj
 
