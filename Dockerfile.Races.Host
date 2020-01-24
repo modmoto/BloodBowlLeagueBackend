@@ -9,7 +9,7 @@ RUN dotnet restore ./ServiceConfigNew/ServiceConfigNew.csproj
 RUN dotnet restore ./Races/Host.Races/Host.Races.csproj
 RUN dotnet restore ./Races/Domain.Races/Domain.Races.csproj
 
-COPY ./ServiceConfig ./ServiceConfig
+COPY ./ServiceConfigNew ./ServiceConfigNew
 COPY ./Races ./Races
 RUN dotnet build ./Races/Host.Races/Host.Races.csproj
 
