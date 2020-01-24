@@ -7,6 +7,7 @@ RUN dotnet restore ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
 COPY ./ServiceConfigNew/ServiceConfigNew.csproj ./ServiceConfigNew/ServiceConfigNew.csproj
 RUN dotnet restore ./ServiceConfigNew/ServiceConfigNew.csproj
 COPY ./ReadHosts ./ReadHosts
+COPY ./ServiceConfigNew ./ServiceConfigNew
 RUN dotnet build ./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj
 
 RUN dotnet publish "./ReadHosts/Teams.ReadHost/Teams.ReadHost.csproj" -o "../../app/out"
