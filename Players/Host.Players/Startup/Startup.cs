@@ -53,7 +53,7 @@ namespace Host.Players.Startup
         public void Configure(IApplicationBuilder app)
         {
             app.UseCors(
-                options => options.WithOrigins("http://localhost:3000").AllowAnyMethod()
+                options => options.WithOrigins("http://localhost:3000", "http://blood-bowl-league.com").AllowAnyMethod()
             );
             app.UseRouting();
             app.UseEndpoints(endpoints => {
