@@ -57,8 +57,12 @@ namespace Teams.ReadHost.Startup
             app.UseRouting();
             app.UseCors(
                 options => options
-                    .AllowAnyOrigin()
-                    .AllowAnyHeader()
+                    .WithOrigins(
+                        "http://localhost:3000",
+                        "http://localhost:80",
+                        "http://localhost",
+                        "http://*.blood-bowl-league.com",
+                        "http://blood-bowl-league.com")
                     .AllowAnyMethod()
             );
             app.UseEndpoints(endpoints => {

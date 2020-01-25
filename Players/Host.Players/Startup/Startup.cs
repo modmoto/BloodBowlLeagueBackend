@@ -51,6 +51,7 @@ namespace Host.Players.Startup
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseRouting();
             app.UseCors(
                 options => options
                     .WithOrigins(
@@ -61,7 +62,6 @@ namespace Host.Players.Startup
                         "http://blood-bowl-league.com")
                     .AllowAnyMethod()
             );
-            app.UseRouting();
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
