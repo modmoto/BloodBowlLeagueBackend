@@ -60,6 +60,7 @@ namespace Host.Matches.Startup
                     .WithOrigins(
                         "http://localhost:3000",
                         "http://localhost:80",
+                        "http://localhost",
                         "http://*.blood-bowl-league.com",
                         "http://blood-bowl-league.com")
                     .AllowAnyMethod()
