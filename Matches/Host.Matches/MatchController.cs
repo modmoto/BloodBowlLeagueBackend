@@ -55,11 +55,17 @@ namespace Host.Matches
             return Ok();
         }
 
-        [HttpGet("startall")]
+        [HttpGet("startpoll")]
         public ActionResult startall()
         {
-            _discoveryPoller.StartDependencyDiscovery();
             _eventDelegator.StartEventPolling();
+            return Ok();
+        }
+
+        [HttpGet("startDisco")]
+        public ActionResult startSisc()
+        {
+            _discoveryPoller.StartDependencyDiscovery();
             return Ok();
         }
 
