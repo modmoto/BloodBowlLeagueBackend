@@ -64,6 +64,7 @@ namespace Seasons.ReadHost.Startup
                         "http://*.blood-bowl-league.com",
                         "http://blood-bowl-league.com")
                     .AllowAnyMethod()
+                    .AllowAnyHeader()
             );
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
