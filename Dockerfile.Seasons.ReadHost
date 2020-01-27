@@ -6,9 +6,9 @@ COPY ./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj ./ReadHosts/Seasons.Re
 RUN dotnet restore ./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj
 
 COPY ./ReadHosts ./ReadHosts
-RUN dotnet build ./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj
+RUN dotnet build ./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj -c Release
 
-RUN dotnet publish "./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj" -o "../../app/out"
+RUN dotnet publish "./ReadHosts/Seasons.ReadHost/Seasons.ReadHost.csproj" -c Release -o "../../app/out"
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app

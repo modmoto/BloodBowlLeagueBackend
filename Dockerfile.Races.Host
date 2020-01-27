@@ -8,9 +8,9 @@ RUN dotnet restore ./Races/Host.Races/Host.Races.csproj
 RUN dotnet restore ./Races/Domain.Races/Domain.Races.csproj
 
 COPY ./Races ./Races
-RUN dotnet build ./Races/Host.Races/Host.Races.csproj
+RUN dotnet build ./Races/Host.Races/Host.Races.csproj -c Release
 
-RUN dotnet publish "./Races/Host.Races/Host.Races.csproj" -o "../../app/out"
+RUN dotnet publish "./Races/Host.Races/Host.Races.csproj" -c Release -o "../../app/out"
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
