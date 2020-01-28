@@ -37,7 +37,7 @@ namespace Seasons.ReadHost.Startup
             services.AddMicrowave(config =>
             {
                 config.WithFeedType(typeof(EventFeed<>));
-                config.WithLogLevel(MicrowaveLogLevel.Info);
+                config.WithLogLevel(MicrowaveLogLevel.Trace);
             });
 
             services.AddMicrowaveWebApi(c =>

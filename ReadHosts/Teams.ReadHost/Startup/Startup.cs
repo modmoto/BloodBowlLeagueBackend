@@ -37,7 +37,7 @@ namespace Teams.ReadHost.Startup
             services.AddMicrowave(config =>
             {
                 config.WithFeedType(typeof(EventFeed<>));
-                config.WithLogLevel(MicrowaveLogLevel.Info);
+                config.WithLogLevel(MicrowaveLogLevel.Trace);
             });
 
             services.AddMicrowaveWebApi(c =>
@@ -69,8 +69,6 @@ namespace Teams.ReadHost.Startup
                 endpoints.MapControllers();
             });
             app.UseMicrowaveUi();
-            app.RunMicrowaveQueries();
-            app.RunMicrowaveServiceDiscovery();
         }
     }
 }
