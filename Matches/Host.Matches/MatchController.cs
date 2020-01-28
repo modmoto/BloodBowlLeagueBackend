@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using Application.Matches;
 using Microsoft.AspNetCore.Mvc;
-using Microwave;
-using Microwave.WebApi;
 
 namespace Host.Matches
 {
@@ -11,17 +9,11 @@ namespace Host.Matches
     public class MatchController : Controller
     {
         private readonly MatchCommandHandler _commandHandler;
-        private readonly DiscoveryPoller _discoveryPoller;
-        private readonly AsyncEventDelegator _eventDelegator;
 
         public MatchController(
-            MatchCommandHandler commandHandler,
-            DiscoveryPoller discoveryPoller,
-            AsyncEventDelegator eventDelegator)
+            MatchCommandHandler commandHandler)
         {
             _commandHandler = commandHandler;
-            _discoveryPoller = discoveryPoller;
-            _eventDelegator = eventDelegator;
         }
 
         [HttpPost("create")]
@@ -53,32 +45,6 @@ namespace Host.Matches
             var startMatchCommand = new StartMatchCommand(matchId);
             await _commandHandler.StartMatch(startMatchCommand);
             return Ok();
-        }
-
-        [HttpGet("startpoll")]
-        public ActionResult startall()
-        {
-            _eventDelegator.StartEventPolling();
-            return Ok();
-        }
-
-        [HttpGet("startDisco")]
-        public ActionResult startSisc()
-        {
-            _discoveryPoller.StartDependencyDiscovery();
-            return Ok();
-        }
-
-        [HttpGet("gettasks")]
-        public ActionResult gettasks()
-        {
-            return Ok(_eventDelegator.Tasks);
-        }
-
-        [HttpGet("task")]
-        public ActionResult task()
-        {
-            return Ok(_discoveryPoller.PollTask);
         }
     }
 }

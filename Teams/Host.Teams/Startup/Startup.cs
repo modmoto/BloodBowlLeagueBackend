@@ -2,7 +2,6 @@
 using System.Linq;
 using Application.Teams;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
@@ -70,8 +69,6 @@ namespace Teams.WriteHost.Startup
                 endpoints.MapControllers();
             });
             app.UseMicrowaveUi();
-            app.RunMicrowaveQueries();
-            app.RunMicrowaveServiceDiscovery();
         }
     }
 }

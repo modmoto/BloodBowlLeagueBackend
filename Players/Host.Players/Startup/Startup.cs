@@ -2,7 +2,6 @@
 using System.Linq;
 using Application.Players;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
@@ -67,8 +66,6 @@ namespace Host.Players.Startup
                 endpoints.MapControllers();
             });
             app.UseMicrowaveUi();
-            app.RunMicrowaveQueries();
-            app.RunMicrowaveServiceDiscovery();
             app.UseCors("MyPolicy");
         }
     }

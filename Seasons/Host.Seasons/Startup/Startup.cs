@@ -6,7 +6,6 @@ using Domain.Seasons;
 using Domain.Seasons.Events;
 using Domain.Seasons.TeamReadModels;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microwave;
@@ -75,8 +74,6 @@ namespace Host.Matches.Startup
                 endpoints.MapControllers();
             });
             app.UseMicrowaveUi();
-            app.RunMicrowaveQueries();
-            app.RunMicrowaveServiceDiscovery();
         }
     }
 
