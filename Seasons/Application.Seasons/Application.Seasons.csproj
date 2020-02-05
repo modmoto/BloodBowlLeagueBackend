@@ -8,10 +8,10 @@
 
     <ItemGroup>
         <PackageReference Include="Microwave.EventStores">
-            <Version>0.1.1801-beta</Version>
+            <Version>0.1.1803-beta</Version>
         </PackageReference>
         <PackageReference Include="Microwave.Queries">
-            <Version>0.1.1801-beta</Version>
+            <Version>0.1.1803-beta</Version>
         </PackageReference>
     </ItemGroup>
 
