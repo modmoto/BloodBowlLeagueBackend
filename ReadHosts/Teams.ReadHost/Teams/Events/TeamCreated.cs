@@ -4,9 +4,9 @@ using Microwave.Queries;
 
 namespace Teams.ReadHost.Teams.Events
 {
-    public class TeamDraftCreated : ISubscribedDomainEvent
+    public class TeamCreated : ISubscribedDomainEvent
     {
-        public TeamDraftCreated(
+        public TeamCreated(
             Guid teamId,
             string raceId,
             string teamName,
