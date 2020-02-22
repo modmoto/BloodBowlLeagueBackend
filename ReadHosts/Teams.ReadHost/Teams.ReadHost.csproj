@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      </ItemGroup>
+      <Folder Include="Teams\Events" />
+    </ItemGroup>
 
 </Project>

@@ -10,24 +10,18 @@ namespace Teams.ReadHost.Teams.Events
             Guid teamId,
             string raceId,
             string teamName,
-            string trainerName,
-            IEnumerable<AllowedPlayer> allowedPlayers,
-            GoldCoins startingMoney)
+            string trainerName)
         {
             TeamId = teamId;
             RaceId = raceId;
             TeamName = teamName;
             TrainerName = trainerName;
-            AllowedPlayers = allowedPlayers;
-            StartingMoney = startingMoney;
         }
 
         public string EntityId => TeamId.ToString();
         public string RaceId { get; }
         public string TeamName { get; }
         public string TrainerName { get; }
-        public IEnumerable<AllowedPlayer> AllowedPlayers { get; }
-        public GoldCoins StartingMoney { get; }
         public Guid TeamId { get; }
     }
 }
