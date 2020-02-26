@@ -17,7 +17,7 @@ namespace Domain.Players.UnitTests
 
             var domainResult = player.ChooseSkill(skillLevelUp);
 
-            Assert.IsFalse(domainResult.IsOk);
+            Assert.IsTrue(domainResult.Failed);
         }
 
         [TestMethod]
@@ -57,6 +57,141 @@ namespace Domain.Players.UnitTests
             Assert.AreEqual(0, player.FreeSkillPoints.Count());
             Assert.AreEqual(2, player.Level);
             Assert.AreEqual(Block().SkillId, player.CurrentSkills.Single().SkillId);
+        }
+
+        [TestMethod]
+        public void LevelUp_StrengthSkillAvailable()
+        {
+            var player = DefaultPlayer();
+            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.PlusOneStrength));
+            var skillLevelUp = PlusOneStrength();
+
+            var domainResult = player.ChooseSkill(skillLevelUp);
+
+            Assert.IsTrue(domainResult.IsOk);
+            Assert.AreEqual(1, domainResult.DomainEvents.Count());
+        }
+
+        [TestMethod]
+        public void LevelUp_StrengtSkillAvailable_SkillOfLowerPower()
+        {
+            var player = DefaultPlayer();
+            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.PlusOneStrength));
+            var skillLevelUp = Pass();
+
+            var domainResult = player.ChooseSkill(skillLevelUp);
+
+            Assert.IsTrue(domainResult.IsOk);
+            Assert.AreEqual(1, domainResult.DomainEvents.Count());
+        }
+
+        [TestMethod]
+        public void LevelUp_StrengtSkillAvailable_PlusAgilityNotPickable()
+        {
+            var player = DefaultPlayer();
+            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.PlusOneStrength));
+            var skillLevelUp = PlusOneAgility();
+
+            var domainResult = player.ChooseSkill(skillLevelUp);
+
+            Assert.IsTrue(domainResult.Failed);
+        }
+
+        [TestMethod]
+        public void LevelUp_StrengtSkillAvailable_PlusArmorNotPickable()
+        {
+            var player = DefaultPlayer();
+            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.PlusOneStrength));
+            var skillLevelUp = PlusOneArmor();
+
+            var domainResult = player.ChooseSkill(skillLevelUp);
+
+            Assert.IsTrue(domainResult.Failed);
+        }
+
+        [TestMethod]
+        public void LevelUp_StrengthWanted_ButOnlyArmorPossible()
+        {
+            var player = DefaultPlayer();
+            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.PlusOneArmorOrMovement));
+            var skillLevelUp = PlusOneStrength();
+
+            var domainResult = player.ChooseSkill(skillLevelUp);
+
+            Assert.IsFalse(domainResult.IsOk);
+        }
+
+        [TestMethod]
+        public void LevelUp_DoubleReplacedWithGeneral()
+        {
+            var player = new Player();
+            player.Apply(PlayerCreated());
+            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.Double));
+            var skillLevelUp = Block();
+
+            var domainResult = player.ChooseSkill(skillLevelUp);
+
+            Assert.IsTrue(domainResult.IsOk);
+        }
+
+        [TestMethod]
+        public void LevelUp_DoubleUSedForDouble()
+        {
+            var player = new Player();
+            player.Apply(PlayerCreated());
+            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.Double));
+            var skillLevelUp = Pass();
+
+            var domainResult = player.ChooseSkill(skillLevelUp);
+
+            Assert.IsTrue(domainResult.IsOk);
+        }
+
+        [TestMethod]
+        public void LevelUp_DoubleTooHigh()
+        {
+            var player = new Player();
+            player.Apply(PlayerCreated());
+            player.Apply(PlayerChoseLevelUp());
+            var pass = Pass();
+
+            var domainResult = player.ChooseSkill(pass);
+
+            Assert.IsFalse(domainResult.IsOk);
+        }
+
+        [TestMethod]
+        public void LevelUp_PickSkillTwice()
+        {
+            var player = new Player();
+            player.Apply(PlayerCreated());
+            player.Apply(PlayerChoseLevelUp());
+            player.Apply(PlayerChoseLevelUp());
+            player.Apply(SkillPicked(Block()));
+
+            var skillLevelUp = Block();
+
+            var domainResult2 = player.ChooseSkill(skillLevelUp);
+
+            Assert.IsFalse(domainResult2.IsOk);
+        }
+
+        private SkillReadModel PlusOneArmor()
+        {
+            return new SkillReadModel
+            {
+                SkillId = "PlusOneArmorOrMovement",
+                SkillType = SkillType.PlusOneArmorOrMovement
+            };
+        }
+
+        private SkillReadModel PlusOneAgility()
+        {
+            return new SkillReadModel
+            {
+                SkillId = "PlusOneAgility",
+                SkillType = SkillType.Agility,
+            };
         }
 
         private Player LeveledUpdPlayer()
@@ -111,99 +246,6 @@ namespace Domain.Players.UnitTests
                 SkillId = "Pass",
                 SkillType = SkillType.Passing
             };
-        }
-
-        [TestMethod]
-        public void LevelUp_StrengthSkillAvailable()
-        {
-            var player = DefaultPlayer();
-            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.PlusOneStrength));
-            var skillLevelUp = PlusOneStrength();
-
-            var domainResult = player.ChooseSkill(skillLevelUp);
-
-            Assert.IsTrue(domainResult.IsOk);
-            Assert.AreEqual(1, domainResult.DomainEvents.Count());
-        }
-
-        [TestMethod]
-        public void LevelUp_StrengtSkillAvailable_SkillOfLowerPower()
-        {
-            var player = DefaultPlayer();
-            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.PlusOneStrength));
-            var skillLevelUp = Pass();
-
-            var domainResult = player.ChooseSkill(skillLevelUp);
-
-            Assert.IsTrue(domainResult.IsOk);
-            Assert.AreEqual(1, domainResult.DomainEvents.Count());
-        }
-
-        [TestMethod]
-        public void LevelUp_StrengthWanted_ButOnlyArmorPossible()
-        {
-            var player = DefaultPlayer();
-            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.PlusOneArmorOrMovement));
-            var skillLevelUp = PlusOneStrength();
-
-            var domainResult = player.ChooseSkill(skillLevelUp);
-
-            Assert.IsFalse(domainResult.IsOk);
-        }
-
-        [TestMethod]
-        public void LevelUp_DoubleReplacedWithGeneral()
-        {
-            var player = new Player();
-            player.Apply(PlayerCreated());
-            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.Double));
-            var skillLevelUp = Block();
-
-            var domainResult = player.ChooseSkill(skillLevelUp);
-
-            Assert.IsTrue(domainResult.IsOk);
-        }
-
-        [TestMethod]
-        public void LevelUp_DoubleUSedForDouble()
-        {
-            var player = new Player();
-            player.Apply(PlayerCreated());
-            player.Apply(PlayerChoseLevelUp(FreeSkillPoint.Double));
-            var skillLevelUp = Pass();
-
-            var domainResult = player.ChooseSkill(skillLevelUp);
-
-            Assert.IsTrue(domainResult.IsOk);
-        }
-
-        [TestMethod]
-        public void LevelUp_DoubleTooHigh()
-        {
-            var player = new Player();
-            player.Apply(PlayerCreated());
-            player.Apply(PlayerChoseLevelUp());
-            var skillLevelUp = Pass();
-
-            var domainResult = player.ChooseSkill(skillLevelUp);
-
-            Assert.IsFalse(domainResult.IsOk);
-        }
-
-        [TestMethod]
-        public void LevelUp_PickSkillTwice()
-        {
-            var player = new Player();
-            player.Apply(PlayerCreated());
-            player.Apply(PlayerChoseLevelUp());
-            player.Apply(PlayerChoseLevelUp());
-            player.Apply(SkillPicked(Block()));
-
-            var skillLevelUp = Block();
-
-            var domainResult2 = player.ChooseSkill(skillLevelUp);
-
-            Assert.IsFalse(domainResult2.IsOk);
         }
 
         private static PlayerLevelUpPossibilitiesChosen PlayerChoseLevelUp(FreeSkillPoint freeSkillPoint = default(FreeSkillPoint))

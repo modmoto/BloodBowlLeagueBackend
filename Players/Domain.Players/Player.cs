@@ -115,7 +115,7 @@ namespace Domain.Players
                 case FreeSkillPoint.PlusOneAgility:
                     return PlayerCanPickAgility(newSkill);
                 case FreeSkillPoint.PlusOneStrength:
-                    return true;
+                    return PlayerCanPickPlusOneStrength(newSkill);
                 default:
                     return false;
             }
@@ -130,7 +130,6 @@ namespace Domain.Players
         {
             if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) return true;
             if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) return true;
-            if (newSkill.SkillType == SkillType.PlusOneArmorOrMovement) return true;
             if (newSkill.SkillType == SkillType.PlusOneAgility) return true;
             return false;
         }
@@ -140,6 +139,14 @@ namespace Domain.Players
             if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) return true;
             if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) return true;
             if (newSkill.SkillType == SkillType.PlusOneArmorOrMovement) return true;
+            return false;
+        }
+
+        private bool PlayerCanPickPlusOneStrength(SkillReadModel newSkill)
+        {
+            if (PlayerConfig.SkillsOnDefault.Contains(newSkill.SkillType)) return true;
+            if (PlayerConfig.SkillsOnDouble.Contains(newSkill.SkillType)) return true;
+            if (newSkill.SkillType == SkillType.PlusOneStrength) return true;
             return false;
         }
 
