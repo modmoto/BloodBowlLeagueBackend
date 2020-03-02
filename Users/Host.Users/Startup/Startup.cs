@@ -1,3 +1,4 @@
+using Host.Users.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +13,9 @@ namespace Host.Users.Startup
             services.AddControllersWithViews();
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
+                .AddInMemoryIdentityResources(IdentityConfig.Ids)
                 .AddInMemoryApiResources(IdentityConfig.Apis)
+                .AddTestUsers(TestUsers.Users)
                 .AddInMemoryClients(IdentityConfig.Clients);
         }
 

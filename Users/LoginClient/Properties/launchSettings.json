@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "LoginClient": {
+      "commandName": "Project",
+      "applicationUrl": "http://localhost:6009",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

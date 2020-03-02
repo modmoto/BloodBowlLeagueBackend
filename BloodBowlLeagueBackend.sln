@@ -79,6 +79,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{1794E400
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host.Users", "Users\Host.Users\Host.Users.csproj", "{09F9F1E7-5D60-405F-B7F9-C14CF186F813}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginClient", "Users\LoginClient\LoginClient.csproj", "{1F0C331B-5CA6-4E39-ACA4-FAEE3582E4AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -177,6 +179,10 @@ Global
 		{09F9F1E7-5D60-405F-B7F9-C14CF186F813}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09F9F1E7-5D60-405F-B7F9-C14CF186F813}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09F9F1E7-5D60-405F-B7F9-C14CF186F813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F0C331B-5CA6-4E39-ACA4-FAEE3582E4AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F0C331B-5CA6-4E39-ACA4-FAEE3582E4AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F0C331B-5CA6-4E39-ACA4-FAEE3582E4AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F0C331B-5CA6-4E39-ACA4-FAEE3582E4AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -205,6 +211,7 @@ Global
 		{C8A47A88-617A-456D-8ACE-FC6BB9307021} = {D67ADD6B-1317-4308-BB42-37BFB34DE7CE}
 		{B1438C09-F5FC-4026-BA83-7360B9DEDD6D} = {D67ADD6B-1317-4308-BB42-37BFB34DE7CE}
 		{09F9F1E7-5D60-405F-B7F9-C14CF186F813} = {1794E400-686A-4C0F-9878-101FAAFB4820}
+		{1F0C331B-5CA6-4E39-ACA4-FAEE3582E4AB} = {1794E400-686A-4C0F-9878-101FAAFB4820}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0C8F1104-0A69-4A44-8850-E95E4A4617C5}
