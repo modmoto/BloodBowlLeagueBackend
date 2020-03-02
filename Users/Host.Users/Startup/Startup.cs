@@ -17,31 +17,33 @@ namespace Host.Users.Startup
                 .AddInMemoryApiResources(IdentityConfig.Apis)
                 .AddTestUsers(TestUsers.Users)
                 .AddInMemoryClients(IdentityConfig.Clients);
+
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("api", policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseIdentityServer();
-            app.UseRouting();
+            app.UseCookiePolicy();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
+            app.UseCors("api");
 
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseIdentityServer();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

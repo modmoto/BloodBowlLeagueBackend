@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using IdentityServer4;
+using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Test;
 using Microsoft.AspNetCore.Http;
@@ -27,10 +28,23 @@ namespace Host.Users.Controllers
             var vm = await BuildLoginViewModelAsync(returnUrl);
             return View(vm);
         }
+        
+        public async Task<IActionResult> Error(string errorId)
+        {
+            var vm = new ErrorViewModel();
+
+            var message = await _interaction.GetErrorContextAsync(errorId);
+            if (message != null)
+            {
+                vm.Error = message;
+            }
+            ViewBag.VM = vm;
+            return View("Error", vm);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(LoginViewModel model, string button)
+        public async Task<IActionResult> Index(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -70,5 +84,10 @@ namespace Host.Users.Controllers
             vm.Username = model.Username;
             return vm;
         }
+    }
+
+    public class ErrorViewModel
+    {
+        public ErrorMessage Error { get; set; }
     }
 }
