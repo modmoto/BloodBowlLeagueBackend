@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "Host.Users": {
+      "commandName": "Project",
+      "applicationUrl": "http://localhost:6008",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
