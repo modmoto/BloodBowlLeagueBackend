@@ -5,9 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-    <PackageReference Include=" IdentityServer4">
-        <Version>3.1.2</Version>
-    </PackageReference>
-</ItemGroup>
+        <PackageReference Include="IdentityServer4">
+            <Version>3.1.2</Version>
+        </PackageReference>
+    </ItemGroup>
 
 </Project>

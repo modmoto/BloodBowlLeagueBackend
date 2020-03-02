@@ -9,6 +9,7 @@ namespace Host.Users.Startup
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
                 .AddInMemoryApiResources(IdentityConfig.Apis)
                 .AddInMemoryClients(IdentityConfig.Clients);
         }
