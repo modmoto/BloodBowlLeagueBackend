@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microwave.Queries;
 using Teams.ReadHost.Players;
@@ -16,6 +17,13 @@ namespace Teams.ReadHost.Teams
         public TeamQuerryController(IReadModelRepository queryRepository)
         {
             _queryRepository = queryRepository;
+        }
+
+        [Authorize]
+        [HttpGet("auth")]
+        public async Task<ActionResult> GetAuth()
+        {
+            return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
         }
 
         [HttpGet("{teamId}")]

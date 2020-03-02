@@ -28,8 +28,16 @@ namespace Teams.ReadHost.Startup
                 .AddCors()
                 .AddMvc()
                 .AddJsonOptions(options =>
-                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
-                ;
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
+            services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options =>
+                {
+                    options.Authority = "http://localhost:6008";
+                    options.RequireHttpsMetadata = false;
+
+                    options.Audience = "api1";
+                });
 
             var baseAdress = _configuration.GetValue<string>("baseAdresses");
             var serviceUrls = baseAdress.Split(';').Select(s => new Uri(s));
@@ -50,7 +58,6 @@ namespace Teams.ReadHost.Startup
             services.AddMicrowaveUi();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
@@ -65,6 +72,10 @@ namespace Teams.ReadHost.Startup
                     .AllowAnyMethod()
                     .AllowAnyHeader()
             );
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
