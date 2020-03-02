@@ -2,7 +2,6 @@ using Host.Users.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace Host.Users.Startup
 {
@@ -17,23 +16,11 @@ namespace Host.Users.Startup
                 .AddInMemoryApiResources(IdentityConfig.Apis)
                 .AddTestUsers(TestUsers.Users)
                 .AddInMemoryClients(IdentityConfig.Clients);
-
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("api", policy =>
-                {
-                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-                });
-            });
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCookiePolicy();
-
-            app.UseCors("api");
 
             app.UseStaticFiles();
 

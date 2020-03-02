@@ -12,6 +12,12 @@
 
 <h2>Properties</h2>
 
+<form asp-action="Logout">
+   <div class="form-group">
+       <button class="btn btn-primary" name="button" value="login">Logout</button>
+   </div>
+</form>
+
 <dl>
     @foreach (var prop in (await Context.AuthenticateAsync()).Properties.Items)
     {
