@@ -43,11 +43,9 @@ namespace Host.Users.Startup
                     RequireConsent = false,
                     RequirePkce = true,
 
-                    // where to redirect to after login
-                    RedirectUris = { "http://localhost:6008/signin-oidc" },
+                    RedirectUris = { "http://localhost:6009/signin-oidc" },
 
-                    // where to redirect to after logout
-                    PostLogoutRedirectUris = { "http://localhost:6008/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:6009/signout-callback-oidc" },
 
                     AllowedScopes = new List<string>
                     {
