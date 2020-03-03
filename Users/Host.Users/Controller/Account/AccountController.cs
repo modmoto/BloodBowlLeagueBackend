@@ -19,19 +19,16 @@ namespace Host.Users.Controller.Account
     {
         private readonly TestUserStore _users;
         private readonly IIdentityServerInteractionService _interaction;
-        private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
 
         public AccountController(
             IIdentityServerInteractionService interaction,
-            IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
             TestUserStore users = null)
         {
             _users = users ?? new TestUserStore(TestUsers.Users);
 
             _interaction = interaction;
-            _clientStore = clientStore;
             _schemeProvider = schemeProvider;
         }
 
@@ -47,10 +44,6 @@ namespace Host.Users.Controller.Account
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginInputModel model, string button)
         {
-            // check if we are in the context of an authorization request
-            var context = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
-
-            // the user clicked the "cancel" button
             if (button == "cancel")
             {
                 return Redirect(model.ReturnUrl);
@@ -122,10 +115,6 @@ namespace Host.Users.Controller.Account
             return View();
         }
 
-
-        /*****************************************/
-        /* helper APIs for the AccountController */
-        /*****************************************/
         private async Task<LoginViewModel> BuildLoginViewModelAsync(string returnUrl)
         {
             var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
@@ -161,7 +150,6 @@ namespace Host.Users.Controller.Account
 
             if (User?.Identity.IsAuthenticated != true)
             {
-                // if the user is not authenticated, then just show logged out page
                 vm.ShowLogoutPrompt = false;
                 return vm;
             }
@@ -169,13 +157,10 @@ namespace Host.Users.Controller.Account
             var context = await _interaction.GetLogoutContextAsync(logoutId);
             if (context?.ShowSignoutPrompt == false)
             {
-                // it's safe to automatically sign-out
                 vm.ShowLogoutPrompt = false;
                 return vm;
             }
 
-            // show the logout prompt. this prevents attacks where the user
-            // is automatically signed out by another malicious web page.
             return vm;
         }
 
