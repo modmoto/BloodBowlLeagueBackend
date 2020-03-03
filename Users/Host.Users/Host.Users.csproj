@@ -17,6 +17,7 @@
       <_ContentIncludedByDefault Remove="Views\Device\UserCodeConfirmation.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Diagnostics\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Grants\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
     </ItemGroup>
 
 </Project>
