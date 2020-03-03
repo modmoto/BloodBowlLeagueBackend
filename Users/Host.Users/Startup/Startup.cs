@@ -1,4 +1,4 @@
-using Host.Users.Controllers;
+using Host.Users.Controller;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
