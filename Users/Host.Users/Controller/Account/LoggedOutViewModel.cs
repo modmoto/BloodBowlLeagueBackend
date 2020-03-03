@@ -1,7 +1,3 @@
-// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-
 namespace Host.Users.Controller.Account
 {
     public class LoggedOutViewModel
@@ -13,7 +9,5 @@ namespace Host.Users.Controller.Account
         public bool AutomaticRedirectAfterSignOut { get; set; }
 
         public string LogoutId { get; set; }
-        public bool TriggerExternalSignout => ExternalAuthenticationScheme != null;
-        public string ExternalAuthenticationScheme { get; set; }
     }
 }
